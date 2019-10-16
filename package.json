@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack-dev-server",
     "build:prod": "webpack --mode production",
-    "start": "npm run build:prod && node app.js"
+    "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css"
   },
   "author": "Justin Schiller",
   "license": "ISC",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "ejs": "^2.7.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "node-sass": "^4.12.0"
   }
 }

@@ -1,13 +1,75 @@
 <% include partials/header %>
 <!-- ==================================== -->
 
-<h1>Let's learn Webpack 2</h1>
-<button id="secret-button">Show the Secret</button>
-<p id="secret-paragraph">You can't see this all the time</p>
 
-<a href="/campgrounds">View all campgrounds!</a>
+<!-- ====================== SITE HEADER (BEGIN) ====================== -->
+<div class="site-header">
 
-<script src="/scripts/dist/bundle.js"></script>
+   <!-- ====================== HEADER NOTICE (BEGIN) ====================== -->
+   <div class="header-notice">
+      <div class="header-notice__content">
+         <ion-icon class="header-notice__alert-icon" name="md-alert"></ion-icon>
+         <p class="header-notice__text">This is the <strong> Header Notice </strong>used for promotional or other important messages.</p>
+         <ion-icon class="header-notice__close-icon"name="md-close"><ion-icon>
+      </div>
+   </div>
+
+   <!-- ====================== FULL HEADER (BEGIN) ====================== -->
+   <div class="full-header">
+      
+      <!-- ====================== TOP HEADER (BEGIN) ====================== -->
+      <div class="top-header container">
+
+            <div class="logo">
+               <img class="logo__img" src="/img/company-logo.png" alt="company logo" >
+            </div>
+
+            <form class="search-form">
+               <input type="text" class="search-form__input" placeholder="Search our store" name="search-field">
+               <button type="submit" class="btn">Search</button>
+            </form>
+            
+            <div class="phone-support">
+                  <ion-icon class="phone-support__icon" name="call"></ion-icon>
+                  <div class="phone-support__text">
+                     <span class="phone-support__question">Have questions?</span>
+                     <span class="phone-support__number">123.456.7890</span>
+                  </div>
+            </div>
+
+      </div>
+
+      <!-- ====================== NAV MENU BAR (BEGIN) ====================== -->
+      <nav class="nav-menu-bar">
+         <div class="container">
+
+            <div class="nav-menu-bar__left">
+               <div class="top-menu">
+                  
+               </div>
+            </div>
+            
+            <div class="nav-menu-bar__right">
+               <div class="my-account-wrapper">
+   
+               </div>
+   
+               <div class="cart-wrapper">
+               
+               </div>
+            </div>
+
+         </div>
+      </nav>
+
+   </div>
+
+
+</div>
+
+
+<!-- <script src="/scripts/dist/bundle.js"></script> -->
+
 
 <!-- ==================================== -->
 <% include partials/footer %>
