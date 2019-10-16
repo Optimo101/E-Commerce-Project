@@ -12,7 +12,7 @@
    background-color: $background-color-lightgrey;
 
    &__alert-icon {
-      color: rgb(251, 86, 86);
+      color: $color-primary;
       font-size: 2.5rem;
    }
 
@@ -37,16 +37,17 @@
    justify-content: space-between;
 
    height: 12rem;
-   background-color: lightslategray;
+   // background-color: lightslategray;
 }
 
 .logo {
    display: flex;
    align-items: center;
+   justify-content: center;
    
    height: 100%;
    flex-basis: 25%;
-   background-color: lightgreen;
+   // background-color: lightgreen;
 
    &__img {
       max-width: 100%;
@@ -57,41 +58,51 @@
 .search-form {
    display: flex;
    justify-content: center;
-   flex-basis: 40%;
+   flex-basis: 45%;
 
    border: 2px solid lightgrey;
    border-radius: 4rem;
 
 
    &__input {
-      width: 80%;
-
+      flex-grow: 1;
       font-size: inherit;
       font-family: inherit;
+      border-radius: 4rem;
       border: none;
       padding: 1rem 1.5rem;
+   }
+
+   &__icon {
+      font-size: 2rem;
+      margin-right: .5rem;
    }
 }
 
 .phone-support {
    display: flex;
-   justify-content: flex-end;
+   justify-content: center;
    align-items: center;
    flex-basis: 25%;
 
-   background-color: lightcoral;
+   color: $color-black;
+   // background-color: lightcoral;
 
    &__icon {
-      font-size: 3rem;
+      font-size: 4rem;
+      margin-right: 1rem;
    }
 
    &__text {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
    }
 
    &__question {
-
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: $color-primary;
    }
 
    &__number {
