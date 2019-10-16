@@ -26,7 +26,7 @@
 
             <form class="search-form">
                <input type="text" class="search-form__input" placeholder="Search our store" name="search-field">
-               <button type="submit" class="btn btn--black"><ion-icon class="search-form__icon" name="search"></ion-icon>Search</button>
+               <button type="submit" class="btn btn--black search-form__btn"><ion-icon class="search-form__icon" name="search"></ion-icon>Search</button>
             </form>
             
             <div class="phone-support">
@@ -41,23 +41,58 @@
 
       <!-- ====================== NAV MENU BAR (BEGIN) ====================== -->
       <nav class="nav-menu-bar">
-         <div class="container">
+         <!-- <div class="container"> -->
+            <div class="nav-menu-bar__content container">
+               <ul class="top-menu">
+                  <li class="top-menu__item top-menu__item--1">
+                     <a href="#" class="top-menu__link btn btn--black ">
+                        <ion-icon class="top-menu__icon" name="menu"></ion-icon>
+                        Shop Categories
+                     </a>
+                  </li>
+   
+                  <li class="top-menu__item top-menu__item--2">
+                     <a href="#" class="top-menu__link btn btn--red">
+                        Home
+                     </a>
+                  </li>
+   
+                  <li class="top-menu__item top-menu__item--3">
+                     <a href="#" class="top-menu__link btn btn--red">
+                        Brands
+                     </a>
+                  </li>
+   
+                  <li class="top-menu__item top-menu__item--4">
+                     <a href="#" class="top-menu__link btn btn--red">
+                        Specials
+                     </a>
+                  </li>
+                  <li class="top-menu__item top-menu__item--5">
+                     <a href="#" class="top-menu__link btn btn--red">
+                        Services
+                     </a>
+                  </li>
+               </ul>
+               
+               <div class="account-cart-wrapper">
+                  <a class="my-account btn btn--black">
+                     <ion-icon class="my-account__icon" name="person"></ion-icon>
+                     My Account
+                  </a>
+      
+                  <a class="cart" href="#">
+                     Cart
+                     <ion-icon class="cart__icon" name="cart">
+                     </ion-icon>
+                     <div class="cart__counter">0</div>
 
-            <div class="top-menu">
-               <button class="shop-categories">
-                     <ion-icon name="menu"></ion-icon>
-               </button>
+                  </a>
+               </div>
             </div>
-            
-            <div class="my-account">
 
-            </div>
-
-            <div class="cart">
-            
-            </div>
-
-         </div>
+         <!-- </div> -->
+         
       </nav>
 
    </div>

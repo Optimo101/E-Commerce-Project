@@ -15,6 +15,9 @@ body {
   box-sizing: border-box;
   margin: auto; }
 
+a {
+  text-decoration: none; }
+
 body {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
@@ -30,18 +33,16 @@ body {
   line-height: inherit;
   color: white;
   text-decoration: none;
+  border: none;
   border-radius: 4rem;
   display: inline-block;
-  border: none;
-  cursor: pointer;
-  padding: .8rem 2.2rem; }
-  .btn ion-icon {
-    font-size: 2rem;
-    margin-right: .5rem; }
+  padding: .8rem 2.2rem;
+  transition: background-color .2s;
+  cursor: pointer; }
   .btn--black {
-    background-color: black; }
-    .btn--black:hover {
-      background-color: #eb3039; }
+    background-color: #000; }
+  .btn--red {
+    background-color: #eb3039; }
 
 .header-notice {
   display: flex;
@@ -69,7 +70,6 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 100%;
   flex-basis: 25%; }
   .logo__img {
@@ -89,10 +89,15 @@ body {
     border-radius: 4rem;
     border: none;
     padding: 1rem 1.5rem; }
+  .search-form__btn:hover {
+    background-color: #eb3039; }
+  .search-form__icon {
+    font-size: 2rem;
+    margin-right: .5rem; }
 
 .phone-support {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex-basis: 25%;
   color: #000; }
@@ -110,12 +115,67 @@ body {
 
 .container {
   max-width: 150rem;
-  padding: 0 2.5rem;
+  padding: 0 4rem;
   margin: 0 auto; }
 
 .nav-menu-bar {
+  display: flex;
   background-color: #eb3039;
   height: 6rem; }
+  .nav-menu-bar__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1; }
+
+.top-menu {
+  display: flex;
+  align-items: center;
+  list-style: none; }
+  .top-menu__item--1 {
+    margin-right: 2rem;
+    text-transform: uppercase; }
+  .top-menu__link {
+    font-weight: 500; }
+    .top-menu__link:hover {
+      background-color: #000; }
+  .top-menu__icon {
+    margin-right: 1.5rem;
+    font-size: 2.5rem; }
+
+.account-cart-wrapper {
+  display: flex;
+  align-items: center; }
+
+.my-account {
+  font-weight: 300;
+  margin-right: 3rem; }
+  .my-account__icon {
+    font-size: 2.5rem;
+    margin-right: 1rem; }
+
+.cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 500;
+  color: white; }
+  .cart__icon {
+    font-size: 4.5rem; }
+  .cart__counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: -1rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: #000;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    font-weight: 300; }
 
 .paragraph {
   font-weight: 700;
