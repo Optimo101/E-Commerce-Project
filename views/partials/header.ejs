@@ -1,19 +1,90 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- ====================== SITE HEADER (BEGIN) ====================== -->
+<header class="site-header">
 
-    <link rel="stylesheet" href="/stylesheets/css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+   <!-- ====================== HEADER NOTICE (BEGIN) ====================== -->
+   <div class="header-notice">
+      <div class="header-notice__content">
+         <ion-icon class="header-notice__alert-icon" name="md-alert"></ion-icon>
+         <p class="header-notice__text">This is the <strong> Header Notice </strong>used for promotional or other important messages.</p>
+         <ion-icon class="header-notice__close-icon"name="md-close"><ion-icon>
+      </div>
+   </div>
 
+   <!-- ====================== MAIN HEADER (BEGIN) ====================== -->
+   <div class="main-header">
+      
+      <!-- ====================== TOP HEADER (BEGIN) ====================== -->
+      <div class="top-header container">
 
-    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
-    
-    <title>Webpack 2 Basics</title>
-</head>
-<body>
+            <div class="logo">
+               <img class="logo__img" src="/img/company-logo.png" alt="company logo" >
+            </div>
+
+            <form class="search-form">
+               <input type="text" class="search-form__input" placeholder="Search our store" name="search-field">
+               <button type="submit" class="btn btn--black search-form__btn"><ion-icon class="search-form__icon" name="search"></ion-icon>Search</button>
+            </form>
+            
+            <div class="phone-support">
+               <ion-icon class="phone-support__icon" name="call"></ion-icon>
+               <div class="phone-support__text">
+                  <span class="phone-support__question">Have questions?</span>
+                  <span class="phone-support__number">Call: 456-789-1234</span>
+               </div>
+
+            </div>
+      </div>
+
+      <!-- ====================== NAV MENU BAR (BEGIN) ====================== -->
+      <nav class="nav-menu-bar">
+         <div class="nav-menu-bar__content container">
+            <ul class="top-menu">
+               <li class="top-menu__item top-menu__item--1">
+                  <a href="#" class="top-menu__link btn btn--black ">
+                     <ion-icon class="top-menu__icon" name="menu"></ion-icon>
+                     Shop Categories
+                  </a>
+               </li>
+
+               <li class="top-menu__item top-menu__item--2">
+                  <a href="#" class="top-menu__link btn btn--red">
+                     Home
+                  </a>
+               </li>
+
+               <li class="top-menu__item top-menu__item--3">
+                  <a href="#" class="top-menu__link btn btn--red">
+                     Brands
+                  </a>
+               </li>
+
+               <li class="top-menu__item top-menu__item--4">
+                  <a href="#" class="top-menu__link btn btn--red">
+                     Specials
+                  </a>
+               </li>
+               <li class="top-menu__item top-menu__item--5">
+                  <a href="#" class="top-menu__link btn btn--red">
+                     Services
+                  </a>
+               </li>
+            </ul>
+            
+            <div class="account-cart-wrapper">
+               <a class="my-account btn btn--black">
+                  <ion-icon class="my-account__icon" name="person"></ion-icon>
+                  My Account
+               </a>
    
+               <a class="cart" href="#">
+                  Cart
+                  <ion-icon class="cart__icon" name="cart">
+                  </ion-icon>
+                  <div class="cart__counter">0</div>
+               </a>
+
+            </div>
+         </div>
+      </nav>
+   </div>
+</header>

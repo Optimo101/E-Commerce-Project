@@ -43,7 +43,6 @@
 .logo {
    display: flex;
    align-items: center;
-   justify-content: center;
    
    height: 100%;
    flex-basis: 25%;
@@ -73,6 +72,12 @@
       padding: 1rem 1.5rem;
    }
 
+   &__btn {
+      &:hover {
+         background-color: $color-primary;
+      }
+   }
+
    &__icon {
       font-size: 2rem;
       margin-right: .5rem;
@@ -81,7 +86,7 @@
 
 .phone-support {
    display: flex;
-   justify-content: center;
+   justify-content: flex-end;
    align-items: center;
    flex-basis: 25%;
 
