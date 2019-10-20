@@ -17,7 +17,7 @@
       background-size: cover;
       background-position: center;
 
-      background-color: $background-color-lightgrey;
+      background-color: $color-lightergrey;
 
 
       &--lg {
@@ -47,7 +47,7 @@
 }
 
 .service-bar {
-   background-color: $color-secondary;
+   background-color: $color-black;
 
    &__content {
       display: flex;
