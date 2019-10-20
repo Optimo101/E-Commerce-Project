@@ -1,0 +1,41 @@
+.service-feature {
+   display: flex;
+   align-items: center;
+
+   padding: 2rem 3rem;
+
+
+   &__icon-wrap {
+      display: flex;
+      align-items: center;
+
+      border: 2px solid $color-tertiary;
+      border-radius: 50%;
+      padding: .5rem;
+      margin-right: 1rem;
+   }
+
+   &__icon {
+      font-size: 3rem;
+      color: $color-tertiary;
+      padding: 1rem;
+   }
+
+   &__text {
+      display: flex;
+      flex-direction: column;
+
+   }
+
+   &__title {
+      font-size: 1.8rem;
+      color: $color-white;
+      font-weight: 500;
+   }
+
+   &__subtitle {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: $background-color-lightgrey;
+   }
+}
