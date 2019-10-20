@@ -45,3 +45,20 @@
       height: 100%;
    }
 }
+
+.service-bar {
+   background-color: $color-secondary;
+
+   &__content {
+      display: flex;
+      justify-content: space-between;
+
+      & div:nth-of-type(1) div:nth-of-type(1) i {
+         height: 5.75rem;
+         transform: translateY(.4rem);
+      }
+   }
+
+  
+
+}
