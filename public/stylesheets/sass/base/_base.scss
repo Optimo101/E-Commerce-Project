@@ -17,8 +17,11 @@ html {
 body {
     box-sizing: border-box;
     margin: auto;
+    position: relative;
 }
 
 a {
     text-decoration: none;
+    color: inherit;
+
 }
