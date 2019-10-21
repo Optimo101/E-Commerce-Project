@@ -126,7 +126,8 @@ body {
     align-items: center; }
   .header-notice__close-icon {
     margin-left: 1rem;
-    font-size: 2.5rem; }
+    font-size: 2.5rem;
+    cursor: pointer; }
 
 .top-header {
   display: flex;
