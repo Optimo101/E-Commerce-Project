@@ -1,6 +1,4 @@
-.site-header {
-
-}
+.site-header {}
 
 .header-notice {
    display: flex;
@@ -29,15 +27,12 @@
    }
 }
 
-.full-header {
-
-}
+.full-header {}
 
 .top-header {
    display: flex;
    align-items: center;
    justify-content: space-between;
-
    height: 12rem;
 }
 
@@ -109,8 +104,6 @@
       color: $color-primary;
    }
 
-   &__number {
-
-   }
+   &__number {}
 }
 
