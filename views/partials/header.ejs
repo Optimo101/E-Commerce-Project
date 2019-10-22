@@ -36,91 +36,95 @@
       </div>
 
       <!-- ====================== NAV MENU BAR (BEGIN) ====================== -->
-      <nav class="nav-menu-bar">
-         <div class="nav-menu-bar__content container">
-            <ul class="top-menu">
+      <nav class="nav-bar">
+         <div class="nav-bar__content container">
+            <div class="nav-bar__left">
 
-               <li class="top-menu__item top-menu__item--1">
-                  <a href="#" class="top-menu__link btn btn--black ">
-                        <i class="fas fa-bars top-menu__icon"></i>
-                     Shop Categories
-                  </a>
+                  <div class="main-menu">
+                     <button href="#" class="main-menu__button btn btn--black ">
+                           <i class="fas fa-bars main-menu__icon"></i>
+                        Shop Categories
+                     </button>
 
-                  <div class="dropdown-menu">
-                     <ul class="dropdown-menu__list">
+                     <div class="main-menu__dropdown">
+                        <ul class="main-menu__list">
 
-                        <li class="dropdown-menu__item">
-                           <a href="#" class="dropdown-menu__link">
-                              <span class="dropdown-menu__title">One</span>
-                              <i class="fas fa-chevron-down dropdown-menu__icon"></i>
-                           </a>
-                           <div class="dropdown-submenu">
-                              This is the submenu
-                           </div>
-                        </li>
+                           <li class="main-menu__item">
+                              <a href="#" class="main-menu__link">
+                                 <span class="main-menu__title">One</span>
+                                 <i class="fas fa-chevron-down main-menu__item-arrow"></i>
+                              </a>
+                              <div class="main-menu__submenu">
+                                 This is the submenu
+                              </div>
+                           </li>
 
-                        <li class="dropdown-menu__item">
-                           <a href="#" class="dropdown-menu__link">
-                              <span class="dropdown-menu__title">Two</span>
-                              <i class="fas fa-chevron-down dropdown-menu__icon"></i>
-                           </a>
-                        </li>
+                           <li class="main-menu__item">
+                              <a href="#" class="main-menu__link">
+                                 <span class="main-menu__title">Two</span>
+                                 <i class="fas fa-chevron-down main-menu__item-arrow"></i>
+                              </a>
+                           </li>
 
-                        <li class="dropdown-menu__item">
-                           <a href="#" class="dropdown-menu__link">
-                              <span class="dropdown-menu__title">Three</span>
-                              <i class="fas fa-chevron-down dropdown-menu__icon"></i>
-                           </a>
-                        </li>
-                        
-                        <li class="dropdown-menu__item">
-                           <a href="#" class="dropdown-menu__link">
-                              <span class="dropdown-menu__title">Four</span>
-                              <i class="fas fa-chevron-down dropdown-menu__icon"></i>
-                           </a>
-                        </li>
-                     </ul>
+                           <li class="main-menu__item">
+                              <a href="#" class="main-menu__link">
+                                 <span class="main-menu__title">Three</span>
+                                 <i class="fas fa-chevron-down main-menu__item-arrow"></i>
+                              </a>
+                           </li>
+                           
+                           <li class="main-menu__item">
+                              <a href="#" class="main-menu__link">
+                                 <span class="main-menu__title">Four</span>
+                                 <i class="fas fa-chevron-down main-menu__item-arrow"></i>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
                   </div>
-               </li>
 
-               <li class="top-menu__item top-menu__item--2">
-                  <a href="#" class="top-menu__link btn btn--red">
-                     Home
-                  </a>
-               </li>
+               <ul class="nav">
+                  <li class="nav__item">
+                     <a href="#" class="nav__link btn btn--red">
+                        Home
+                     </a>
+                  </li>
 
-               <li class="top-menu__item top-menu__item--3">
-                  <a href="#" class="top-menu__link btn btn--red">
-                     Brands
-                  </a>
-               </li>
+                  <li class="nav__item">
+                     <a href="#" class="nav__link btn btn--red">
+                        Brands
+                     </a>
+                  </li>
 
-               <li class="top-menu__item top-menu__item--4">
-                  <a href="#" class="top-menu__link btn btn--red">
-                     Specials
-                  </a>
-               </li>
-               <li class="top-menu__item top-menu__item--5">
-                  <a href="#" class="top-menu__link btn btn--red">
-                     Services
-                  </a>
-               </li>
-            </ul>
-            
-            <div class="account-cart-wrapper">
-               <a class="my-account btn btn--black">
-                     <i class="far fa-user my-account__icon"></i>
-                  My Account
-               </a>
-   
-               <a class="cart" href="#">
-                  Cart
-                  <i class="fas fa-shopping-cart cart__icon"></i>
-                  </ion-icon>
-                  <div class="cart__counter">0</div>
-               </a>
-
+                  <li class="nav__item">
+                     <a href="#" class="nav__link btn btn--red">
+                        Specials
+                     </a>
+                  </li>
+                  <li class="nav__item">
+                     <a href="#" class="nav__link btn btn--red">
+                        Services
+                     </a>
+                  </li>
+               </ul>
             </div>
+               
+            <div class="nav-bar__right">
+               <div class="account-cart-wrapper">
+                  <a class="my-account btn btn--black">
+                        <i class="far fa-user my-account__icon"></i>
+                     My Account
+                  </a>
+      
+                  <a class="cart" href="#">
+                     Cart
+                     <i class="fas fa-shopping-cart cart__icon"></i>
+                     </ion-icon>
+                     <div class="cart__counter">0</div>
+                  </a>
+               </div>
+            </div>
+               
          </div>
       </nav>
    </div>
