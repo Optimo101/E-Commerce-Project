@@ -20,8 +20,13 @@
       border-radius: .8rem;
       width: 100%;
       z-index: 100;
-      padding: 1rem 0;
       background-color: $color-white;
+
+      transition: height .3s ease-in-out;
+      overflow: hidden;
+
+      height: 0;
+      display: none; 
 
       &::before {
          position: absolute;
@@ -35,8 +40,15 @@
       }
    }
 
+   &__dropdown.is-visible {
+      display: block;
+      height: auto;
+   }
+
    &__list {
       list-style: none;
+      padding: 1rem 0;
+
 
       & li:not(:last-child):after  {
          border-bottom: 1px solid #e5e5e5;
