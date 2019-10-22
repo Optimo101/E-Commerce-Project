@@ -126,8 +126,11 @@ body {
     border-radius: .8rem;
     width: 100%;
     z-index: 100;
-    padding: 1rem 0;
-    background-color: #FFF; }
+    background-color: #FFF;
+    transition: height .3s ease-in-out;
+    overflow: hidden;
+    height: 0;
+    display: none; }
     .main-menu__dropdown::before {
       position: absolute;
       top: -1.4rem;
@@ -137,8 +140,12 @@ body {
       content: "\f0de";
       font-size: 3rem;
       color: #FFF; }
+  .main-menu__dropdown.is-visible {
+    display: block;
+    height: auto; }
   .main-menu__list {
-    list-style: none; }
+    list-style: none;
+    padding: 1rem 0; }
     .main-menu__list li:not(:last-child):after {
       border-bottom: 1px solid #e5e5e5;
       position: absolute;
