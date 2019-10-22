@@ -8,6 +8,7 @@
    height: 4rem;
    width: 100%;
    background-color: $color-lightergrey;
+   border-bottom: 1px solid $color-lightgrey;
 
    &__alert-icon {
       color: $color-primary;
