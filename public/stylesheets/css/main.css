@@ -114,7 +114,7 @@ body {
 .main-menu {
   position: relative;
   height: 4rem; }
-  .main-menu__button {
+  .main-menu__btn {
     text-transform: uppercase; }
   .main-menu__icon {
     margin-right: 1.5rem;
@@ -266,7 +266,7 @@ body {
   position: relative; }
 
 .shadow-overlay {
-  display: block;
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
