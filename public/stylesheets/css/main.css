@@ -146,7 +146,7 @@ body {
   .main-menu__list {
     list-style: none;
     padding: 1rem 0; }
-    .main-menu__list li:not(:last-child):after {
+    .main-menu__list > li:not(:last-child):after {
       border-bottom: 1px solid #e5e5e5;
       position: absolute;
       left: 0;
@@ -166,7 +166,6 @@ body {
       .main-menu__item:hover .main-menu__item-arrow {
         transform: rotate(-90deg); }
   .main-menu__link {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -183,7 +182,31 @@ body {
   border: 1px solid #cecece;
   border-radius: .8rem;
   z-index: 100;
-  background-color: #FFF; }
+  list-style: none;
+  background-color: #FFF;
+  overflow: hidden;
+  display: none; }
+  .submenu__item {
+    text-transform: none;
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 500; }
+  .submenu > li:not(:last-child):after {
+    border-bottom: 1px solid #e5e5e5;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 90%;
+    content: "";
+    bottom: 0;
+    margin: 0 auto; }
+  .submenu__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    text-decoration: none; }
 
 .header-notice {
   display: flex;

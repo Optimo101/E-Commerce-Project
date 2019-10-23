@@ -20,32 +20,31 @@ export const showDropdown = (element) => {
    var height = getHeight(); // Gets natural height
    element.classList.add('is-visible'); // Make element visible
    element.style.height = height; // Update the max-height
+   elements.shadowOverlay.style.display = 'block'; // show background overlay
 
-   // Once transition is complete, remove the inline max-height so content can scale responsively
+
+   // Once transition is complete, remove the inline max-height so content can scale responsively.
 	window.setTimeout(function () {
-		element.style.height = '';
+      element.style.height = '';
+      element.style.overflow = 'visible'; // Show overflow for submenus
    }, 350);
-   
-   // Show shadow overlay
-   elements.shadowOverlay.style.display = 'block';
 };
 
 export const hideDropdown = (element) => {
    // Give element a height to change from
    element.style.height = element.scrollHeight + 'px';
 
-   // Set height to 0
+   // Set height back to 0 and overflow to hidden
    window.setTimeout(function() {
       element.style.height = '0';
+      element.style.overflow = 'hidden';
    }, 1);
 
    // When transition is complete, hide it
    window.setTimeout(function() {
       element.classList.remove('is-visible');
+      elements.shadowOverlay.style.display = 'none';
    }, 350);
-
-   // Hide shadow overlay
-   elements.shadowOverlay.style.display = 'none';
 };
 
 export const toggleDropdown = (element) => {
@@ -60,9 +59,10 @@ export const toggleDropdown = (element) => {
 };
 
 export const hideOnClickOutside = (event, element) => {
-   
-   if (element.classList.contains('is-visible') && event.target.closest('.main-menu__btn') === null && event.target.closest('.main-menu__dropdown') === null) {
-      hideDropdown(element);
+   if (element.classList.contains('is-visible') && 
+      event.target.closest('.main-menu__btn') === null && 
+      event.target.closest('.main-menu__dropdown') === null) {
+         hideDropdown(element);
    }
 };
 
