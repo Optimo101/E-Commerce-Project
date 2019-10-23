@@ -4,6 +4,7 @@
    position: relative;
    height: 4rem;
 
+
    &__btn {
       text-transform: uppercase;
    }
@@ -50,7 +51,7 @@
       padding: 1rem 0;
 
 
-      & li:not(:last-child):after  {
+      & > li:not(:last-child):after  {
          border-bottom: 1px solid #e5e5e5;
          position: absolute;
          left: 0;
@@ -78,7 +79,6 @@
    }
 
    &__link {
-      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
