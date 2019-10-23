@@ -14,7 +14,12 @@ elements.mainMenuBtn.addEventListener('click', function() {
    homePage.toggleDropdown(elements.mainMenuDropdown);
 });
 
-// Main menu item
-elements.mainMenuItem.addEventListener('mouseover', function(event) {
-   console.log(event.target);
+// Close main menu when user clicks outside of main menu
+document.addEventListener('click', function(event) {
+   homePage.hideOnClickOutside(event, elements.mainMenuDropdown);
 });
+
+// Main menu item
+// elements.mainMenuItem.addEventListener('mouseover', function(event) {
+//    console.log(event.target);
+// });

@@ -1,9 +1,12 @@
+import { elements } from './base';
+ 
+
 // ============== SIMPLE HIDE ELEMENT FUNCTION ==============
 export const hideElement = (element) => {
    element.style.display = 'none';
 };
 
-// ============== DROPDOWN MENU ==============
+// ============== DROPDOWN MENU FUNCTIONS ==============
 export const showDropdown = (element) => {
 
    // Gets the natural height of an element
@@ -18,12 +21,13 @@ export const showDropdown = (element) => {
    element.classList.add('is-visible'); // Make element visible
    element.style.height = height; // Update the max-height
 
-   console.log(element.style.height);
-
    // Once transition is complete, remove the inline max-height so content can scale responsively
 	window.setTimeout(function () {
 		element.style.height = '';
-	}, 350);
+   }, 350);
+   
+   // Show shadow overlay
+   elements.shadowOverlay.style.display = 'block';
 };
 
 export const hideDropdown = (element) => {
@@ -39,6 +43,9 @@ export const hideDropdown = (element) => {
    window.setTimeout(function() {
       element.classList.remove('is-visible');
    }, 350);
+
+   // Hide shadow overlay
+   elements.shadowOverlay.style.display = 'none';
 };
 
 export const toggleDropdown = (element) => {
@@ -50,6 +57,18 @@ export const toggleDropdown = (element) => {
 
    //Otherwise, show it
    showDropdown(element);
-}
+};
+
+export const hideOnClickOutside = (event, element) => {
+   
+   if (element.classList.contains('is-visible') && event.target.closest('.main-menu__btn') === null && event.target.closest('.main-menu__dropdown') === null) {
+      hideDropdown(element);
+   }
+};
+
+
+
+
+
 
 
