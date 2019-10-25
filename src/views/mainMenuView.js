@@ -1,12 +1,6 @@
 import { elements } from './base';
- 
 
-// ============== SIMPLE HIDE ELEMENT FUNCTION ==============
-export const hideElement = (element) => {
-   element.style.display = 'none';
-};
-
-// ============== DROPDOWN MENU FUNCTIONS ==============
+// ============== MAINMENU FUNCTIONS ==============
 export const showDropdown = (element) => {
 
    // Gets the natural height of an element
@@ -27,11 +21,11 @@ export const showDropdown = (element) => {
 	window.setTimeout(function () {
       element.style.height = '';
       element.style.overflow = 'visible'; // Show overflow for submenus
-   }, 350);
+   }, 250);
 };
 
 export const hideDropdown = (element) => {
-   // Give element a height to change from
+   // Give element a height to change from as 'auto' (from 'is-visible' class) does not work
    element.style.height = element.scrollHeight + 'px';
 
    // Set height back to 0 and overflow to hidden
@@ -44,7 +38,7 @@ export const hideDropdown = (element) => {
    window.setTimeout(function() {
       element.classList.remove('is-visible');
       elements.shadowOverlay.style.display = 'none';
-   }, 350);
+   }, 250);
 };
 
 export const toggleDropdown = (element) => {
@@ -65,10 +59,3 @@ export const hideOnClickOutside = (event, element) => {
          hideDropdown(element);
    }
 };
-
-
-
-
-
-
-
