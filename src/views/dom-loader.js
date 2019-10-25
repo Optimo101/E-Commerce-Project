@@ -1,1 +1,0 @@
-export const headerNoticeBtn = document.querySelector('.header-notice__close-icon');

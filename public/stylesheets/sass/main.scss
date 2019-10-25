@@ -2,11 +2,14 @@
 
 @import 'base/base';
 @import 'base/typography';
+@import 'base/utilities';
 
 @import 'components/button';
 @import 'components/prom-primary';
 @import 'components/prom-secondary';
 @import 'components/service-feature';
+@import 'components/main-menu';
+@import 'components/submenu';
 
 @import 'layout/header';
 @import 'layout/layout';

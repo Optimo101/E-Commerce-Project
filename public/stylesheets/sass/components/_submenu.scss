@@ -1,0 +1,18 @@
+.submenu {
+   position: absolute;
+   left: 100%;
+   top: 0;
+   border: 1px solid $color-lightgrey;
+   border-radius: .8rem;
+   z-index: 100;
+   background-color: $color-white;
+
+   width: 50rem;
+
+   opacity: 0;
+   height: 0;
+   overflow: hidden;
+   display: none;
+   transition: height .25s ease-in-out, opacity .25s ease-out;
+
+}

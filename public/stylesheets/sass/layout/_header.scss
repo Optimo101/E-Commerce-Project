@@ -1,6 +1,4 @@
-.site-header {
-
-}
+.site-header {}
 
 .header-notice {
    display: flex;
@@ -10,6 +8,7 @@
    height: 4rem;
    width: 100%;
    background-color: $color-lightergrey;
+   border-bottom: 1px solid $color-lightgrey;
 
    &__alert-icon {
       color: $color-primary;
@@ -29,15 +28,12 @@
    }
 }
 
-.full-header {
-
-}
+.full-header {}
 
 .top-header {
    display: flex;
    align-items: center;
    justify-content: space-between;
-
    height: 12rem;
 }
 
@@ -109,8 +105,6 @@
       color: $color-primary;
    }
 
-   &__number {
-
-   }
+   &__number {}
 }
 

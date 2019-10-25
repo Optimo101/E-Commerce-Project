@@ -1,8 +1,11 @@
-.nav-menu-bar {
+.nav-bar {
    display: flex;
    
    background-color: $color-primary;
    height: 6rem;
+   border-top: 1px solid $color-lightgrey;
+   border-bottom: 1px solid $color-lightgrey;
+
 
    &__content {
       display: flex;
@@ -10,30 +13,30 @@
       justify-content: space-between;
       flex-grow: 1;
    }   
+
+   &__left {
+      display: flex;
+   }
+
+   &__right {}
 }
 
-.top-menu {
+.nav {
    display: flex;
    align-items: center;
    list-style: none;
+   margin-left: 2rem;
 
    &__item {
-      &--1 {
-         margin-right: 2rem;
-         text-transform: uppercase;
-      }
+      position: relative;
    }
+
    &__link {
       font-weight: 500;
 
       &:hover {
          background-color: $color-black;
       }
-   }
-
-   &__icon {
-      margin-right: 1.5rem;
-      font-size: 2rem;
    }
 }
 
