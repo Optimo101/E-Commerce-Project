@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "webpack-dev-server",
+    "build:dev": "webpack --mode development",
     "build:prod": "webpack --mode production",
     "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css"
   },
