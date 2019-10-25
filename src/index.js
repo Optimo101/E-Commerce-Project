@@ -1,25 +1,59 @@
-import { elements } from './views/base';
-import * as homePage from './views/home-page';
+import { elements, hideElement } from './views/base';
+
+import * as mainMenuView from './views/mainMenuView';
+import * as submenuView from './views/submenuView';
+
+// ============= ADD IDs to DOM ELEMENTS =============
+const addModClass = (nodeList, prefix) => {
+   const elementList = nodeList;
+
+   let num = 1;
+
+   for (const item of elementList) {
+      item.classList.add(`${prefix}--${num}`);
+      num++;
+   };
+};
+
+// ============= CREATE EVENT LISTENERS FOR... =============
+const setUpEventListeners = () => {
+
+   // HEADER NOTICE CLOSE BUTTON
+   elements.headerNoticeBtn.addEventListener('click', function() {
+      hideElement(elements.headerNotice);
+   });
+
+   // OPEN/CLOSE MAIN MENU
+   elements.mainMenuBtn.addEventListener('click', function() {
+      mainMenuView.toggleDropdown(elements.mainMenuDropdown);
+   });
+
+   // CLOSE MAIN MENU WHEN CLICK ANYWHERE OUTSIDE OF MAIN MENU
+   document.addEventListener('click', function(event) {
+      mainMenuView.hideOnClickOutside(event, elements.mainMenuDropdown);
+   });
+};
 
 
 
+// OPEN/CLOSE SUBMENU
 
-// Small 'X' button in Header Notice section
-elements.headerNoticeBtn.addEventListener('click', function() {
-   homePage.hideElement(elements.headerNotice);
-});
+const setUpSubmenusEvent = (eventType, method) => {
+   for (let i = 1; i < elements.mainMenuItems.length; i++) {
+      document.querySelector(`.main-menu__item--${i}`).addEventListener(eventType, function() {
+         if (document.querySelector(`.submenu--${i}`)) {
+            method(document.querySelector(`.submenu--${i}`));
+         };
+      });
+   };
+};
 
-// Open/Close main menu
-elements.mainMenuBtn.addEventListener('click', function() {
-   homePage.toggleDropdown(elements.mainMenuDropdown);
-});
+const init = () => {
+   addModClass(elements.mainMenuItems,'main-menu__item');
+   addModClass(elements.submenuItems, 'submenu');
+   setUpEventListeners();
+   setUpSubmenusEvent('mouseover', submenuView.showSubMenu);
+   setUpSubmenusEvent('mouseleave', submenuView.hideSubMenu);
+};
 
-// Close main menu when user clicks outside of main menu
-document.addEventListener('click', function(event) {
-   homePage.hideOnClickOutside(event, elements.mainMenuDropdown);
-});
-
-// Open/Close submenu
-elements.mainMenuItem.addEventListener('mouseover', function(event) {
-   console.log(event.target);
-});
+init();
