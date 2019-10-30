@@ -1,7 +1,39 @@
 import { elements, hideElement } from './views/base';
 
+
+import Search from './models/Search';
+
+import * as searchView from './views/searchView';
 import * as mainMenuView from './views/mainMenuView';
 import * as submenuView from './views/submenuView';
+
+// Global state of the app
+const state = {};
+
+const controlSearch = async () => {
+   // Get query from view
+   const query = searchView.getInput();
+
+   if (query) {
+      // New search object and add to state
+      state.search = new Search(query);
+
+      // Prepare UI for results
+
+      // Search for recipes
+      await state.search.getResults();
+
+      // Render results on UI
+      console.log(state.search.results);
+   }
+
+}
+
+elements.searchForm.addEventListener('submit', event => {
+   event.preventDefault();
+   controlSearch();
+});
+
 
 // ============= ADD IDs to DOM ELEMENTS =============
 const addModClass = (nodeList, prefix) => {
@@ -37,7 +69,6 @@ const setUpEventListeners = () => {
 
 
 // OPEN/CLOSE SUBMENU
-
 const setUpSubmenusEvent = (eventType, method) => {
    for (let i = 1; i < elements.mainMenuItems.length; i++) {
       document.querySelector(`.main-menu__item--${i}`).addEventListener(eventType, function() {
