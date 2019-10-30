@@ -1,6 +1,5 @@
 import { elements, hideElement } from './views/base';
 
-
 import Search from './models/Search';
 
 import * as searchView from './views/searchView';
@@ -10,6 +9,7 @@ import * as submenuView from './views/submenuView';
 // Global state of the app
 const state = {};
 
+// ============= SEARCH CONTROLLER =============
 const controlSearch = async () => {
    // Get query from view
    const query = searchView.getInput();
@@ -26,33 +26,26 @@ const controlSearch = async () => {
       // Render results on UI
       console.log(state.search.results);
    }
-
 }
 
-elements.searchForm.addEventListener('submit', event => {
-   event.preventDefault();
-   controlSearch();
-});
-
-
-// ============= ADD IDs to DOM ELEMENTS =============
-const addModClass = (nodeList, prefix) => {
-   const elementList = nodeList;
-
-   let num = 1;
-
-   for (const item of elementList) {
-      item.classList.add(`${prefix}--${num}`);
-      num++;
-   };
+const addClasses = () => {
+   // ADD MODIFIER CLASSES TO DOM ELEMENTS FOR SUBMENUS
+   submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
+   submenuView.addModClass(elements.submenuItems, 'submenu');
 };
+
 
 // ============= CREATE EVENT LISTENERS FOR... =============
 const setUpEventListeners = () => {
-
    // HEADER NOTICE CLOSE BUTTON
    elements.headerNoticeBtn.addEventListener('click', function() {
       hideElement(elements.headerNotice);
+   });
+
+   // SEACH FORM SUBMISSION
+   elements.searchForm.addEventListener('submit', event => {
+      event.preventDefault();
+      controlSearch();
    });
 
    // OPEN/CLOSE MAIN MENU
@@ -64,27 +57,15 @@ const setUpEventListeners = () => {
    document.addEventListener('click', function(event) {
       mainMenuView.hideOnClickOutside(event, elements.mainMenuDropdown);
    });
-};
 
-
-
-// OPEN/CLOSE SUBMENU
-const setUpSubmenusEvent = (eventType, method) => {
-   for (let i = 1; i < elements.mainMenuItems.length; i++) {
-      document.querySelector(`.main-menu__item--${i}`).addEventListener(eventType, function() {
-         if (document.querySelector(`.submenu--${i}`)) {
-            method(document.querySelector(`.submenu--${i}`));
-         };
-      });
-   };
+   // OPEN/CLOSE SUBMENU
+   submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
+   submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
 };
 
 const init = () => {
-   addModClass(elements.mainMenuItems,'main-menu__item');
-   addModClass(elements.submenuItems, 'submenu');
+   addClasses();
    setUpEventListeners();
-   setUpSubmenusEvent('mouseover', submenuView.showSubMenu);
-   setUpSubmenusEvent('mouseleave', submenuView.hideSubMenu);
 };
 
 init();
