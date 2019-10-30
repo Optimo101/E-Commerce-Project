@@ -248,7 +248,8 @@ body {
     font-family: inherit;
     border-radius: 4rem;
     border: none;
-    padding: 1rem 1.5rem; }
+    padding: 1rem 1.5rem;
+    background-color: #FFF; }
   .search-form__btn:hover {
     background-color: #EB2F38; }
   .search-form__icon {
