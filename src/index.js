@@ -28,8 +28,8 @@ const controlSearch = async () => {
    }
 }
 
+// ============= ADD MODIFIER CLASS TO EACH SUBMENU ELEMENT =============
 const addClasses = () => {
-   // ADD MODIFIER CLASSES TO DOM ELEMENTS FOR SUBMENUS
    submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
    submenuView.addModClass(elements.submenuItems, 'submenu');
 };
@@ -43,10 +43,10 @@ const setUpEventListeners = () => {
    });
 
    // SEACH FORM SUBMISSION
-   elements.searchForm.addEventListener('submit', event => {
-      event.preventDefault();
-      controlSearch();
-   });
+   // elements.searchForm.addEventListener('submit', event => {
+   //    event.preventDefault();
+   //    controlSearch();
+   // });
 
    // OPEN/CLOSE MAIN MENU
    elements.mainMenuBtn.addEventListener('click', function() {
