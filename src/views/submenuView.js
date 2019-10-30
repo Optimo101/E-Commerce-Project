@@ -1,4 +1,27 @@
+import { elements } from './base';
 
+// ============= ADD MODIFIER CLASS TO DOM ELEMENTS =============
+export const addModClass = (nodeList, prefix) => {
+   const elementList = nodeList;
+
+   let num = 1;
+
+   for (const item of elementList) {
+      item.classList.add(`${prefix}--${num}`);
+      num++;
+   };
+};
+
+// ADD EVENT LISTENERS FOR OPEN/CLOSING SUBMENUS
+export const setUpSubmenuEvent = (eventType, method) => {
+   for (let i = 1; i < elements.mainMenuItems.length; i++) {
+      document.querySelector(`.main-menu__item--${i}`).addEventListener(eventType, function() {
+         if (document.querySelector(`.submenu--${i}`)) {
+            method(document.querySelector(`.submenu--${i}`));
+         };
+      });
+   };
+};
 
 // ============== SUBMENU FUNCTIONS ==============
 export const showSubMenu = (element) => {
@@ -23,3 +46,5 @@ export const hideSubMenu = (element) => {
    }, 250);
 
 }
+
+
