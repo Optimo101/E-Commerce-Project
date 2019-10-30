@@ -1,0 +1,54 @@
+.results {
+   display: grid;
+   grid-template-rows: 10rem auto;
+   grid-template-columns: [sidebar-start] 27rem [sidebar-end main-start] 1fr [main-end];
+
+   background-color: $color-lightergrey;
+
+   &__sidebar {
+      background-color: lightgreen;
+      grid-column: sidebar-start / sidebar-end;
+      grid-row: 1 / -1;
+
+      height: 100%;
+      width: 100%;
+
+   }
+
+   &__header {
+      background-color: lightseagreen;
+      grid-column: main-start / main-end;
+      
+      height: 100%;
+      width: 100%;
+
+   }
+
+   &__main {
+      background-color: lightgrey;
+      grid-column: main-start / main-end;
+
+      height: 100rem;
+      width: 100%;
+
+   }
+
+   &__main-grid {
+      background-color: lightsalmon;
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: [main-grid-start] repeat(4, [col-start] 1fr [col-end]) [main-grid-end];
+
+      height: 30rem;
+      width: 100%;
+
+   
+   }
+}
+
+.product-grid-item {
+   background-color: lightskyblue;
+   margin: 2rem;
+   padding: 2rem;
+   height: 25rem;
+}
