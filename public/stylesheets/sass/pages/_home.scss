@@ -1,7 +1,8 @@
 .grid-primary-wrapper {
-   padding: 2rem;
+   padding: 0 2rem;
    height: 35vw;
    max-height: 52.5rem;
+   padding: 2rem 0;
 }
 
 .grid-primary {
@@ -17,7 +18,7 @@
       background-size: cover;
       background-position: center;
 
-      background-color: $color-lightergrey;
+      background-color: $color-white;
 
 
       &--lg {
