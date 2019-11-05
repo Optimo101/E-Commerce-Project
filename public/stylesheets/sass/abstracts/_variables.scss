@@ -1,13 +1,21 @@
 // COLORS
-      $color-primary: #EB2F38;
-      $color-secondary: #6B151A;
-      $color-tertiary: #EE777D;
-      $color-black: rgb(61, 61, 61);
-      $color-white: #FFF;
-      $color-darkgrey: rgb(122, 122, 122);
-      $color-lightgrey: #cecece;
-      $color-lightergrey: #ececec;
+   $color-primary: #EB2F38;
+   $color-secondary: #6B151A;
+   $color-tertiary: #EE777D;
+   $color-black: rgb(61, 61, 61);
+   $color-white: #FFF;
+   $color-darkgrey: rgb(122, 122, 122);
+   $color-lightgrey: #cecece;
+   $color-lightergrey: #ececec;
 
-// SIZE
-   //FONT
-      $font-size-primary: 1.6rem;
+
+//FONT
+   $font-size-primary: 1.6rem;
+   $font-size-sm: 1.4rem;
+   $font-size-xs: 1.2rem;
+   $font-size-lg: 1.8rem;
+   $font-size-xl: 2rem;
+
+   $font-weight-primary: 400;
+   $font-weight-bold: 500;
+   $font-weight-thin: 300;

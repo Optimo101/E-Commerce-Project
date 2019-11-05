@@ -43,10 +43,10 @@ const setUpEventListeners = () => {
    });
 
    // SEACH FORM SUBMISSION
-   // elements.searchForm.addEventListener('submit', event => {
-   //    event.preventDefault();
-   //    controlSearch();
-   // });
+   elements.searchForm.addEventListener('submit', event => {
+      event.preventDefault();
+      controlSearch();
+   });
 
    // OPEN/CLOSE MAIN MENU
    elements.mainMenuBtn.addEventListener('click', function() {
