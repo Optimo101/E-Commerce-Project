@@ -10,23 +10,23 @@ import * as submenuView from './views/submenuView';
 const state = {};
 
 // ============= SEARCH CONTROLLER =============
-const controlSearch = async () => {
-   // Get query from view
-   const query = searchView.getInput();
+// const controlSearch = async () => {
+//    // Get query from view
+//    const query = searchView.getInput();
 
-   if (query) {
-      // New search object and add to state
-      state.search = new Search(query);
+//    if (query) {
+//       // New search object and add to state
+//       state.search = new Search(query);
 
-      // Prepare UI for results
+//       // Prepare UI for results
 
-      // Search for recipes
-      await state.search.getResults();
+//       // Search for recipes
+//       await state.search.getResults();
 
-      // Render results on UI
-      console.log(state.search.results);
-   }
-}
+//       // Render results on UI
+//       console.log(state.search.results);
+//    }
+// }
 
 // ============= ADD MODIFIER CLASS TO EACH SUBMENU ELEMENT =============
 const addClasses = () => {
@@ -61,6 +61,8 @@ const setUpEventListeners = () => {
    // OPEN/CLOSE SUBMENU
    submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
    submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
+
+   console.log(document);
 };
 
 const init = () => {

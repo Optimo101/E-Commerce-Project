@@ -1,9 +1,10 @@
 const    express     = require('express'),
          app         = express(),
          path        = require('path'),
-         newSearch   = require('./models/newSearch');
+         Search      = require('./models/Search');
 
-// 
+
+
 // =================================================
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
@@ -11,22 +12,20 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 
+
 // =================================================
-
-
 app.get('/', function(req, res) {
    res.render('home');
 });
 
 app.get('/results', async function(req, res) {
 
-   var search = new newSearch(req.query.search);
+   var searchQuery = new Search(req.query.search);
 
-   await search.getResults();
-   console.log(search.results);
+   await searchQuery.getResults();
+   console.log(searchQuery.results);
 
-   res.render('index');
-
+   res.render('index', {results: searchQuery.results});
 });
 
 app.get('*', function(req, res) {
