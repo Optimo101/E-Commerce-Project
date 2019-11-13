@@ -24,7 +24,7 @@ export default class Search {
       const baseURL = 'https://api.bestbuy.com/v1/',
             apiType = 'products',
             keyWords = this.formatQuery(),
-            attribute = '&onlineAvailability=true',
+            attribute = '&customerReviewAverage>0',
             catID = '',
             apiKey = 'MORTkmhIyQS3N3Pahuta4gSd',
             sortOptions = '&sort=bestSellingRank.asc',

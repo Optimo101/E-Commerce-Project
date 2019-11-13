@@ -47,24 +47,31 @@ const setUpEventListeners = () => {
 const state = {};
 
 // ============= SEARCH CONTROLLER =============
-
 const controlSearch = async () => {
 
    if (window.location.search) {
-      // Get 'search' url parameter string
+      // Get query from url parameter
       const urlQueryString = window.location.search;
-      console.log(urlQueryString); 
 
       // New search object and add to state
       state.search = new Search(urlQueryString);
 
       // Prepare UI for results
+      
+      try {
+         // Search for products
+         await state.search.getResults();
 
-      // Perform search
-      await state.search.getResults();
+         // Render results on UI
+         searchView.renderResults(state.search.results);
 
-      // Render results on UI
-      console.log(state.search.results);
+      } catch (error) {
+         alert('Somthing went wrong with the search');
+         console.log(error);
+      }
+
+      console.log(state.search);
+      
    };
 };
 
