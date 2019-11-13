@@ -1,7 +1,6 @@
 const    express     = require('express'),
          app         = express(),
-         path        = require('path'),
-         Search      = require('./models/Search');
+         path        = require('path');
 
 
 
@@ -22,10 +21,6 @@ app.get('/', function(req, res) {
 });
 
 app.get('/results', async function(req, res) {
-   // var searchQuery = new Search(req.query.search);
-   // await searchQuery.getResults();
-   // console.log(searchQuery.results);
-
    res.render('index');
 });
 

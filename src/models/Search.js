@@ -21,19 +21,22 @@ export default class Search {
    };
 
    async getResults() {
-      const baseURL = 'https://api.bestbuy.com/v1/';
-      const apiType = 'products';
-      const keyWords = this.formatQuery();
+      const baseURL = 'https://api.bestbuy.com/v1/',
+            apiType = 'products',
+            keyWords = this.formatQuery(),
+            attribute = '&onlineAvailability=true',
+            catID = '',
+            apiKey = 'MORTkmhIyQS3N3Pahuta4gSd',
+            sortOptions = '&sort=bestSellingRank.asc',
+            showOptions = '&show=sku,name,salePrice,regularPrice,customerReviewAverage,customerReviewCount,bestSellingRank,thumbnailImage,image',
+            pageSize = '&pageSize=100',
+            active = '&active=true',
+            responseFormat = '&format=json';
+
       console.log(keyWords);
-      const catID = '';
-      const apiKey = 'MORTkmhIyQS3N3Pahuta4gSd';
-      const sortOptions = '&sort=name.asc';
-      const showOptions = '&show=sku,name,regularPrice';
-      const pagination = `&pageSize=100`;
-      const responseFormat = '&format=json';
 
       try {
-         const response  = await axios.get(`${baseURL}${apiType}((${keyWords})${catID})?apiKey=${apiKey}${sortOptions}${showOptions}${pagination}${responseFormat}`);
+         const response  = await axios.get(`${baseURL}${apiType}((${keyWords})${attribute}${catID})?apiKey=${apiKey}${sortOptions}${showOptions}${pageSize}${active}${responseFormat}`);
 
          this.results = response.data.products;
 
