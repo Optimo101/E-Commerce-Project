@@ -467,6 +467,9 @@ body {
     font-size: 1.2rem; }
     .product-thumb__review-icon--empty {
       color: inherit; }
+  .product-thumb__title {
+    font-size: 1.2rem;
+    text-align: center; }
   .product-thumb__price {
     color: #EB2F38;
     font-weight: 500; }
