@@ -14,18 +14,19 @@ app.set('view engine', 'ejs');
 
 
 // =================================================
+
+
+
 app.get('/', function(req, res) {
    res.render('home');
 });
 
 app.get('/results', async function(req, res) {
+   // var searchQuery = new Search(req.query.search);
+   // await searchQuery.getResults();
+   // console.log(searchQuery.results);
 
-   var searchQuery = new Search(req.query.search);
-
-   await searchQuery.getResults();
-   console.log(searchQuery.results);
-
-   res.render('index', {results: searchQuery.results});
+   res.render('index');
 });
 
 app.get('*', function(req, res) {

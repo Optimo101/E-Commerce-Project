@@ -6,7 +6,8 @@ export default class Search {
    }
 
    formatQuery() {
-      const queryArray = this.query.trim().split(' ');
+      // i.e. input is "?search=red+dead+redemption"
+      const queryArray = this.query.trim().slice(8).split('+');
       const addToString = "search=\'";
 
       let newQueryArray = [];
@@ -16,6 +17,7 @@ export default class Search {
       });
 
       return newQueryArray.join('&');
+      // i.e. output would be 'search="red"&search="dead"&search="redemption"
    };
 
    async getResults() {
