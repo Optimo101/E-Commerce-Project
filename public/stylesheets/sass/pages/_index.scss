@@ -1,7 +1,7 @@
 .results {
    display: grid;
    grid-template-rows: 10rem auto;
-   grid-template-columns: [sidebar-start] 25rem [sidebar-end main-start] 1fr [main-end];
+   grid-template-columns: [sidebar-start] 20rem [sidebar-end main-start] 1fr [main-end];
    gap: 1.5rem;
 
    padding: 2rem 0;
@@ -12,7 +12,6 @@
       grid-column: sidebar-start / sidebar-end;
       grid-row: 1 / -1;
 
-      height: 100%;
       width: 100%;
 
       border: 1px solid lightgrey;
@@ -23,7 +22,6 @@
    &__header {
       grid-column: main-start / main-end;
       
-      height: 100%;
       width: 100%;
 
       border: 1px solid lightgrey;
@@ -33,117 +31,15 @@
    &__main {
       grid-column: main-start / main-end;
 
-      width: 100%;
 
    }
 
    &__main-grid {
       display: grid;
-      grid-template-columns: [main-grid-start] repeat(4, [col-start] 1fr [col-end]) [main-grid-end];
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+      grid-template-rows: minmax(0, 50rem);
+      grid-auto-rows: minmax(0, 50rem);
+      gap: 1.5rem;
 
    }
-}
-
-.product-thumb {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-
-   border: 1px solid $color-lightgrey;
-   border-radius: .8rem;
-   height: 35rem;
-   padding: 1rem 2rem;
-
-   background-color: $color-white;
-
-   &__img-wrap {
-      display: flex;
-      justify-content: center;
-
-      height: 100%;
-      margin-top: 3rem;
-      margin-bottom: 3rem;
-
-      // background-color: darkgrey;
-   }
-
-   &__img {
-      // max-width: 100%;
-      // object-fit: contain;
-      width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-
-      // background-color: lightgrey;
-   }
-
-   &__btn-wrap {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 1rem;
-
-      & button:nth-of-type(1) {
-         margin-right: .8rem;
-      }
-
-      & button:nth-of-type(2) {
-         padding: 1rem;
-      }
-
-   }
-
-   &__btn {
-
-      &:hover {
-         background-color: $color-primary;
-      }
-   }
-   
-   &__cart-icon {
-      margin-right: .5rem;
-   }
-
-   &__heart-icon {
-      font-size: 1.4rem;
-
-   }
-
-   &__desc-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-   }
-
-   &__review-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin-bottom: .8rem;
-
-   }
-
-   &__review-icon {
-      color: rgb(255, 208, 0);
-      font-size: $font-size-xs;
-
-      &--empty {
-         color: inherit;
-      }
-   }
-
-   &__title {
-      font-size: $font-size-xs;
-      text-align: center;
-   }
-
-   &__price {
-      color: $color-primary;
-      font-weight: $font-weight-bold;;
-
-   }
-
-
 }

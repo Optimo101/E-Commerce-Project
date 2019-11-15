@@ -203,6 +203,65 @@ body {
   display: none;
   transition: height .25s ease-in-out, opacity .25s ease-out; }
 
+.product-thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #cecece;
+  border-radius: .8rem;
+  padding: 3.5rem 0;
+  background-color: #FFF; }
+  .product-thumb__top-content {
+    height: 50%;
+    margin: 0 3rem; }
+  .product-thumb__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; }
+  .product-thumb__middle-content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 3.5rem; }
+  .product-thumb__btn-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem; }
+    .product-thumb__btn-wrap button:nth-of-type(1) {
+      margin-right: .8rem; }
+    .product-thumb__btn-wrap button:nth-of-type(2) {
+      padding: 1rem; }
+  .product-thumb__btn:hover {
+    background-color: #EB2F38; }
+  .product-thumb__cart-icon {
+    margin-right: .5rem; }
+  .product-thumb__heart-icon {
+    font-size: 1.4rem; }
+  .product-thumb__review-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem; }
+  .product-thumb__review-icon {
+    color: #ffd000;
+    font-size: 1.2rem; }
+    .product-thumb__review-icon--empty {
+      color: inherit; }
+  .product-thumb__desc-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1.5rem; }
+  .product-thumb__title {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #3d3d3d; }
+  .product-thumb__bottom-content {
+    margin-top: auto; }
+  .product-thumb__price {
+    color: #EB2F38;
+    font-weight: 500; }
+
 .header-notice {
   display: flex;
   justify-content: center;
@@ -234,9 +293,12 @@ body {
   align-items: center;
   height: 100%;
   flex-basis: 25%; }
+  .logo__link {
+    height: 100%; }
   .logo__img {
-    max-width: 100%;
-    max-height: 100%; }
+    width: 100%;
+    height: 100%;
+    object-fit: contain; }
 
 .search-form {
   display: flex;
@@ -398,78 +460,23 @@ body {
 .results {
   display: grid;
   grid-template-rows: 10rem auto;
-  grid-template-columns: [sidebar-start] 25rem [sidebar-end main-start] 1fr [main-end];
+  grid-template-columns: [sidebar-start] 20rem [sidebar-end main-start] 1fr [main-end];
   gap: 1.5rem;
   padding: 2rem 0; }
   .results__sidebar {
     grid-column: sidebar-start / sidebar-end;
     grid-row: 1 / -1;
-    height: 100%;
     width: 100%;
     border: 1px solid lightgrey; }
   .results__header {
     grid-column: main-start / main-end;
-    height: 100%;
     width: 100%;
     border: 1px solid lightgrey; }
   .results__main {
-    grid-column: main-start / main-end;
-    width: 100%; }
+    grid-column: main-start / main-end; }
   .results__main-grid {
     display: grid;
-    grid-template-columns: [main-grid-start] repeat(4, [col-start] 1fr [col-end]) [main-grid-end];
-    gap: 1rem; }
-
-.product-thumb {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #cecece;
-  border-radius: .8rem;
-  height: 35rem;
-  padding: 1rem 2rem;
-  background-color: #FFF; }
-  .product-thumb__img-wrap {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    margin-top: 3rem;
-    margin-bottom: 3rem; }
-  .product-thumb__img {
-    width: 100%;
-    max-height: 100%;
-    object-fit: contain; }
-  .product-thumb__btn-wrap {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem; }
-    .product-thumb__btn-wrap button:nth-of-type(1) {
-      margin-right: .8rem; }
-    .product-thumb__btn-wrap button:nth-of-type(2) {
-      padding: 1rem; }
-  .product-thumb__btn:hover {
-    background-color: #EB2F38; }
-  .product-thumb__cart-icon {
-    margin-right: .5rem; }
-  .product-thumb__heart-icon {
-    font-size: 1.4rem; }
-  .product-thumb__desc-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-  .product-thumb__review-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: .8rem; }
-  .product-thumb__review-icon {
-    color: #ffd000;
-    font-size: 1.2rem; }
-    .product-thumb__review-icon--empty {
-      color: inherit; }
-  .product-thumb__title {
-    font-size: 1.2rem;
-    text-align: center; }
-  .product-thumb__price {
-    color: #EB2F38;
-    font-weight: 500; }
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-template-rows: minmax(0, 50rem);
+    grid-auto-rows: minmax(0, 50rem);
+    gap: 1.5rem; }
