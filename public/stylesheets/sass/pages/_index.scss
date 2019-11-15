@@ -36,9 +36,9 @@
 
    &__main-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-      grid-template-rows: minmax(0, 50rem);
-      grid-auto-rows: minmax(0, 50rem);
+      grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+      grid-template-rows: minmax(0, 45rem);
+      grid-auto-rows: minmax(0, 45rem);
       gap: 1.5rem;
 
    }
