@@ -224,7 +224,7 @@ body {
     display: flex;
     flex-direction: column;
     align-content: center;
-    margin-top: 3.5rem;
+    margin-top: 2.5rem;
     padding: 0 1.5rem; }
   .product-thumb__btn-wrap {
     display: flex;
@@ -249,13 +249,13 @@ body {
     color: #ffd000; }
     .product-thumb__review-icon--empty {
       color: inherit; }
-  .product-thumb__review-number {
+  .product-thumb__review-count {
     font-size: 1.2rem; }
   .product-thumb__desc-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem; }
+    margin-bottom: .5rem; }
   .product-thumb__title {
     text-align: center;
     color: #3d3d3d; }

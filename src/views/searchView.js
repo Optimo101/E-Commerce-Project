@@ -20,8 +20,8 @@ const renderProductThumb = (product) => {
                <i class="product-thumb__review-icon fas fa-star"></i>
                <i class="product-thumb__review-icon product-thumb__review-icon--empty far fa-star"></i>
             </div>
-            <div class="product-thumb__review-number">
-               (1,234)
+            <div class="product-thumb__review-count">
+               (${product.customerReviewCount})
             </div>
          </div>
       </div>
