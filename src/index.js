@@ -71,9 +71,21 @@ const controlSearch = async () => {
       }
 
       console.log(state.search);
-      
    };
 };
+
+// When page buttons on results page are clicked
+elements.resultsPages.addEventListener('click', event => {
+   const btn = event.target.closest('.btn');
+
+   if (btn) {
+      const goToPage = parseInt(btn.dataset.goto, 10);
+      searchView.clearResults();
+      searchView.renderResults(state.search.results, goToPage);
+   };
+});
+
+
 
 const init = () => {
    addMenuClasses();

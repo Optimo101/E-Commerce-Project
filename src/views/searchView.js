@@ -1,5 +1,10 @@
 import { elements } from './base';
 
+export const clearResults = () => {
+   elements.resultsMainGrid.innerHTML = '';
+   elements.resultsPages.innerHTML = '';
+}
+
 const renderProductThumb = (product) => {
    const markup = 
    `<div class="product-thumb">
@@ -43,6 +48,37 @@ const renderProductThumb = (product) => {
    elements.resultsMainGrid.insertAdjacentHTML('beforeend', markup);
 };
 
+const createButton = (page, type) =>  `
+   <button class="btn btn--small btn--black results__page-btn results__page-btn--${type}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
+         <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
+         <i class="fas fa-angle-${type === 'prev' ? 'left' : 'right'}"></i>
+   </button>
+`;
+
+
+const renderButtons = (page, numResults, resPerPage) => {
+   const pages = Math.ceil(numResults / resPerPage); // 48 results / 20 = 2.4 rounded to 3 pages
+
+   let button;
+   if (page === 1 && pages > 1) {
+      // Only display next page button
+      button = createButton(page, 'next');
+      console.log(button);
+
+   } else if (page < pages) {
+      // Both buttons
+      button = `
+         ${createButton(page, 'prev')}
+         ${createButton(page, 'next')}
+      `;
+      
+   } else if (page === pages && pages > 1) {
+      // Only previous button
+      button = createButton(page, 'prev')
+   }
+
+   elements.resultsPages.insertAdjacentHTML('afterbegin', button);
+};
 
 
 export const renderResults = (results, page = 1, resPerPage = 20) => {
@@ -53,5 +89,5 @@ export const renderResults = (results, page = 1, resPerPage = 20) => {
    results.slice(start, end).forEach(renderProductThumb);
 
    //Render page buttons
-
+   renderButtons(page, results.length, resPerPage);
 };
