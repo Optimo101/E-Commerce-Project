@@ -86,7 +86,6 @@ elements.resultsPages.addEventListener('click', event => {
 });
 
 
-
 const init = () => {
    addMenuClasses();
    setUpEventListeners();
