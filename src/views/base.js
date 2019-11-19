@@ -13,6 +13,7 @@ export const elements = {
    submenuItems: document.querySelectorAll('.submenu'),
 
    resultsMainGrid: document.querySelector('.results__main-grid'),
+   resultsPages: document.querySelector('.results__page-buttons'),
 };
 
 // ============== SIMPLE HIDE ELEMENT FUNCTION ==============
