@@ -11,6 +11,10 @@ export const elements = {
 
    mainMenuItems: document.querySelectorAll('.main-menu__item'),
    submenuItems: document.querySelectorAll('.submenu'),
+
+   resultsMainGrid: document.querySelector('.results__main-grid'),
+   resultsPages: document.querySelector('.results__page-buttons'),
+   resultsCount: document.querySelector('.results__item-count'),
 };
 
 // ============== SIMPLE HIDE ELEMENT FUNCTION ==============

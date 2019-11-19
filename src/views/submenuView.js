@@ -8,6 +8,10 @@ export const addModClass = (nodeList, prefix) => {
 
    for (const item of elementList) {
       item.classList.add(`${prefix}--${num}`);
+
+      if (prefix === 'main-menu__item') {
+         item.id = `mm-${num}`;
+      }
       num++;
    };
 };

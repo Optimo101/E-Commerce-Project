@@ -1,12 +1,15 @@
 import axios from 'axios';
 
 export default class Search {
-   constructor(query) {
+   constructor(query, catID = '') {
       this.query = query;
+      this.catID = catID;
+      this.results = [];
    }
 
    formatQuery() {
-      const queryArray = this.query.trim().split(' ');
+      // i.e. input is "?search=red+dead+redemption"
+      const queryArray = this.query.trim().slice(8).split('+');
       const addToString = "search=\'";
 
       let newQueryArray = [];
@@ -16,27 +19,34 @@ export default class Search {
       });
 
       return newQueryArray.join('&');
+      // i.e. output would be 'search="red"&search="dead"&search="redemption"
    };
 
    async getResults() {
-      const baseURL = 'https://api.bestbuy.com/v1/';
-      const apiType = 'products';
-      const keyWords = this.formatQuery();
-      console.log(keyWords);
-      const catID = '';
-      const apiKey = 'MORTkmhIyQS3N3Pahuta4gSd';
-      const sortOptions = '&sort=name.asc';
-      const showOptions = '&show=sku,name,regularPrice';
-      const pagination = `&pageSize=100`;
-      const responseFormat = '&format=json';
+      const baseURL = 'https://api.bestbuy.com/v1/',
+            apiType = 'products',
+            keyWords = this.formatQuery(),
+            attribute = '&customerReviewAverage>0',
+            catID = `${this.catID}`,
+            apiKey = 'MORTkmhIyQS3N3Pahuta4gSd',
+            sortOptions = '&sort=bestSellingRank.asc',
+            showOptions = '&show=sku,name,salePrice,regularPrice,customerReviewAverage,customerReviewCount,bestSellingRank,categoryPath.name,categoryPath.id,thumbnailImage,image',
+            pageSize = '&pageSize=100',
+            active = '&active=true',
+            responseFormat = '&format=json';
 
-      try {
-         const response  = await axios.get(`${baseURL}${apiType}((${keyWords})${catID})?apiKey=${apiKey}${sortOptions}${showOptions}${pagination}${responseFormat}`);
+      let totalPages = 1;
 
-         this.results = response.data.products;
+      for (let i = 0; i < totalPages; i++) {
+         try {
+            const response = await axios.get(`${baseURL}${apiType}((${keyWords})${attribute}${catID})?apiKey=${apiKey}${sortOptions}${showOptions}${pageSize}&page=${i + 1}${active}${responseFormat}`);
 
-      } catch (error) {
-         console.error(error);
+            this.results = this.results.concat(response.data.products);
+            totalPages = response.data.totalPages;
+
+         } catch (error) {
+            console.error(error);
+         }
       }
    }
 }

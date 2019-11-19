@@ -59,3 +59,4 @@ export const hideOnClickOutside = (event, element) => {
          hideDropdown(element);
    }
 };
+
