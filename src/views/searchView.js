@@ -48,6 +48,10 @@ const renderProductThumb = (product) => {
    elements.resultsMainGrid.insertAdjacentHTML('beforeend', markup);
 };
 
+const renderItemCount = (itemStart, itemEnd, itemTotal) => {
+   elements.resultsCount.innerHTML = `${itemStart} - ${itemEnd} of ${itemTotal} total items`
+};
+
 const createButton = (page, type) =>  `
    <button class="btn btn--small btn--black results__page-btn results__page-btn--${type}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
          <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
@@ -88,6 +92,13 @@ export const renderResults = (results, page = 1, resPerPage = 20) => {
 
    results.slice(start, end).forEach(renderProductThumb);
 
-   //Render page buttons
-   renderButtons(page, results.length, resPerPage);
+   // Render item count of current page
+   const itemStart = start + 1;
+   const itemEnd = end;
+   renderItemCount(itemStart, itemEnd, results.length);
+
+   // Render page buttons of current page
+   if (results.length >= resPerPage) {
+      renderButtons(page, results.length, resPerPage);
+   }
 };

@@ -466,7 +466,7 @@ body {
 
 .results {
   display: grid;
-  grid-template-rows: 10rem auto 5rem;
+  grid-template-rows: 10rem auto min-content;
   grid-template-columns: [sidebar-start] 20rem [sidebar-end main-start] 1fr [main-end];
   gap: 1.5rem;
   padding: 2rem 0; }
@@ -492,8 +492,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    border: 1px solid lightgrey; }
+    width: 100%; }
+  .results__item-count {
+    color: #3d3d3d;
+    font-size: 1.4rem; }
   .results__page-buttons {
     display: flex;
     justify-content: space-between; }
