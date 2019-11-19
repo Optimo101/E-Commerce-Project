@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 export default class Search {
-   constructor(query) {
+   constructor(query, catID = '') {
       this.query = query;
+      this.catID = catID;
+      this.results = [];
    }
 
    formatQuery() {
@@ -25,23 +27,26 @@ export default class Search {
             apiType = 'products',
             keyWords = this.formatQuery(),
             attribute = '&customerReviewAverage>0',
-            catID = '',
+            catID = `${this.catID}`,
             apiKey = 'MORTkmhIyQS3N3Pahuta4gSd',
             sortOptions = '&sort=bestSellingRank.asc',
-            showOptions = '&show=sku,name,salePrice,regularPrice,customerReviewAverage,customerReviewCount,bestSellingRank,thumbnailImage,image',
+            showOptions = '&show=sku,name,salePrice,regularPrice,customerReviewAverage,customerReviewCount,bestSellingRank,categoryPath.name,categoryPath.id,thumbnailImage,image',
             pageSize = '&pageSize=100',
             active = '&active=true',
             responseFormat = '&format=json';
 
-      console.log(keyWords);
+      let totalPages = 1;
 
-      try {
-         const response  = await axios.get(`${baseURL}${apiType}((${keyWords})${attribute}${catID})?apiKey=${apiKey}${sortOptions}${showOptions}${pageSize}${active}${responseFormat}`);
+      for (let i = 0; i < totalPages; i++) {
+         try {
+            const response = await axios.get(`${baseURL}${apiType}((${keyWords})${attribute}${catID})?apiKey=${apiKey}${sortOptions}${showOptions}${pageSize}&page=${i + 1}${active}${responseFormat}`);
 
-         this.results = response.data.products;
+            this.results = this.results.concat(response.data.products);
+            totalPages = response.data.totalPages;
 
-      } catch (error) {
-         console.error(error);
+         } catch (error) {
+            console.error(error);
+         }
       }
    }
 }
