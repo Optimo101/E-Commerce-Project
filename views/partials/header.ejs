@@ -17,11 +17,13 @@
       <div class="top-header container">
 
             <div class="logo">
-               <img class="logo__img" src="/img/company-logo.png" alt="company logo" >
+               <a href="/" class="logo__link">
+                  <img class="logo__img" src="/img/company-logo.png" alt="company logo" >
+               </a>
             </div>
 
-            <form class="search-form">
-               <input type="text" class="search-form__input" placeholder="Search our store" name="search-field">
+            <form class="search-form" method="GET" action="/results">
+               <input class="search-form__input" type="text" placeholder="Search our store" name="search">
                <button class="btn btn--black search-form__btn"><i class="fas fa-search search-form__icon"></i>Search</button>
             </form>
             
@@ -31,7 +33,6 @@
                   <span class="phone-support__question">Have questions?</span>
                   <span class="phone-support__number">Call: 456-789-1234</span>
                </div>
-
             </div>
       </div>
 
@@ -56,24 +57,49 @@
                                  <i class="fas fa-chevron-down main-menu__item-arrow"></i>
                               </a>
                   
-                              <div class="submenu" id="sm-1">
+                              <div class="submenu">
                                  <ul class="test-list">
                                     <li class="test-item">This is a submenu</li>
                                     <li class="test-item">2</li>
                                     <li class="test-item">3</li>
                                     <li class="test-item">4</li>
                                     <li class="test-item">5</li>
-                                    <li class="test-item">5</li>
-                                    <li class="test-item">5</li>
-                                    <li class="test-item">5</li>
-                                    <li class="test-item">5</li>
-                                    <li class="test-item">5</li>
-                                    <li class="test-item">5</li>
-                                    <li class="test-item">5</li>
-
                                  </ul>
                               </div>
+                           </li>
 
+                           <li class="main-menu__item">
+                              <a href="#" class="main-menu__link">
+                                 <i class="fas fa-headphones main-menu__item-icon"></i>
+                                 <span class="main-menu__title">Audio</span>
+                                 <i class="fas fa-chevron-down main-menu__item-arrow"></i>
+                              </a>
+
+                              <div class="submenu">
+                                 <ul class="test-list">
+                                    <li class="test-item">This is a submenu</li>
+                                    <li class="test-item">2</li>
+                                    <li class="test-item">3</li>
+                                    <li class="test-item">4</li>
+                                    <li class="test-item">5</li>                                   
+                                 </ul>
+                              </div>
+                           </li>
+
+                           <li class="main-menu__item">
+                              <a href="#" class="main-menu__link">
+                                 <i class="fas fa-car-alt main-menu__item-icon"></i>
+                                 <span class="main-menu__title">Car Electronics & GPS</span>
+                                 <i class="fas fa-chevron-down main-menu__item-arrow"></i>
+                              </a>
+                           </li>
+                           
+                           <li class="main-menu__item">
+                              <a href="#" class="main-menu__link">
+                                 <i class="fas fa-camera main-menu__item-icon"></i>
+                                 <span class="main-menu__title">Cameras & Camcorders</span>
+                                 <i class="fas fa-chevron-down main-menu__item-arrow"></i>
+                              </a>
                            </li>
 
                            <li class="main-menu__item">
@@ -82,31 +108,20 @@
                                  <span class="main-menu__title">Computers & Tablets</span>
                                  <i class="fas fa-chevron-down main-menu__item-arrow"></i>
                               </a>
-
-                              <div class="submenu" id="sm-2">
-                                    <ul class="test-list">
-                                       <li class="test-item">This is a submenu</li>
-                                       <li class="test-item">2</li>
-                                       <li class="test-item">3</li>
-                                       <li class="test-item">4</li>
-                                       <li class="test-item">5</li>
-                                       <li class="test-item">5</li>
-                                       <li class="test-item">5</li>
-                                       <li class="test-item">5</li>
-                                       <li class="test-item">5</li>
-                                       <li class="test-item">5</li>
-                                       <li class="test-item">5</li>
-
-                                       
-                                    </ul>
-                                 </div>
-
                            </li>
 
                            <li class="main-menu__item">
                               <a href="#" class="main-menu__link">
-                                 <i class="fas fa-camera main-menu__item-icon"></i>
-                                 <span class="main-menu__title">Cameras & Camcorders</span>
+                                 <i class="far fa-play-circle main-menu__item-icon"></i>
+                                 <span class="main-menu__title">Movies & Music</span>
+                                 <i class="fas fa-chevron-down main-menu__item-arrow"></i>
+                              </a>
+                           </li>
+
+                           <li class="main-menu__item">
+                              <a href="#" class="main-menu__link">
+                                 <i class="fas fa-gamepad main-menu__item-icon"></i>
+                                 <span class="main-menu__title">Video Games</span>
                                  <i class="fas fa-chevron-down main-menu__item-arrow"></i>
                               </a>
                            </li>
@@ -121,19 +136,12 @@
 
                            <li class="main-menu__item">
                               <a href="#" class="main-menu__link">
-                                 <i class="fas fa-headphones main-menu__item-icon"></i>
-                                 <span class="main-menu__title">Audio</span>
+                                 <i class="fas fa-blender-phone main-menu__item-icon"></i>
+                                 <span class="main-menu__title">Appliances</span>
                                  <i class="fas fa-chevron-down main-menu__item-arrow"></i>
                               </a>
                            </li>
 
-                           <li class="main-menu__item">
-                              <a href="#" class="main-menu__link">
-                                 <i class="fas fa-gamepad main-menu__item-icon"></i>
-                                 <span class="main-menu__title">Video Games</span>
-                                 <i class="fas fa-chevron-down main-menu__item-arrow"></i>
-                              </a>
-                           </li>
                         </ul>
                      </div>
                   </div>
