@@ -196,7 +196,6 @@ body {
   border-radius: .8rem;
   z-index: 100;
   background-color: #FFF;
-  width: 50rem;
   opacity: 0;
   height: 0;
   overflow: hidden;
