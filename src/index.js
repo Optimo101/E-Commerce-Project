@@ -1,24 +1,26 @@
 import { elements, hideElement } from './views/base';
 
 import Search from './models/Search';
-import CatSearch from './models/CatSearch';
+import SubCats from './models/SubCats';
 
 import * as searchView from './views/searchView';
 import * as mainMenuView from './views/mainMenuView';
 import * as submenuView from './views/submenuView';
 
-// ============= GLOBAL STATE OF APP =============
+// GLOBAL STATE OF APP
 const state = {};
 
-// ============= SEARCH CONTROLLER =============
+// ===========================================================
+// SEARCH CONTROLLER
+// ===========================================================
+
 const controlSearch = async () => {
+   // Get search query from url parameter
+   const urlQuery = window.location.search;
 
-   if (window.location.search) {
-      // Get query from url parameter
-      const urlQueryString = window.location.search;
-
+   if (urlQuery) {
       // New search object and add to state
-      state.search = new Search(urlQueryString);
+      state.search = new Search(urlQuery);
 
       // Prepare UI for results
       
@@ -28,8 +30,9 @@ const controlSearch = async () => {
 
          // Render results on UI
          searchView.renderResults(state.search.results);
+
       } catch (error) {
-         alert('Somthing went wrong with the search');
+         alert('Somthing went wrong with the product search');
          console.log(error);
       }
 
@@ -37,38 +40,37 @@ const controlSearch = async () => {
    };
 };
 
-// ============= CAT SEARCH CONTROLLER =============
-const controlCatSearch = async () => {
+// ===========================================================
+// CATEGORIES CONTROLLER
+// ===========================================================
+
+const controlSubCats = async () => {
    // New category search object and add to state
-   state.catSearch = new CatSearch();
+   state.subCats = new SubCats();
 
    try {
-      await state.catSearch.getResults();      
+      await state.subCats.getResults();
+
    } catch (error) {
       alert('Somthing went wrong with the categories search');
       console.log(error);
    }
 
-   console.log(state.catSearch.results);
+   state.subCats.createSubCats();
 };
 
-// ============= MAIN MENU CONTROLLER =============
-   
-// ============= HEADER CONTROLLER =============
-const controlHeader = () => {
+// ===========================================================
+// MAIN MENU CONTROLLER
+// ===========================================================
+
+const controlMainMenu = () => {
    // Add modifier classes to each main menu item and corresponding submenu: main-menu__item--1 / submenu--1
-   submenuView.addModClass(elements.mainMenuItems,'main-menu__item'); // addModClass found in submenuView
-   submenuView.addModClass(elements.submenuItems, 'submenu'); // addModClass found in submenuView
+   submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
+   submenuView.addModClass(elements.submenuItems, 'submenu');
 
-   controlCatSearch();
-
-
+   controlSubCats();
 
    // Create event listeners for...
-      // Header notice close button
-      elements.headerNoticeBtn.addEventListener('click', function() {
-         hideElement(elements.headerNotice);
-      });
       // Open/close main menu
       elements.mainMenuBtn.addEventListener('click', function() {
          mainMenuView.toggleDropdown(elements.mainMenuDropdown);
@@ -80,18 +82,32 @@ const controlHeader = () => {
       // Open/close main menu
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
       submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
+   }
 
+// ===========================================================
+// HEADER CONTROLLER
+// ===========================================================
+
+const controlHeader = () => {
    
+   // Create event listeners for...
+      // Header notice close button
+      elements.headerNoticeBtn.addEventListener('click', function() {
+         hideElement(elements.headerNotice);
+      });
 }
 
-
-// ============= HOME PAGE CONTROLLER =============
+// ===========================================================
+// HOME PAGE CONTROLLER
+// ===========================================================
 const controlHomePage = () => {
    console.log('controller for home page');
 }
 
 
-// ============= RESULTS PAGE CONTROLLER =============
+// ===========================================================
+// RESULTS PAGE CONTROLLER
+// ===========================================================
 const controlResultsPage = () => {
    controlSearch();
 
@@ -108,8 +124,13 @@ const controlResultsPage = () => {
 };
 
 
+// ===========================================================
+// INITIALIZE APP
+// ===========================================================
+
 const init = () => {
    controlHeader();
+   controlMainMenu();
 
    if (window.location.pathname === '/') {
       controlHomePage();
