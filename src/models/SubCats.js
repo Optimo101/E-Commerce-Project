@@ -3,7 +3,7 @@ import axios from 'axios';
 export default class SubCats {
    constructor() {
       this.results = [];
-      this.allSubCats = [];
+      this.allSubCatArrays = [];
    }
 
    async getResults() {
@@ -28,7 +28,7 @@ export default class SubCats {
       }
 
       this.filterResults();
-      console.log(this.results);
+      // console.log(this.results);
 
    };
 
@@ -56,7 +56,7 @@ export default class SubCats {
          this.results = resultsArray;
    };
 
-   createSubCats() {
+   organizeResults() {
       
       for (let i = 0; i < 9; i++) {
          let subCatArray = [];
@@ -67,8 +67,7 @@ export default class SubCats {
             };
          });
 
-         this.allSubCats.push(subCatArray);
+         this.allSubCatArrays.push(subCatArray);
       }
-      console.log(this.allSubCats);
    }
 };
