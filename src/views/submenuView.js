@@ -39,7 +39,7 @@ export const showSubMenu = (element) => {
    element.style.display = 'block';
    element.style.height = getHeight();
    element.style.opacity = 1;
-}
+};
 
 export const hideSubMenu = (element) => {
    element.style.height = '0';
@@ -48,7 +48,37 @@ export const hideSubMenu = (element) => {
    window.setTimeout(function() {
       element.style.display = 'none';
    }, 250);
+};
 
-}
+
+// ============== RENDER SUBMENU CONTENT ==============
+const createSubmenu = (subCatObj, MainCatNum, totalSubCats) => {
+
+};
+
+
+
+
+// ============== RENDER SUBMENUS ==============
+
+export const renderSubMenus = (arrays) => {
+   
+   // For each subcategory list (array)...
+   arrays.forEach(function(array, index) {
+
+      // Create an object and...
+      let subCategories = {};
+
+      // ...create object properties based on each subcategory object in the array...
+      array.forEach(function(element, index) {
+         subCategories[`${index + 1}`] = element;
+      });
+
+      // ...then create submenu markup for main menu items using created object, index + 1 to match id of main menu item and total number of items for looping purposes
+      // createSubmenu(subCategories, index + 1, array.length);
+   });
+};
+
+
 
 
