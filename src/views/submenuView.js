@@ -18,7 +18,7 @@ export const addModClass = (nodeList, prefix) => {
 
 // ADD EVENT LISTENERS FOR OPEN/CLOSING SUBMENUS
 export const setUpSubmenuEvent = (eventType, method) => {
-   for (let i = 1; i < elements.mainMenuItems.length; i++) {
+   for (let i = 1; i <= elements.mainMenuItems.length; i++) {
       document.querySelector(`.main-menu__item--${i}`).addEventListener(eventType, function() {
          if (document.querySelector(`.submenu--${i}`)) {
             method(document.querySelector(`.submenu--${i}`));
@@ -52,7 +52,40 @@ export const hideSubMenu = (element) => {
 
 
 // ============== RENDER SUBMENU CONTENT ==============
-const createSubmenu = (subCatObj, MainCatNum, totalSubCats) => {
+const createSubmenu = (mainCatNum) => {
+   const markup = `
+      <div class="submenu submenu--${mainCatNum}">
+      </div>
+   `;
+   const mainMenuElement = document.getElementById(`mm-${mainCatNum}`);
+
+   mainMenuElement.insertAdjacentHTML('beforeend', markup);
+};
+
+const createSubmenuContent = (subCatsObj, mainCatNum, totalSubCats) => {
+   let markup = `
+      <ul class="submenu__list">
+   `;
+   for (let i = 1; i <= totalSubCats; i++) {
+      markup += `
+         <li class="submenu__item submenu__item--${i}">
+            <a class="submenu__link" href="/results?cat-search=${subCatsObj[i].id}">
+               <span class="submenu__title">
+               ${subCatsObj[i].name}
+               
+               </span>
+            </a>
+         </li>
+         `};
+
+   markup += `</ul>`;
+   console.log(markup);
+
+   const subMenuElement = document.querySelector(`.submenu--${mainCatNum}`);
+   console.log(subMenuElement);
+   subMenuElement.insertAdjacentHTML('beforeend', markup);
+
+   // console.log(document.getElementById(`${subCatsObj['1'].id}`));
 
 };
 
@@ -60,22 +93,24 @@ const createSubmenu = (subCatObj, MainCatNum, totalSubCats) => {
 
 
 // ============== RENDER SUBMENUS ==============
-
 export const renderSubMenus = (arrays) => {
    
    // For each subcategory list (array)...
    arrays.forEach(function(array, index) {
 
       // Create an object and...
-      let subCategories = {};
-
-      // ...create object properties based on each subcategory object in the array...
+      let subCategoriesObj = {};
+      // ...create object properties for each subcategory object in the array...
       array.forEach(function(element, index) {
-         subCategories[`${index + 1}`] = element;
+         subCategoriesObj[`${index + 1}`] = element;
       });
 
-      // ...then create submenu markup for main menu items using created object, index + 1 to match id of main menu item and total number of items for looping purposes
-      // createSubmenu(subCategories, index + 1, array.length);
+      console.log(subCategoriesObj);
+      // ...then create submenu markup for main menu items using index + 1 to match id of main menu item
+      createSubmenu(index + 1);
+
+      // Then fill in each submenu with the subcategory items
+      createSubmenuContent(subCategoriesObj, index + 1, array.length);
    });
 };
 

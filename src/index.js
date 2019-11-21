@@ -84,8 +84,6 @@ const controlSubCats = async (callback) => {
    state.subCats.organizeResults();
    console.log(state.subCats.allSubCatArrays);
 
-   submenuView.renderSubMenus(state.subCats.allSubCatArrays);
-
    callback();
 };
 
@@ -95,22 +93,27 @@ const controlSubCats = async (callback) => {
 
 controlSubCats(function() {
    
-   // Add modifier classes to each main menu item and corresponding submenu: main-menu__item--1 / submenu--1
+   // Add modifier classes to each main menu item: main-menu__item--1
    submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
-   submenuView.addModClass(elements.submenuItems, 'submenu');
+   
+   // Then create the submenus for each main menu item
+   submenuView.renderSubMenus(state.subCats.allSubCatArrays);
+   
+   // Then add  modifier classes to each submenu: submenu--1
+   // submenuView.addModClass(elements.submenuItems, 'submenu');
    
    // Create event listeners for...
-   // Open/close main menu
-   elements.mainMenuBtn.addEventListener('click', function() {
-      mainMenuView.toggleDropdown(elements.mainMenuDropdown);
-   });
-   // Close main menu when click anywhere outside of mainmenu
-   document.addEventListener('click', function(event) {
-      mainMenuView.hideOnClickOutside(event, elements.mainMenuDropdown);
-   });
-   // Open/close main menu
-   submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
-   submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
+      // Open/close main menu
+      elements.mainMenuBtn.addEventListener('click', function() {
+         mainMenuView.toggleDropdown(elements.mainMenuDropdown);
+      });
+      // Close main menu when click anywhere outside of mainmenu
+      document.addEventListener('click', function(event) {
+         mainMenuView.hideOnClickOutside(event, elements.mainMenuDropdown);
+      });
+      // Open/close main menu
+      submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
+      submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
 });
 
 
