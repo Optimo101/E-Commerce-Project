@@ -65,7 +65,7 @@ if (window.location.pathname === '/results') {
 };
 
 // ===========================================================
-// CATEGORIES CONTROLLER
+// SUBCATEGORIES CONTROLLER
 // ===========================================================
 
 const controlSubCats = async (callback) => {
@@ -113,7 +113,7 @@ controlSubCats(function() {
       });
       // Open/close main menu
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
-      submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
+      submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);      
 });
 
 

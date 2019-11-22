@@ -69,7 +69,7 @@ const createSubmenuContent = (subCatsObj, mainCatNum, totalSubCats) => {
    for (let i = 1; i <= totalSubCats; i++) {
       markup += `
          <li class="submenu__item submenu__item--${i}">
-            <a class="submenu__link" href="/results?cat-search=${subCatsObj[i].id}">
+            <a class="submenu__link" href="/results?categoryPath.id=${subCatsObj[i].id}">
                <span class="submenu__title">
                ${subCatsObj[i].name}
                
@@ -79,14 +79,9 @@ const createSubmenuContent = (subCatsObj, mainCatNum, totalSubCats) => {
          `};
 
    markup += `</ul>`;
-   console.log(markup);
 
    const subMenuElement = document.querySelector(`.submenu--${mainCatNum}`);
-   console.log(subMenuElement);
    subMenuElement.insertAdjacentHTML('beforeend', markup);
-
-   // console.log(document.getElementById(`${subCatsObj['1'].id}`));
-
 };
 
 
@@ -105,7 +100,6 @@ export const renderSubMenus = (arrays) => {
          subCategoriesObj[`${index + 1}`] = element;
       });
 
-      console.log(subCategoriesObj);
       // ...then create submenu markup for main menu items using index + 1 to match id of main menu item
       createSubmenu(index + 1);
 
