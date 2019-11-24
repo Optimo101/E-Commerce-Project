@@ -82,7 +82,6 @@ const controlSubCats = async (callback) => {
    }
 
    state.subCats.organizeResults();
-   console.log(state.subCats.allSubCatArrays);
 
    callback();
 };
