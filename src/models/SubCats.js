@@ -28,7 +28,6 @@ export default class SubCats {
       }
 
       this.filterResults();
-      // console.log(this.results);
 
    };
 
@@ -42,7 +41,7 @@ export default class SubCats {
             };
          });
 
-         endString = endString + '00';
+         endString += '00';
 
          resultsArray.forEach(function(element) {
             if (element.id.endsWith(endString)) {
@@ -50,8 +49,11 @@ export default class SubCats {
             }
          });
 
-         resultsArray.splice(0, 1); // first category from results (Gift Ideas) was only item that did not follow above pattern -- manually removing
+         console.log(resultsArray);
+         resultsArray.splice(0, 1); // first category from results (Gift Ideas) was only item that did not follow number pattern used to filter above -- manually removing
          resultsArray.splice(33, 1); // unable to remove id: '0700000' (Video Games) using above method -- manually removing
+         resultsArray.splice(3, 1); // Removing subcategory TV & Internet Service Providers due to no search results found under this category
+         resultsArray.splice(54, 1); // Removing subcategory Weather Stations due to no search results found under this category.
 
          this.results = resultsArray;
    };
@@ -66,8 +68,23 @@ export default class SubCats {
                subCatArray.push(element);
             };
          });
-
+         
          this.allSubCatArrays.push(subCatArray);
       }
+
+      // Insert subcategories for Movies & Music categories as these did not conform to ID structure used for all others.
+      const movMusArr = [
+         {
+            "name": "Movies & TV Shows",
+            "id": "cat02015"
+          },
+          {
+            "name": "Shop All Music",
+            "id": "cat02001"
+          }
+      ];
+
+      this.allSubCatArrays[5] = movMusArr;
+      console.log(this.allSubCatArrays);
    }
 };
