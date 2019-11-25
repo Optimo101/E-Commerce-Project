@@ -5,7 +5,13 @@ export const clearResults = () => {
    elements.resultsPages.innerHTML = '';
 }
 
+
 const renderProductItem = (product) => {
+
+   product.name = product.name.replace(/"/g, '&quot;');
+
+   console.log(product.name);
+
    const markup = 
    `<div class="product-thumb">
       <a class="product-thumb__top-content" href="#">
