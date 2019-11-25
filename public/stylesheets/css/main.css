@@ -103,7 +103,7 @@ body {
     margin-right: 1rem; }
   .service-feature__icon {
     font-size: 3rem;
-    color: #FFF;
+    color: #eb5050;
     padding: 1rem; }
   .service-feature__text {
     display: flex;
@@ -120,7 +120,7 @@ body {
 .main-menu {
   position: relative;
   height: 4rem;
-  width: 27rem; }
+  width: 30rem; }
   .main-menu__btn {
     text-transform: uppercase; }
   .main-menu__icon {
@@ -168,17 +168,19 @@ body {
     position: relative;
     text-transform: none;
     width: 100%;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 500; }
     .main-menu__item:hover {
       color: black; }
       .main-menu__item:hover .main-menu__item-arrow {
         transform: rotate(-90deg); }
+      .main-menu__item:hover .main-menu__item-icon {
+        color: #EB2F38; }
   .main-menu__link {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 1rem 1.5rem;
+    padding: 1.2rem 1.8rem;
     text-decoration: none; }
   .main-menu__item-icon {
     margin-right: 1.5rem;
@@ -196,12 +198,29 @@ body {
   border-radius: .8rem;
   z-index: 100;
   background-color: #FFF;
-  width: 50rem;
   opacity: 0;
   height: 0;
   overflow: hidden;
   display: none;
   transition: height .25s ease-in-out, opacity .25s ease-out; }
+  .submenu__list {
+    display: flex;
+    flex-direction: column;
+    width: 35rem;
+    list-style: none;
+    padding: 1rem 0;
+    color: #7a7a7a; }
+  .submenu__item {
+    width: 100%;
+    font-weight: 400; }
+    .submenu__item:hover {
+      color: black;
+      background-color: #ececec; }
+  .submenu__link {
+    display: block;
+    padding: .5rem 1.8rem;
+    width: 100%;
+    height: 100%; }
 
 .product-thumb {
   display: flex;
@@ -382,7 +401,7 @@ body {
   display: flex;
   align-items: center;
   list-style: none;
-  margin-left: 2rem; }
+  margin-left: -7rem; }
   .nav__item {
     position: relative; }
   .nav__link {
