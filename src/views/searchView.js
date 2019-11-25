@@ -5,7 +5,7 @@ export const clearResults = () => {
    elements.resultsPages.innerHTML = '';
 }
 
-const renderProductThumb = (product) => {
+const renderProductItem = (product) => {
    const markup = 
    `<div class="product-thumb">
       <a class="product-thumb__top-content" href="#">
@@ -89,7 +89,7 @@ export const renderResults = (results, page = 1, resPerPage = 20) => {
    const start = (page - 1) * resPerPage;
    const end = page * resPerPage;
 
-   results.slice(start, end).forEach(renderProductThumb);
+   results.slice(start, end).forEach(renderProductItem);
 
    // Render item count of current page
    const itemStart = start + 1;
