@@ -1,9 +1,9 @@
 import { elements, hideElement } from './views/base';
 
-import Search from './models/Search';
-import SubCats from './models/SubCats';
+import ProductSearch from './models/ProductSearch';
+import CategorySearch from './models/CategorySearch';
 
-import * as searchView from './views/searchView';
+import * as resultsView from './views/resultsView';
 import * as mainMenuView from './views/mainMenuView';
 import * as submenuView from './views/submenuView';
 
@@ -15,26 +15,26 @@ const state = {};
 // SEARCH CONTROLLER
 // ===========================================================
 
-const controlSearch = async (query) => {
+const controlProductSearch = async (query) => {
 
       // Create new search object and add to state
-      state.search = new Search(query);
+      state.productSearch = new ProductSearch(query);
 
       // Prepare UI for results
       
       try {
          // Search for products
-         await state.search.getResults();
+         await state.productSearch.getResults();
 
          // Render results on UI
-         searchView.renderResults(state.search.results);
+         resultsView.renderResults(state.productSearch.results);
 
       } catch (error) {
          alert('Somthing went wrong with the product search');
          console.log(error);
       }
 
-   console.log(state.search);
+   console.log(state.productSearch);
 };
 
 // ===========================================================
@@ -49,7 +49,7 @@ if (window.location.pathname === '/results') {
 
    if (urlQuery) {
       // Perform Search and prepare results
-      controlSearch(urlQuery);
+      controlProductSearch(urlQuery);
    }
 
    // When page buttons on Results page are clicked
@@ -58,8 +58,8 @@ if (window.location.pathname === '/results') {
 
       if (btn) {
          const goToPage = parseInt(btn.dataset.goto, 10);
-         searchView.clearResults();
-         searchView.renderResults(state.search.results, goToPage);
+         resultsView.clearResults();
+         resultsView.renderResults(state.productSearch.results, goToPage);
       };
    });
 };
@@ -68,20 +68,20 @@ if (window.location.pathname === '/results') {
 // SUBCATEGORIES CONTROLLER
 // ===========================================================
 
-const controlSubCats = async (callback) => {
+const controlCategorySearch = async (callback) => {
    // New category search object and add to state
-   state.subCats = new SubCats();
+   state.categorySearch = new CategorySearch();
 
    try {
       // Search categories
-      await state.subCats.getResults();
+      await state.categorySearch.getResults();
 
    } catch (error) {
       alert('Somthing went wrong with the categories search');
       console.log(error);
    }
 
-   state.subCats.organizeResults();
+   state.categorySearch.organizeResults();
 
    callback();
 };
@@ -90,13 +90,13 @@ const controlSubCats = async (callback) => {
 // MAIN MENU
 // ===========================================================
 
-controlSubCats(function() {
+controlCategorySearch(function() {
    
    // Add modifier classes to each main menu item: main-menu__item--1
    submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
    
    // Then create the submenus for each main menu item
-   submenuView.renderSubMenus(state.subCats.allSubCatArrays);
+   submenuView.renderSubMenus(state.categorySearch.allSubCatArrays);
    
    // Then add  modifier classes to each submenu: submenu--1
    // submenuView.addModClass(elements.submenuItems, 'submenu');

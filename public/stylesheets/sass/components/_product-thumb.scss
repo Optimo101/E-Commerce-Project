@@ -29,7 +29,6 @@
       align-content: center;
       margin-top: 2.5rem;
       padding: 0 1.5rem;
-
    }
 
    &__btn-wrap {
@@ -58,29 +57,33 @@
 
    &__heart-icon {
       font-size: 1.4rem;
+      width: 1.4rem;
+      
    }
 
    &__review-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
-
+      line-height: 1rem;
    }
 
    &__review-stars {
-      margin-right: 1rem;
+      font-size: $font-size-lg;
    }
 
    &__review-icon {
-      color: rgb(255, 208, 0);
+      color: $color-primary;
 
-      &--empty {
-         color: inherit;
+      &--partial {
+         color: transparent;
+         -webkit-background-clip: text;
       }
    }
 
    &__review-count {
       font-size: $font-size-xs;
+      margin-top: 3px;
    }
 
    &__desc-wrap {

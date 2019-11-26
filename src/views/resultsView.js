@@ -5,12 +5,28 @@ export const clearResults = () => {
    elements.resultsPages.innerHTML = '';
 }
 
+const renderStars = (rating) => {
+   const int = Math.floor(rating);
+   const dec = (rating * 10 - Math.floor(rating) * 10) / 10;
+   const perc = dec * 100;
+
+   let htmlString = '';
+   
+   for (let i = 0; i < int; i++) {
+      htmlString += '<i class="product-thumb__review-icon fas fa-star"></i>';
+   };
+
+   if (dec) {
+      htmlString += `<i class="product-thumb__review-icon fas fa-star product-thumb__review-icon--partial" style="background-image: linear-gradient(to right, #EB2F38 0%, #EB2F38 ${perc}%, #ffffff ${perc}%, #ffffff 100%);"></i>`
+   };
+     
+   return htmlString;
+};
+
 
 const renderProductItem = (product) => {
 
    product.name = product.name.replace(/"/g, '&quot;');
-
-   console.log(product.name);
 
    const markup = 
    `<div class="product-thumb">
@@ -25,12 +41,9 @@ const renderProductItem = (product) => {
 
          <div class="product-thumb__review-wrap">
             <div class="product-thumb__review-stars">
-               <i class="product-thumb__review-icon fas fa-star"></i>
-               <i class="product-thumb__review-icon fas fa-star"></i>
-               <i class="product-thumb__review-icon fas fa-star"></i>
-               <i class="product-thumb__review-icon fas fa-star"></i>
-               <i class="product-thumb__review-icon product-thumb__review-icon--empty far fa-star"></i>
+               ${renderStars(product.customerReviewAverage)}
             </div>
+
             <div class="product-thumb__review-count">
                (${product.customerReviewCount})
             </div>
@@ -67,7 +80,7 @@ const createButton = (page, type) =>  `
 
 
 const renderButtons = (page, numResults, resPerPage) => {
-   const pages = Math.ceil(numResults / resPerPage); // 48 results / 20 = 2.4 rounded to 3 pages
+   const pages = Math.ceil(numResults / resPerPage); // 48 results / 20 = 2.4 rounded up to 3 pages
 
    let button;
    if (page === 1 && pages > 1) {
