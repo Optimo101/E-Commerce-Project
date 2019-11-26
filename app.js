@@ -17,8 +17,12 @@ app.get('/', function(req, res) {
    res.render('home');
 });
 
-app.get('/results', async function(req, res) {
-   res.render('index');
+app.get('/results', function(req, res) {
+   res.render('results');
+});
+
+app.get('/product', function(req, res) {
+   res.render('product');
 });
 
 app.get('*', function(req, res) {
