@@ -49,7 +49,6 @@ export default class SubCats {
             }
          });
 
-         console.log(resultsArray);
          resultsArray.splice(0, 1); // first category from results (Gift Ideas) was only item that did not follow number pattern used to filter above -- manually removing
          resultsArray.splice(33, 1); // unable to remove id: '0700000' (Video Games) using above method -- manually removing
          resultsArray.splice(3, 1); // Removing subcategory TV & Internet Service Providers due to no search results found under this category
@@ -85,6 +84,5 @@ export default class SubCats {
       ];
 
       this.allSubCatArrays[5] = movMusArr;
-      console.log(this.allSubCatArrays);
    }
 };
