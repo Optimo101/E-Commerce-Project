@@ -30,13 +30,13 @@ const renderProductItem = (product) => {
 
    const markup = 
    `<div class="product-thumb">
-      <a class="product-thumb__top-content" href="#">
+      <a class="product-thumb__top-content" href="/product?search=${product.sku}">
          <img src="${product.image}" alt="${product.name}" class="product-thumb__img">
       </a>
 
       <div class="product-thumb__middle-content">
          <div class="product-thumb__desc-wrap">
-            <a href="#" class="product-thumb__title">${product.name}</a>
+            <a href="/product?search=${product.sku}" class="product-thumb__title">${product.name}</a>
          </div>
 
          <div class="product-thumb__review-wrap">
