@@ -29,7 +29,6 @@ export default class Search {
          console.log(`You attempted a category search with query: ${this.query}`);
          const formattedQuery = this.query.slice(1);
 
-         console.log(formattedQuery);
          return formattedQuery;
    };
 
@@ -61,10 +60,10 @@ export default class Search {
 
       const baseURL = 'https://api.bestbuy.com/v1/',
             apiType = 'products',
-            attribute = 'customerReviewAverage>3',
+            attribute = 'customerReviewAverage>1',
             apiKey = 'MORTkmhIyQS3N3Pahuta4gSd',
             sortOptions = 'sort=bestSellingRank.asc',
-            showOptions = 'show=sku,name,salePrice,regularPrice,customerReviewAverage,customerReviewCount,bestSellingRank,categoryPath.name,categoryPath.id,thumbnailImage,image',
+            showOptions = 'show=sku,name,regularPrice,customerReviewAverage,customerReviewCount,thumbnailImage,image',
             pageSize = 'pageSize=100',
             active = 'active=true',
             responseFormat = 'format=json';

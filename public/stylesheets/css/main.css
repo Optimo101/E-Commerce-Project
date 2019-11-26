@@ -257,19 +257,23 @@ body {
   .product-thumb__cart-icon {
     margin-right: .5rem; }
   .product-thumb__heart-icon {
-    font-size: 1.4rem; }
+    font-size: 1.4rem;
+    width: 1.4rem; }
   .product-thumb__review-wrap {
     display: flex;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    line-height: 1rem; }
   .product-thumb__review-stars {
-    margin-right: 1rem; }
+    font-size: 1.8rem; }
   .product-thumb__review-icon {
-    color: #ffd000; }
-    .product-thumb__review-icon--empty {
-      color: inherit; }
+    color: #EB2F38; }
+    .product-thumb__review-icon--partial {
+      color: transparent;
+      -webkit-background-clip: text; }
   .product-thumb__review-count {
-    font-size: 1.2rem; }
+    font-size: 1.2rem;
+    margin-top: 3px; }
   .product-thumb__desc-wrap {
     display: flex;
     flex-direction: column;
