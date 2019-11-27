@@ -63,7 +63,7 @@ export default class Search {
             attribute = 'customerReviewAverage>1',
             apiKey = 'MORTkmhIyQS3N3Pahuta4gSd',
             sortOptions = 'sort=bestSellingRank.asc',
-            showOptions = 'show=sku,name,regularPrice,customerReviewAverage,customerReviewCount,thumbnailImage,image',
+            showOptions = 'show=name,sku,description,details.name,details.value,features.feature,image,includedItemList.includedItem,longDescription,manufacturer,modelNumber,regularPrice,shortDescription,thumbnailImage',
             pageSize = 'pageSize=100',
             active = 'active=true',
             responseFormat = 'format=json';
