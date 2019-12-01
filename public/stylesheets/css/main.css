@@ -37,8 +37,18 @@ body {
   color: #3d3d3d; }
 
 .paragraph {
-  font-weight: 700;
+  font-weight: 500;
   font-size: 3rem; }
+
+.product-header__title {
+  font-size: 3rem;
+  font-weight: 300;
+  color: #3d3d3d; }
+
+.product-header__subtitle {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #3d3d3d; }
 
 .is-visible {
   display: block;
@@ -227,7 +237,7 @@ body {
   flex-direction: column;
   align-items: center;
   border: 1px solid #cecece;
-  border-radius: .8rem;
+  border-radius: 1rem;
   padding: 3.5rem 0;
   font-size: 1.4rem;
   color: #3d3d3d;
@@ -534,3 +544,71 @@ body {
       margin-left: 2.5rem; }
       .results__page-btn--next i {
         margin-left: .5rem; }
+
+.product__header {
+  padding: 2rem 0; }
+
+.product__main {
+  display: flex; }
+
+.product-header__title {
+  border-bottom: 1px solid #cecece; }
+
+.product-header__info-box {
+  max-width: 50rem;
+  display: flex;
+  justify-content: space-between; }
+
+.product-gallery__box {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 1.5rem; }
+
+.product-gallery__main-img-wrap {
+  max-height: 50rem;
+  border: 1px solid #cecece;
+  border-radius: 1rem;
+  background-color: white;
+  margin-bottom: 1.5rem; }
+
+.product-gallery__inner-img-wrap {
+  margin: 2.5rem; }
+
+.product-gallery__main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 1rem; }
+
+.product-gallery__thumbs-box {
+  display: flex; }
+
+.product-gallery__thumb-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #cecece;
+  border-radius: .8rem;
+  max-width: 8rem;
+  max-height: 8rem;
+  transition: border-color .2s; }
+  .product-gallery__thumb-wrap:not(:last-child) {
+    margin-right: 1rem; }
+  .product-gallery__thumb-wrap:hover {
+    border-color: #3d3d3d;
+    cursor: pointer; }
+
+.product-gallery__inner-thumb-wrap {
+  display: flex;
+  align-items: center;
+  margin: .8rem; }
+
+.product-gallery__thumb-img {
+  width: 100%; }
+
+.product-info__box {
+  background-color: lightskyblue;
+  width: 50%;
+  height: 50rem; }
