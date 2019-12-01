@@ -89,7 +89,7 @@ const controlProduct = async () => {
          await controlProductSearch(urlQuery);
 
          // Render results on UI
-         productView.renderProduct(state.productSearch.results);
+         productView.renderProduct(state.productSearch.results[0]);
          
 
       }  catch (error) {
