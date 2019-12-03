@@ -161,11 +161,31 @@
 // =====================================
 
    &__user-review-box {
-      margin: 1.5rem 0;
+      margin: 2rem 0;
+      color: $color-black;
+      // background-color: lightpink;
+   }
 
-      height: 10rem;
-      background-color: lightpink;
+   &__review-wrap {
+      display: flex;
+      align-items: center;
+   }
 
+   &__review-stars {
+      margin-right: 1.5rem;
+   }
+
+   &__review-icon {
+      color: $color-primary;
+
+   }
+
+   &__review-text {
+
+   }
+
+   &__review-count {
+      font-weight: 500;
    }
 
    &__user-action-box {
