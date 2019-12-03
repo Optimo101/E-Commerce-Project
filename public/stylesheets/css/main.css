@@ -643,9 +643,21 @@ body {
   color: #3d3d3d; }
 
 .product-info__user-review-box {
-  margin: 1.5rem 0;
-  height: 10rem;
-  background-color: lightpink; }
+  margin: 2rem 0;
+  color: #3d3d3d; }
+
+.product-info__review-wrap {
+  display: flex;
+  align-items: center; }
+
+.product-info__review-stars {
+  margin-right: 1.5rem; }
+
+.product-info__review-icon {
+  color: #EB2F38; }
+
+.product-info__review-count {
+  font-weight: 500; }
 
 .product-info__user-action-box {
   height: 10rem;
