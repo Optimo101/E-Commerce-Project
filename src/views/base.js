@@ -17,7 +17,9 @@ export const elements = {
    resultsCount: document.querySelector('.results__item-count'),
 };
 
+
+
 // ============== SIMPLE HIDE ELEMENT FUNCTION ==============
 export const hideElement = (element) => {
-   element.style.display = 'none';
+     element.style.height = '0';
 };

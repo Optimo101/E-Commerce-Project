@@ -144,11 +144,17 @@
       color: inherit;
    }
 
+
+// =====================================
+// =====================================
+
+
    &__nav-content {
 
    }
 
 // =====================================
+
 
    &__description {
       color: $color-black;
@@ -158,7 +164,10 @@
 
    }
 
+
 // =====================================
+// =====================================
+
 
    &__user-review-box {
       margin: 2rem 0;
@@ -188,9 +197,115 @@
       font-weight: 500;
    }
 
+
+//===============================
+//===============================
+
+
    &__user-action-box {
-      height: 10rem;
-      background-color: lightgreen;
+      display: flex;
+   }
+
+   &__quantity-wrap {
+      display: flex;
+
+      color: $color-black;
+      width: 6rem;
+      height: 4rem;
+      margin-right: 1rem;
+   }
+
+   &__quantity-input {
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      font-size: $font-size-lg;
+      border: 1px solid $color-black;
+      border-right: none;
+   }
+
+   &__quantity-btns {
+      display: flex;
+      flex-direction: column;
+   }
+
+   &__quantity-up {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 50%;
+      width: 2rem;
+      border: 1px solid $color-black;
+      cursor: pointer;
+
+      &:hover {
+         background-color: $color-lightgrey;
+      }
+
+      &:active {
+         box-shadow: inset 0 0 3px #000;
+      }
+   }
+
+   &__quantity-down {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 50%;
+      width: 2rem;
+      border: 1px solid $color-black;
+      cursor: pointer;
+
+      &:hover {
+         background-color: $color-lightgrey;
+      }
+
+      &:active {
+         box-shadow: inset 0 0 3px #000;
+      }
+   }
+
+   &__total-wrap {
+      display: flex;
+      align-items: center;
+
+      line-height: 3rem;
+      color: black;
+      font-size: $font-size-xxl;
+      margin-right: 2rem;
+      transition: background-color .25s;
+   }
+
+   &__cart-btn {
+      margin-right: 1rem;
+      &:hover {
+         background-color: $color-primary;
+      }
+   }
+
+   &__cart-icon {
+      font-size: $font-size-xl;
+      margin-right: 1rem;
+   }
+
+   &__fav-btn {
+
+      &:hover {
+         & .product-info__fav-icon {
+            transform: scale(1.4);
+            backface-visibility: hidden;
+            color: $color-primary;
+
+         }
+      }
+      
+   }
+
+   &__fav-icon {
+      margin-right: 1rem;
+      transition: all .25s;
 
    }
 
