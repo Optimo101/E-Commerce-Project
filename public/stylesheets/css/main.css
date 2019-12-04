@@ -309,11 +309,13 @@ body {
   height: 4rem;
   width: 100%;
   background-color: #ececec;
-  border-bottom: 1px solid #cecece; }
+  border-bottom: 1px solid #cecece;
+  transition: height .5s;
+  overflow: hidden; }
   .header-notice__alert-icon {
     color: #EB2F38;
     font-size: 2rem;
-    margin-right: .5rem; }
+    margin-right: .25rem; }
   .header-notice__content {
     display: flex;
     align-items: center; }
@@ -660,5 +662,76 @@ body {
   font-weight: 500; }
 
 .product-info__user-action-box {
-  height: 10rem;
-  background-color: lightgreen; }
+  display: flex; }
+
+.product-info__quantity-wrap {
+  display: flex;
+  color: #3d3d3d;
+  width: 6rem;
+  height: 4rem;
+  margin-right: 1rem; }
+
+.product-info__quantity-input {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-size: 1.8rem;
+  border: 1px solid #3d3d3d;
+  border-right: none; }
+
+.product-info__quantity-btns {
+  display: flex;
+  flex-direction: column; }
+
+.product-info__quantity-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 2rem;
+  border: 1px solid #3d3d3d;
+  cursor: pointer; }
+  .product-info__quantity-up:hover {
+    background-color: #cecece; }
+  .product-info__quantity-up:active {
+    box-shadow: inset 0 0 3px #000; }
+
+.product-info__quantity-down {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 2rem;
+  border: 1px solid #3d3d3d;
+  cursor: pointer; }
+  .product-info__quantity-down:hover {
+    background-color: #cecece; }
+  .product-info__quantity-down:active {
+    box-shadow: inset 0 0 3px #000; }
+
+.product-info__total-wrap {
+  display: flex;
+  align-items: center;
+  line-height: 3rem;
+  color: black;
+  font-size: 3rem;
+  margin-right: 2rem;
+  transition: background-color .25s; }
+
+.product-info__cart-btn {
+  margin-right: 1rem; }
+  .product-info__cart-btn:hover {
+    background-color: #EB2F38; }
+
+.product-info__cart-icon {
+  font-size: 2rem;
+  margin-right: 1rem; }
+
+.product-info__fav-btn:hover .product-info__fav-icon {
+  transform: scale(1.4);
+  backface-visibility: hidden;
+  color: #EB2F38; }
+
+.product-info__fav-icon {
+  margin-right: 1rem;
+  transition: all .25s; }
