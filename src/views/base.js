@@ -15,6 +15,17 @@ export const elements = {
    resultsMainGrid: document.querySelector('.results__main-grid'),
    resultsPages: document.querySelector('.results__page-buttons'),
    resultsCount: document.querySelector('.results__item-count'),
+
+   productNavItems: document.querySelectorAll('.product-info__nav-item'),
+   productNavContents: document.querySelectorAll('.product-info__nav-content'),
+
+   productQuantity: document.querySelector('.product-info__quantity-input'),
+   productAmount: document.querySelector('.product-info__total-amount'),
+   productUpBtn: document.querySelector('.product-info__up-btn'),
+   productDownBtn: document.querySelector('.product-info__down-btn'),
+
+
+
 };
 
 
