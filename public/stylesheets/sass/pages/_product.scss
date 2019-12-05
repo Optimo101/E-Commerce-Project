@@ -131,7 +131,6 @@
          color: $color-black;
          &:after {
             transform: scaleX(1);  
-
          }
       }
       
@@ -144,6 +143,11 @@
       color: inherit;
    }
 
+   &__nav-content-main {
+      color: $color-black;
+      max-height: 45rem;
+      overflow-y: scroll;
+   }
 
 // =====================================
 // =====================================
@@ -151,19 +155,101 @@
 
    &__nav-content {
 
+      &--1 {
+         display: block;
+      }
+
+      &--2 {
+         display: none;
+      }
+
+      &--3 {
+         display: none;
+      }
+
+      &--4 {
+         display: none;
+      }
+
    }
 
-// =====================================
-
-
    &__description {
-      color: $color-black;
    }
 
    &__description-p {
 
    }
 
+   // =====================================
+
+   &__features {
+      list-style: none;
+      font-size: $font-size-xs;
+   }
+
+   &__features-item {
+      margin-bottom: 1.2rem;
+   }
+
+   &__features-title {
+
+   }
+
+   &__features-text {
+      line-height: 1.4rem;
+
+   }
+
+   // =====================================
+
+   &__included {
+      list-style: inside;
+      font-size: $font-size-xs;
+
+   }
+
+   &__included-item {
+      margin-bottom: .5rem;
+
+   }
+
+   &__included-title {
+      display: inline-block;
+
+   }
+
+   // =====================================
+
+   &__specifications {
+      display: flex;
+      font-size: $font-size-xs;
+
+      & ul {
+         display: flex;
+         flex-direction: column;
+         list-style: none;;
+      }
+   }
+
+   &__specifications-titles {
+      margin-right: 2rem;
+      flex-shrink: 0;
+   }
+
+   &__specifications-values {
+   }
+
+   &__specifications-item {   
+      height: 3rem;   
+      margin-bottom: .8rem;
+   }
+
+   &__specifications-title {
+   }
+
+   &__specifications-text {
+
+   }
 
 // =====================================
 // =====================================
@@ -229,7 +315,7 @@
       flex-direction: column;
    }
 
-   &__quantity-up {
+   &__up-btn {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -248,7 +334,7 @@
       }
    }
 
-   &__quantity-down {
+   &__down-btn {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -294,7 +380,7 @@
 
       &:hover {
          & .product-info__fav-icon {
-            transform: scale(1.4);
+            transform: scale(1.5);
             backface-visibility: hidden;
             color: $color-primary;
 
