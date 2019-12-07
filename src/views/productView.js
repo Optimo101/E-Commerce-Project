@@ -1,5 +1,21 @@
 import { elements } from './base';
 
+const renderThumbImgs = (ImgsArr, productName) => {
+   let html = '';
+
+   for (const element of ImgsArr) {
+      html += `
+         <div class="product-gallery__thumb-wrap">
+            <div class="product-gallery__inner-thumb-wrap">
+               <img src="${element}" alt="${productName}" class="product-gallery__thumb-img">
+            </div>
+         </div>
+      `;
+   };
+      
+   elements.productThumbsBox.insertAdjacentHTML('afterbegin', html);
+
+};
 
 const renderDescContent = (longDescription) => {
    const html = `
@@ -126,7 +142,7 @@ const renderSpecsContent = (specsArr) => {
 export const renderProduct = (product) => {
    console.log(product);
 
-   const imageProperties = [
+   const imgProperties = [
       product.largeFrontImage,
       product.alternateViewsImage,
       product.angleImage,
@@ -137,30 +153,46 @@ export const renderProduct = (product) => {
       product.accessoriesImage
    ];
 
-   let imagesArr = [];
+   let imgsArr = [];
 
-   for (const image of imageProperties) {
+   for (const image of imgProperties) {
       if (image) {
-         imagesArr.push(image);
+         imgsArr.push(image);
       }
    };
- 
-   const createImages = (images) => {
-      for (const img of images) {
-         const html = `
-            <div class="product__thumb-container product__thumb-container--${images.indexOf(img)}">
-               <img class="product__thumb product__thumb--${images.indexOf(img)}" src="${img}" alt="${product.name}">
-            </div>
-         `;
-         document.querySelector('.product').insertAdjacentHTML('beforeend', html);
-      };
-   };
 
-   // createImages(imagesArr)
-
+   renderThumbImgs(imgsArr, product.name);
    renderDescContent(product.longDescription);
    renderFeatContent(product.features);
    renderIncludedContent(product.includedItemList);
    renderSpecsContent(product.details);
+
+};
+
+export const navItemsEvents = (event) => {
+   const navItemElement = event.currentTarget;
+   
+   for (const element of elements.productNavItems) {
+      element.classList.remove('product-info__nav-item--active');
+   }
+   navItemElement.classList.add('product-info__nav-item--active');
+   
+   for (const element of elements.productNavContents) {
+      element.style.display = 'none';
+   }
+   const index = Array.prototype.indexOf.call(elements.productNavItems, navItemElement);
+   elements.productNavContents[index].style.display = 'block';
+};
+
+export const thumbImgsEvents = (event) => {
+   console.log('thumb img was clicked!');
+   
+   const imgElement = event.currentTarget.querySelector(elements.productThumbImg);
+   console.log(imgElement);
+
+   const imgSrc = imgElement.getAttribute('src');
+   console.log(imgSrc);
+
+   elements.productImg.setAttribute('src', imgSrc);
 
 };

@@ -96,26 +96,18 @@ const controlProduct = async () => {
          alert('Somthing went wrong when attempting to render product.');
          console.log(error);
       }
-   }
+   };
 
    // EVENT LISTENERS
    // ===========================================================
-     for (const element of elements.productNavItems) {
-         element.addEventListener('click', function() {
-            for (const element of elements.productNavItems) {
-               element.classList.remove('product-info__nav-item--active');
-            }
-            element.classList.add('product-info__nav-item--active');
-            
-            for (const element of elements.productNavContents) {
-               element.style.display = 'none';
-            }
-            const index = Array.prototype.indexOf.call(elements.productNavItems, element);
-            elements.productNavContents[index].style.display = 'block';
-         });
-     };
-     
+      for (const navItem of elements.productNavItems) {
+         navItem.addEventListener('click', productView.navItemsEvents);
+      };
+      console.log(elements.productThumbs);
 
+      for (const element of elements.productThumbs) {
+         element.addEventListener('click', productView.thumbImgsEvents);
+      };
 };
 
 
