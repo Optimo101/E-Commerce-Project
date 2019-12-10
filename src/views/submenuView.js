@@ -16,6 +16,7 @@ export const addModClass = (nodeList, prefix) => {
    };
 };
 
+
 // ADD EVENT LISTENERS FOR OPEN/CLOSING SUBMENUS
 export const setUpSubmenuEvent = (eventType, method) => {
    for (let i = 1; i <= elements.mainMenuItems.length; i++) {
@@ -26,6 +27,7 @@ export const setUpSubmenuEvent = (eventType, method) => {
       });
    };
 };
+
 
 // ============== SUBMENU FUNCTIONS ==============
 export const showSubMenu = (element) => {
@@ -83,8 +85,6 @@ const createSubmenuContent = (subCatsObj, mainCatNum, totalSubCats) => {
    const subMenuElement = document.querySelector(`.submenu--${mainCatNum}`);
    subMenuElement.insertAdjacentHTML('beforeend', markup);
 };
-
-
 
 
 // ============== RENDER SUBMENUS ==============
