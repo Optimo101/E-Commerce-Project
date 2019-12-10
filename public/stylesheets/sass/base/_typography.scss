@@ -1,24 +1,39 @@
 body {
    font-family: 'Poppins', sans-serif;
-   font-weight: 400;
+   font-weight: $font-weight-primary;
    color: $color-darkgrey;
    font-size: $font-size-primary;
    line-height: normal;
 }
 
 .prom-head-primary {
-   font-size: 3rem;
-   font-weight: 300; 
+   font-size: $font-size-xxl;
+   font-weight:  $font-weight-thin; 
    color: $color-primary;
 }
 
 .prom-head-secondary {
    font-size: 2.2rem;
-   font-weight: 500;
+   font-weight: $font-weight-bold;
    color: $color-black;
 }
 
 .paragraph {
-   font-weight: 700;
-   font-size: 3rem;
+   font-weight: $font-weight-bold;
+   font-size: $font-size-xxl;
 }
+
+.product-header {
+   &__title {
+      font-size: $font-size-xxl;
+      font-weight: $font-weight-primary;
+      color: $color-black; 
+   }
+
+   &__subtitle {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      color: $color-black;
+   }
+}
+

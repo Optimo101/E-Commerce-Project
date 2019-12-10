@@ -2,32 +2,29 @@ import { elements, hideElement } from './views/base';
 
 import ProductSearch from './models/ProductSearch';
 import CategorySearch from './models/CategorySearch';
+import Cart from './models/Cart';
 
 import * as resultsView from './views/resultsView';
+import * as productView from './views/productView';
 import * as mainMenuView from './views/mainMenuView';
 import * as submenuView from './views/submenuView';
 
-// GLOBAL STATE OF APP
+
+// GLOBAL STATE
+// ===========================================================
 const state = {};
 
-
 // ===========================================================
-// SEARCH CONTROLLER
+// PRODUCTS SEARCH CONTROLLER
 // ===========================================================
 
 const controlProductSearch = async (query) => {
-
       // Create new search object and add to state
       state.productSearch = new ProductSearch(query);
 
-      // Prepare UI for results
-      
       try {
          // Search for products
          await state.productSearch.getResults();
-
-         // Render results on UI
-         resultsView.renderResults(state.productSearch.results);
 
       } catch (error) {
          alert('Somthing went wrong with the product search');
@@ -37,103 +34,178 @@ const controlProductSearch = async (query) => {
    console.log(state.productSearch);
 };
 
-// ===========================================================
-// RESULTS PAGE
-// ===========================================================
 
-// When user is on Results Page...
-if (window.location.pathname === '/results') {
+// ===========================================================
+// RESULTS PAGE CONTROLLER
+// ===========================================================
+const controlResults = async () => {
+   // Get search query from url parameter
+   const urlQuery = window.location.search;
    
+   if (urlQuery) {
+      try {
+         // Prepare UI for results
+
+         // Perform Search and prepare results
+         await controlProductSearch(urlQuery);
+
+         // Render results on UI
+         resultsView.renderResults(state.productSearch.results);
+
+      }  catch (error) {
+         alert('Somthing went wrong when attempting to render product search results');
+         console.log(error);
+      }
+   }
+
+   // EVENT LISTENERS
+   // ===========================================================
+      // When page buttons on Results page are clicked
+      elements.resultsPages.addEventListener('click', event => {
+         const btn = event.target.closest('.btn');
+
+         if (btn) {
+            const goToPage = parseInt(btn.dataset.goto, 10);
+            resultsView.clearResults();
+            resultsView.renderResults(state.productSearch.results, goToPage);
+         };
+      });
+};
+   
+
+// ===========================================================
+// PRODUCT PAGE CONTROLLER
+// ===========================================================
+const controlProduct = async () => {
+
    // Get search query from url parameter
    const urlQuery = window.location.search;
 
    if (urlQuery) {
-      // Perform Search and prepare results
-      controlProductSearch(urlQuery);
-   }
+      try {
+         // Prepare UI for results
 
-   // When page buttons on Results page are clicked
-   elements.resultsPages.addEventListener('click', event => {
-      const btn = event.target.closest('.btn');
+         // Perform Search and prepare results
+         await controlProductSearch(urlQuery);
 
-      if (btn) {
-         const goToPage = parseInt(btn.dataset.goto, 10);
-         resultsView.clearResults();
-         resultsView.renderResults(state.productSearch.results, goToPage);
-      };
-   });
+         // Render results on UI
+         productView.renderProduct(state.productSearch.results[0]);
+         
+
+      }  catch (error) {
+         alert('Somthing went wrong when attempting to render product.');
+         console.log(error);
+      }
+
+      // EVENT LISTENERS
+      // ===========================================================
+         // When nav titles are clicked
+         for (const navItem of elements.productNavItems) {
+            navItem.addEventListener('click', productView.navItemsEvents);
+         };
+
+         // When thumb images are clicked
+         const productThumbs = document.querySelectorAll('.product-gallery__thumb-wrap');
+         for (const element of productThumbs) {
+            element.addEventListener('click', productView.thumbImgsEvents);
+         };
+
+         // When product quantity buttons are clicked
+         elements.productBtns.addEventListener('click', productView.quantBtnEvents);
+   };
 };
 
-// ===========================================================
-// SUBCATEGORIES CONTROLLER
-// ===========================================================
 
-const controlCategorySearch = async (callback) => {
-   // New category search object and add to state
-   state.categorySearch = new CategorySearch();
+// ===========================================================
+// CATEGORIES SEARCH CONTROLLER
+// ===========================================================
+   const controlCategorySearch = async () => {
+      // New category search object and add to state
+      state.categorySearch = new CategorySearch();
 
+      try {
+         // Search categories
+         await state.categorySearch.getResults();
+
+      } catch (error) {
+         alert('Somthing went wrong with the categories search');
+         console.log(error);
+      }
+   };
+
+
+// ===========================================================
+// HEADER CONTROLLER
+// ===========================================================
+const controlHeader = async () => {
    try {
-      // Search categories
-      await state.categorySearch.getResults();
+      // Perform categories search
+      await controlCategorySearch();
+
+      // Organize the results to be used for rendering
+      state.categorySearch.organizeResults();
+
+      // Add modifier classes to each main menu item: main-menu__item--1
+      submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
+   
+      // Render the submenus with subcategories for each main menu category
+      submenuView.renderSubMenus(state.categorySearch.allSubCatArrays);
 
    } catch (error) {
-      alert('Somthing went wrong with the categories search');
+      alert('Somthing went wrong when attempting to render subcategories.');
       console.log(error);
    }
 
-   state.categorySearch.organizeResults();
-
-   callback();
-};
-
-// ===========================================================
-// MAIN MENU
-// ===========================================================
-
-controlCategorySearch(function() {
-   
-   // Add modifier classes to each main menu item: main-menu__item--1
-   submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
-   
-   // Then create the submenus for each main menu item
-   submenuView.renderSubMenus(state.categorySearch.allSubCatArrays);
-   
-   // Then add  modifier classes to each submenu: submenu--1
-   // submenuView.addModClass(elements.submenuItems, 'submenu');
-   
-   // Create event listeners for...
+   // EVENT LISTENERS
+   // ===========================================================
       // Open/close main menu
       elements.mainMenuBtn.addEventListener('click', function() {
          mainMenuView.toggleDropdown(elements.mainMenuDropdown);
       });
+
       // Close main menu when click anywhere outside of mainmenu
       document.addEventListener('click', function(event) {
          mainMenuView.hideOnClickOutside(event, elements.mainMenuDropdown);
       });
+
       // Open/close main menu
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
-      submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);      
-});
-
-
-
-
-// ===========================================================
-// HEADER
-// ===========================================================
-
-// Create event listeners for...
-   // Header notice close button
-   elements.headerNoticeBtn.addEventListener('click', function() {
-      hideElement(elements.headerNotice);
-   });
+      submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu); 
+      
+      // Header notice close button
+      elements.headerNoticeBtn.addEventListener('click', function() {
+         hideElement(elements.headerNotice);
+      });
+};
 
 
 // ===========================================================
 // HOME PAGE CONTROLLER
 // ===========================================================
+const controlHome = () => {
+
+};
 
 
+// ===========================================================
+// INITIALIZE APPLICATION
+// ===========================================================
+const init = () => {
+   controlHeader();
+
+   if (window.location.pathname === '/product') {
+      controlProduct();
+   } else if (window.location.pathname === '/results') {
+      controlResults();
+   } else {
+      controlHome();
+   }
+
+   console.log(state);
+
+};
+
+init();
 
 
 
