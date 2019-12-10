@@ -16,19 +16,22 @@ export const elements = {
    resultsPages: document.querySelector('.results__page-buttons'),
    resultsCount: document.querySelector('.results__item-count'),
 
+   productTitle: document.querySelector('.product-header__title'),
+   productManufacturer: document.querySelector('.product-header__manufacturer-data'),
+   productModel: document.querySelector('.product-header__model-data'),
+   productSku: document.querySelector('.product-header__sku-data'),
+
    productImg: document.querySelector('.product-gallery__main-img'),
    productThumbsBox: document.querySelector('.product-gallery__thumbs-box'),
-   productThumbs: document.querySelectorAll('.product-gallery__thumb-wrap'),
-   productThumbImg: document.querySelector('.product-gallery__thumb-img'),
 
    productNavItems: document.querySelectorAll('.product-info__nav-item'),
    productNavContents: document.querySelectorAll('.product-info__nav-content'),
 
    productQuantity: document.querySelector('.product-info__quantity-input'),
-   productAmount: document.querySelector('.product-info__total-amount'),
-   productUpBtn: document.querySelector('.product-info__up-btn'),
-   productDownBtn: document.querySelector('.product-info__down-btn')
-
+   productPrice: document.querySelector('.product-info__total-price'),
+   productBtns: document.querySelector('.product-info__quantity-btns'),
+   productReview: document.querySelector('.product-info__review-stars'),
+   productReviewCount: document.querySelector('.product-info__review-count')
 };
 
 

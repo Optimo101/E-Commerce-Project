@@ -2,6 +2,7 @@ import { elements, hideElement } from './views/base';
 
 import ProductSearch from './models/ProductSearch';
 import CategorySearch from './models/CategorySearch';
+import Cart from './models/Cart';
 
 import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
@@ -42,7 +43,6 @@ const controlResults = async () => {
    const urlQuery = window.location.search;
    
    if (urlQuery) {
-
       try {
          // Prepare UI for results
 
@@ -96,18 +96,23 @@ const controlProduct = async () => {
          alert('Somthing went wrong when attempting to render product.');
          console.log(error);
       }
+
+      // EVENT LISTENERS
+      // ===========================================================
+         // When nav titles are clicked
+         for (const navItem of elements.productNavItems) {
+            navItem.addEventListener('click', productView.navItemsEvents);
+         };
+
+         // When thumb images are clicked
+         const productThumbs = document.querySelectorAll('.product-gallery__thumb-wrap');
+         for (const element of productThumbs) {
+            element.addEventListener('click', productView.thumbImgsEvents);
+         };
+
+         // When product quantity buttons are clicked
+         elements.productBtns.addEventListener('click', productView.quantBtnEvents);
    };
-
-   // EVENT LISTENERS
-   // ===========================================================
-      for (const navItem of elements.productNavItems) {
-         navItem.addEventListener('click', productView.navItemsEvents);
-      };
-      console.log(elements.productThumbs);
-
-      for (const element of elements.productThumbs) {
-         element.addEventListener('click', productView.thumbImgsEvents);
-      };
 };
 
 
@@ -126,7 +131,6 @@ const controlProduct = async () => {
          alert('Somthing went wrong with the categories search');
          console.log(error);
       }
-      
    };
 
 
@@ -196,6 +200,9 @@ const init = () => {
    } else {
       controlHome();
    }
+
+   console.log(state);
+
 };
 
 init();
