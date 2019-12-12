@@ -1,12 +1,13 @@
 import { elements } from './base';
 
 export const renderLikeBtn = (isLiked) => {
-   const htmlString = isLiked ? `
-      <i class="product-info__like-icon product-info__like-icon--full fas fa-heart"></i><span class="product-info__like-text">Saved</span>
-   ` : `
+   const htmlString = !isLiked ? `
       <i class="product-info__like-icon far fa-heart"></i><span class="product-info__like-text">Save</span>
+   ` : `
+      <i class="product-info__like-icon product-info__like-icon--full fas fa-heart"></i><span class="product-info__like-text">Saved</span>
    `;
 
+   elements.productLikeBtn.innerHTML = '';
    elements.productLikeBtn.insertAdjacentHTML('afterbegin', htmlString);
 }
 

@@ -25,8 +25,12 @@ const renderStars = (rating) => {
 
 
 const renderProductItem = (product) => {
-
    product.name = product.name.replace(/"/g, '&quot;');
+
+   console.log(product.liked);
+
+   const likeIconHtml = product.liked ? '<i class="product-thumb__heart-icon fas fa-heart"></i>' : '<i class="product-thumb__heart-icon far fa-heart"></i>'
+
 
    const markup = 
    `<div class="product-thumb">
@@ -58,7 +62,7 @@ const renderProductItem = (product) => {
                Add to Cart
             </button>
             <button class="product-thumb__btn btn btn--small btn--black">
-               <i class="product-thumb__heart-icon far fa-heart"></i>
+               ${likeIconHtml}
             </button>
          </div>
       </div>
