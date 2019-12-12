@@ -31,7 +31,16 @@ const controlProductSearch = async (query) => {
          console.log(error);
       }
 
-   console.log(state.productSearch);
+      // Determine if any products are 'Liked' by user
+      for (const element of state.productSearch.results) {
+         if (!state.likes.isLiked(element.sku)) {
+            continue
+         } else {
+            element.liked = true;
+         }
+      };
+
+   console.log(state.productSearch.results);
 };
 
 // ===========================================================
@@ -73,8 +82,6 @@ const controlLike = () => {
       // Remove like to UI list
       console.log(localStorage);
       console.log(state.likes);
-
-
    }
 }
 
@@ -243,7 +250,7 @@ const init = () => {
       state.likes = new Likes();
       state.likes.readLocalStorage();
       console.log(localStorage);
-      console.log(state.likes);
+      console.log(state);
    });
 
    controlHeader();
