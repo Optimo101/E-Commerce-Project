@@ -2,7 +2,7 @@ import { elements, hideElement } from './views/base';
 
 import ProductSearch from './models/ProductSearch';
 import CategorySearch from './models/CategorySearch';
-import Cart from './models/Cart';
+import Likes from './models/Likes';
 
 import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
@@ -33,6 +33,50 @@ const controlProductSearch = async (query) => {
 
    console.log(state.productSearch);
 };
+
+// ===========================================================
+// LIKE CONTROLLER
+// ===========================================================
+const controlLike = () => {
+   // if (!state.likes) state.likes = new Likes();
+
+   const currentSku = state.productSearch.results[0].sku;
+
+   // User has NOT yet liked current product
+   if (!state.likes.isLiked(currentSku)) {
+      // Add like to the state
+      state.likes.addLike(
+         currentSku,
+         state.productSearch.results[0].name,
+         state.productSearch.results[0].image,
+         state.productSearch.results[0].regularPrice
+      );
+
+      // Toggle the like button
+      productView.toggleLikeBtn(true);
+
+
+      // Add like to UI list
+      console.log(localStorage);
+      console.log(state.likes);
+
+
+   // User HAS liked the current product
+   } else {
+      // Remove like to the state
+      state.likes.deleteLike(currentSku);
+
+      // Toggle the like button
+      productView.toggleLikeBtn(false);
+
+
+      // Remove like to UI list
+      console.log(localStorage);
+      console.log(state.likes);
+
+
+   }
+}
 
 
 // ===========================================================
@@ -90,7 +134,7 @@ const controlProduct = async () => {
 
          // Render results on UI
          productView.renderProduct(state.productSearch.results[0]);
-         
+         productView.renderLikeBtn(state.likes.isLiked(state.productSearch.results[0].sku))
 
       }  catch (error) {
          alert('Somthing went wrong when attempting to render product.');
@@ -111,7 +155,10 @@ const controlProduct = async () => {
          };
 
          // When product quantity buttons are clicked
-         elements.productBtns.addEventListener('click', productView.quantBtnEvents);
+         elements.productQuantBtns.addEventListener('click', productView.quantBtnEvents);
+
+         // When Like button is clicked
+         elements.productLikeBtn.addEventListener('click', controlLike);
    };
 };
 
@@ -191,6 +238,14 @@ const controlHome = () => {
 // INITIALIZE APPLICATION
 // ===========================================================
 const init = () => {
+   // Restore liked products on page load
+   window.addEventListener('load', () => {
+      state.likes = new Likes();
+      state.likes.readLocalStorage();
+      console.log(localStorage);
+      console.log(state.likes);
+   });
+
    controlHeader();
 
    if (window.location.pathname === '/product') {
@@ -201,7 +256,6 @@ const init = () => {
       controlHome();
    }
 
-   console.log(state);
 
 };
 

@@ -380,23 +380,29 @@
       margin-right: 1rem;
    }
 
-   &__fav-btn {
+   &__like-btn {
 
       &:hover {
-         & .product-info__fav-icon {
-            transform: scale(1.5);
-            backface-visibility: hidden;
+         & .product-info__like-icon {
+            transform: scale(1.4);
             color: $color-primary;
-
          }
-      }
-      
+      } 
    }
 
-   &__fav-icon {
+   &__like-icon {
+      font-size: $font-size-lg;
       margin-right: 1rem;
       transition: all .25s;
+      backface-visibility: hidden;
 
+      &--full {
+         color: $color-primary;
+         transform: scale(1.4);
+      }
    }
 
+   &__like-text {
+      width: 5rem;
+   }
 }

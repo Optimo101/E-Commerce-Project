@@ -20,16 +20,15 @@ export const elements = {
    productManufacturer: document.querySelector('.product-header__manufacturer-data'),
    productModel: document.querySelector('.product-header__model-data'),
    productSku: document.querySelector('.product-header__sku-data'),
-
    productImg: document.querySelector('.product-gallery__main-img'),
    productThumbsBox: document.querySelector('.product-gallery__thumbs-box'),
-
    productNavItems: document.querySelectorAll('.product-info__nav-item'),
    productNavContents: document.querySelectorAll('.product-info__nav-content'),
-
    productQuantity: document.querySelector('.product-info__quantity-input'),
    productPrice: document.querySelector('.product-info__total-price'),
-   productBtns: document.querySelector('.product-info__quantity-btns'),
+   productQuantBtns: document.querySelector('.product-info__quantity-btns'),
+   productCartBtn: document.querySelector('.product-info__cart-btn'),
+   productLikeBtn: document.querySelector('.product-info__like-btn'),
    productReview: document.querySelector('.product-info__review-stars'),
    productReviewCount: document.querySelector('.product-info__review-count')
 };
