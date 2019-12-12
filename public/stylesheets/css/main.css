@@ -785,11 +785,18 @@ body {
   font-size: 2rem;
   margin-right: 1rem; }
 
-.product-info__fav-btn:hover .product-info__fav-icon {
-  transform: scale(1.5);
-  backface-visibility: hidden;
+.product-info__like-btn:hover .product-info__like-icon {
+  transform: scale(1.4);
   color: #EB2F38; }
 
-.product-info__fav-icon {
+.product-info__like-icon {
+  font-size: 1.8rem;
   margin-right: 1rem;
-  transition: all .25s; }
+  transition: all .25s;
+  backface-visibility: hidden; }
+  .product-info__like-icon--full {
+    color: #EB2F38;
+    transform: scale(1.4); }
+
+.product-info__like-text {
+  width: 5rem; }
