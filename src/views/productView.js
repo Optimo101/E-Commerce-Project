@@ -1,5 +1,32 @@
 import { elements } from './base';
 
+export const renderLikeBtn = (isLiked, sku) => {
+   const htmlString = !isLiked ? `
+      <button class="product-info__like-btn btn btn--black" id="0-${sku}">
+      <i class="product-info__like-icon far fa-heart"></i>
+      <span class="product-info__like-text">Save</span>
+      </button>
+   ` : `
+      <button class="product-info__like-btn btn btn--black" id="0-${sku}">
+      <i class="product-info__like-icon product-info__like-icon--full fas fa-heart"></i>
+      <span class="product-info__like-text">Saved</span>
+      </button>
+   `;
+
+   elements.productActionBox.insertAdjacentHTML('beforeend', htmlString);
+}
+
+export const toggleLikeBtn = (isLiked) => {
+   if (isLiked) {
+      document.querySelector('.product-info__like-icon').setAttribute('class', 'product-info__like-icon product-info__like-icon--full fas fa-heart');
+      document.querySelector('.product-info__like-text').innerHTML = 'Saved';
+   } else {
+      document.querySelector('.product-info__like-icon').setAttribute('class', 'product-info__like-icon far fa-heart');
+      document.querySelector('.product-info__like-text').innerHTML = 'Save';
+   }
+}
+
+
 const renderImgs = (product) => {
    const imgProperties = [
       product.largeFrontImage,
