@@ -23,17 +23,23 @@ const renderStars = (rating) => {
    return htmlString;
 };
 
+export const toggleLikeBtn = (isLiked) => {
+   if (isLiked) {
+      document.querySelector('.product-thumb__like-icon').setAttribute('class', 'product-thumb__like-icon product-thumb__like-icon--full fas fa-heart');
+   } else {
+      document.querySelector('.product-thumb__like-icon').setAttribute('class', 'product-thumb__like-icon far fa-heart');
+   }
+}
+
 
 const renderProductItem = (product) => {
    product.name = product.name.replace(/"/g, '&quot;');
 
-   console.log(product.liked);
-
-   const likeIconHtml = product.liked ? '<i class="product-thumb__heart-icon fas fa-heart"></i>' : '<i class="product-thumb__heart-icon far fa-heart"></i>'
+   const likeIconHtml = product.liked ? '<i class="product-thumb__like-icon product-thumb__like-icon--full fas fa-heart"></i>' : '<i class="product-thumb__like-icon far fa-heart"></i>'
 
 
    const markup = 
-   `<div class="product-thumb">
+   `<div class="product-thumb" id="${product.index}-${product.sku}">
       <a class="product-thumb__top-content" href="/product?search=${product.sku}">
          <img src="${product.image}" alt="${product.name}" class="product-thumb__img">
       </a>
@@ -57,11 +63,11 @@ const renderProductItem = (product) => {
       <div class="product-thumb__bottom-content">
          <div class="product-thumb__price">$${product.regularPrice}</div>
          <div class="product-thumb__btn-wrap">
-            <button class="product-thumb__btn btn btn--small btn--black">
+            <button class="product-thumb__cart-btn btn btn--small btn--black" id="${product.index}-${product.sku}">
                <i class="product-thumb__cart-icon fas fa-shopping-cart"></i>
                Add to Cart
             </button>
-            <button class="product-thumb__btn btn btn--small btn--black">
+            <button class="product-thumb__like-btn btn btn--small btn--black" id="${product.index}-${product.sku}">
                ${likeIconHtml}
             </button>
          </div>

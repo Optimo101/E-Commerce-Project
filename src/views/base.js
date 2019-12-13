@@ -28,7 +28,7 @@ export const elements = {
    productPrice: document.querySelector('.product-info__total-price'),
    productQuantBtns: document.querySelector('.product-info__quantity-btns'),
    productCartBtn: document.querySelector('.product-info__cart-btn'),
-   productLikeBtn: document.querySelector('.product-info__like-btn'),
+   productActionBox: document.querySelector('.product-info__user-action-box'),
    productReview: document.querySelector('.product-info__review-stars'),
    productReviewCount: document.querySelector('.product-info__review-count')
 };

@@ -1,14 +1,19 @@
 import { elements } from './base';
 
-export const renderLikeBtn = (isLiked) => {
+export const renderLikeBtn = (isLiked, sku) => {
    const htmlString = !isLiked ? `
-      <i class="product-info__like-icon far fa-heart"></i><span class="product-info__like-text">Save</span>
+      <button class="product-info__like-btn btn btn--black" id="0-${sku}">
+      <i class="product-info__like-icon far fa-heart"></i>
+      <span class="product-info__like-text">Save</span>
+      </button>
    ` : `
-      <i class="product-info__like-icon product-info__like-icon--full fas fa-heart"></i><span class="product-info__like-text">Saved</span>
+      <button class="product-info__like-btn btn btn--black" id="0-${sku}">
+      <i class="product-info__like-icon product-info__like-icon--full fas fa-heart"></i>
+      <span class="product-info__like-text">Saved</span>
+      </button>
    `;
 
-   elements.productLikeBtn.innerHTML = '';
-   elements.productLikeBtn.insertAdjacentHTML('afterbegin', htmlString);
+   elements.productActionBox.insertAdjacentHTML('beforeend', htmlString);
 }
 
 export const toggleLikeBtn = (isLiked) => {

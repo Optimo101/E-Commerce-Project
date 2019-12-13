@@ -77,7 +77,7 @@ export default class Search {
             const response = await axios.get(`${baseURL}${apiType}(${keywords}${catID}&${attribute})?apiKey=${apiKey}&${sortOptions}&${showOptions}&${pageSize}&page=${i + 1}&${active}&${responseFormat}`);
 
             this.results = this.results.concat(response.data.products);
-            // totalPages = response.data.totalPages; // ACTIVATE THIS LINE OF CODE TO MAKE TURN OFF THE LIMITED NUMBER OF SEARCH RESULTS (PAGES)
+            // totalPages = response.data.totalPages; // ACTIVATE THIS LINE OF CODE TO CREATE UNLIMITED NUMBER OF SEARCH RESULTS (PAGES)
             totalPages = 1;
          } catch (error) {
             console.error(error);
