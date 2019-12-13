@@ -3,6 +3,7 @@ import { elements, hideElement } from './views/base';
 import ProductSearch from './models/ProductSearch';
 import CategorySearch from './models/CategorySearch';
 import Likes from './models/Likes';
+import Cart from './models/Cart';
 
 import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
