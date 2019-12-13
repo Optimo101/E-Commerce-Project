@@ -23,11 +23,11 @@ const renderStars = (rating) => {
    return htmlString;
 };
 
-export const toggleLikeBtn = (isLiked) => {
+export const toggleLikeBtn = (isLiked, currentElement) => {
    if (isLiked) {
-      document.querySelector('.product-thumb__like-icon').setAttribute('class', 'product-thumb__like-icon product-thumb__like-icon--full fas fa-heart');
+      currentElement.setAttribute('class', 'product-thumb__like-icon product-thumb__like-icon--full fas fa-heart');
    } else {
-      document.querySelector('.product-thumb__like-icon').setAttribute('class', 'product-thumb__like-icon far fa-heart');
+      currentElement.setAttribute('class', 'product-thumb__like-icon far fa-heart');
    }
 }
 

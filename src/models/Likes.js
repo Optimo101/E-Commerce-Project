@@ -22,8 +22,8 @@ export default class Likes {
    }
 
    isLiked(sku) {
-      // Searches for matching Sku in likes array. If found, the result will NOT equal -1 which makes the entire expression true -- else, false.
-      return this.likes.findIndex(element => element.sku === sku) !== -1;
+      // Searches for matching Sku in likes array. If found, the result will NOT equal -1 which will return true -- else, false.
+      return this.likes.findIndex(element => element.sku == sku) !== -1;
    }
 
    getNumLikes() {

@@ -36,9 +36,12 @@ const controlProductSearch = async (query) => {
 // LIKE CONTROLLER
 // ===========================================================
 const controlLike = (event) => {
-   const itemArray = event.currentTarget.id.split('-');
-   const currentIndex = itemArray[0];
-   const currentSku = itemArray[1];
+   const idArray = event.currentTarget.id.split('-');
+   const currentIndex = idArray[0];
+   const currentSku = idArray[1];
+
+   console.log(currentIndex);
+   console.log(currentSku);
 
    // User has NOT yet liked current product
    if (!state.likes.isLiked(currentSku)) {
@@ -52,9 +55,9 @@ const controlLike = (event) => {
 
       // Toggle the like button
       if (window.location.pathname === '/results') {
-         resultsView.toggleLikeBtn(true);
+         resultsView.toggleLikeBtn(true, event.currentTarget.querySelector('.product-thumb__like-icon'));
       } else if (window.location.pathname === '/product') {
-         productView.toggleLikeBtn(true);
+         productView.toggleLikeBtn(true, event.currentTarget.querySelector('.product-thumb__like-icon'));
       }
 
       // Add like to UI list
@@ -68,9 +71,9 @@ const controlLike = (event) => {
 
       // Toggle the like button
       if (window.location.pathname === '/results') {
-         resultsView.toggleLikeBtn(false);
+         resultsView.toggleLikeBtn(false, event.currentTarget.querySelector('.product-thumb__like-icon'));
       } else if (window.location.pathname === '/product') {
-         productView.toggleLikeBtn(false);
+         productView.toggleLikeBtn(false, event.currentTarget.querySelector('.product-thumb__like-icon'));
       }
 
       // Remove like to UI list
@@ -95,14 +98,10 @@ const controlResults = async () => {
          // Perform Search and prepare results
          await controlProductSearch(urlQuery);
 
-         console.log(state.likes);
-         console.log(state.likes.likes);
          // Determine if any products are 'Liked' by user
          state.productSearch.results.forEach((element) => {
             if (!state.likes.isLiked(element.sku)) {
-               console.log(`${element.sku} is NOT liked`);
             } else {
-               console.log(`${element.sku} IS liked`);
                element.liked = true;
             }
          });
