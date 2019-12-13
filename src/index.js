@@ -2,7 +2,7 @@ import { elements, hideElement } from './views/base';
 
 import ProductSearch from './models/ProductSearch';
 import CategorySearch from './models/CategorySearch';
-import Cart from './models/Cart';
+import Likes from './models/Likes';
 
 import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
@@ -19,20 +19,69 @@ const state = {};
 // ===========================================================
 
 const controlProductSearch = async (query) => {
-      // Create new search object and add to state
-      state.productSearch = new ProductSearch(query);
+   // Create new search object and add to state
+   state.productSearch = new ProductSearch(query);
 
-      try {
-         // Search for products
-         await state.productSearch.getResults();
+   try {
+      // Search for products
+      await state.productSearch.getResults();
 
-      } catch (error) {
-         alert('Somthing went wrong with the product search');
-         console.log(error);
+   } catch (error) {
+      alert('Somthing went wrong with the product search');
+      console.log(error);
+   }
+};
+
+// ===========================================================
+// LIKE CONTROLLER
+// ===========================================================
+const controlLike = (event) => {
+   const idArray = event.currentTarget.id.split('-');
+   const currentIndex = idArray[0];
+   const currentSku = idArray[1];
+
+   console.log(currentIndex);
+   console.log(currentSku);
+
+   // User has NOT yet liked current product
+   if (!state.likes.isLiked(currentSku)) {
+      // Add like to the state
+      state.likes.addLike(
+         currentSku,
+         state.productSearch.results[currentIndex].name,
+         state.productSearch.results[currentIndex].image,
+         state.productSearch.results[currentIndex].regularPrice
+      );
+
+      // Toggle the like button
+      if (window.location.pathname === '/results') {
+         resultsView.toggleLikeBtn(true, event.currentTarget.querySelector('.product-thumb__like-icon'));
+      } else if (window.location.pathname === '/product') {
+         productView.toggleLikeBtn(true, event.currentTarget.querySelector('.product-thumb__like-icon'));
       }
 
-   console.log(state.productSearch);
-};
+      // Add like to UI list
+      console.log(localStorage);
+      console.log(state.likes);
+
+   // User HAS liked the current product
+   } else {
+      // Remove like to the state
+      state.likes.deleteLike(currentSku);
+
+      // Toggle the like button
+      if (window.location.pathname === '/results') {
+         resultsView.toggleLikeBtn(false, event.currentTarget.querySelector('.product-thumb__like-icon'));
+      } else if (window.location.pathname === '/product') {
+         productView.toggleLikeBtn(false, event.currentTarget.querySelector('.product-thumb__like-icon'));
+      }
+
+      // Remove like to UI list
+      console.log(localStorage);
+      console.log(state.likes);
+   }
+ 
+}
 
 
 // ===========================================================
@@ -49,13 +98,27 @@ const controlResults = async () => {
          // Perform Search and prepare results
          await controlProductSearch(urlQuery);
 
+         // Determine if any products are 'Liked' by user
+         state.productSearch.results.forEach((element) => {
+            if (!state.likes.isLiked(element.sku)) {
+            } else {
+               element.liked = true;
+            }
+         });
+
+
          // Render results on UI
+         state.productSearch.results.forEach((element, index) => {
+            element.index = index;
+         });
+
          resultsView.renderResults(state.productSearch.results);
 
       }  catch (error) {
          alert('Somthing went wrong when attempting to render product search results');
          console.log(error);
       }
+
    }
 
    // EVENT LISTENERS
@@ -70,6 +133,11 @@ const controlResults = async () => {
             resultsView.renderResults(state.productSearch.results, goToPage);
          };
       });
+
+      // When 'like' buttons on Results page are clicked
+      for (const likeBtn of document.querySelectorAll('.product-thumb__like-btn')) {
+         likeBtn.addEventListener('click', controlLike);
+      }
 };
    
 
@@ -90,7 +158,7 @@ const controlProduct = async () => {
 
          // Render results on UI
          productView.renderProduct(state.productSearch.results[0]);
-         
+         productView.renderLikeBtn(state.likes.isLiked(state.productSearch.results[0].sku), state.productSearch.results[0].sku)
 
       }  catch (error) {
          alert('Somthing went wrong when attempting to render product.');
@@ -111,7 +179,10 @@ const controlProduct = async () => {
          };
 
          // When product quantity buttons are clicked
-         elements.productBtns.addEventListener('click', productView.quantBtnEvents);
+         elements.productQuantBtns.addEventListener('click', productView.quantBtnEvents);
+
+         // When Like button is clicked
+         document.querySelector('.product-info__like-btn').addEventListener('click', controlLike);
    };
 };
 
@@ -191,6 +262,14 @@ const controlHome = () => {
 // INITIALIZE APPLICATION
 // ===========================================================
 const init = () => {
+   // Restore liked products on page load
+   window.addEventListener('load', () => {
+      state.likes = new Likes();
+      state.likes.readLocalStorage();
+      console.log(localStorage);
+      console.log(state);
+   });
+
    controlHeader();
 
    if (window.location.pathname === '/product') {
@@ -201,7 +280,6 @@ const init = () => {
       controlHome();
    }
 
-   console.log(state);
 
 };
 
