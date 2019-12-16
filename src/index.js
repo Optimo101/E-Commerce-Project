@@ -15,10 +15,10 @@ import * as submenuView from './views/submenuView';
 // ===========================================================
 const state = {};
 
+
 // ===========================================================
 // PRODUCTS SEARCH CONTROLLER
 // ===========================================================
-
 const controlProductSearch = async (query) => {
    // Create new search object and add to state
    state.productSearch = new ProductSearch(query);
@@ -33,10 +33,36 @@ const controlProductSearch = async (query) => {
    }
 };
 
+
+// ===========================================================
+// CART CONTROLLER
+// ===========================================================
+const controlCart = (event) => {
+   const idArray = event.currentTarget.id.split('-');
+   const currentIndex = idArray[0];
+   const currentSku = idArray[1];
+   let currentQuantity;
+
+   if (elements.productQuantity) {
+      currentQuantity = Number(elements.productQuantity.value);
+   } else {
+      currentQuantity = 1;
+   }
+
+   state.cart.addItem(
+      currentSku,
+      state.productSearch.results[currentIndex].image,
+      state.productSearch.results[currentIndex].name,
+      state.productSearch.results[currentIndex].regularPrice,
+      currentQuantity
+   );
+};
+
+
 // ===========================================================
 // LIKE CONTROLLER
 // ===========================================================
-const controlLike = (event) => {
+const controlLikes = (event) => {
    const idArray = event.currentTarget.id.split('-');
    const currentIndex = idArray[0];
    const currentSku = idArray[1];
@@ -81,7 +107,6 @@ const controlLike = (event) => {
       console.log(localStorage);
       console.log(state.likes);
    }
- 
 }
 
 
@@ -135,9 +160,14 @@ const controlResults = async () => {
          };
       });
 
+      // When 'Add to Cart' button is clicked
+      for (const cartBtn of document.querySelectorAll('.product-thumb__cart-btn')) {
+         cartBtn.addEventListener('click', controlCart);
+      }
+
       // When 'like' buttons on Results page are clicked
       for (const likeBtn of document.querySelectorAll('.product-thumb__like-btn')) {
-         likeBtn.addEventListener('click', controlLike);
+         likeBtn.addEventListener('click', controlLikes);
       }
 };
    
@@ -182,8 +212,11 @@ const controlProduct = async () => {
          // When product quantity buttons are clicked
          elements.productQuantBtns.addEventListener('click', productView.quantBtnEvents);
 
-         // When Like button is clicked
-         document.querySelector('.product-info__like-btn').addEventListener('click', controlLike);
+         // When 'Add to Cart' button is clicked
+         elements.productCartBtn.addEventListener('click', controlCart);
+
+         // When 'Like' button is clicked
+         document.querySelector('.product-info__like-btn').addEventListener('click', controlLikes);
    };
 };
 
@@ -267,6 +300,10 @@ const init = () => {
    window.addEventListener('load', () => {
       state.likes = new Likes();
       state.likes.readLocalStorage();
+
+      state.cart = new Cart();
+      state.cart.readLocalStorage();
+      
       console.log(localStorage);
       console.log(state);
    });

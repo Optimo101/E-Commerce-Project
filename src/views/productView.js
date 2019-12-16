@@ -26,6 +26,10 @@ export const toggleLikeBtn = (isLiked) => {
    }
 }
 
+const renderCartBtnId = (sku) => {
+   elements.productCartBtn.id = `0-${sku}`;
+}
+
 
 const renderImgs = (product) => {
    const imgProperties = [
@@ -224,6 +228,7 @@ export const renderProduct = (product) => {
    renderTopInfo(product.name, product.manufacturer, product.modelNumber, product.sku);
    renderReview(product.customerReviewAverage, product.customerReviewCount);
    renderPrice(product.regularPrice);
+   renderCartBtnId(product.sku);
    renderDescContent(product.longDescription);
    renderFeatContent(product.features);
    renderIncludedContent(product.includedItemList);
