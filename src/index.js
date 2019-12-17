@@ -56,6 +56,8 @@ const controlCart = (event) => {
       state.productSearch.results[currentIndex].regularPrice,
       currentQuantity
    );
+
+   elements.headerCartCounter.innerHTML = state.cart.getNumItems();
 };
 
 
@@ -247,19 +249,23 @@ const controlHeader = async () => {
       // Perform categories search
       await controlCategorySearch();
 
-      // Organize the results to be used for rendering
-      state.categorySearch.organizeResults();
-
-      // Add modifier classes to each main menu item: main-menu__item--1
-      submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
-   
-      // Render the submenus with subcategories for each main menu category
-      submenuView.renderSubMenus(state.categorySearch.allSubCatArrays);
-
    } catch (error) {
       alert('Somthing went wrong when attempting to render subcategories.');
       console.log(error);
    }
+
+    // Organize the results to be used for rendering
+    state.categorySearch.organizeResults();
+
+    // Add modifier classes to each main menu item: main-menu__item--1
+    submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
+ 
+    // Render the submenus with subcategories for each main menu category
+    submenuView.renderSubMenus(state.categorySearch.allSubCatArrays);
+
+    // Update number of items showing in header cart icon
+    elements.headerCartCounter.innerHTML = state.cart.getNumItems();
+
 
    // EVENT LISTENERS
    // ===========================================================
@@ -303,7 +309,7 @@ const init = () => {
 
       state.cart = new Cart();
       state.cart.readLocalStorage();
-      
+
       console.log(localStorage);
       console.log(state);
    });

@@ -19,6 +19,7 @@ export default class Cart {
       }
       
       this.persistData();
+      this.getNumItems();
       console.log(this.cart);
    }
 
@@ -32,6 +33,15 @@ export default class Cart {
    }
 
    getNumItems() {
+      let numItems = 0;
+      
+      const objProperties = (Object.getOwnPropertyNames(this.cart));
+
+      for (const property of objProperties) {
+         numItems += this.cart[property].quantity;
+      }
+
+      return numItems;
 
    }
 

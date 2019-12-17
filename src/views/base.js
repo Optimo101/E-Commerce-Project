@@ -1,6 +1,7 @@
 export const elements = {
    headerNotice: document.querySelector('.header-notice'),
    headerNoticeBtn: document.querySelector('.header-notice__close-icon'),
+   headerCartCounter: document.querySelector('.cart__counter'),
 
    searchForm: document.querySelector('.search-form'),
    searchInput: document.querySelector('.search-form__input'),
