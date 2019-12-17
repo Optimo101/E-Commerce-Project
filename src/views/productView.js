@@ -260,7 +260,7 @@ export const thumbImgsEvents = (event) => {
 };
 
 export const quantBtnEvents = (event) => {
-   const className = 'product-info__up-btn';
+   const className = 'quantity-calc__up-btn';
    const quantity = Number(elements.productQuantity.value);
    let newQuantity;
 

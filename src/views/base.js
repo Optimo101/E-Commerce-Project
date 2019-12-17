@@ -1,7 +1,7 @@
 export const elements = {
    headerNotice: document.querySelector('.header-notice'),
    headerNoticeBtn: document.querySelector('.header-notice__close-icon'),
-   headerCartCounter: document.querySelector('.cart__counter'),
+   headerCartCounter: document.querySelector('.cart-link__counter'),
 
    searchForm: document.querySelector('.search-form'),
    searchInput: document.querySelector('.search-form__input'),
@@ -25,9 +25,9 @@ export const elements = {
    productThumbsBox: document.querySelector('.product-gallery__thumbs-box'),
    productNavItems: document.querySelectorAll('.product-info__nav-item'),
    productNavContents: document.querySelectorAll('.product-info__nav-content'),
-   productQuantity: document.querySelector('.product-info__quantity-input'),
+   productQuantity: document.querySelector('.quantity-calc__input'),
    productPrice: document.querySelector('.product-info__total-price'),
-   productQuantBtns: document.querySelector('.product-info__quantity-btns'),
+   productQuantBtns: document.querySelector('.quantity-calc__btns'),
    productActionBox: document.querySelector('.product-info__user-action-box'),
    productCartBtn: document.querySelector('.product-info__cart-btn'),
    productReview: document.querySelector('.product-info__review-stars'),
