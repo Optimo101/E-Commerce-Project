@@ -1,6 +1,7 @@
 export const elements = {
    headerNotice: document.querySelector('.header-notice'),
    headerNoticeBtn: document.querySelector('.header-notice__close-icon'),
+   headerCartCounter: document.querySelector('.cart__counter'),
 
    searchForm: document.querySelector('.search-form'),
    searchInput: document.querySelector('.search-form__input'),
@@ -27,8 +28,8 @@ export const elements = {
    productQuantity: document.querySelector('.product-info__quantity-input'),
    productPrice: document.querySelector('.product-info__total-price'),
    productQuantBtns: document.querySelector('.product-info__quantity-btns'),
-   productCartBtn: document.querySelector('.product-info__cart-btn'),
    productActionBox: document.querySelector('.product-info__user-action-box'),
+   productCartBtn: document.querySelector('.product-info__cart-btn'),
    productReview: document.querySelector('.product-info__review-stars'),
    productReviewCount: document.querySelector('.product-info__review-count')
 };

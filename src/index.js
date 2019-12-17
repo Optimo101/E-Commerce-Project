@@ -3,6 +3,7 @@ import { elements, hideElement } from './views/base';
 import ProductSearch from './models/ProductSearch';
 import CategorySearch from './models/CategorySearch';
 import Likes from './models/Likes';
+import Cart from './models/Cart';
 
 import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
@@ -14,10 +15,10 @@ import * as submenuView from './views/submenuView';
 // ===========================================================
 const state = {};
 
+
 // ===========================================================
 // PRODUCTS SEARCH CONTROLLER
 // ===========================================================
-
 const controlProductSearch = async (query) => {
    // Create new search object and add to state
    state.productSearch = new ProductSearch(query);
@@ -32,10 +33,38 @@ const controlProductSearch = async (query) => {
    }
 };
 
+
+// ===========================================================
+// CART CONTROLLER
+// ===========================================================
+const controlCart = (event) => {
+   const idArray = event.currentTarget.id.split('-');
+   const currentIndex = idArray[0];
+   const currentSku = idArray[1];
+   let currentQuantity;
+
+   if (elements.productQuantity) {
+      currentQuantity = Number(elements.productQuantity.value);
+   } else {
+      currentQuantity = 1;
+   }
+
+   state.cart.addItem(
+      currentSku,
+      state.productSearch.results[currentIndex].image,
+      state.productSearch.results[currentIndex].name,
+      state.productSearch.results[currentIndex].regularPrice,
+      currentQuantity
+   );
+
+   elements.headerCartCounter.innerHTML = state.cart.getNumItems();
+};
+
+
 // ===========================================================
 // LIKE CONTROLLER
 // ===========================================================
-const controlLike = (event) => {
+const controlLikes = (event) => {
    const idArray = event.currentTarget.id.split('-');
    const currentIndex = idArray[0];
    const currentSku = idArray[1];
@@ -80,7 +109,6 @@ const controlLike = (event) => {
       console.log(localStorage);
       console.log(state.likes);
    }
- 
 }
 
 
@@ -134,9 +162,14 @@ const controlResults = async () => {
          };
       });
 
+      // When 'Add to Cart' button is clicked
+      for (const cartBtn of document.querySelectorAll('.product-thumb__cart-btn')) {
+         cartBtn.addEventListener('click', controlCart);
+      }
+
       // When 'like' buttons on Results page are clicked
       for (const likeBtn of document.querySelectorAll('.product-thumb__like-btn')) {
-         likeBtn.addEventListener('click', controlLike);
+         likeBtn.addEventListener('click', controlLikes);
       }
 };
    
@@ -181,8 +214,11 @@ const controlProduct = async () => {
          // When product quantity buttons are clicked
          elements.productQuantBtns.addEventListener('click', productView.quantBtnEvents);
 
-         // When Like button is clicked
-         document.querySelector('.product-info__like-btn').addEventListener('click', controlLike);
+         // When 'Add to Cart' button is clicked
+         elements.productCartBtn.addEventListener('click', controlCart);
+
+         // When 'Like' button is clicked
+         document.querySelector('.product-info__like-btn').addEventListener('click', controlLikes);
    };
 };
 
@@ -213,19 +249,23 @@ const controlHeader = async () => {
       // Perform categories search
       await controlCategorySearch();
 
-      // Organize the results to be used for rendering
-      state.categorySearch.organizeResults();
-
-      // Add modifier classes to each main menu item: main-menu__item--1
-      submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
-   
-      // Render the submenus with subcategories for each main menu category
-      submenuView.renderSubMenus(state.categorySearch.allSubCatArrays);
-
    } catch (error) {
       alert('Somthing went wrong when attempting to render subcategories.');
       console.log(error);
    }
+
+    // Organize the results to be used for rendering
+    state.categorySearch.organizeResults();
+
+    // Add modifier classes to each main menu item: main-menu__item--1
+    submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
+ 
+    // Render the submenus with subcategories for each main menu category
+    submenuView.renderSubMenus(state.categorySearch.allSubCatArrays);
+
+    // Update number of items showing in header cart icon
+    elements.headerCartCounter.innerHTML = state.cart.getNumItems();
+
 
    // EVENT LISTENERS
    // ===========================================================
@@ -266,6 +306,10 @@ const init = () => {
    window.addEventListener('load', () => {
       state.likes = new Likes();
       state.likes.readLocalStorage();
+
+      state.cart = new Cart();
+      state.cart.readLocalStorage();
+
       console.log(localStorage);
       console.log(state);
    });
