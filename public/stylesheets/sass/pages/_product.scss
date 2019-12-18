@@ -11,7 +11,7 @@
 .product-header {
 
    &__title {
-      border-bottom:  2px solid $color-lightgrey;
+      border-bottom:  3px solid $color-lightgrey;
    }
    
    &__info-box {
@@ -335,7 +335,7 @@
    &__like-icon {
       font-size: $font-size-xl;
       margin-right: 1rem;
-      transition: all .25s;
+      transition: transform .25s ease, color .25s;
       backface-visibility: hidden;
 
       &--full {
