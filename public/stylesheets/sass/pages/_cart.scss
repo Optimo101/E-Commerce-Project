@@ -1,7 +1,7 @@
 .cart-page {
    &__header {
       margin-bottom: 2rem;
-      border-bottom: 2px solid $color-lightgrey;
+      border-bottom: 3px solid $color-lightgrey;
    }
 
    &__header-title {
@@ -11,43 +11,26 @@
 
    &__main {
       display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
    }
 }
 
-   
+.cart {
+   margin-bottom: 3rem;
+}
 
 .cart-grid {
-
-   &__box {
-      margin-right: 2.5rem;
-      font-weight: $font-weight-bold;
-      color: $color-black;
-   }
-
-   &__header {
-
-   }
-
-   &__header-content {
-      color: $color-darkgrey;
-      margin-left: 1rem;
-   }
-
-   &__header-text {
-
-   }
-
-   &__grid {
-      display: grid;
-      grid-template-columns: 12rem minmax(20rem, max-content) min-content min-content;
-      grid-template-rows: 3rem;
-      grid-auto-rows: minmax(0, 10rem);
-      gap: .3rem;
-
-      border: 1px solid $color-lightgrey;
-      border-radius: 1rem;
-      overflow: hidden;
-   }
+   display: grid;
+   grid-template-columns: 15rem minmax(20rem, max-content) min-content min-content;
+   grid-template-rows: 3rem;
+   grid-auto-rows: minmax(0, 15rem);
+   gap: .3rem;
+   border: 2px solid $color-lightgrey;
+   border-radius: 1rem;
+   overflow: hidden;
+   margin-right: 2.5rem;
+   
 
    &__item {
       display: flex;
@@ -77,8 +60,7 @@
 
    &__image {
       max-width: 100%;
-      max-height: 100%;
-      
+      max-height: 100%; 
    }
 
    &__name {
@@ -128,29 +110,104 @@
 }
 
 .cart-summary {
+
    &__box {
-      min-width: 30rem;
+      width: 100%;
+      background-color: $color-white;
+      border: 2px solid $color-lightgrey;
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
    }
 
    &__header {
-
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
    }
 
-   &__header-content {
+   &__title {
       color: $color-darkgrey;
       margin-left: 1rem;
+      color: $color-black;
    }
 
-   &__main-wrap {
-      width: 100%;
-      height: 30rem;
-      background-color: $color-white;
+   &__content {
       border: 1px solid $color-lightgrey;
-      border-radius: 1rem;
+      border-radius: 1rem;;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+
+      & div {
+         display: flex;
+         justify-content: space-between;
+      }
 
    }
 
+   &__subtotal-wrap {
 
+   }
 
+   &__subtotal-text {
+
+   }
+
+   &__subtotal-amount {
+
+   }
+
+   &__tax-wrap {
+
+   }
+
+   &__tax-text {
+
+   }
+
+   &__tax-amount {
+
+   }
+
+   &__shipping-wrap {
+      border-bottom: 1px double $color-lightgrey;
+      margin-bottom: .8rem; 
+   }
+
+   &__shipping-text {
+
+   }
+
+   &__shipping-amount {
+
+   }
+
+   &__total-wrap {
+      color: $color-black;
+      font-weight: $font-weight-bold;
+      font-size: $font-size-xl;
+
+   }
+
+   &__total-text {
+
+   }
+
+   &__total-amount {
+
+   }
+
+   &__btns-wrap {
+      display: flex;
+   }
+
+   &__shop-btn {
+      margin-right: 1rem;
+   }
+
+   &__checkout-btn {
+
+   }
+
+   
 }
 
