@@ -1,6 +1,6 @@
 export default class Cart {
    constructor() {
-      this.cart = {};
+      this.items = {};
       // this.cart.charges.subTotal = 0;
       // this.cart.charges.taxes = 0;
       // this.cart.charges.shipping = 0;
@@ -11,34 +11,44 @@ export default class Cart {
       
       if (!this.inCart(sku)) {
          const itemTotal = Number((price * quantity).toFixed(2));
-         this.cart[sku] = { sku, image, name, price, quantity, itemTotal};
+         this.items[sku] = { sku, image, name, price, quantity, itemTotal};
 
       } else {
-         this.cart[sku].quantity += quantity;
-         this.cart[sku].itemTotal = Number((price * this.cart[sku].quantity).toFixed(2));
+         this.items[sku].quantity += quantity;
+         this.items[sku].itemTotal = Number((price * this.items[sku].quantity).toFixed(2));
       }
       
       this.persistData();
       this.getNumItems();
-      console.log(this.cart);
    }
 
-   removeItem(sku, quantity) {
+   removeItem(sku) {
+      delete this.items[sku];
+      this.persistData();
+   }
 
+   updateItem(sku, newQuantity) {
+      this.items[sku].quantity = newQuantity;
+      this.updateItemTotal(sku);
+      this.persistData();
+   }
+
+   updateItemTotal(sku) {
+      this.items[sku].itemTotal = (this.items[sku].quantity * this.items[sku].price).toFixed(2);
    }
 
 
    inCart(sku) {
-      return this.cart.hasOwnProperty(sku) ? true : false;
+      return this.items.hasOwnProperty(sku) ? true : false;
    }
 
    getNumItems() {
       let numItems = 0;
       
-      const objProperties = (Object.getOwnPropertyNames(this.cart));
+      const objProperties = (Object.getOwnPropertyNames(this.items));
 
       for (const property of objProperties) {
-         numItems += this.cart[property].quantity;
+         numItems += this.items[property].quantity;
       }
 
       return numItems;
@@ -47,13 +57,13 @@ export default class Cart {
 
    persistData() {
       // track Cart in localStorage
-      localStorage.setItem('cart', JSON.stringify(this.cart));
+      localStorage.setItem('cart', JSON.stringify(this.items));
    }
 
    readLocalStorage() {
       const storage = JSON.parse(localStorage.getItem('cart'));
 
       // Restore likes from localStorage
-      if (storage) this.cart = storage;
+      if (storage) this.items = storage;
    }
 }
