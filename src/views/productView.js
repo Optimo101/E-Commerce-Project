@@ -258,23 +258,3 @@ export const thumbImgsEvents = (event) => {
 
    elements.productImg.setAttribute('src', imgSrc);
 };
-
-export const quantBtnEvents = (event) => {
-   const className = 'quantity-calc__up-btn';
-   const quantity = Number(elements.productQuantity.value);
-   let newQuantity;
-
-   if (event.target.getAttribute('class') === className || event.target.parentNode.getAttribute('class') === className) {
-      newQuantity = quantity + 1;
-   } else {
-      newQuantity = quantity - 1;
-   }
-   
-   if (newQuantity > 0 && newQuantity < 10) {
-      elements.productQuantity.value = newQuantity;
-
-      const total = ((Number(elements.productPrice.innerHTML) / quantity) * newQuantity).toFixed(2);
-
-      elements.productPrice.innerHTML = total;
-   };
-};

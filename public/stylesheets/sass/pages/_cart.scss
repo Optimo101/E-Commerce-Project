@@ -12,24 +12,30 @@
    &__main {
       display: flex;
       justify-content: space-between;
-      flex-wrap: wrap;
    }
 }
 
 .cart {
-   margin-bottom: 3rem;
+   display: flex;
+   justify-content: space-between;
+   flex-wrap: wrap;
 }
 
 .cart-grid {
+   flex-grow: 1;
+
    display: grid;
-   grid-template-columns: 15rem minmax(20rem, max-content) min-content min-content;
+   grid-template-columns: 10rem auto auto auto;
    grid-template-rows: 3rem;
-   grid-auto-rows: minmax(0, 15rem);
-   gap: .3rem;
+   grid-auto-rows: minmax(0, 10rem);
+   gap: 3px;
+
    border: 2px solid $color-lightgrey;
    border-radius: 1rem;
    overflow: hidden;
    margin-right: 2.5rem;
+   color: $color-black;
+
    
 
    &__item {
@@ -56,6 +62,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100%;
+      width: 100%;
    }
 
    &__image {
@@ -77,10 +85,27 @@
       }
    }
 
+   &__btn-wrap {
+      display: flex;
+
+      & i {
+         font-size: $font-size-sm;
+         transition: color .25s ease;
+      }
+   }
+
    &__remove-btn {
-      cursor: pointer;
+      margin-right: .5rem;
+
       &:hover {
          background-color: $color-primary;
+      }
+   }
+
+   &__refresh-btn {
+      &:hover {
+         background-color: rgb(54, 204, 54);
+
       }
    }
 
@@ -93,13 +118,14 @@
    }
 
    &__total-price-number {
-
    }
 
    &__unit-price {
       font-size: $font-size-xxs;
       white-space: nowrap;
       font-weight: $font-weight-primary;
+      color: $color-darkgrey;
+
 
    }
 
@@ -110,7 +136,12 @@
 }
 
 .cart-summary {
+   flex-grow: 1;
+   flex-shrink: 0;
+   max-width: 38rem;
+   color: $color-black;
 
+   
    &__box {
       width: 100%;
       background-color: $color-white;
@@ -123,12 +154,11 @@
       display: flex;
       justify-content: center;
       margin-bottom: 1rem;
+
    }
 
    &__title {
-      color: $color-darkgrey;
       margin-left: 1rem;
-      color: $color-black;
    }
 
    &__content {
@@ -141,7 +171,6 @@
          display: flex;
          justify-content: space-between;
       }
-
    }
 
    &__subtotal-wrap {
@@ -178,7 +207,8 @@
    }
 
    &__shipping-amount {
-
+      color: $color-primary;
+      font-weight: $font-weight-bold;
    }
 
    &__total-wrap {
@@ -205,6 +235,7 @@
    }
 
    &__checkout-btn {
+      text-transform: uppercase;
 
    }
 

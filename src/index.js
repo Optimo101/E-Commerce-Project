@@ -1,4 +1,4 @@
-import { elements, hideElement } from './views/base';
+import { elements, hideElement, updateItemQuant } from './views/base';
 
 import ProductSearch from './models/ProductSearch';
 import CategorySearch from './models/CategorySearch';
@@ -9,6 +9,7 @@ import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
 import * as mainMenuView from './views/mainMenuView';
 import * as submenuView from './views/submenuView';
+import * as cartView from './views/cartView';
 
 
 // GLOBAL STATE
@@ -49,6 +50,7 @@ const controlCart = (event) => {
       currentQuantity = 1;
    }
 
+   // Add the item to the cart model
    state.cart.addItem(
       currentSku,
       state.productSearch.results[currentIndex].image,
@@ -57,9 +59,51 @@ const controlCart = (event) => {
       currentQuantity
    );
 
+   // Update number of cart items in cart icon located in top right corner
    elements.headerCartCounter.innerHTML = state.cart.getNumItems();
 };
 
+// ===========================================================
+// CART PAGE CONTROLLER
+// ===========================================================
+const controlCartPage = () => {
+   cartView.renderCartGrid(state.cart.items);
+
+   
+
+   elements.cartGrid.addEventListener('click', (event) => {
+      
+      if (event.target.closest('.cart-grid__quantity')) {
+         const itemSku = event.target.closest('.cart-grid__quantity').id.slice(5);
+   
+         if (event.target.matches('.quantity-calc__btns, .quantity-calc__btns *')) {
+            let direction;
+   
+            if (event.target.className.includes('up')) {
+               direction = 'up';
+            } else {
+               direction = 'down';
+            }
+   
+            updateItemQuant(direction, itemSku, (newQuantity) => {
+               state.cart.updateItem(itemSku, newQuantity)
+            });
+         }
+
+         if (event.target.matches('.cart-grid__remove-btn, .cart-grid__remove-btn *')) {
+            state.cart.removeItem(itemSku); 
+            location.reload(true);
+         }
+
+         if (event.target.matches('.cart-grid__refresh-btn, .cart-grid__refresh-btn *')) {
+            location.reload(true);
+         }
+      }
+
+
+   });
+   
+};
 
 // ===========================================================
 // LIKE CONTROLLER
@@ -115,7 +159,7 @@ const controlLikes = (event) => {
 // ===========================================================
 // RESULTS PAGE CONTROLLER
 // ===========================================================
-const controlResults = async () => {
+const controlResultsPage = async () => {
    // Get search query from url parameter
    const urlQuery = window.location.search;
    
@@ -162,6 +206,8 @@ const controlResults = async () => {
          };
       });
 
+    
+
       // When 'Add to Cart' button is clicked
       for (const cartBtn of document.querySelectorAll('.product-thumb__cart-btn')) {
          cartBtn.addEventListener('click', controlCart);
@@ -177,7 +223,7 @@ const controlResults = async () => {
 // ===========================================================
 // PRODUCT PAGE CONTROLLER
 // ===========================================================
-const controlProduct = async () => {
+const controlProductPage = async () => {
 
    // Get search query from url parameter
    const urlQuery = window.location.search;
@@ -197,29 +243,53 @@ const controlProduct = async () => {
          alert('Somthing went wrong when attempting to render product.');
          console.log(error);
       }
-
-      // EVENT LISTENERS
-      // ===========================================================
-         // When nav titles are clicked
-         for (const navItem of elements.productNavItems) {
-            navItem.addEventListener('click', productView.navItemsEvents);
-         };
-
-         // When thumb images are clicked
-         const productThumbs = document.querySelectorAll('.product-gallery__thumb-wrap');
-         for (const element of productThumbs) {
-            element.addEventListener('click', productView.thumbImgsEvents);
-         };
-
-         // When product quantity buttons are clicked
-         elements.productQuantBtns.addEventListener('click', productView.quantBtnEvents);
-
-         // When 'Add to Cart' button is clicked
-         elements.productCartBtn.addEventListener('click', controlCart);
-
-         // When 'Like' button is clicked
-         document.querySelector('.product-info__like-btn').addEventListener('click', controlLikes);
    };
+
+   // EVENT LISTENERS
+   // ===========================================================
+   elements.productMain.addEventListener('click', (event) => {
+      const itemSku = elements.productSku.innerHTML;
+
+      // When product quantity buttons are clicked
+      if (event.target.matches('.quantity-calc__btns, .quantity-calc__btns *')) {
+         let direction;
+
+         if (event.target.className.includes('up')) {
+            direction = 'up';
+         } else {
+            direction = 'down';
+         }
+
+         updateItemQuant(direction, itemSku, function(newQuantity) {
+            elements.productPrice.innerHTML = (newQuantity * state.productSearch.results[0].regularPrice).toFixed(2);
+         });
+      }
+   });
+
+   console.log(elements.productQuantity);
+
+   elements.productQuantity.addEventListener('input', (event) => {
+      console.log('Something changed!');
+   })
+
+
+   // When nav titles are clicked
+   for (const navItem of elements.productNavItems) {
+      navItem.addEventListener('click', productView.navItemsEvents);
+   };
+
+   // When thumb images are clicked
+   const productThumbs = document.querySelectorAll('.product-gallery__thumb-wrap');
+   for (const element of productThumbs) {
+      element.addEventListener('click', productView.thumbImgsEvents);
+   };
+
+   // When 'Add to Cart' button is clicked
+   elements.productCartBtn.addEventListener('click', controlCart);
+
+   // When 'Like' button is clicked
+   document.querySelector('.product-info__like-btn').addEventListener('click', controlLikes);
+   
 };
 
 
@@ -293,7 +363,7 @@ const controlHeader = async () => {
 // ===========================================================
 // HOME PAGE CONTROLLER
 // ===========================================================
-const controlHome = () => {
+const controlHomePage = () => {
 
 };
 
@@ -302,8 +372,8 @@ const controlHome = () => {
 // INITIALIZE APPLICATION
 // ===========================================================
 const init = () => {
-   // Restore liked products on page load
-   window.addEventListener('load', () => {
+   // Restore cart and saved/liked items on page load
+   // window.addEventListener('load', () => {
       state.likes = new Likes();
       state.likes.readLocalStorage();
 
@@ -312,19 +382,19 @@ const init = () => {
 
       console.log(localStorage);
       console.log(state);
-   });
+   // });
 
    controlHeader();
 
    if (window.location.pathname === '/product') {
-      controlProduct();
+      controlProductPage();
    } else if (window.location.pathname === '/results') {
-      controlResults();
+      controlResultsPage();
+   } else if (window.location.pathname === '/cart') {
+      controlCartPage();
    } else {
-      controlHome();
+      controlHomePage();
    }
-
-
 };
 
 init();

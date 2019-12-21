@@ -20,18 +20,20 @@
    cursor: pointer;
 
    &--small {
-      font-size: 1.2rem;
+      font-size: $font-size-xxs;
       border-radius: .5rem;
       padding: .6rem 1rem;
    }
-
-   
-   
+  
    &--black {
       background-color: $color-black;
    }
 
    &--red {
       background-color: $color-primary;
+   }
+
+   &--darkgrey {
+      background-color: $color-darkgrey;
    }
 }
