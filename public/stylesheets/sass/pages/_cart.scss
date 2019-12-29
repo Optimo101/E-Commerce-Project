@@ -90,23 +90,20 @@
 
       & i {
          font-size: $font-size-sm;
-         transition: color .25s ease;
+      }
+
+      & button {
+         width: 2.75rem;
       }
    }
 
    &__remove-btn {
       margin-right: .5rem;
 
-      &:hover {
-         background-color: $color-primary;
-      }
    }
 
    &__refresh-btn {
-      &:hover {
-         background-color: rgb(54, 204, 54);
 
-      }
    }
 
    &__total {
@@ -138,7 +135,7 @@
 .cart-summary {
    flex-grow: 1;
    flex-shrink: 0;
-   max-width: 38rem;
+   max-width: 41rem;
    color: $color-black;
 
    
@@ -207,8 +204,6 @@
    }
 
    &__shipping-amount {
-      color: $color-primary;
-      font-weight: $font-weight-bold;
    }
 
    &__total-wrap {

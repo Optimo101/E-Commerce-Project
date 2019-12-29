@@ -67,12 +67,13 @@ const controlCart = (event) => {
 // CART PAGE CONTROLLER
 // ===========================================================
 const controlCartPage = () => {
-   cartView.renderCartGrid(state.cart.items);
+   cartView.renderCartGridItems(state.cart.items);
 
-   
+   state.cart.calcTotals();
+   cartView.updateCartSummary(state.cart.totals);
 
    elements.cartGrid.addEventListener('click', (event) => {
-      
+   
       if (event.target.closest('.cart-grid__quantity')) {
          const itemSku = event.target.closest('.cart-grid__quantity').id.slice(5);
    
@@ -84,11 +85,13 @@ const controlCartPage = () => {
             } else {
                direction = 'down';
             }
-   
+
             updateItemQuant(direction, itemSku, (newQuantity) => {
                state.cart.updateItem(itemSku, newQuantity)
             });
-         }
+
+            cartView.highlightRefreshBtns(itemSku);
+         };
 
          if (event.target.matches('.cart-grid__remove-btn, .cart-grid__remove-btn *')) {
             state.cart.removeItem(itemSku); 
@@ -99,10 +102,8 @@ const controlCartPage = () => {
             location.reload(true);
          }
       }
-
-
    });
-   
+
 };
 
 // ===========================================================
