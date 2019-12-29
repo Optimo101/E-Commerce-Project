@@ -35,7 +35,11 @@ export const elements = {
    productReview: document.querySelector('.product-info__review-stars'),
    productReviewCount: document.querySelector('.product-info__review-count'),
 
-   cartGrid: document.querySelector('.cart-grid')
+   cartGrid: document.querySelector('.cart-grid'),
+   cartSummarySubtotal: document.querySelector('.cart-summary__subtotal-number'),
+   cartSummaryTaxes: document.querySelector('.cart-summary__tax-number'),
+   cartSummaryShipping: document.querySelector('.cart-summary__shipping-number'),
+   cartSummaryTotal: document.querySelector('.cart-summary__total-number')
 };
 
 

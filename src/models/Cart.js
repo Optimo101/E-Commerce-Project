@@ -1,10 +1,7 @@
 export default class Cart {
    constructor() {
       this.items = {};
-      // this.cart.charges.subTotal = 0;
-      // this.cart.charges.taxes = 0;
-      // this.cart.charges.shipping = 0;
-      // this.cart.charges.total = 0;
+      this.totals = {};
    }
 
    addItem(sku, image, name, price, quantity) {      
@@ -53,6 +50,36 @@ export default class Cart {
 
       return numItems;
 
+   }
+
+   calcTotals() {
+      this.calcSubtotal();
+      this.calcTaxes();
+      this.calcShipping();
+      this.calcGrandTotal();
+   }
+
+   calcSubtotal() {
+      let subtotal = 0;
+
+      for (const item in this.items) {
+         const itemSubtotal = this.items[item].quantity * this.items[item].price;
+         subtotal += itemSubtotal;
+      }
+
+      this.totals.subtotal = Number(subtotal.toFixed(2));
+   }
+
+   calcTaxes() {
+      this.totals.taxes = Number((this.totals.subtotal * .0825).toFixed(2));
+   }
+
+   calcShipping() {
+      this.totals.shipping = 0.00;
+   }
+
+   calcGrandTotal() {
+      this.totals.grandTotal = (this.totals.subtotal + this.totals.taxes + this.totals.shipping).toFixed(2);
    }
 
    persistData() {

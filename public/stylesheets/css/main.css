@@ -69,7 +69,7 @@ body {
   border-radius: 4rem;
   display: inline-block;
   padding: .8rem 2.2rem;
-  transition: background-color .2s;
+  transition: background-color .25s ease;
   cursor: pointer; }
   .btn--small {
     font-size: 1.2rem;
@@ -79,6 +79,8 @@ body {
     background-color: #3d3d3d; }
   .btn--red {
     background-color: #EB2F38; }
+  .btn--green {
+    background-color: #36cc36; }
   .btn--darkgrey {
     background-color: #7a7a7a; }
 
@@ -875,14 +877,11 @@ body {
   .cart-grid__btn-wrap {
     display: flex; }
     .cart-grid__btn-wrap i {
-      font-size: 1.4rem;
-      transition: color .25s ease; }
+      font-size: 1.4rem; }
+    .cart-grid__btn-wrap button {
+      width: 2.75rem; }
   .cart-grid__remove-btn {
     margin-right: .5rem; }
-    .cart-grid__remove-btn:hover {
-      background-color: #EB2F38; }
-  .cart-grid__refresh-btn:hover {
-    background-color: #36cc36; }
   .cart-grid__unit-price {
     font-size: 1.2rem;
     white-space: nowrap;
@@ -892,7 +891,7 @@ body {
 .cart-summary {
   flex-grow: 1;
   flex-shrink: 0;
-  max-width: 38rem;
+  max-width: 41rem;
   color: #3d3d3d; }
   .cart-summary__box {
     width: 100%;
@@ -917,9 +916,6 @@ body {
   .cart-summary__shipping-wrap {
     border-bottom: 1px double #cecece;
     margin-bottom: .8rem; }
-  .cart-summary__shipping-amount {
-    color: #EB2F38;
-    font-weight: 500; }
   .cart-summary__total-wrap {
     color: #3d3d3d;
     font-weight: 500;

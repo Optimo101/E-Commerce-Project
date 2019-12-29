@@ -1,6 +1,6 @@
 import { elements } from './base';
 
-export const renderCartGrid = (cartItems) => {
+export const renderCartGridItems = (cartItems) => {
    const items = Object.keys(cartItems);
 
    for (const item of items) {
@@ -34,10 +34,10 @@ export const renderCartGrid = (cartItems) => {
                </div>
 
                <div class="cart-grid__btn-wrap">
-                  <button href="/cart" class="cart-grid__remove-btn btn btn--small btn--darkgrey">
+                  <button class="cart-grid__remove-btn btn btn--small btn--red">
                      <i class="cart-grid__remove-icon fas fa-times-circle"></i>
                   </button>
-                  <button href="/cart" class="cart-grid__refresh-btn btn btn--small btn--darkgrey">
+                  <button class="cart-grid__refresh-btn btn btn--small btn--darkgrey">
                      <i class="cart-grid__refresh-icon fas fa-redo-alt"></i>
                   </button>
                </div>
@@ -62,4 +62,32 @@ export const renderCartGrid = (cartItems) => {
 
       elements.cartGrid.insertAdjacentHTML('beforeend', html);
    };
-}
+};
+
+export const updateCartSummary = (totals) => {
+   console.log(totals.subtotal);
+   console.log(totals.taxes);
+   console.log(totals.shipping);
+   console.log(totals.grandTotal);
+
+   elements.cartSummarySubtotal.innerHTML = `${totals.subtotal}`;
+   elements.cartSummaryTaxes.innerHTML = `${totals.taxes}`;
+   elements.cartSummaryShipping.innerHTML = `${totals.shipping}`;
+   elements.cartSummaryTotal.innerHTML = `${totals.grandTotal}`;
+
+} 
+
+export const highlightRefreshBtns = (itemSku) => {
+   const refreshBtn = document.querySelector(`#item-${itemSku} .cart-grid__refresh-btn`);
+   const checkoutBtn = document.querySelector('.cart-summary__checkout-btn');
+
+   if (refreshBtn.classList.contains('btn--darkgrey')) {
+      refreshBtn.classList.remove('btn--darkgrey');
+      refreshBtn.classList.add('btn--green');
+
+      checkoutBtn.classList.remove('btn--darkgrey');
+      checkoutBtn.classList.add('btn--green');
+      checkoutBtn.innerHTML = 'Refresh Cart';
+      checkoutBtn.setAttribute('href', '/cart');
+   };
+};
