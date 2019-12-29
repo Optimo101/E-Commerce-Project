@@ -25,6 +25,10 @@ app.get('/product', function(req, res) {
    res.render('product');
 });
 
+app.get('/cart', function(req, res) {
+   res.render('cart');
+});
+
 app.get('*', function(req, res) {
    res.send('Sorry, page not found.')
 });

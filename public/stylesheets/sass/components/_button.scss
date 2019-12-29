@@ -16,22 +16,28 @@
    display: inline-block;
    padding: .8rem 2.2rem;
 
-   transition: background-color .2s;
+   transition: background-color .25s ease;
    cursor: pointer;
 
    &--small {
-      font-size: 1.2rem;
+      font-size: $font-size-xxs;
       border-radius: .5rem;
       padding: .6rem 1rem;
    }
-
-   
-   
+  
    &--black {
       background-color: $color-black;
    }
 
    &--red {
       background-color: $color-primary;
+   }
+
+   &--green {
+      background-color: rgb(54, 204, 54);
+   }
+
+   &--darkgrey {
+      background-color: $color-darkgrey;
    }
 }
