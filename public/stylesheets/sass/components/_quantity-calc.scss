@@ -1,0 +1,63 @@
+
+.quantity-calc {
+
+   &__wrap {
+      display: flex;
+
+      color: $color-black;
+      width: 6rem;
+      height: 4rem;
+   }
+
+   &__input {
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      font-size: $font-size-lg;
+      border: 1px solid $color-black;
+      border-right: none;
+   }
+
+   &__btns {
+      display: flex;
+      flex-direction: column;
+   }
+
+   &__up-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 50%;
+      width: 2rem;
+      border: 1px solid $color-black;
+      cursor: pointer;
+
+      &:hover {
+         background-color: $color-lightgrey;
+      }
+
+      &:active {
+         box-shadow: inset 0 0 3px #000;
+      }
+   }
+
+   &__down-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 50%;
+      width: 2rem;
+      border: 1px solid $color-black;
+      cursor: pointer;
+
+      &:hover {
+         background-color: $color-lightgrey;
+      }
+
+      &:active {
+         box-shadow: inset 0 0 3px #000;
+      }
+   }
+}

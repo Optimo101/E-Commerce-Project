@@ -1,0 +1,156 @@
+<% include partials/head %>
+<% include partials/header %>
+
+<main class="main">
+   <div class="shadow-overlay">
+   </div>
+
+   <div class="container">
+      <section class="cart-page">
+         <div class="cart-page__header">
+            <h1 class="cart-page__header-title">Shopping Cart</h1>
+         </div>
+
+         <div class="cart-page__main">
+
+            <div class="cart">
+
+               <div class="cart-grid">
+                  <div class="cart-grid__item">
+                     <h4 class="cart-grid__column-header">Image</h4>
+                  </div>
+                  <div class="cart-grid__item">
+                     <h4 class="cart-grid__column-header">Name</h4>
+                  </div>
+                  <div class="cart-grid__item">
+                     <h4 class="cart-grid__column-header">Quantity</h4>
+                  </div>
+                  <div class="cart-grid__item">
+                     <h4 class="cart-grid__column-header">Total</h4>
+                  </div>
+
+
+
+                  <!-- <div class="cart-grid__item">
+                     <div class="cart-grid__image-outer-wrap">
+                        <div class="cart-grid__image-inner-wrap">
+                           <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/5715/5715634_sa.jpg" alt="" class="cart-grid__image">
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="cart-grid__item">
+                     <p class="cart-grid__name">  
+                        Garmin - DriveSmart 61 LMT-S 6.95&quot; GPS with Built-In Bluetooth - Black
+                     </p>
+                  </div>
+
+                  <div class="cart-grid__item">
+                     <div class="cart-grid__quantity">
+
+                        <div class="quantity-calc__wrap">
+                           <input type="text" class="quantity-calc__input" name="quantity" value="1" maxlength="1" minlength="1">
+                           <span class="quantity-calc__btns">
+                              <div class="quantity-calc__up-btn">
+                                 <i class="fas fa-angle-up"></i>
+                              </div>
+                              <div class="quantity-calc__down-btn">
+                                 <i class="fas fa-angle-down"></i>
+                              </div>
+                           </span>
+                        </div>
+
+                        <div class="cart-grid__btn-wrap">
+                           <button href="/cart" class="cart-grid__remove-btn btn btn--small btn--red" id="sku">
+                              <i class="cart-grid__remove-icon fas fa-times-circle"></i>
+                           </button>
+                           <button href="/cart" class="cart-grid__refresh-btn btn btn--small btn--green" id="sku">
+                              <i class="cart-grid__refresh-icon fas fa-redo-alt"></i>
+                           </button>
+                        </div>
+
+                     </div>
+                  </div>
+
+                  <div class="cart-grid__item">
+                        <div class="cart-grid__total">
+
+                           <div class="cart-grid__total-price">
+                              <span class="cart-grid__total-price-number">$399.98</span>
+                           </div>
+
+                           <div class="cart-grid__unit-price">
+                              <p class="cart-grid__unit-price-text">($199.99 each)</p>
+                           </div>
+                        </div>
+                  
+                  </div> -->
+
+                  
+               </div>
+            </div>
+
+
+
+            <div class="cart-summary">
+               <div class="cart-summary__box">
+                  <div class="cart-summary__header">
+                     <h2 class="cart-summary__title">Summary</h2>
+                  </div>
+                  <div class="cart-summary__content">
+                     <div class="cart-summary__subtotal-wrap">
+                        <div class="cart-summary__subtotal-text">
+                           Subtotal:
+                        </div>
+                        <div class="cart-summary__subtotal-amount">
+                           $<span class="cart-summary__subtotal-number">0.00</span>
+                        </div>
+                     </div>
+                     <div class="cart-summary__tax-wrap">
+                        <div class="cart-summary__tax-text">
+                           Taxes:
+                        </div>
+                        <div class="cart-summary__tax-amount">
+                           $<span class="cart-summary__tax-number">0.00</span>
+                        </div>
+                     </div>
+                     <div class="cart-summary__shipping-wrap">
+                        <div class="cart-summary__shipping-text">
+                           Shipping:
+                        </div>
+                        <div class="cart-summary__shipping-amount">
+                           $<span class="cart-summary__shipping-number">0.00</span>
+                        </div>
+                     </div>
+                     <div class="cart-summary__total-wrap">
+                        <div class="cart-summary__total-text">
+                           Total:
+                        </div>
+                        <div class="cart-summary__total-amount">
+                           $<span class="cart-summary__total-number">0.00</span>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="cart-summary__btns-wrap">
+                     <a class="cart-summary__shop-btn btn btn--black" href="/">
+                        Continue Shopping
+                     </a>
+                     <a class="cart-summary__checkout-btn btn btn--red" href="#">
+                        Checkout
+                     </a>
+                  </div>
+                  
+               </div>
+            </div>
+
+         </div>
+
+
+
+      </section>
+   </div>
+</main>
+
+
+<% include partials/footer %>

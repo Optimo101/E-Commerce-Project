@@ -11,7 +11,7 @@
 .product-header {
 
    &__title {
-      border-bottom:  2px solid $color-lightgrey;
+      border-bottom:  3px solid $color-lightgrey;
    }
    
    &__info-box {
@@ -29,7 +29,7 @@
       display: flex;
       flex-direction: column;
       width: 50%;
-      margin-right: 3rem;
+      margin-right: 2.5rem;
    }
 
    &__img-wrap {
@@ -296,66 +296,7 @@
       display: flex;
    }
 
-   &__quantity-wrap {
-      display: flex;
-
-      color: $color-black;
-      width: 6rem;
-      height: 4rem;
-      margin-right: 1rem;
-   }
-
-   &__quantity-input {
-      height: 100%;
-      width: 100%;
-      text-align: center;
-      font-size: $font-size-lg;
-      border: 1px solid $color-black;
-      border-right: none;
-   }
-
-   &__quantity-btns {
-      display: flex;
-      flex-direction: column;
-   }
-
-   &__up-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      height: 50%;
-      width: 2rem;
-      border: 1px solid $color-black;
-      cursor: pointer;
-
-      &:hover {
-         background-color: $color-lightgrey;
-      }
-
-      &:active {
-         box-shadow: inset 0 0 3px #000;
-      }
-   }
-
-   &__down-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      height: 50%;
-      width: 2rem;
-      border: 1px solid $color-black;
-      cursor: pointer;
-
-      &:hover {
-         background-color: $color-lightgrey;
-      }
-
-      &:active {
-         box-shadow: inset 0 0 3px #000;
-      }
-   }
+   
 
    &__total-wrap {
       display: flex;
@@ -365,6 +306,7 @@
       color: black;
       font-size: $font-size-xxl;
       margin-right: 2rem;
+      margin-left: 1rem;
       transition: background-color .25s;
    }
 
@@ -393,7 +335,7 @@
    &__like-icon {
       font-size: $font-size-xl;
       margin-right: 1rem;
-      transition: all .25s;
+      transition: transform .25s ease, color .25s;
       backface-visibility: hidden;
 
       &--full {
