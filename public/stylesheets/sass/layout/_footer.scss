@@ -1,0 +1,131 @@
+.site-footer {}
+
+.main-footer {
+   display: flex;
+   padding-top: 3rem;
+   padding-bottom: 5rem;
+   font-size: $font-size-sm;
+
+}
+
+.footer-contact {
+   display: flex;
+   flex-basis: 22%;
+   padding-right: 2.5rem;
+
+   &__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      & div:nth-of-type(2) {
+         margin-bottom: .6rem;
+      }
+   }
+
+   &__logo-box {
+      display: flex;
+      align-items: center;
+      max-width: 16rem;
+      margin-bottom: 1rem;
+   }
+
+   &__logo-img {
+      width: 100%;
+      height: auto;
+   }
+
+   &__item {
+      display: flex;
+      align-items: center;
+   }
+
+   & i {
+      margin-right: 1.5rem;
+   }
+}
+
+.footer-nav {
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   flex-basis: 43%;
+   
+   border-left: 2px solid $color-darkgrey;
+   border-right: 2px solid $color-darkgrey;
+
+
+   &__list-box {
+
+   }
+
+   &__list-heading {
+      font-size: $font-size-lg;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: $color-black;
+   }
+
+   &__list {
+      list-style: none;
+   }
+
+   &__list-item {
+      margin-bottom: .6rem;
+      transition: color .25s;
+
+      &:hover {
+         color: $color-black;
+      }
+
+   }
+}
+
+.footer-subscribe {
+   display: flex;
+   justify-content: flex-end;
+   flex-basis: 35%;
+
+
+   &__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+
+      max-width: 38rem;
+      padding-left: 2.5rem;
+   }
+
+   &__paragraph {
+      margin-bottom: 1.8rem;
+   }
+
+   &__form {
+      display: flex;
+      align-items: center;
+
+      width: 100%;
+      border: 2px solid $color-lightgrey;
+      border-radius: 4rem;
+   }
+
+   &__form-input {
+      flex: 1;
+      margin-right: 2rem;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 4rem;
+
+      font-family: inherit;
+      font-size: inherit;
+
+
+
+      
+   }
+
+   &__form-btn {
+      height: 100%;
+   }
+}
