@@ -10,7 +10,7 @@ export default class Cart {
          const itemTotal = Number((price * quantity).toFixed(2));
          this.items[sku] = { sku, image, name, price, quantity, itemTotal};
 
-      } else {
+      } else if (this.items[sku].quantity < 9) {
          this.items[sku].quantity += quantity;
          this.items[sku].itemTotal = Number((price * this.items[sku].quantity).toFixed(2));
       }
