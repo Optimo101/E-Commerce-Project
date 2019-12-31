@@ -3,3 +3,10 @@
    display: block;
    height: auto;
 }
+
+.is-spinning {
+   animation-name: spin;
+   animation-duration: 500ms;
+   animation-iteration-count: infinite;
+   animation-timing-function:linear;
+}

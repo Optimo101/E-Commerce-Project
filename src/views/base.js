@@ -63,5 +63,36 @@ export const updateItemQuant = (direction, sku, callback) => {
 
       callback(newQuantity);
    }
+};
+
+export const cartBtnAnimation = (event, existingItem) => {
+   const iconElement = event.currentTarget.children[0];
+   const cartBtnText = event.currentTarget.children[1];
+
+   if (existingItem && existingItem.quantity === 9) {
+      console.log(existingItem);
+      console.log('YOu have reached the item limit!');
+      cartBtnText.innerHTML = '';
+      cartBtnText.innerHTML = 'Max Limit';
+      iconElement.classList.remove('fa-shopping-cart');
+      iconElement.classList.add('fa-exclamation');
+
+   } else {
+      cartBtnText.innerHTML = '';
+      cartBtnText.innerHTML = 'Adding. . .';
+      iconElement.classList.remove('fa-shopping-cart');
+      iconElement.classList.add('fa-redo-alt');
+      iconElement.classList.add('is-spinning');
+   }
+
    
+   const stopCartBtnAnimation = () => {
+      cartBtnText.innerHTML = '';
+      cartBtnText.innerHTML = 'Add to Cart';
+      iconElement.classList.remove('is-spinning');
+      iconElement.classList.remove('fa-redo-alt');
+      iconElement.classList.add('fa-shopping-cart');
+   };
+
+   setTimeout(stopCartBtnAnimation, 500);
 };

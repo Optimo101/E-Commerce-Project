@@ -1,6 +1,7 @@
 @import 'abstracts/variables';
 
 @import 'base/base';
+@import 'base/animations';
 @import 'base/typography';
 @import 'base/utilities';
 
@@ -19,6 +20,6 @@
 @import 'layout/footer';
 
 @import 'pages/home';
-@import 'pages/index';
+@import 'pages/results';
 @import 'pages/product';
 @import 'pages/cart';
