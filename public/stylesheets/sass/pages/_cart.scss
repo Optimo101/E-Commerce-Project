@@ -46,11 +46,6 @@
       padding: 1rem;
    }
 
-   &__column-header {
-      margin-right: auto;
-      color: $color-black;
-   }
-
    &__image-outer-wrap {
       display: flex;
       align-items: center;
@@ -230,7 +225,9 @@
    }
 
    &__checkout-btn {
+      flex: 1;
       text-transform: uppercase;
+
 
    }
 
