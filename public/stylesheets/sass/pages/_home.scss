@@ -53,6 +53,14 @@
       display: flex;
       justify-content: space-between;
 
+      & .service-feature:first-child {
+         padding-left: 0;
+      }
+
+      & .service-feature:last-child {
+         padding-right: 0;
+      }
+
       & div:nth-of-type(1) div:nth-of-type(1) i {
          height: 5.75rem;
          transform: translateY(.4rem);
