@@ -464,8 +464,7 @@ body {
   position: relative;
   background-color: #ececec;
   padding-top: 3rem;
-  padding-bottom: 10rem;
-  border-bottom: 2px solid #cecece; }
+  border-bottom: 1px solid #cecece; }
 
 .shadow-overlay {
   display: none;
@@ -508,7 +507,7 @@ body {
 
 .my-account {
   font-weight: 300;
-  margin-right: 3rem; }
+  margin-right: 5rem; }
   .my-account__icon {
     font-size: 2rem;
     margin-right: 1rem; }
@@ -620,35 +619,18 @@ body {
   .footer-subscribe__form-btn {
     height: 100%; }
 
-.grid-primary-wrapper {
-  height: 35vw;
-  max-height: 52.5rem;
-  padding-bottom: 3rem; }
+.landing__img-container {
+  position: relative;
+  height: 63vh;
+  overflow: hidden;
+  margin-top: -3rem; }
 
-.grid-primary {
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 3fr 1fr;
-  gap: 2rem; }
-  .grid-primary__item {
-    border-radius: .8rem;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-color: #FFF; }
-    .grid-primary__item--lg {
-      grid-row: 1 / 3;
-      grid-column: 1 / 2;
-      background-image: url("../../img/grid-img-1.png"); }
-    .grid-primary__item--sm-top {
-      background-image: url("../../img/grid-img-2.png"); }
-    .grid-primary__item--sm-bottom {
-      background-image: url("../../img/grid-img-3.png"); }
-  .grid-primary__slider {
-    position: relative;
-    width: 100%;
-    height: 100%; }
+.landing__img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%); }
 
 .service-bar {
   background-color: #3d3d3d; }
