@@ -1,4 +1,4 @@
-import { elements, hideElement, updateItemQuant } from './views/base';
+import { elements, hideElement, updateItemQuant, cartBtnAnimation } from './views/base';
 
 import ProductSearch from './models/ProductSearch';
 import CategorySearch from './models/CategorySearch';
@@ -44,12 +44,17 @@ const controlCart = (event) => {
    const currentSku = idArray[1];
    let currentQuantity;
 
+
+
    if (elements.productQuantity) {
       currentQuantity = Number(elements.productQuantity.value);
    } else {
       currentQuantity = 1;
    }
 
+   // Swap icon on 'Add to Cart' button to let user know item is being added to thier cart
+   cartBtnAnimation(event, state.cart.items[currentSku]);
+   
    // Add the item to the cart model
    state.cart.addItem(
       currentSku,
@@ -267,13 +272,7 @@ const controlProductPage = async () => {
       }
    });
 
-   console.log(elements.productQuantity);
-
-   elements.productQuantity.addEventListener('input', (event) => {
-      console.log('Something changed!');
-   })
-
-
+ 
    // When nav titles are clicked
    for (const navItem of elements.productNavItems) {
       navItem.addEventListener('click', productView.navItemsEvents);

@@ -65,7 +65,7 @@ const renderProductItem = (product) => {
          <div class="product-thumb__btn-wrap">
             <button class="product-thumb__cart-btn btn btn--small btn--black" id="${product.index}-${product.sku}">
                <i class="product-thumb__cart-icon fas fa-shopping-cart"></i>
-               Add to Cart
+               <span class="product-thumb__cart-btn-text">Add to Cart</span>
             </button>
             <button class="product-thumb__like-btn btn btn--small btn--black" id="${product.index}-${product.sku}">
                ${likeIconHtml}
