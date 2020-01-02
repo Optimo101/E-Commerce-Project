@@ -5,6 +5,7 @@ import CategorySearch from './models/CategorySearch';
 import Likes from './models/Likes';
 import Cart from './models/Cart';
 
+import * as homeView from './views/homeView';
 import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
 import * as mainMenuView from './views/mainMenuView';
@@ -365,6 +366,8 @@ const controlHeader = async () => {
 // ===========================================================
 const controlHomePage = () => {
 
+   homeView.beginBackgroundFade();
+   
 };
 
 

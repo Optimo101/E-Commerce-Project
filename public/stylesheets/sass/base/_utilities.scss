@@ -10,3 +10,15 @@
    animation-iteration-count: infinite;
    animation-timing-function:linear;
 }
+
+.shrink-and-slide {
+   animation-name: shrink-and-slide;
+   animation-duration: 3000ms;
+
+}
+
+.slide-and-fade {
+   animation-name: slide-and-fade;
+   animation-duration: 3000ms;
+   animation-delay: 200ms;
+}

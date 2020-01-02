@@ -13,6 +13,14 @@ export const elements = {
    mainMenuItems: document.querySelectorAll('.main-menu__item'),
    submenuItems: document.querySelectorAll('.submenu'),
 
+   landingSection: document.querySelector('.landing'),
+   landingBackground: document.querySelector('.landing__background'),
+   landingPromoBox: document.querySelector('.promotion'),
+   landingPromoHeader: document.querySelector('.promotion__main-header'),
+   landingPromoSubHeader: document.querySelector('.promotion__sub-header'),
+   landingPromoBtn: document.querySelector('.promotion__btn'),
+
+
    resultsMainGrid: document.querySelector('.results__main-grid'),
    resultsPages: document.querySelector('.results__page-buttons'),
    resultsCount: document.querySelector('.results__item-count'),
