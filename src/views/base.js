@@ -13,20 +13,19 @@ export const elements = {
    mainMenuItems: document.querySelectorAll('.main-menu__item'),
    submenuItems: document.querySelectorAll('.submenu'),
 
-   landingSection: document.querySelector('.landing'),
-   landingBackground: document.querySelector('.landing__background'),
+   landingSection: document.querySelector('.landing-section'),
+   landingBackground: document.querySelector('.landing-section__background'),
    landingPromoBox: document.querySelector('.promotion'),
    landingPromoHeader: document.querySelector('.promotion__main-header'),
    landingPromoSubHeader: document.querySelector('.promotion__sub-header'),
    landingPromoBtn: document.querySelector('.promotion__btn'),
 
+   resultsSection: document.querySelector('.results-section'),
+   resultsMainGrid: document.querySelector('.results-section__main-grid'),
+   resultsPages: document.querySelector('.results-section__page-buttons'),
+   resultsCount: document.querySelector('.results-section__item-count'),
 
-   resultsMainGrid: document.querySelector('.results__main-grid'),
-   resultsPages: document.querySelector('.results__page-buttons'),
-   resultsCount: document.querySelector('.results__item-count'),
-
-
-   productMain: document.querySelector('.product__main'),
+   productMain: document.querySelector('.product-section__main'),
    productTitle: document.querySelector('.product-header__title'),
    productManufacturer: document.querySelector('.product-header__manufacturer-data'),
    productModel: document.querySelector('.product-header__model-data'),
@@ -73,21 +72,21 @@ export const updateItemQuant = (direction, sku, callback) => {
    }
 };
 
-export const cartBtnAnimation = (event, existingItem) => {
-   const iconElement = event.currentTarget.children[0];
-   const cartBtnText = event.currentTarget.children[1];
+export const cartBtnAnimation = (buttonElement, existingItem) => {
+   const iconElement = buttonElement.children[0];
+   const textElement = buttonElement.children[1];
 
    if (existingItem && existingItem.quantity === 9) {
       console.log(existingItem);
       console.log('YOu have reached the item limit!');
-      cartBtnText.innerHTML = '';
-      cartBtnText.innerHTML = 'Max Limit';
+      textElement.innerHTML = '';
+      textElement.innerHTML = 'Max Limit';
       iconElement.classList.remove('fa-shopping-cart');
       iconElement.classList.add('fa-exclamation');
 
    } else {
-      cartBtnText.innerHTML = '';
-      cartBtnText.innerHTML = 'Adding. . .';
+      textElement.innerHTML = '';
+      textElement.innerHTML = 'Adding. . .';
       iconElement.classList.remove('fa-shopping-cart');
       iconElement.classList.add('fa-redo-alt');
       iconElement.classList.add('is-spinning');
@@ -95,8 +94,8 @@ export const cartBtnAnimation = (event, existingItem) => {
 
    
    const stopCartBtnAnimation = () => {
-      cartBtnText.innerHTML = '';
-      cartBtnText.innerHTML = 'Add to Cart';
+      textElement.innerHTML = '';
+      textElement.innerHTML = 'Add to Cart';
       iconElement.classList.remove('is-spinning');
       iconElement.classList.remove('fa-redo-alt');
       iconElement.classList.add('fa-shopping-cart');
