@@ -82,7 +82,7 @@ const renderItemCount = (itemStart, itemEnd, itemTotal) => {
 };
 
 const createButton = (page, type) =>  `
-   <button class="btn btn--small btn--black results__page-btn results__page-btn--${type}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
+   <button class="btn btn--small btn--black results-section__page-btn results-section__page-btn--${type}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
          <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
          <i class="fas fa-angle-${type === 'prev' ? 'left' : 'right'}"></i>
    </button>
