@@ -16,27 +16,27 @@ export const promotionRotation = () => {
 
    const promoContent = {
       header: [
-         'Versatile Laptops',
-         'Looking to upgrade your camera?',
          'Music Where You Want It',
-         'Movie nights just got better!'
+         'Looking to upgrade your camera?',
+         'Versatile Laptops',
+         'Movie nights just got better.'
       ],
       subHeader: [
-         'Huge selection from top brands.',
-         'Great deals happening right now.',
          'Beats by Dr. Dre, Sony, Apple and Bose.',
+         'Great deals happening right now.',
+         'Huge selection from top brands.',
          'Flat screen TVs for every budget.'
       ],
       button: [
-         'Shop Laptops',
-         'Shop Cameras',
          'Shop Headphones',
+         'Shop Cameras',
+         'Shop Laptops',
          'Shop Televisions'
       ],
       href: [
-         '/results?categoryPath.id=abcat0502000',
-         '/results?categoryPath.id=abcat0401000',
          '/results?categoryPath.id=abcat0204000',
+         '/results?categoryPath.id=abcat0401000',
+         '/results?categoryPath.id=abcat0502000',
          '/results?categoryPath.id=abcat0101000'
       ]
    }
