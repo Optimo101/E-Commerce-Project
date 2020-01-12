@@ -24,6 +24,11 @@
       border-radius: .5rem;
       padding: .6rem 1rem;
    }
+
+   &--animated {
+      animation: moveInBottom .5s ease-out .75s;
+      animation-fill-mode: backwards;
+   }
   
    &--black {
       background-color: $color-black;

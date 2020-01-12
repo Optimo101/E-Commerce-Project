@@ -1,4 +1,6 @@
-.cart-page {
+.cart-section {
+   padding-bottom: 10rem;
+
    &__header {
       margin-bottom: 2rem;
       border-bottom: 3px solid $color-lightgrey;
@@ -36,8 +38,6 @@
    margin-right: 2.5rem;
    color: $color-black;
 
-   
-
    &__item {
       display: flex;
       align-items: center;
@@ -66,10 +66,6 @@
       max-height: 100%; 
    }
 
-   &__name {
-
-   }
-
    &__quantity {
       display: flex;
       flex-direction: column;
@@ -94,22 +90,6 @@
 
    &__remove-btn {
       margin-right: .5rem;
-
-   }
-
-   &__refresh-btn {
-
-   }
-
-   &__total {
-
-   }
-
-   &__total-price {
-
-   }
-
-   &__total-price-number {
    }
 
    &__unit-price {
@@ -117,14 +97,7 @@
       white-space: nowrap;
       font-weight: $font-weight-primary;
       color: $color-darkgrey;
-
-
    }
-
-   &__unit-price-text {
-
-   }
-
 }
 
 .cart-summary {
@@ -133,7 +106,6 @@
    max-width: 41rem;
    color: $color-black;
 
-   
    &__box {
       width: 100%;
       background-color: $color-white;
@@ -165,55 +137,15 @@
       }
    }
 
-   &__subtotal-wrap {
-
-   }
-
-   &__subtotal-text {
-
-   }
-
-   &__subtotal-amount {
-
-   }
-
-   &__tax-wrap {
-
-   }
-
-   &__tax-text {
-
-   }
-
-   &__tax-amount {
-
-   }
-
    &__shipping-wrap {
       border-bottom: 1px double $color-lightgrey;
       margin-bottom: .8rem; 
-   }
-
-   &__shipping-text {
-
-   }
-
-   &__shipping-amount {
    }
 
    &__total-wrap {
       color: $color-black;
       font-weight: $font-weight-bold;
       font-size: $font-size-xl;
-
-   }
-
-   &__total-text {
-
-   }
-
-   &__total-amount {
-
    }
 
    &__btns-wrap {
@@ -227,10 +159,6 @@
    &__checkout-btn {
       flex: 1;
       text-transform: uppercase;
-
-
    }
-
-   
 }
 
