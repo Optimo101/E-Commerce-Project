@@ -13,28 +13,28 @@ app.set('view engine', 'ejs');
 
 
 // =================================================
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
    res.render('home');
 });
 
-app.get('/results', function(req, res) {
+app.get('/results', (req, res) => {
    res.render('results');
 });
 
-app.get('/product', function(req, res) {
+app.get('/product', (req, res) => {
    res.render('product');
 });
 
-app.get('/cart', function(req, res) {
+app.get('/cart', (req, res) => {
    res.render('cart');
 });
 
-app.get('*', function(req, res) {
+app.get('*', (req, res) => {
    res.send('Sorry, page not found.')
 });
 
 
 
-app.listen(3000, 'localhost', function() {
+app.listen(3000, 'localhost', () => {
    console.log('Server has started on port 3000...');
 });
