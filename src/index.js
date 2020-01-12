@@ -5,6 +5,7 @@ import CategorySearch from './models/CategorySearch';
 import Likes from './models/Likes';
 import Cart from './models/Cart';
 
+import * as homeView from './views/homeView';
 import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
 import * as mainMenuView from './views/mainMenuView';
@@ -39,7 +40,8 @@ const controlProductSearch = async (query) => {
 // CART CONTROLLER
 // ===========================================================
 const controlCart = (event) => {
-   const idArray = event.currentTarget.id.split('-');
+   const buttonElement = event.target.closest('.btn');
+   const idArray = buttonElement.id.split('-');
    const currentIndex = idArray[0];
    const currentSku = idArray[1];
    let currentQuantity;
@@ -53,7 +55,7 @@ const controlCart = (event) => {
    }
 
    // Swap icon on 'Add to Cart' button to let user know item is being added to thier cart
-   cartBtnAnimation(event, state.cart.items[currentSku]);
+   cartBtnAnimation(buttonElement, state.cart.items[currentSku]);
    
    // Add the item to the cart model
    state.cart.addItem(
@@ -115,12 +117,11 @@ const controlCartPage = () => {
 // LIKE CONTROLLER
 // ===========================================================
 const controlLikes = (event) => {
-   const idArray = event.currentTarget.id.split('-');
+   const buttonElement = event.target.closest('.btn');
+   const iconElement = buttonElement.children[0];
+   const idArray = buttonElement.id.split('-');
    const currentIndex = idArray[0];
    const currentSku = idArray[1];
-
-   console.log(currentIndex);
-   console.log(currentSku);
 
    // User has NOT yet liked current product
    if (!state.likes.isLiked(currentSku)) {
@@ -134,14 +135,13 @@ const controlLikes = (event) => {
 
       // Toggle the like button
       if (window.location.pathname === '/results') {
-         resultsView.toggleLikeBtn(true, event.currentTarget.querySelector('.product-thumb__like-icon'));
+         resultsView.toggleLikeBtn(true, iconElement);
       } else if (window.location.pathname === '/product') {
-         productView.toggleLikeBtn(true, event.currentTarget.querySelector('.product-thumb__like-icon'));
+         productView.toggleLikeBtn(true, iconElement);
       }
 
       // Add like to UI list
-      console.log(localStorage);
-      console.log(state.likes);
+      // COMING SOON!!!
 
    // User HAS liked the current product
    } else {
@@ -150,14 +150,13 @@ const controlLikes = (event) => {
 
       // Toggle the like button
       if (window.location.pathname === '/results') {
-         resultsView.toggleLikeBtn(false, event.currentTarget.querySelector('.product-thumb__like-icon'));
+         resultsView.toggleLikeBtn(false, iconElement);
       } else if (window.location.pathname === '/product') {
-         productView.toggleLikeBtn(false, event.currentTarget.querySelector('.product-thumb__like-icon'));
+         productView.toggleLikeBtn(false, iconElement);
       }
 
       // Remove like to UI list
-      console.log(localStorage);
-      console.log(state.likes);
+      // COMING SOON!!!
    }
 }
 
@@ -201,8 +200,8 @@ const controlResultsPage = async () => {
 
    // EVENT LISTENERS
    // ===========================================================
-      // When page buttons on Results page are clicked
-      elements.resultsPages.addEventListener('click', event => {
+   elements.resultsSection.addEventListener('click', event => {
+      if (event.target.matches('.results-section__page-buttons, .results-section__page-buttons *')) {
          const btn = event.target.closest('.btn');
 
          if (btn) {
@@ -210,19 +209,16 @@ const controlResultsPage = async () => {
             resultsView.clearResults();
             resultsView.renderResults(state.productSearch.results, goToPage);
          };
-      });
-
-    
-
-      // When 'Add to Cart' button is clicked
-      for (const cartBtn of document.querySelectorAll('.product-thumb__cart-btn')) {
-         cartBtn.addEventListener('click', controlCart);
       }
 
-      // When 'like' buttons on Results page are clicked
-      for (const likeBtn of document.querySelectorAll('.product-thumb__like-btn')) {
-         likeBtn.addEventListener('click', controlLikes);
+      if (event.target.matches('.product-thumb__cart-btn, .product-thumb__cart-btn *')) {
+         controlCart(event);
       }
+
+      if (event.target.matches('.product-thumb__like-btn, .product-thumb__like-btn *')) {
+         controlLikes(event);
+      }
+   });
 };
    
 
@@ -365,6 +361,10 @@ const controlHeader = async () => {
 // ===========================================================
 const controlHomePage = () => {
 
+   homeView.promotionRotation();
+
+
+   
 };
 
 
