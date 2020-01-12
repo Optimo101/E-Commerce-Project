@@ -1,6 +1,10 @@
-const    express     = require('express'),
-         app         = express(),
-         path        = require('path');
+const    express  = require('express'),
+         app      = express(),
+         path     = require('path');
+
+
+
+
 
 
 
@@ -11,11 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 
-
-const users = [
-   {id: 1, name: 'Justin'},
-   {id: 2, name: 'Sam'}
-];
 
 // =================================================
 app.get('/', (req, res) => {
@@ -34,28 +33,17 @@ app.get('/cart', (req, res) => {
    res.render('cart');
 });
 
-app.get('/account', (req, res) => {
-   res.render('account');
-});
-
-app.post('/account', (req, res) => {
-   if (!req.body.name || req.body.name.length < 5) {
-      // 400 Bad Request
-      res.status(400).send('Name is required and should be minimum of 5 characters');
-      return;
-   }
-
-   const newUser = {
-      id: users.length + 1,
-      name: req.body.name
-   };
-
-   users.push(newUser);
-   res.send(newUser);
-   res.send(users);
 
 
-});
+// app.get('/account', (req, res) => {
+
+
+// });
+
+// app.post('/account', (req, res) => {
+   
+// });
+
 
 app.get('*', (req, res) => {
    res.send('Sorry, page not found.')
