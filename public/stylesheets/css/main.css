@@ -581,10 +581,10 @@ body {
   display: flex;
   align-items: center; }
 
-.my-account {
+.account-btn {
   font-weight: 300;
   margin-right: 5rem; }
-  .my-account__icon {
+  .account-btn__icon {
     font-size: 2rem;
     margin-right: 1rem; }
 

@@ -1,6 +1,14 @@
 const    express     = require('express'),
-         app         = express(),
-         path        = require('path');
+         path        = require('path'),
+         // bodyParser  = require('body-parser'),
+         db          = require('./queries'),
+         app         = express();
+         
+
+
+
+
+
 
 
 
@@ -8,33 +16,49 @@ const    express     = require('express'),
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended:true,}));
 
 app.set('view engine', 'ejs');
 
 
 // =================================================
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
    res.render('home');
 });
 
-app.get('/results', function(req, res) {
+app.get('/results', (req, res) => {
    res.render('results');
 });
 
-app.get('/product', function(req, res) {
+app.get('/product', (req, res) => {
    res.render('product');
 });
 
-app.get('/cart', function(req, res) {
+app.get('/cart', (req, res) => {
    res.render('cart');
 });
 
-app.get('*', function(req, res) {
+
+
+app.get('/account', (req, res) => {
+   res.render('account');
+
+});
+
+// app.post('/account', (req, res) => {
+   
+// });
+
+
+app.get('*', (req, res) => {
    res.send('Sorry, page not found.')
 });
 
 
+// PORT
+const port = process.env.PORT || 3000;
 
-app.listen(3000, 'localhost', function() {
-   console.log('Server has started on port 3000...');
+app.listen(port, () => {
+   console.log(`Server has started on port ${port}...`);
 });
