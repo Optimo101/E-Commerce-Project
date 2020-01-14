@@ -1,6 +1,10 @@
-const    express  = require('express'),
-         app      = express(),
-         path     = require('path');
+const    express     = require('express'),
+         path        = require('path'),
+         // bodyParser  = require('body-parser'),
+         db          = require('./queries'),
+         app         = express();
+         
+
 
 
 
@@ -12,6 +16,8 @@ const    express  = require('express'),
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended:true,}));
 
 app.set('view engine', 'ejs');
 
@@ -35,10 +41,10 @@ app.get('/cart', (req, res) => {
 
 
 
-// app.get('/account', (req, res) => {
+app.get('/account', (req, res) => {
+   res.render('account');
 
-
-// });
+});
 
 // app.post('/account', (req, res) => {
    
@@ -52,6 +58,7 @@ app.get('*', (req, res) => {
 
 // PORT
 const port = process.env.PORT || 3000;
+
 app.listen(port, () => {
    console.log(`Server has started on port ${port}...`);
 });
