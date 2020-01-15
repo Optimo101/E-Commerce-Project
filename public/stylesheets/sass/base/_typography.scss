@@ -23,6 +23,16 @@ body {
    font-size: $font-size-xxl;
 }
 
+.page-header {
+   margin-bottom: 2rem;
+   border-bottom: 3px solid $color-lightgrey;
+   
+   &__title {
+      font-size: $font-size-xxl;
+      color: $color-black;
+   }
+}
+
 .product-header {
    &__title {
       font-size: $font-size-xxl;

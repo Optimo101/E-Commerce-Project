@@ -1,0 +1,46 @@
+<% include partials/head %>
+<% include partials/header %>
+
+<main class="main">
+   <div class="shadow-overlay">
+   </div>
+
+   <div class="container">
+      <section class="sign-up-section">
+         <div class="page-header">
+            <h1 class="page-header__title">Account Sign Up</h1>
+         </div>
+
+         <div class="form-container">
+            <form class="sign-up__form form" action="POST">
+
+               <span class="sign-up__first-name-title">First Name</span>
+               <input type="text" class="sign-up__first-name-input input" name="sign-up-first" required>
+
+               <span class="sign-up__last-name-title">Last Name</span>
+               <input type="text" class="sign-up__last-name-input input" name="sign-up-last" required>
+               
+               <span class="sign-up__email-title">Email Address</span>
+               <input type="email" class="sign-up__email-input input" name="sign-up-email" required>
+
+               <span class="sign-up__password-title">Password</span>
+               <input type="password" class="sign-up__password-input input" name="sign-up-pass" required>
+
+               <span class="sign-up__password-title">Confirm Password</span>
+               <input type="password" class="sign-up__confirm-password-input input" name="sign-up-confirm-pass" required>
+
+               <button class="sign-up__btn btn btn--red btn--hover-float">Create Account</button>
+
+               <div class="sign-up__sub-container">
+                  <p class="sign-up__paragraph">Already have an account? <a class="sign-up__link" href="/account">Sign In</a></p>
+               </div>
+               
+            </form>
+         </div>
+
+
+      </section>
+   </div>
+</main>
+
+<% include partials/footer %>

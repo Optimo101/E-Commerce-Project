@@ -40,15 +40,18 @@ app.get('/cart', (req, res) => {
 });
 
 
-
+// SIGN IN FORM
 app.get('/account', (req, res) => {
    res.render('account');
+})
 
-});
+// NEW USER FORM
+app.get('/account/new', db.showUserForm);
+// CREATE USER
+app.post('/account', db.createUser);
+// GET USER
+app.get('/account/:id', db.getUserById);
 
-// app.post('/account', (req, res) => {
-   
-// });
 
 
 app.get('*', (req, res) => {

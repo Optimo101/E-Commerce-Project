@@ -1,5 +1,4 @@
 .product-section {
-   padding-bottom: 10rem;
    
    &__header {
       padding: 2rem 0;
@@ -10,14 +9,8 @@
    }
 }
 
-.product-header {
-
-   &__title {
-      border-bottom:  3px solid $color-lightgrey;
-   }
-   
+.page-header {
    &__info-box {
-
       & div {
          display: inline-block;
          margin-right:2.5rem;

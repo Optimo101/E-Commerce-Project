@@ -1,0 +1,46 @@
+.form-container {
+   display: inline-block;
+}
+
+.form {
+   display: flex;
+   flex-direction: column;
+
+   background-color: $color-white;
+   padding: 3rem;
+   border: 2px solid $color-lightgrey;
+   border-radius: 1rem;
+
+   & button {
+      margin-bottom: 1.5rem;
+   }
+}
+
+.input {
+   margin-bottom: 1.5rem;
+   padding: .5rem;
+}
+
+.sign-in__sub-container {
+   background-color: $color-lightergrey;
+}
+
+.sign-up__link {
+   display: inline-block;
+   color: blue;
+
+   &:after {
+      display:block;
+      content: '';
+      border-bottom: solid 2px blue;  
+      transform: scaleX(0);  
+      transition: transform .25s ease-in-out;
+   }
+
+   &:hover:after {
+      transform: scaleX(1);
+   }
+}
+
+
+

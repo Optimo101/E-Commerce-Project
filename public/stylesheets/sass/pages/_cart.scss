@@ -1,16 +1,4 @@
 .cart-section {
-   padding-bottom: 10rem;
-
-   &__header {
-      margin-bottom: 2rem;
-      border-bottom: 3px solid $color-lightgrey;
-   }
-
-   &__header-title {
-      font-size: $font-size-xxl;
-      color: $color-black;
-   }
-
    &__main {
       display: flex;
       justify-content: space-between;

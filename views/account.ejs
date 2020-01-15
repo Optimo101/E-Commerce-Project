@@ -1,6 +1,35 @@
 <% include partials/head %>
 <% include partials/header %>
 
-<h1 class="test">THIS WILL BE THE ACCOUNT PAGE!</h1>
+<main class="main">
+   <div class="shadow-overlay">
+   </div>
+
+   <div class="container">
+      <section class="account-section">
+         <div class="page-header">
+            <h1 class="page-header__title">Account Sign In</h1>
+         </div>
+
+         <div class="form-container">
+            <form class="sign-in__form form" action="GET">
+               <input type="email" class="sign-in__email-input input" name="email-sign-in" placeholder="email">
+               <input type="text" class="sign-in__password-input input" name="password-sign-in" placeholder="password">
+               <button class="sign-in__btn btn btn--red btn--hover-float">Sign In</button>
+
+               <div class="sign-in__sub-container">
+                  <p class="sign-up__paragraph">New customer? <a class="sign-up__link" href="/account/new">Start here.</a></p>
+               </div>
+            </form>
+
+            
+
+         
+         </div>
+            
+
+      </section>
+   </div>
+</main>
 
 <% include partials/footer %>

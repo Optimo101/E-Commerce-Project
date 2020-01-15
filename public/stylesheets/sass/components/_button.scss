@@ -29,6 +29,22 @@
       animation: moveInBottom .5s ease-out .75s;
       animation-fill-mode: backwards;
    }
+
+   &--hover-float {
+      transition: all .20s;
+
+      &:hover {
+         transform: translateY(-3px);
+         box-shadow: 0 .8rem .6rem rgba($color-black, .3);
+      }
+
+      &:active,
+      &:focus {
+         outline: none;
+         transform: translateY(-1px);
+         box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+      }
+   }
   
    &--black {
       background-color: $color-black;
@@ -45,4 +61,5 @@
    &--darkgrey {
       background-color: $color-darkgrey;
    }
+
 }
