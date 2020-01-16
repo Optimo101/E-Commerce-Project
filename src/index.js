@@ -392,7 +392,7 @@ const init = () => {
       controlResultsPage();
    } else if (window.location.pathname === '/cart') {
       controlCartPage();
-   } else {
+   } else if (window.location.pathname === '/') {
       controlHomePage();
    }
 };

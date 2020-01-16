@@ -12,27 +12,27 @@
          </div>
 
          <div class="form-container">
-            <form class="sign-up__form form" action="POST">
+            <form class="sign-up__form form" method="POST" action="/register">
 
                <span class="sign-up__first-name-title">First Name</span>
-               <input type="text" class="sign-up__first-name-input input" name="sign-up-first" required>
+               <input type="text" class="sign-up__first-name-input input" name="firstName" required>
 
                <span class="sign-up__last-name-title">Last Name</span>
-               <input type="text" class="sign-up__last-name-input input" name="sign-up-last" required>
+               <input type="text" class="sign-up__last-name-input input" name="lastName" required>
                
                <span class="sign-up__email-title">Email Address</span>
-               <input type="email" class="sign-up__email-input input" name="sign-up-email" required>
+               <input type="email" class="sign-up__email-input input" name="username" required>
 
                <span class="sign-up__password-title">Password</span>
-               <input type="password" class="sign-up__password-input input" name="sign-up-pass" required>
+               <input type="password" class="sign-up__password-input input" name="password" required>
 
                <span class="sign-up__password-title">Confirm Password</span>
-               <input type="password" class="sign-up__confirm-password-input input" name="sign-up-confirm-pass" required>
+               <input type="password" class="sign-up__confirm-password-input input" name="passwordConfirm" required>
 
                <button class="sign-up__btn btn btn--red btn--hover-float">Create Account</button>
 
                <div class="sign-up__sub-container">
-                  <p class="sign-up__paragraph">Already have an account? <a class="sign-up__link" href="/account">Sign In</a></p>
+                  <p class="sign-up__paragraph">Already have an account? <a class="sign-up__link" href="/login">Sign In</a></p>
                </div>
                
             </form>

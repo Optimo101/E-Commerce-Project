@@ -1,11 +1,4 @@
-const Pool = require('pg').Pool;
-const pool = new Pool({
-   user: 'eshopadmin',
-   host: 'localhost',
-   database: 'eshopdb',
-   password: 'admin',
-   port: 5432,
-});
+
 
 // const getUsers = (req, res) => {
 //    pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
@@ -18,19 +11,15 @@ const pool = new Pool({
 
 // SIGN IN USER (Show GET to /account/:id)
 const getUserById = (req, res) => {
-   const id = parseInt(request.params.id);
+   const email = request.params.email;
+   const password = request.params.passsword;
 
-   pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
-      if (error) {
-         throw error;
-      }
-      response.status(200).json(results.rows);
-   })
+   
 };
 
 // NEW USER FORM (New - GET to /account/new)
-const showUserForm = (req, res) => {
-   res.render('sign-up');
+const newUserForm = (req, res) => {
+   res.render('new-account');
 
 };
 
@@ -47,21 +36,21 @@ const createUser = (req, res) => {
 };
 
 // UPDATE USER DATA (Edit - PUT to /account/:id )
-const updateUser = (req, res) => {
-   const id = parseInt(request.params.id);
-   const {name, email } = request.body;
+// const updateUser = (req, res) => {
+//    const id = parseInt(request.params.id);
+//    const {name, email } = request.body;
 
-   pool.query(
-      'Update users SET name = $1, email = $2 WHERE id= $3',
-      [name, email, id],
-      (error, results) => {
-         if (error) {
-            throw error;
-         }
-         response.status(200).send(`User modified with ID: ${id}`);
-      }
-   );
-};
+//    pool.query(
+//       'Update users SET name = $1, email = $2 WHERE id= $3',
+//       [name, email, id],
+//       (error, results) => {
+//          if (error) {
+//             throw error;
+//          }
+//          response.status(200).send(`User modified with ID: ${id}`);
+//       }
+//    );
+// };
 
 // DELETE USER (Destroy - DELETE to /account/:id)
 const deleteUser = (req, res) => {
@@ -77,9 +66,8 @@ const deleteUser = (req, res) => {
 
 module.exports = {
    getUserById,
-   showUserForm,
+   newUserForm,
    createUser,
-   updateUser,
    deleteUser,
 }
 
