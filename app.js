@@ -6,10 +6,10 @@
 //          Pool        = require('pg').Pool;
 
 const    express = require('express'),
+         app = express(),
          flash = require('connect-flash-plus'),
          passport = require('passport'),
          request = require('request'),
-         app = express(),
          path = require('path'),
          PORT = process.env.PORT || 3000,
          routes = require('./lib/routes');
