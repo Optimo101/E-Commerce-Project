@@ -1,40 +1,32 @@
-// const    express     = require('express'),
-//          path        = require('path'),
-//          // bodyParser  = require('body-parser'),
-//          // db          = require('./queries'),
-//          app         = express();
-//          Pool        = require('pg').Pool;
+// ======================= DEPENDENCIES =======================
+// ============================================================
 
-const    express = require('express'),
-         app = express(),
-         flash = require('connect-flash-plus'),
-         passport = require('passport'),
-         request = require('request'),
-         path = require('path'),
-         PORT = process.env.PORT || 3000,
-         routes = require('./lib/routes');
+require('dotenv').config();
 
-         require('dotenv').config();
+const express = require('express'),
+      app = express(),
+      passport = require('passport'),
+      request = require('request'),
+      path = require('path'),
+      // routes = require('./lib/routes'),
+      PORT = process.env.PORT || 3000;
 
+const simplecrypt = require('simplecrypt'),
+      sc = simplecrypt({ password: process.env.SCPASS }),
+      { Pool } = require('pg'),
+      uuidv4 = require('uuid/v4'),
+      Strategy = require('passport-local').Strategy;
 
-// =================================================
-// app.use(express.static(__dirname + '/public'));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-// // app.use(bodyParser.json());
-// // app.use(bodyParser.urlencoded({ extended:true,}));
+const db = require('./db/index');
 
-// app.set('view engine', 'ejs');
+// ======================= SETTINGS =======================
+// ========================================================
 
 app.use(require('cookie-parser')());
 app.use(express.urlencoded({ extended: true }));
-// const expressSession = require('express-session'); // REMOVED
-// app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
-app.use(flash());
-// app.use(session({secret: 'super secret'}))
 app.use(express.json()); //Used to parse JSON bodies
 app.use(require('express-session')({
    secret: 'super secret',
@@ -46,86 +38,168 @@ app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
 
 
+// ======================= FUNC EXPRESSIONS =======================
+// ================================================================
 
-routes(app);
+const findByUsername = (username, cb) =>  {
+   db.query('SELECT * FROM users WHERE username = $1', [username], (err, result) => {      
+      if (err) {
+         return cb(err, null);
+
+      } else if (!result.rows[0]) {
+         return cb(null, null);
+
+      } else {
+         return cb(null, result.rows[0]);
+      }
+   });
+}
+
+const findById = (id, cb) => {
+   db.query('SELECT * FROM users WHERE id = $1', [id], (err, result) => {      
+      if (err) {
+         console.log(err);
+         return cb(err, null);
+      }
+
+      if (!result.rows[0]) {
+         console.log('The username does not match any existing account.');
+         return cb(null, null);
+      }
+      
+   return cb(null, result.rows[0]);
+   });
+}
+
+// Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request).
+passport.use(new Strategy((username, password, cb) => {
+      findByUsername(username, function(err, user) {
+         if (err) {
+            console.log('Error', err);
+            return cb(err); 
+         }
+         if (!user) {
+            console.log(`The provided username ${username} does not match any existing account.`)
+            return cb(null, false); 
+         }
+         if (sc.decrypt(user.password) != password) {
+            console.log('The password provided does not match the account.')
+            return cb(null, false);
+         }
+      return cb(null, user);
+     });
+   }
+));
+
+passport.serializeUser(function(user, cb) {
+   cb(null, user.id);
+ });
+ 
+ passport.deserializeUser(function(id, cb) {
+   findById(id, function (err, user) {
+     if (err) { return cb(err); }
+     cb(null, user);
+   });
+ });
 
 
+// Initialize Passport and restore authentication state, if any, from the session.
+app.use(passport.initialize());
+app.use(passport.session());
 
-
-// =================================================
-// app.get('/', (req, res) => {
-//    res.render('home');
-// });
-
-// app.get('/results', (req, res) => {
-//    res.render('results');
-// });
-
-// app.get('/product', (req, res) => {
-//    res.render('product');
-// });
-
-// app.get('/cart', (req, res) => {
-//    res.render('cart');
-// });
-
-
-// // SIGN IN FORM
-// app.get('/login', (req, res) => {
-//    res.render('login');
-// });
-
-// // NEW USER FORM
-// app.get('/register', (req, res) => {
-//    res.render('register');
-
-// });
-
-
-
-// const pool = new Pool({
-//    user: 'eshopadmin',
-//    host: 'localhost',
-//    database: 'eshopdb',
-//    password: 'admin',
-//    port: 5432
-// });
-
-// // LOGIN USER
-// app.post('/login', (req, res) => {
-//    console.log(req.body);
-//    const email = req.body.email;
-//    const password = req.body.password;
+// ======================= ROUTES =======================
+// ======================================================
+// HOME PAGE
+app.get('/', (req, res, next) => {
    
-//    pool.query('SELECT * FROM users WHERE email = $1 AND password = $2', [email, password], (error, result) => {
-//       if (error) {
-//          console.log(error);
-//          throw error;
-//       }
-//       res.status(200).json(result.rows);
-//    });
-// });
+
+   res.render('home', {user: req.user});
+});
+
+// RESULTS PAGE
+app.get('/results', (req, res) => {
+   res.render('results');
+});
+
+// PRODUCT PAGE
+app.get('/product', (req, res) => {
+   res.render('product');
+});
+
+// CART PAGE
+app.get('/cart', (req, res) => {
+   res.render('cart');
+});
+
+// ======================= REGISTER =======================
+// ========================================================
+// REGISTER PAGE (FORM)
+app.get('/register', (req, res) => {
+   res.render('register');
+});
+
+// REGISTER (POST)
+app.post('/register', (req, res) => {
+   const userInfo = {
+         firstName: req.body.firstName,
+         lastName: req.body.lastName,
+         username: req.body.username,
+         password: req.body.password,
+         checkPassword: req.body.checkPassword
+   };
+
+});
+
+// ======================= LOGIN =======================
+// =====================================================
+// LOGIN PAGE (FORM)
+app.get('/login', (req, res) => {
+   res.render('login');
+});
+
+// LOGIN (POST)
+app.post('/login', passport.authenticate('local', {failureRedirect: '/login' }), (req, res, next) => {
+   res.redirect('/');
+   
+   //==========================================
+   // const userInfo = {
+   //    username: req.body.username,
+   //    password: req.body.password
+   // }; console.log(userInfo);
+
+   // db.query('SELECT * FROM users WHERE username = $1', [userInfo.username], (err, result) => {
+   //    if (err) {
+   //       console.log(err);
+   //       return next(err);
+
+   //    } else if (!result.rows[0]) {
+   //       console.log('The username does not match any existing account.');
+   //       res.redirect('/login');
+
+   //    } else {
+   //       if (validatePassword(userInfo.password, result.rows[0].password)) {
+   //          console.log('Password match!')
+   //       } else {
+   //          console.log('Password mismatch!')
+   //       }
+   //       res.send(result.rows[0]);
+   //    }
+   // });
+   //==========================================
+
+
+});
+
+
+// CATCH ALL
+app.get('/*', (req, res) => {
+   res.send('Unable to find the requested route.')
+})
 
 
 
-
-
-// // // CREATE USER
-// // app.post('/account', db.createUser);
-
-// // // DELETE USER
-// // app.delete('/account/:id', db.deleteUser);
-
-
-
-
-// app.get('*', (req, res) => {
-//    res.send('Sorry, page not found.')
-// });
-
-
-
-
+// ======================= SERVER =======================
+// ======================================================
 app.listen(PORT, () => {
    console.log(`Server has started on port ${PORT}...`);
 });
