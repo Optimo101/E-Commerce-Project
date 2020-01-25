@@ -1,5 +1,10 @@
 <% include partials/head %>
-<% include partials/header %>
+
+<% if (typeof user != 'undefined') { %>
+   <%- include('partials/header', {user}) %>
+<% } else { %>
+   <%- include partials/header %>
+<% } %>
 
 <h1 class="test">WELCOME TO THE ACCOUNT PAGES</h1>
 

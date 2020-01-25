@@ -1,5 +1,10 @@
 <% include partials/head %>
-<% include partials/header %>
+
+<% if (typeof user != 'undefined') { %>
+   <%- include('partials/header', {user}) %>
+<% } else { %>
+   <%- include partials/header %>
+<% } %>
 
 <main class="main">
    <div class="shadow-overlay">

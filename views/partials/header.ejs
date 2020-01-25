@@ -168,11 +168,11 @@
                <div class="account-cart-wrapper">
                   <a class="account-btn btn btn--black" href="/login">
                      <i class="far fa-user account-btn__icon"></i>
-                     <% if(!user) { %>
-                        Account
+                     <% if (typeof user != 'undefined') { %>
+                        <%= `${user.first_name}'s Account` %>
                      <% } else { %>
-                        YURKEEKA!
-                     <% } %> 
+                        Account
+                     <% } %>
                   </a>
       
                   <a class="cart-link" href="/cart">
