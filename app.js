@@ -118,17 +118,17 @@ app.get('/', (req, res, next) => {
 
 // RESULTS PAGE
 app.get('/results', (req, res) => {
-   res.render('results');
+   res.render('results', {user: req.user});
 });
 
 // PRODUCT PAGE
 app.get('/product', (req, res) => {
-   res.render('product');
+   res.render('product', {user: req.user});
 });
 
 // CART PAGE
 app.get('/cart', (req, res) => {
-   res.render('cart');
+   res.render('cart', {user: req.user});
 });
 
 // ======================= REGISTER =======================
