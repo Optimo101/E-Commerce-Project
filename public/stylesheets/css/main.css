@@ -514,7 +514,7 @@ body {
   font-weight: 500; }
   .account-menu__item:hover {
     color: black; }
-    .account-menu__item:hover .main-menu__item-icon {
+    .account-menu__item:hover .account-menu__item-icon {
       color: #EB2F38; }
 
 .account-menu__link {
@@ -1246,5 +1246,10 @@ section {
 .account-section__content {
   display: flex;
   justify-content: space-between;
-  max-width: 70rem;
+  max-width: 60rem;
   flex-wrap: wrap; }
+
+.account__info-sub-container .input {
+  border: none;
+  border-bottom: 1px solid #7a7a7a;
+  border-radius: 0; }
