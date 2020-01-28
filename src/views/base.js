@@ -13,8 +13,11 @@ export const elements = {
    mainMenuItems: document.querySelectorAll('.main-menu__item'),
    submenuItems: document.querySelectorAll('.submenu'),
 
-   landingSection: document.querySelector('.landing-section'),
-   landingBackground: document.querySelector('.landing-section__background'),
+   accountMenuBtn: document.querySelector('.account-btn'),
+   accountMenuDropdown: document.querySelector('.account-menu__dropdown'),
+
+   landingSection: document.querySelector('.landing'),
+   landingBackground: document.querySelector('.landing__background'),
    landingPromoBox: document.querySelector('.promotion'),
    landingPromoHeader: document.querySelector('.promotion__main-header'),
    landingPromoSubHeader: document.querySelector('.promotion__sub-header'),
@@ -26,7 +29,7 @@ export const elements = {
    resultsCount: document.querySelector('.results-section__item-count'),
 
    productMain: document.querySelector('.product-section__main'),
-   productTitle: document.querySelector('.product-header__title'),
+   productTitle: document.querySelector('.product__title'),
    productManufacturer: document.querySelector('.product-header__manufacturer-data'),
    productModel: document.querySelector('.product-header__model-data'),
    productSku: document.querySelector('.product-header__sku-data'),

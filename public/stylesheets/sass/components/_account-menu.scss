@@ -1,17 +1,4 @@
-.main-menu {
-   position: relative;
-   height: 4rem;
-   width: 30rem;
-
-
-   &__btn {
-      text-transform: uppercase;
-   }
-
-   &__icon {
-      margin-right: 1.5rem;
-      font-size: 2rem;
-   }
+.account-menu {
 
    &__dropdown {
       position: absolute;
@@ -37,12 +24,14 @@
          font-size: 3rem;
          color: $color-white;
       }
+
+      &.is-visible {
+         display: block;
+         height: auto;
+      }
    }
 
-   &__dropdown.is-visible {
-      display: block;
-      height: auto;
-   }
+   
 
    &__list {
       list-style: none;
@@ -60,9 +49,9 @@
          margin: 0 auto;
       }
 
-      & > .main-menu__item:hover > .submenu {
-         display: block;
-      }
+      // & > .main-menu__item:hover > .submenu {
+      //    display: block;
+      // }
    }
 
    &__item {
@@ -74,11 +63,8 @@
 
       &:hover {
          color: black;
-         & .main-menu__item-arrow {
-            transform: rotate(-90deg);
-         }
 
-         & .main-menu__item-icon {
+         & .account-menu__item-icon {
             color: $color-primary;
          }
       }   
@@ -99,11 +85,5 @@
 
    &__title {
       margin-right: auto;
-
-   }
-
-   &__item-arrow {
-      transition: transform .3s;
    }
 }
-

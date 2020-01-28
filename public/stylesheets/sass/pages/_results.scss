@@ -4,7 +4,6 @@
    grid-template-columns: [sidebar-start] 20rem [sidebar-end main-start] 1fr [main-end];
    gap: 1.5rem;
    padding-top: 2rem;
-   padding-bottom: 10rem;
 
    &__sidebar {
       grid-column: sidebar-start / sidebar-end;
