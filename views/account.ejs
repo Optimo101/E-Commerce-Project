@@ -22,17 +22,18 @@
                   <h2 class="account__title form__title">Account Info</h2>
    
                   <div class="form__content">
-                     <div class="account__sub-container form-sub-container">
+                     <div class="account__info-sub-container form-sub-container">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="account__first-name-input input" name="firstName" required value="<%= user.first_name %>">
+                        <input type="text" class="account__first-name-input input" name="firstName" required readonly value="<%= user.first_name %>">
          
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="account__last-name-input input" name="lastName" required value="<%= user.last_name %>">
+                        <input type="text" class="account__last-name-input input" name="lastName" required readonly value="<%= user.last_name %>">
                         
                         <label for="accountUsername">Email Address</label>
-                        <input type="email" class="account__email-input input" name="accountUsername" required value="<%= user.username %>">
+                        <input type="email" class="account__email-input input" name="accountUsername" required readonly value="<%= user.username %>">
                      </div>
                   </div>
+                  
                </form>
             </div>
    
@@ -41,7 +42,7 @@
                   <h2 class="account__title form__title">Change Password</h2>
    
                   <div class="form__content">
-                     <div class="account__sub-container form-sub-container">
+                     <div class="account__password-sub-container form-sub-container">
                         <label for="currentPassword">Current Password</label>
                         <input type="password" class="account__password-input input" name="currentPassword" required>
    
