@@ -38,7 +38,7 @@ app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
 
 
-// ======================= FUNC EXPRESSIONS =======================
+// ======================= FUNCTION EXPRESSIONS =======================
 // ================================================================
 
 const findByUsername = (username, cb) =>  {
@@ -111,8 +111,6 @@ app.use(passport.session());
 // ======================================================
 // HOME PAGE
 app.get('/', (req, res, next) => {
-   
-
    res.render('home', {user: req.user});
 });
 
@@ -131,22 +129,28 @@ app.get('/cart', (req, res) => {
    res.render('cart', {user: req.user});
 });
 
+// ACCOUNT
+app.get('/account', (req, res) => {
+   res.render('account', {user: req.user});
+});
+
 // ======================= REGISTER =======================
 // ========================================================
-// REGISTER PAGE (FORM)
+// REGISTER PAGE (GET)
 app.get('/register', (req, res) => {
    res.render('register');
 });
 
 // REGISTER (POST)
 app.post('/register', (req, res) => {
-   const userInfo = {
-         firstName: req.body.firstName,
-         lastName: req.body.lastName,
-         username: req.body.username,
-         password: req.body.password,
-         checkPassword: req.body.checkPassword
+   const newUser = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      newUsername: req.body.newUsername,
+      newPassword: req.body.newPassword,
+      confirmPassword: req.body.confirmPassword
    };
+   console.log(newUser);
 
 });
 
@@ -160,41 +164,18 @@ app.get('/login', (req, res) => {
 // LOGIN (POST)
 app.post('/login', passport.authenticate('local', {failureRedirect: '/login' }), (req, res, next) => {
    res.redirect('/');
-   
-   //==========================================
-   // const userInfo = {
-   //    username: req.body.username,
-   //    password: req.body.password
-   // }; console.log(userInfo);
-
-   // db.query('SELECT * FROM users WHERE username = $1', [userInfo.username], (err, result) => {
-   //    if (err) {
-   //       console.log(err);
-   //       return next(err);
-
-   //    } else if (!result.rows[0]) {
-   //       console.log('The username does not match any existing account.');
-   //       res.redirect('/login');
-
-   //    } else {
-   //       if (validatePassword(userInfo.password, result.rows[0].password)) {
-   //          console.log('Password match!')
-   //       } else {
-   //          console.log('Password mismatch!')
-   //       }
-   //       res.send(result.rows[0]);
-   //    }
-   // });
-   //==========================================
-
-
 });
 
+// LOGOUT
+app.get('/logout', (req, res) => {
+   req.logout();
+   res.redirect('/');
+});
 
 // CATCH ALL
 app.get('/*', (req, res) => {
    res.send('Unable to find the requested route.')
-})
+});
 
 
 

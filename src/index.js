@@ -335,15 +335,30 @@ const controlHeader = async () => {
 
    // EVENT LISTENERS
    // ===========================================================
+      // Close menus when click anywhere outside of menus
+      document.addEventListener('click', function(event) {
+         if (elements.mainMenuDropdown.classList.contains('is-visible')) {
+            mainMenuView.hideOnClickOutside(event, elements.mainMenuDropdown);
+         
+         } else if (elements.accountMenuDropdown != null && 
+         elements.accountMenuDropdown.classList.contains('is-visible')) {
+            mainMenuView.hideOnClickOutside(event, elements.accountMenuDropdown);
+         }
+      });
+   
+      
       // Open/close main menu
       elements.mainMenuBtn.addEventListener('click', function() {
          mainMenuView.toggleDropdown(elements.mainMenuDropdown);
       });
 
-      // Close main menu when click anywhere outside of mainmenu
-      document.addEventListener('click', function(event) {
-         mainMenuView.hideOnClickOutside(event, elements.mainMenuDropdown);
-      });
+      // Open/close account menu
+      if (elements.accountMenuDropdown != null) {
+         elements.accountMenuBtn.addEventListener('click', function() {
+            mainMenuView.toggleDropdown(elements.accountMenuDropdown);
+         });
+      }
+
 
       // Open/close main menu
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);

@@ -1,3 +1,12 @@
+.login-section__content {
+   display: flex;
+   justify-content: space-between;
+   flex-wrap: wrap;
+   max-width: 95rem;
+
+}
+
+
 .form-container {
    display: inline-block;
 }
@@ -16,26 +25,48 @@
    }
 }
 
-.input {
-   margin-bottom: 1.5rem;
-   padding: .5rem;
+.form__title {
+   text-align: center;
+   margin-bottom: 2.5rem;
+   color: $color-black;
 }
 
-.sign-up__link {
-   display: inline-block;
-   color: blue;
+.form__content {
+   display: flex;
+   justify-content: center;
+}
 
-   &:after {
-      display:block;
-      content: '';
-      border-bottom: solid 2px blue;  
-      transform: scaleX(0);  
-      transition: transform .25s ease-in-out;
+.form-sub-container {
+   display: flex;
+   flex-direction: column;
+
+   .btn {
+      margin-top: 1.5rem;
+   }
+}
+
+.sign-up__form {
+   .form-sub-container:nth-of-type(1) {
+      margin-right: 5rem;
    }
 
-   &:hover:after {
-      transform: scaleX(1);
+   .input:last-of-type {
+      margin-bottom: 0;
    }
+}
+
+.input {
+   min-width: 20rem;
+   margin-bottom: 1.5rem;
+   padding: .5rem;
+   // border: 1px solid $color-lightgrey;
+   border-radius: .5rem;
+}
+
+.or-container {
+   display: flex;
+   align-items: center;
+   color: $color-black;
 }
 
 

@@ -53,10 +53,11 @@ export const toggleDropdown = (element) => {
 };
 
 export const hideOnClickOutside = (event, element) => {
-   if (element.classList.contains('is-visible') && 
-      event.target.closest('.main-menu__btn') === null && 
-      event.target.closest('.main-menu__dropdown') === null) {
+   if (event.target.closest('.main-menu__btn') === null && 
+      event.target.closest('.main-menu__dropdown') === null &&
+      event.target.closest('.account-btn') === null &&
+      event.target.closest('.account-menu__dropdown') === null) {
          hideDropdown(element);
-   }
+   } 
 };
 

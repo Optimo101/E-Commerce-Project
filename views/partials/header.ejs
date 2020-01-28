@@ -42,7 +42,7 @@
 
                   <div class="main-menu">
                      <button href="#" class="main-menu__btn btn btn--black ">
-                           <i class="fas fa-bars main-menu__icon"></i>
+                        <i class="fas fa-bars main-menu__icon"></i>
                         Shop Categories
                      </button>
 
@@ -166,15 +166,52 @@
                
             <div class="nav-bar__right">
                <div class="account-cart-wrapper">
-                  <a class="account-btn btn btn--black" href="/login">
-                     <i class="far fa-user account-btn__icon"></i>
-                     <% if (typeof user != 'undefined') { %>
-                        <%= `${user.first_name}'s Account` %>
-                     <% } else { %>
+                  <% if (typeof user != 'undefined') { %>
+                     <button class="account-btn btn btn--black">
+                        <i class="far fa-user account-btn__icon"></i>
+                        <%= `Hello, ${user.first_name}!` %>
+                     </button>
+
+                     <div class="account-menu__dropdown">
+                        <ul class="account-menu__list">
+
+                           <li class="account-menu__item">
+                              <a href="/cart" class="account-menu__link">
+                                 <i class="fas fa-tv account-menu__item-icon"></i>
+                                 <span class="account-menu__title">Shopping Cart</span>
+                              </a>
+                           </li>
+
+                           <li class="account-menu__item">
+                              <a href="/likes" class="account-menu__link">
+                                 <i class="fas fa-headphones account-menu__item-icon"></i>
+                                 <span class="account-menu__title">Liked Items</span>
+                              </a>
+                           </li>
+
+                           <li class="account-menu__item">
+                              <a href="/account" class="account-menu__link">
+                                 <i class="fas fa-car-alt account-menu__item-icon"></i>
+                                 <span class="account-menu__title">Account Info</span>
+                              </a>
+                           </li>
+                           
+                           <li class="account-menu__item">
+                              <a href="/logout" class="account-menu__link">
+                                 <i class="fas fa-camera account-menu__item-icon"></i>
+                                 <span class="account-menu__title">Logout</span>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+
+                  <% } else { %>
+                     <a class="account-btn btn btn--black" href="/login">
+                        <i class="far fa-user account-btn__icon"></i>
                         Account
-                     <% } %>
-                  </a>
-      
+                     </a>
+                  <% } %>
+                  
                   <a class="cart-link" href="/cart">
                      Cart
                      <i class="fas fa-shopping-cart cart-link__icon"></i>
