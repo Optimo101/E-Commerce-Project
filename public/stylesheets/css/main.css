@@ -468,6 +468,69 @@ body {
   .quantity-calc__down-btn:active {
     box-shadow: inset 0 0 3px #000; }
 
+.account-menu__dropdown {
+  position: absolute;
+  top: 5rem;
+  border: 1px solid #cecece;
+  border-radius: .8rem;
+  width: 100%;
+  z-index: 100;
+  background-color: #FFF;
+  transition: height .25s ease-in-out;
+  overflow: hidden;
+  height: 0;
+  display: none; }
+  .account-menu__dropdown::before {
+    position: absolute;
+    top: -1.4rem;
+    left: 2rem;
+    height: 1.5rem;
+    font-family: FontAwesome;
+    content: "\f0de";
+    font-size: 3rem;
+    color: #FFF; }
+  .account-menu__dropdown.is-visible {
+    display: block;
+    height: auto; }
+
+.account-menu__list {
+  list-style: none;
+  padding: 1rem 0; }
+  .account-menu__list > li:not(:last-child):after {
+    border-bottom: 1px solid #e5e5e5;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 90%;
+    content: "";
+    bottom: 0;
+    margin: 0 auto; }
+
+.account-menu__item {
+  position: relative;
+  text-transform: none;
+  width: 100%;
+  font-size: 1.6rem;
+  font-weight: 500; }
+  .account-menu__item:hover {
+    color: black; }
+    .account-menu__item:hover .main-menu__item-icon {
+      color: #EB2F38; }
+
+.account-menu__link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1.2rem 1.8rem;
+  text-decoration: none; }
+
+.account-menu__item-icon {
+  margin-right: 1.5rem;
+  width: 1.75rem; }
+
+.account-menu__title {
+  margin-right: auto; }
+
 .header-notice {
   display: flex;
   justify-content: center;
@@ -597,6 +660,7 @@ section {
       background-color: #3d3d3d; }
 
 .account-cart-wrapper {
+  position: relative;
   display: flex;
   align-items: center; }
 
@@ -1128,6 +1192,12 @@ section {
     flex: 1;
     text-transform: uppercase; }
 
+.login-section__content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 95rem; }
+
 .form-container {
   display: inline-block; }
 
@@ -1141,18 +1211,40 @@ section {
   .form button {
     margin-bottom: 1.5rem; }
 
-.input {
-  margin-bottom: 1.5rem;
-  padding: .5rem; }
+.form__title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #3d3d3d; }
 
-.sign-up__link {
-  display: inline-block;
-  color: blue; }
-  .sign-up__link:after {
-    display: block;
-    content: '';
-    border-bottom: solid 2px blue;
-    transform: scaleX(0);
-    transition: transform .25s ease-in-out; }
-  .sign-up__link:hover:after {
-    transform: scaleX(1); }
+.form__content {
+  display: flex;
+  justify-content: center; }
+
+.form-sub-container {
+  display: flex;
+  flex-direction: column; }
+  .form-sub-container .btn {
+    margin-top: 1.5rem; }
+
+.sign-up__form .form-sub-container:nth-of-type(1) {
+  margin-right: 5rem; }
+
+.sign-up__form .input:last-of-type {
+  margin-bottom: 0; }
+
+.input {
+  min-width: 20rem;
+  margin-bottom: 1.5rem;
+  padding: .5rem;
+  border-radius: .5rem; }
+
+.or-container {
+  display: flex;
+  align-items: center;
+  color: #3d3d3d; }
+
+.account-section__content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 70rem;
+  flex-wrap: wrap; }

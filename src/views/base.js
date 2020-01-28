@@ -13,6 +13,9 @@ export const elements = {
    mainMenuItems: document.querySelectorAll('.main-menu__item'),
    submenuItems: document.querySelectorAll('.submenu'),
 
+   accountMenuBtn: document.querySelector('.account-btn'),
+   accountMenuDropdown: document.querySelector('.account-menu__dropdown'),
+
    landingSection: document.querySelector('.landing'),
    landingBackground: document.querySelector('.landing__background'),
    landingPromoBox: document.querySelector('.promotion'),
