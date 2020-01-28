@@ -1,5 +1,10 @@
 <% include partials/head %>
-<% include partials/header %>
+
+<% if (typeof user != 'undefined') { %>
+   <%- include('partials/header', {user}) %>
+<% } else { %>
+   <%- include partials/header %>
+<% } %>
 
 <main class="main">
    <div class="shadow-overlay">
@@ -7,8 +12,8 @@
 
    <div class="container">
       <section class="cart-section">
-         <div class="cart-section__header">
-            <h1 class="cart-section__header-title">Shopping Cart</h1>
+         <div class="page-header">
+            <h1 class="page-header__title">Shopping Cart</h1>
          </div>
 
          <div class="cart-section__main">

@@ -65,28 +65,10 @@ export const promotionRotation = () => {
 
       }, 1500);
 
-      // setTimeout(() => {
-      //    elements.landingBackgrounds[current].classList.remove('landing__background--fade-out');
-      //    elements.landingBackgrounds[next].classList.add('landing__background--fade-in');
-
-      // }, 2000);
       setTimeout(() => {
          elements.landingBackground.classList.remove('shrink-and-slide');
          elements.landingPromoBox.classList.remove('slide-and-fade');
-
-
       }, 7000)
-
    }, 8000);
-
-  
-
-   // const fadeBackground = (i) => {
-   //    setTimeout(() => {
-   //       elements.landingBackground.classList.replace(`landing__background--${i}`, `landing__background--${i+1}`);
-   //    }, 2600);
-   // };
-
-
 };
 

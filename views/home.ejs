@@ -1,6 +1,13 @@
 <% include partials/head %>
 
-<% include partials/header %>
+<% if (typeof user != 'undefined') { %>
+   <%- include('partials/header', {user}) %>
+<% } else { %>
+   <%- include partials/header %>
+<% } %>
+
+
+
 
 <% include partials/landing %>
 <% include partials/service-bar %>
