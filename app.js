@@ -71,7 +71,7 @@ const findById = (id, cb) => {
    });
 }
 
-// Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request).
+// Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request.
 passport.use(new Strategy((username, password, cb) => {
       findByUsername(username, function(err, user) {
          if (err) {
@@ -134,27 +134,30 @@ app.get('/account', (req, res) => {
    res.render('account', {user: req.user});
 });
 
-// ======================= REGISTER =======================
+// ======================= REGISTER USER =======================
 // ========================================================
 // REGISTER PAGE (GET)
 app.get('/register', (req, res) => {
    res.render('register');
 });
 
-// REGISTER (POST)
+// REGISTER USER (POST)
 app.post('/register', (req, res) => {
-   const newUser = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      newUsername: req.body.newUsername,
-      newPassword: req.body.newPassword,
-      confirmPassword: req.body.confirmPassword
-   };
-   console.log(newUser);
+   const { firstName, lastName, newUsername, newPassword, confirmPassword } = req.body;
+
+   db.query('INSERT INTO users (first_name, last_name, username, password, id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstName, lastName, newUsername, sc.encrypt(newPassword), uuidv4()], (error, results) => {
+
+      if (error) {
+         return res.render('login');
+      } 
+      const message = 'Your account was successfully created. Please login.';
+      res.render('login', { message: message })
+
+   });
 
 });
 
-// ======================= LOGIN =======================
+// ======================= LOGIN/OUT =======================
 // =====================================================
 // LOGIN PAGE (FORM)
 app.get('/login', (req, res) => {
@@ -174,7 +177,7 @@ app.get('/logout', (req, res) => {
 
 // CATCH ALL
 app.get('/*', (req, res) => {
-   res.send('Unable to find the requested route.')
+   res.send('Unable to find the requested page.')
 });
 
 
