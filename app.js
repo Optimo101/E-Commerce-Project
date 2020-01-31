@@ -7,9 +7,7 @@ const express = require('express'),
       app = express(),
       passport = require('passport'),
       request = require('request'),
-      path = require('path'),
-      // routes = require('./lib/routes'),
-      PORT = process.env.PORT || 3000;
+      path = require('path');
 
 const simplecrypt = require('simplecrypt'),
       sc = simplecrypt({ password: process.env.SCPASS }),
@@ -184,6 +182,8 @@ app.get('/*', (req, res) => {
 
 // ======================= SERVER =======================
 // ======================================================
+const port = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-   console.log(`Server has started on port ${PORT}...`);
+   console.log(`Server has started on port ${port}...`);
 });
