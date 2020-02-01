@@ -1,6 +1,3 @@
-// ======================= DEPENDENCIES =======================
-// ============================================================
-
 require('dotenv').config();
 
 const express = require('express'),
@@ -78,11 +75,11 @@ passport.use(new Strategy((username, password, cb) => {
          }
          if (!user) {
             console.log(`The provided username ${username} does not match any existing account.`)
-            return cb(null, false); 
+            return cb(null, false, { message: `The provided username ${username} does not match any existing account.`}); 
          }
          if (sc.decrypt(user.password) != password) {
-            console.log('The password provided does not match the account.')
-            return cb(null, false);
+            console.log('The password provided is incorrect')
+            return cb(null, false, { message: 'The password provided is incorrect'});
          }
       return cb(null, user);
      });
@@ -156,7 +153,7 @@ app.post('/register', (req, res) => {
 });
 
 // ======================= LOGIN/OUT =======================
-// =====================================================
+// =========================================================
 // LOGIN PAGE (FORM)
 app.get('/login', (req, res) => {
    res.render('login');
@@ -184,6 +181,6 @@ app.get('/*', (req, res) => {
 // ======================================================
 const port = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+app.listen(port, () => {
    console.log(`Server has started on port ${port}...`);
 });
