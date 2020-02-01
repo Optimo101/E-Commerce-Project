@@ -1,15 +1,10 @@
-// ======================= DEPENDENCIES =======================
-// ============================================================
-
 require('dotenv').config();
 
 const express = require('express'),
       app = express(),
       passport = require('passport'),
       request = require('request'),
-      path = require('path'),
-      // routes = require('./lib/routes'),
-      PORT = process.env.PORT || 3000;
+      path = require('path');
 
 const simplecrypt = require('simplecrypt'),
       sc = simplecrypt({ password: process.env.SCPASS }),
@@ -71,7 +66,7 @@ const findById = (id, cb) => {
    });
 }
 
-// Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request).
+// Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request.
 passport.use(new Strategy((username, password, cb) => {
       findByUsername(username, function(err, user) {
          if (err) {
@@ -80,11 +75,11 @@ passport.use(new Strategy((username, password, cb) => {
          }
          if (!user) {
             console.log(`The provided username ${username} does not match any existing account.`)
-            return cb(null, false); 
+            return cb(null, false, { message: `The provided username ${username} does not match any existing account.`}); 
          }
          if (sc.decrypt(user.password) != password) {
-            console.log('The password provided does not match the account.')
-            return cb(null, false);
+            console.log('The password provided is incorrect')
+            return cb(null, false, { message: 'The password provided is incorrect'});
          }
       return cb(null, user);
      });
@@ -134,28 +129,31 @@ app.get('/account', (req, res) => {
    res.render('account', {user: req.user});
 });
 
-// ======================= REGISTER =======================
+// ======================= REGISTER USER =======================
 // ========================================================
 // REGISTER PAGE (GET)
 app.get('/register', (req, res) => {
    res.render('register');
 });
 
-// REGISTER (POST)
+// REGISTER USER (POST)
 app.post('/register', (req, res) => {
-   const newUser = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      newUsername: req.body.newUsername,
-      newPassword: req.body.newPassword,
-      confirmPassword: req.body.confirmPassword
-   };
-   console.log(newUser);
+   const { firstName, lastName, newUsername, newPassword, confirmPassword } = req.body;
+
+   db.query('INSERT INTO users (first_name, last_name, username, password, id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstName, lastName, newUsername, sc.encrypt(newPassword), uuidv4()], (error, results) => {
+
+      if (error) {
+         return res.render('login');
+      } 
+      const message = 'Your account was successfully created. Please login.';
+      res.render('login', { message: message })
+
+   });
 
 });
 
-// ======================= LOGIN =======================
-// =====================================================
+// ======================= LOGIN/OUT =======================
+// =========================================================
 // LOGIN PAGE (FORM)
 app.get('/login', (req, res) => {
    res.render('login');
@@ -174,13 +172,15 @@ app.get('/logout', (req, res) => {
 
 // CATCH ALL
 app.get('/*', (req, res) => {
-   res.send('Unable to find the requested route.')
+   res.send('Unable to find the requested page.')
 });
 
 
 
 // ======================= SERVER =======================
 // ======================================================
-app.listen(PORT, () => {
-   console.log(`Server has started on port ${PORT}...`);
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+   console.log(`Server has started on port ${port}...`);
 });
