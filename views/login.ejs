@@ -11,8 +11,8 @@
             <h1 class="page-header__title">Account</h1>
          </div>
 
-         <% if (typeof message != 'undefined') { %>
-         <h3 class="message-header"><%= message %></h3>
+         <% if (messages.error) { %>
+         <h3 class="message-header"><%= messages.error %></h3>
          <% } %>
 
          <div class="login-section__content">
