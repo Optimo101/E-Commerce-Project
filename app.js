@@ -1,43 +1,71 @@
 require('dotenv').config();
-
 const express = require('express'),
       app = express(),
       passport = require('passport'),
-      request = require('request'),
-      path = require('path');
-
-const simplecrypt = require('simplecrypt'),
+      LocalStrategy = require('passport-local').Strategy,
+      simplecrypt = require('simplecrypt'),
       sc = simplecrypt({ password: process.env.SCPASS }),
-      { Pool } = require('pg'),
+      flash = require('express-flash'),
       uuidv4 = require('uuid/v4'),
-      Strategy = require('passport-local').Strategy;
+      db = require('./db/index'),
+      session = require('express-session');
 
-const db = require('./db/index');
+// const initializePassport = require('./passport-config');
 
-// ======================= SETTINGS =======================
-// ========================================================
+// initializePassport(passport, getUserByEmail, getUserByID);
 
+
+
+// ===============================================================
 app.use(require('cookie-parser')());
 app.use(express.urlencoded({ extended: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(flash());
 app.use(express.static(__dirname + '/public'));
 app.use(express.json()); //Used to parse JSON bodies
-app.use(require('express-session')({
-   secret: 'super secret',
+app.use(session({
+   secret: process.env.SESSION_SECRET,
    resave: false,
    saveUninitialized: false
 }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
 
+// function initializePassport(passport, getUserByEmail, getUserByID) {
+   const authenticateUser = (email, password, next) => {
+      getUserByEmail(email, (error, user) => {
+         if (error) {
+            return next(error)
+         }
+         if (user == null) {
+            return next(null, false, { message: `The provided email ${email} does not match an existing account.` })
+         }
+         if (sc.decrypt(user.password) == password) {
+            return next(null, user);
+         } else {
+            return next(null, false, { message: 'The password provided is incorrect' })
+         }
+      });
+   }
+// }
 
-// ======================= FUNCTION EXPRESSIONS =======================
-// ================================================================
+passport.use(new LocalStrategy(authenticateUser));
 
-const findByUsername = (username, cb) =>  {
-   db.query('SELECT * FROM users WHERE username = $1', [username], (err, result) => {      
+passport.serializeUser((user, cb) => { cb(null, user.id) });
+   
+passport.deserializeUser((id, cb) => {
+   getUserByID(id, (err, user) => {
+      if (err) { return cb(err); }
+      cb(null, user);
+   });
+});
+
+// ===============================================================
+
+
+function getUserByEmail(email, cb) {
+   db.query('SELECT * FROM users WHERE username = $1', [email], (err, result) => {      
       if (err) {
          return cb(err, null);
 
@@ -50,7 +78,7 @@ const findByUsername = (username, cb) =>  {
    });
 }
 
-const findById = (id, cb) => {
+function getUserByID(id, cb) {
    db.query('SELECT * FROM users WHERE id = $1', [id], (err, result) => {      
       if (err) {
          console.log(err);
@@ -61,49 +89,12 @@ const findById = (id, cb) => {
          console.log('The username does not match any existing account.');
          return cb(null, null);
       }
-      
    return cb(null, result.rows[0]);
    });
 }
 
-// Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request.
-passport.use(new Strategy((username, password, cb) => {
-      findByUsername(username, function(err, user) {
-         if (err) {
-            console.log('Error', err);
-            return cb(err); 
-         }
-         if (!user) {
-            console.log(`The provided username ${username} does not match any existing account.`)
-            return cb(null, false, { message: `The provided username ${username} does not match any existing account.`}); 
-         }
-         if (sc.decrypt(user.password) != password) {
-            console.log('The password provided is incorrect')
-            return cb(null, false, { message: 'The password provided is incorrect'});
-         }
-      return cb(null, user);
-     });
-   }
-));
 
-passport.serializeUser(function(user, cb) {
-   cb(null, user.id);
- });
- 
- passport.deserializeUser(function(id, cb) {
-   findById(id, function (err, user) {
-     if (err) { return cb(err); }
-     cb(null, user);
-   });
- });
-
-
-// Initialize Passport and restore authentication state, if any, from the session.
-app.use(passport.initialize());
-app.use(passport.session());
-
-// ======================= ROUTES =======================
-// ======================================================
+// ===============================================================
 // HOME PAGE
 app.get('/', (req, res, next) => {
    res.render('home', {user: req.user});
@@ -160,7 +151,7 @@ app.get('/login', (req, res) => {
 });
 
 // LOGIN (POST)
-app.post('/login', passport.authenticate('local', {failureRedirect: '/login' }), (req, res, next) => {
+app.post('/login', passport.authenticate('local', {failureRedirect: '/login', failureFlash:true }), (req, res, next) => {
    res.redirect('/');
 });
 
