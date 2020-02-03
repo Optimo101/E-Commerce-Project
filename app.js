@@ -1,43 +1,38 @@
 require('dotenv').config();
-
 const express = require('express'),
       app = express(),
       passport = require('passport'),
-      request = require('request'),
-      path = require('path');
-
-const simplecrypt = require('simplecrypt'),
-      sc = simplecrypt({ password: process.env.SCPASS }),
-      { Pool } = require('pg'),
+      flash = require('express-flash'),
       uuidv4 = require('uuid/v4'),
-      Strategy = require('passport-local').Strategy;
+      simplecrypt = require('simplecrypt'),
+      sc = simplecrypt({ password: process.env.SCPASS }),
+      db = require('./db/index'),
+      session = require('express-session'),
+      initializePassport = require('./passport-config');
 
-const db = require('./db/index');
+initializePassport(passport, getUserByEmail, getUserByID);
 
-// ======================= SETTINGS =======================
-// ========================================================
 
+// ===============================================================
 app.use(require('cookie-parser')());
 app.use(express.urlencoded({ extended: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(flash());
 app.use(express.static(__dirname + '/public'));
 app.use(express.json()); //Used to parse JSON bodies
-app.use(require('express-session')({
-   secret: 'super secret',
+app.use(session({
+   secret: process.env.SESSION_SECRET,
    resave: false,
    saveUninitialized: false
 }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
 
 
-// ======================= FUNCTION EXPRESSIONS =======================
-// ================================================================
-
-const findByUsername = (username, cb) =>  {
-   db.query('SELECT * FROM users WHERE username = $1', [username], (err, result) => {      
+// ===============================================================
+function getUserByEmail(email, cb) {
+   db.query('SELECT * FROM users WHERE username = $1', [email.toLowerCase()], (err, result) => {      
       if (err) {
          return cb(err, null);
 
@@ -50,7 +45,7 @@ const findByUsername = (username, cb) =>  {
    });
 }
 
-const findById = (id, cb) => {
+function getUserByID(id, cb) {
    db.query('SELECT * FROM users WHERE id = $1', [id], (err, result) => {      
       if (err) {
          console.log(err);
@@ -61,49 +56,27 @@ const findById = (id, cb) => {
          console.log('The username does not match any existing account.');
          return cb(null, null);
       }
-      
    return cb(null, result.rows[0]);
    });
 }
 
-// Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request.
-passport.use(new Strategy((username, password, cb) => {
-      findByUsername(username, function(err, user) {
-         if (err) {
-            console.log('Error', err);
-            return cb(err); 
-         }
-         if (!user) {
-            console.log(`The provided username ${username} does not match any existing account.`)
-            return cb(null, false, { message: `The provided username ${username} does not match any existing account.`}); 
-         }
-         if (sc.decrypt(user.password) != password) {
-            console.log('The password provided is incorrect')
-            return cb(null, false, { message: 'The password provided is incorrect'});
-         }
-      return cb(null, user);
-     });
+function checkAuthenticated(req, res, next) {
+   if (req.isAuthenticated()) {
+      return next();
    }
-));
+   console.log('Access denied! Please login.');
+   res.redirect('/login');
+}
 
-passport.serializeUser(function(user, cb) {
-   cb(null, user.id);
- });
- 
- passport.deserializeUser(function(id, cb) {
-   findById(id, function (err, user) {
-     if (err) { return cb(err); }
-     cb(null, user);
-   });
- });
+function checkNotAuthenticated(req, res, next) {
+   if (req.isAuthenticated()) {
+      return res.redirect('/');
+   }
+   next();
+}
 
 
-// Initialize Passport and restore authentication state, if any, from the session.
-app.use(passport.initialize());
-app.use(passport.session());
-
-// ======================= ROUTES =======================
-// ======================================================
+// ===============================================================
 // HOME PAGE
 app.get('/', (req, res, next) => {
    res.render('home', {user: req.user});
@@ -125,47 +98,49 @@ app.get('/cart', (req, res) => {
 });
 
 // ACCOUNT
-app.get('/account', (req, res) => {
+app.get('/account', checkAuthenticated, (req, res) => {
    res.render('account', {user: req.user});
 });
 
 // ======================= REGISTER USER =======================
-// ========================================================
-// REGISTER PAGE (GET)
-app.get('/register', (req, res) => {
-   res.render('register');
-});
+// =============================================================
 
 // REGISTER USER (POST)
 app.post('/register', (req, res) => {
    const { firstName, lastName, newUsername, newPassword, confirmPassword } = req.body;
 
-   db.query('INSERT INTO users (first_name, last_name, username, password, id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstName, lastName, newUsername, sc.encrypt(newPassword), uuidv4()], (error, results) => {
+   if (newPassword !== confirmPassword) {
+      const errorMsg = 'The password fields did not match. Please try again.'
+      return res.render('login', { errorMsg: errorMsg})
+   }
+
+   db.query('INSERT INTO users (first_name, last_name, username, password, id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstName, lastName, newUsername.toLowerCase(), sc.encrypt(newPassword), uuidv4()], (error, results) => {
 
       if (error) {
          return res.render('login');
-      } 
-      const message = 'Your account was successfully created. Please login.';
-      res.render('login', { message: message })
+      }
 
+      const successMsg = 'Account created. Please login.';
+      return res.render('login', { successMsg: successMsg })
    });
 
 });
 
-// ======================= LOGIN/OUT =======================
-// =========================================================
+// ======================= LOGIN/OUT ===========================
+// =============================================================
+
 // LOGIN PAGE (FORM)
-app.get('/login', (req, res) => {
+app.get('/login', checkNotAuthenticated, (req, res) => {
    res.render('login');
 });
 
 // LOGIN (POST)
-app.post('/login', passport.authenticate('local', {failureRedirect: '/login' }), (req, res, next) => {
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {failureRedirect: '/login', failureFlash:true }), (req, res, next) => {
    res.redirect('/');
 });
 
 // LOGOUT
-app.get('/logout', (req, res) => {
+app.get('/logout', checkAuthenticated, (req, res) => {
    req.logout();
    res.redirect('/');
 });
@@ -174,7 +149,6 @@ app.get('/logout', (req, res) => {
 app.get('/*', (req, res) => {
    res.send('Unable to find the requested page.')
 });
-
 
 
 // ======================= SERVER =======================

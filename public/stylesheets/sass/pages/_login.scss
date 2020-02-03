@@ -6,9 +6,19 @@
 
 }
 
-.message-header {
-   color: green;
+.msg-header {
    margin-bottom: 1.5rem;
+
+   &--error {
+      color: $color-primary;
+   }
+
+   &--success {
+      color: rgb(0, 172, 0);
+   }
+   &__icon {
+      margin-right: 1rem;
+   }
 }
 
 .form-container {
