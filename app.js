@@ -2,18 +2,15 @@ require('dotenv').config();
 const express = require('express'),
       app = express(),
       passport = require('passport'),
-      LocalStrategy = require('passport-local').Strategy,
-      simplecrypt = require('simplecrypt'),
-      sc = simplecrypt({ password: process.env.SCPASS }),
       flash = require('express-flash'),
       uuidv4 = require('uuid/v4'),
+      simplecrypt = require('simplecrypt'),
+      sc = simplecrypt({ password: process.env.SCPASS }),
       db = require('./db/index'),
-      session = require('express-session');
+      session = require('express-session'),
+      initializePassport = require('./passport-config');
 
-// const initializePassport = require('./passport-config');
-
-// initializePassport(passport, getUserByEmail, getUserByID);
-
+initializePassport(passport, getUserByEmail, getUserByID);
 
 
 // ===============================================================
@@ -32,40 +29,10 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
 
-// function initializePassport(passport, getUserByEmail, getUserByID) {
-   const authenticateUser = (email, password, next) => {
-      getUserByEmail(email, (error, user) => {
-         if (error) {
-            return next(error)
-         }
-         if (user == null) {
-            return next(null, false, { message: `The provided email ${email} does not match an existing account.` })
-         }
-         if (sc.decrypt(user.password) == password) {
-            return next(null, user);
-         } else {
-            return next(null, false, { message: 'The password provided is incorrect' })
-         }
-      });
-   }
-// }
-
-passport.use(new LocalStrategy(authenticateUser));
-
-passport.serializeUser((user, cb) => { cb(null, user.id) });
-   
-passport.deserializeUser((id, cb) => {
-   getUserByID(id, (err, user) => {
-      if (err) { return cb(err); }
-      cb(null, user);
-   });
-});
 
 // ===============================================================
-
-
 function getUserByEmail(email, cb) {
-   db.query('SELECT * FROM users WHERE username = $1', [email], (err, result) => {      
+   db.query('SELECT * FROM users WHERE username = $1', [email.toLowerCase()], (err, result) => {      
       if (err) {
          return cb(err, null);
 
@@ -93,6 +60,21 @@ function getUserByID(id, cb) {
    });
 }
 
+function checkAuthenticated(req, res, next) {
+   if (req.isAuthenticated()) {
+      return next();
+   }
+   console.log('Access denied! Please login.');
+   res.redirect('/login');
+}
+
+function checkNotAuthenticated(req, res, next) {
+   if (req.isAuthenticated()) {
+      return res.redirect('/');
+   }
+   next();
+}
+
 
 // ===============================================================
 // HOME PAGE
@@ -116,47 +98,49 @@ app.get('/cart', (req, res) => {
 });
 
 // ACCOUNT
-app.get('/account', (req, res) => {
+app.get('/account', checkAuthenticated, (req, res) => {
    res.render('account', {user: req.user});
 });
 
 // ======================= REGISTER USER =======================
-// ========================================================
-// REGISTER PAGE (GET)
-app.get('/register', (req, res) => {
-   res.render('register');
-});
+// =============================================================
 
 // REGISTER USER (POST)
 app.post('/register', (req, res) => {
    const { firstName, lastName, newUsername, newPassword, confirmPassword } = req.body;
 
-   db.query('INSERT INTO users (first_name, last_name, username, password, id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstName, lastName, newUsername, sc.encrypt(newPassword), uuidv4()], (error, results) => {
+   if (newPassword !== confirmPassword) {
+      const errorMsg = 'The password fields did not match. Please try again.'
+      return res.render('login', { errorMsg: errorMsg})
+   }
+
+   db.query('INSERT INTO users (first_name, last_name, username, password, id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstName, lastName, newUsername.toLowerCase(), sc.encrypt(newPassword), uuidv4()], (error, results) => {
 
       if (error) {
          return res.render('login');
-      } 
-      const message = 'Your account was successfully created. Please login.';
-      res.render('login', { message: message })
+      }
 
+      const successMsg = 'Account created. Please login.';
+      return res.render('login', { successMsg: successMsg })
    });
 
 });
 
-// ======================= LOGIN/OUT =======================
-// =========================================================
+// ======================= LOGIN/OUT ===========================
+// =============================================================
+
 // LOGIN PAGE (FORM)
-app.get('/login', (req, res) => {
+app.get('/login', checkNotAuthenticated, (req, res) => {
    res.render('login');
 });
 
 // LOGIN (POST)
-app.post('/login', passport.authenticate('local', {failureRedirect: '/login', failureFlash:true }), (req, res, next) => {
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {failureRedirect: '/login', failureFlash:true }), (req, res, next) => {
    res.redirect('/');
 });
 
 // LOGOUT
-app.get('/logout', (req, res) => {
+app.get('/logout', checkAuthenticated, (req, res) => {
    req.logout();
    res.redirect('/');
 });
@@ -165,7 +149,6 @@ app.get('/logout', (req, res) => {
 app.get('/*', (req, res) => {
    res.send('Unable to find the requested page.')
 });
-
 
 
 // ======================= SERVER =======================

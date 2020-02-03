@@ -1198,9 +1198,14 @@ section {
   flex-wrap: wrap;
   max-width: 95rem; }
 
-.message-header {
-  color: darkred;
+.msg-header {
   margin-bottom: 1.5rem; }
+  .msg-header--error {
+    color: #EB2F38; }
+  .msg-header--success {
+    color: #00ac00; }
+  .msg-header__icon {
+    margin-right: 1rem; }
 
 .form-container {
   display: inline-block; }
