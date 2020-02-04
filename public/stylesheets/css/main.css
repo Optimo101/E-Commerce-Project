@@ -670,6 +670,8 @@ section {
   .account-btn__icon {
     font-size: 2rem;
     margin-right: 1rem; }
+  .account-btn__firstname {
+    font-weight: 500; }
 
 .cart-link {
   position: relative;
