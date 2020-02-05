@@ -19,6 +19,10 @@
          <h3 class="msg-header msg-header--error"><i class="msg-header__icon fas fa-exclamation-circle message-header__icon"></i><%= errorMsg %></h3>
          <% } %>
 
+         <% if (typeof successMsg != 'undefined') { %>
+            <h3 class="msg-header msg-header--success"><i class="msg-header__icon fas fa-exclamation-circle message-header__icon"></i><%= successMsg %></h3>
+            <% } %>
+
          <div class="account-section__content">
 
                <form class="account__form form" method="POST" action="/user/account/<%= user.id %>?_method=PUT">
@@ -50,7 +54,7 @@
                            <input type="password" class="account__password-input input" name="newPassword" required>
             
                            <label for="confirmPassword">Confirm New Password</label>
-                           <input type="password" class="account__confirm-password-input input" name="confirmNewPassword" required>
+                           <input type="password" class="account__confirm-password-input input" name="confirmPassword" required>
             
                            <input type="submit" class="account__btn btn btn--red btn--hover-float" value="Update Password">
                         </div>
