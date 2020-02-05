@@ -169,35 +169,35 @@
                   <% if (typeof user != 'undefined') { %>
                      <button class="account-btn btn btn--black">
                         <i class="far fa-user account-btn__icon"></i>
-                        <%= `Hello, ${user.first_name}` %>
+                        Hello,&nbsp <span class="account-btn__firstname"> <%= user.first_name %></span>
                      </button>
 
                      <div class="account-menu__dropdown">
                         <ul class="account-menu__list">
 
                            <li class="account-menu__item">
-                              <a href="/cart" class="account-menu__link">
+                              <a href="/user/cart/<%= user.id %>" class="account-menu__link">
                                  <i class="fas fa-shopping-cart account-menu__item-icon"></i>
                                  <span class="account-menu__title">Shopping Cart</span>
                               </a>
                            </li>
 
                            <li class="account-menu__item">
-                              <a href="/likes" class="account-menu__link">
+                              <a href="/user/likes/<%= user.id %>" class="account-menu__link">
                                  <i class="fas fa-heart account-menu__item-icon"></i>
                                  <span class="account-menu__title">Liked Items</span>
                               </a>
                            </li>
 
                            <li class="account-menu__item">
-                              <a href="/account" class="account-menu__link">
+                              <a href="/user/account/<%= user.id %>" class="account-menu__link">
                                  <i class="fas fa-info-circle account-menu__item-icon"></i>
                                  <span class="account-menu__title">Account Info</span>
                               </a>
                            </li>
                            
                            <li class="account-menu__item">
-                              <a href="/logout" class="account-menu__link">
+                              <a href="/user/logout/" class="account-menu__link">
                                  <i class="fas fa-sign-out-alt account-menu__item-icon"></i>
                                  <span class="account-menu__title">LOGOUT</span>
                               </a>
@@ -206,7 +206,7 @@
                      </div>
 
                   <% } else { %>
-                     <a class="account-btn btn btn--black" href="/login">
+                     <a class="account-btn btn btn--black" href="/user/login">
                         <i class="far fa-user account-btn__icon"></i>
                         Account
                      </a>
