@@ -2,7 +2,6 @@ const LocalStrategy = require('passport-local').Strategy,
       simplecrypt = require('simplecrypt'),
       sc = simplecrypt({ password: process.env.SCPASS });
 
-
 // // Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request.
 function initialize(passport, getUserByEmail, getUserByID) {
    const authenticateUser = (email, password, next) => {
@@ -10,9 +9,11 @@ function initialize(passport, getUserByEmail, getUserByID) {
          if (error) {
             return next(error)
          }
+
          if (user == null) {
             return next(null, false, { message: `The provided email ${email} does not match an existing account.` })
          }
+
          if (sc.decrypt(user.password) == password) {
             return next(null, user);
          } else {
@@ -31,7 +32,6 @@ function initialize(passport, getUserByEmail, getUserByID) {
          cb(null, user);
       });
    });
-
 }
 
 module.exports = initialize;
