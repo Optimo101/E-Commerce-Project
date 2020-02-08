@@ -5,7 +5,7 @@ const express = require('express'),
       passport = require('passport'),
       flash = require('express-flash'),
       session = require('express-session'),
-      db = require('./config/index'),
+      db = require('./config/db'),
       initializePassport = require('./config/passport');
 
 const register = require('./routes/user/register'),
@@ -71,9 +71,71 @@ function getUserByID(id, cb) {
    });
 }
 
+function checkAuthenticated(req, res, next) {
+   if (req.isAuthenticated()) {
+      return next();
+   }
+   console.log('Access denied! Please login.');
+   res.redirect('/user/login');
+}
+
 // ===============================================================
+
+const testObj = {
+   test: 'This is a test!'
+}
+
+// app.get('/test', (req, res) => {
+//    // If user is logged in
+//    if (req.isAuthenticated()) {
+//       // 
+      
+//       console.log('Request was authenticated!', req.user);
+
+//    } else {
+//       return console.log('Request was NOT authenticated. You get nothing!');
+//    }
+   
+//    res.send(testObj);
+// });
+
+app.post('/db/cart', (req, res) => {
+   // If user is logged in
+   if (req.isAuthenticated()) {
+      console.log('Backend cart console.log:');
+      console.log(req.user.id);
+      const cartItems = JSON.stringify(req.body);
+
+      db.query("UPDATE users SET cart = $1 WHERE id = $2 RETURNING *", [cartItems, req.user.id], (error, results) => {
+         if (error) {
+            return console.log(error)
+         } else {
+            return res.send('Cart successfully saved to account.');
+         }
+      });
+
+   } else {
+      return console.log('Request is NOT authenticated. You get nothing.');
+   }
+});
+
+app.post('/db/likes', (req, res) => {
+   // If user is logged in
+   if (req.isAuthenticated()) {
+      console.log('Backend likes console.log:');
+      console.log(req.body);
+      console.log(JSON.stringify(req.body));
+
+      return res.send(req.body)
+   } else {
+      return console.log('Request is NOT authenticated. You get nothing.')
+   }
+});
+
+
+
 // HOME PAGE
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
    res.render('home', {user: req.user});
 });
 

@@ -352,13 +352,23 @@ const controlHeader = async () => {
          mainMenuView.toggleDropdown(elements.mainMenuDropdown);
       });
 
-      // Open/close account menu
+      // Account Menu events
       if (elements.accountMenuDropdown != null) {
          elements.accountMenuBtn.addEventListener('click', function() {
             mainMenuView.toggleDropdown(elements.accountMenuDropdown);
          });
-      }
 
+         elements.accountLogoutLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            logout();
+
+            async function logout() {
+               await state.cart.sendCartToDB();
+               await state.likes.sendLikesToDB();
+               window.location = '/user/logout';
+            }
+         })
+      }
 
       // Open/close main menu
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
@@ -375,11 +385,7 @@ const controlHeader = async () => {
 // HOME PAGE CONTROLLER
 // ===========================================================
 const controlHomePage = () => {
-
    homeView.promotionRotation();
-
-
-   
 };
 
 
@@ -388,7 +394,6 @@ const controlHomePage = () => {
 // ===========================================================
 const init = () => {
    // Restore cart and saved/liked items on page load
-   // window.addEventListener('load', () => {
       state.likes = new Likes();
       state.likes.readLocalStorage();
 
@@ -397,7 +402,6 @@ const init = () => {
 
       console.log(localStorage);
       console.log(state);
-   // });
 
    controlHeader();
 

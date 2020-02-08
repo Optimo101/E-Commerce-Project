@@ -1,3 +1,5 @@
+import axios from 'axios'; 
+
 export default class Likes {
    constructor() {
       this.likes = [];
@@ -39,6 +41,26 @@ export default class Likes {
       const storage = JSON.parse(localStorage.getItem('likes'));
 
       // Restore likes from localStorage
-      if(storage) this.likes = storage;
+      if (storage) this.likes = storage;
    }
+
+   async sendLikesToDB() {
+      try {
+         await axios.post('/db/likes', this.likes)
+         .then(response => {
+            console.log(response.data);
+         })
+      } catch (error) {
+         console.log(error);
+      }
+
+      this.clearLocalStorage();
+      
+   }
+
+   clearLocalStorage() {
+      localStorage.setItem('likes', '[]');
+
+   }
+
 }
