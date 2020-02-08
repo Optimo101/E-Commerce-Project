@@ -1,3 +1,5 @@
+import axios from 'axios'; 
+
 export default class Cart {
    constructor() {
       this.items = {};
@@ -93,4 +95,25 @@ export default class Cart {
       // Restore likes from localStorage
       if (storage) this.items = storage;
    }
+
+
+   async sendCartToDB() {
+      try {
+         await axios.post('/db/cart', this.items)
+         .then(response => {
+            console.log(response.data);
+         })
+      } catch (error) {
+         console.log(error);
+      }
+
+      this.clearLocalStorage();
+      
+   }
+
+   clearLocalStorage() {
+      localStorage.setItem('cart', '{}');
+
+   }
+
 }

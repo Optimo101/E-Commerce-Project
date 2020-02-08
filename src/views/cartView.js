@@ -65,16 +65,10 @@ export const renderCartGridItems = (cartItems) => {
 };
 
 export const updateCartSummary = (totals) => {
-   console.log(totals.subtotal);
-   console.log(totals.taxes);
-   console.log(totals.shipping);
-   console.log(totals.grandTotal);
-
    elements.cartSummarySubtotal.innerHTML = `${totals.subtotal}`;
    elements.cartSummaryTaxes.innerHTML = `${totals.taxes}`;
    elements.cartSummaryShipping.innerHTML = `${totals.shipping}`;
    elements.cartSummaryTotal.innerHTML = `${totals.grandTotal}`;
-
 } 
 
 export const highlightRefreshBtns = (itemSku) => {

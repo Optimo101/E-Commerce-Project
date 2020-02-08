@@ -3,7 +3,7 @@ const express = require('express'),
       uuidv4 = require('uuid/v4'),
       simplecrypt = require('simplecrypt'),
       sc = simplecrypt({ password: process.env.SCPASS }),
-      db = require('../../config/index');
+      db = require('../../config/db');
 
 
 // REGISTER (POST)

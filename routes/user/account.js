@@ -3,7 +3,7 @@ const express = require('express'),
       passport = require('passport'),
       simplecrypt = require('simplecrypt'),
       sc = simplecrypt({ password: process.env.SCPASS }),
-      db = require('../../config/index');
+      db = require('../../config/db');
 
       
 // ACCOUNT (GET)
@@ -28,7 +28,7 @@ router.put('/:id', (req, res) => {
          return res.render('account', { user: req.user, errorMsg: 'The current password provided did not match your account.' });
       }
 
-      db.query('UPDATE users SET password = $1 WHERE id = $2 RETURNING *;', [sc.encrypt(newPassword), user.id], (error, results) => {
+      db.query('UPDATE users SET password = $1 WHERE id = $2 RETURNING *', [sc.encrypt(newPassword), user.id], (error, results) => {
          if (error) {
             return res.render('account', { user: req.user, errorMsg: 'We are currently experiencing issues with the server. Please try again later.' });
          }

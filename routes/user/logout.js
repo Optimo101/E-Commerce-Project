@@ -2,12 +2,13 @@ const express = require('express'),
       router = express.Router();
 
 
+
 // LOGOUT
 router.get('/', checkAuthenticated, (req, res) => {
+   console.log(`${req.user.first_name} was logged out.`)
    req.logout();
    res.redirect('/');
 });
-
 
 function checkAuthenticated(req, res, next) {
    if (req.isAuthenticated()) {

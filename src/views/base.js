@@ -15,6 +15,7 @@ export const elements = {
 
    accountMenuBtn: document.querySelector('.account-btn'),
    accountMenuDropdown: document.querySelector('.account-menu__dropdown'),
+   accountLogoutLink: document.querySelector('.account-menu__link--logout'),
 
    landingSection: document.querySelector('.landing'),
    landingBackground: document.querySelector('.landing__background'),
