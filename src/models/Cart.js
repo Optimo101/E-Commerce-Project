@@ -86,6 +86,7 @@ export default class Cart {
 
    persistData() {
       // track Cart in localStorage
+      console.log(JSON.stringify(this.items));
       localStorage.setItem('cart', JSON.stringify(this.items));
    }
 
@@ -97,23 +98,44 @@ export default class Cart {
    }
 
 
-   async sendCartToDB() {
+   // async sendCartToDB() {
+   //    try {
+   //       await axios.post('/db/cart/logout', this.items)
+   //       .then(response => {
+   //          console.log(response.data);
+   //       })
+   //    } catch (error) {
+   //       console.log(error);
+   //    }
+
+   //    this.clearLocalStorage();  
+   // }
+
+   async readCartFromDB() {
       try {
-         await axios.post('/db/cart', this.items)
+         await axios.get('/db/cart/login')
          .then(response => {
-            console.log(response.data);
+            this.combineCarts(response.data);
          })
       } catch (error) {
-         console.log(error);
+         console.log(error)
+      }
+   }
+
+   combineCarts(dbCart) {
+      console.log('From combineCarts function:', dbCart)
+      
+      const cartObjKeys = Object.keys(dbCart);
+
+      for (const item of cartObjKeys) {
+         this.addItem(dbCart[item].sku, dbCart[item].image, dbCart[item].name, dbCart[item].price, dbCart[item].quantity);
       }
 
-      this.clearLocalStorage();
-      
+      console.log('New cart after adding dbCart', this.items);
    }
 
    clearLocalStorage() {
-      localStorage.setItem('cart', '{}');
-
+      localStorage.removeItem('cart');
    }
 
 }

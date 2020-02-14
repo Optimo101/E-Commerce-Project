@@ -1,3 +1,5 @@
+import axios from 'axios'; 
+
 import { elements, hideElement, updateItemQuant, cartBtnAnimation } from './views/base';
 
 import ProductSearch from './models/ProductSearch';
@@ -74,6 +76,8 @@ const controlCart = (event) => {
 // CART PAGE CONTROLLER
 // ===========================================================
 const controlCartPage = () => {
+   console.log('Beginning controlCartPage()...')
+
    cartView.renderCartGridItems(state.cart.items);
 
    state.cart.calcTotals();
@@ -165,6 +169,8 @@ const controlLikes = (event) => {
 // RESULTS PAGE CONTROLLER
 // ===========================================================
 const controlResultsPage = async () => {
+   console.log('Beginning controlResultsPage()...');
+
    // Get search query from url parameter
    const urlQuery = window.location.search;
    
@@ -226,6 +232,7 @@ const controlResultsPage = async () => {
 // PRODUCT PAGE CONTROLLER
 // ===========================================================
 const controlProductPage = async () => {
+   console.log('Beginning controlProductPage()...')
 
    // Get search query from url parameter
    const urlQuery = window.location.search;
@@ -311,6 +318,8 @@ const controlProductPage = async () => {
 // HEADER CONTROLLER
 // ===========================================================
 const controlHeader = async () => {
+   console.log('Beginning controlHeader()...')
+
    try {
       // Perform categories search
       await controlCategorySearch();
@@ -354,6 +363,7 @@ const controlHeader = async () => {
 
       // Account Menu events
       if (elements.accountMenuDropdown != null) {
+
          elements.accountMenuBtn.addEventListener('click', function() {
             mainMenuView.toggleDropdown(elements.accountMenuDropdown);
          });
@@ -363,11 +373,22 @@ const controlHeader = async () => {
             logout();
 
             async function logout() {
-               await state.cart.sendCartToDB();
-               await state.likes.sendLikesToDB();
-               window.location = '/user/logout';
+               try {
+                  await axios.post('/user/logout', {
+                     cart: state.cart.items,
+                     likes: state.likes.likes
+                  })
+                  .then((response) => {
+                     console.log(response);
+                     state.cart.clearLocalStorage();
+                     state.likes.clearLocalStorage();
+                     window.location = window.location.href;
+                  })
+               } catch (error) {
+                  console.log(error);
+               }
             }
-         })
+         });
       }
 
       // Open/close main menu
@@ -385,7 +406,63 @@ const controlHeader = async () => {
 // HOME PAGE CONTROLLER
 // ===========================================================
 const controlHomePage = () => {
+   console.log('Beginning controlHomePage()...')
+
    homeView.promotionRotation();
+};
+
+
+// ===========================================================
+// LOGIN PAGE CONTROLLER
+// ===========================================================
+const controlLoginPage = () => {
+   console.log('Beginning controlLoginPage()...')
+   
+// EVENT LISTENERS
+// ===========================================================
+   elements.accountLoginBtn.addEventListener('click', event => {
+      event.preventDefault();
+      login();
+
+      async function login() {
+         const username = elements.accountLoginUsername.value;
+         const password = elements.accountLoginPassword.value;
+
+         try {
+            await axios.post('/user/login', {
+               username: username,
+               password: password
+            })
+            .then(response => {
+               console.log('cart obj:', response.data.cart)
+               console.log('likes obj:', response.data.likes)
+
+               if (response.data.error) {
+                  return document.querySelector('.msg-header').innerHTML = response.data.error;
+               }
+
+               if (response.data.cart != null) {
+                  if (!(Object.keys(response.data.cart).length === 0)) {
+                     state.cart.combineCarts(response.data.cart);
+                  }
+               }
+              
+               if (response.data.likes != null) {
+                  if (!(response.data.likes.length === 0)) {
+                     state.likes.combineLikes(response.data.likes);
+                  }
+               }  
+                  
+               return window.location = '/';
+            })
+       
+         } catch (error) {
+            if (error) {
+               console.log(error);
+            }
+         }
+      }
+   });
 };
 
 
@@ -401,7 +478,7 @@ const init = () => {
       state.cart.readLocalStorage();
 
       console.log(localStorage);
-      console.log(state);
+      console.log('State', state);
 
    controlHeader();
 
@@ -411,6 +488,8 @@ const init = () => {
       controlResultsPage();
    } else if (window.location.pathname === '/cart') {
       controlCartPage();
+   } else if (window.location.pathname === '/user/login') {
+      controlLoginPage();
    } else if (window.location.pathname === '/') {
       controlHomePage();
    }

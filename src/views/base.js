@@ -17,6 +17,11 @@ export const elements = {
    accountMenuDropdown: document.querySelector('.account-menu__dropdown'),
    accountLogoutLink: document.querySelector('.account-menu__link--logout'),
 
+   accountLoginForm: document.querySelector('.sign-in__form'),
+   accountLoginUsername: document.querySelector('.sign-in__email-input'),
+   accountLoginPassword: document.querySelector('.sign-in__password-input'),
+   accountLoginBtn: document.querySelector('.sign-in__btn'),
+
    landingSection: document.querySelector('.landing'),
    landingBackground: document.querySelector('.landing__background'),
    landingPromoBox: document.querySelector('.promotion'),

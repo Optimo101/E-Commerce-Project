@@ -1,10 +1,12 @@
 require('dotenv').config();
+
 const express = require('express'),
       app = express(),
       methodOverride = require('method-override'),
       passport = require('passport'),
       flash = require('express-flash'),
       session = require('express-session'),
+      cookieParser = require('cookie-parser'),
       db = require('./config/db'),
       initializePassport = require('./config/passport');
 
@@ -14,10 +16,10 @@ const register = require('./routes/user/register'),
       account = require('./routes/user/account');
 
 
-initializePassport(passport, getUserByEmail, getUserByID);
-
+// ======================= MIDDLEWARE ============================
 // ===============================================================
-app.use(require('cookie-parser')());
+
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(flash());
@@ -41,98 +43,11 @@ app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
 
 
+initializePassport(passport, getUserByEmail, getUserByID);
+
+
+// ======================= ROUTES ================================
 // ===============================================================
-function getUserByEmail(email, cb) {
-   db.query('SELECT * FROM users WHERE username = $1', [email.toLowerCase()], (err, result) => {      
-      if (err) {
-         return cb(err, null);
-
-      } else if (!result.rows[0]) {
-         return cb(null, null);
-
-      } else {
-         return cb(null, result.rows[0]);
-      }
-   });
-}
-
-function getUserByID(id, cb) {
-   db.query('SELECT * FROM users WHERE id = $1', [id], (err, result) => {      
-      if (err) {
-         console.log(err);
-         return cb(err, null);
-      }
-
-      if (!result.rows[0]) {
-         console.log('The username does not match any existing account.');
-         return cb(null, null);
-      }
-   return cb(null, result.rows[0]);
-   });
-}
-
-function checkAuthenticated(req, res, next) {
-   if (req.isAuthenticated()) {
-      return next();
-   }
-   console.log('Access denied! Please login.');
-   res.redirect('/user/login');
-}
-
-// ===============================================================
-
-const testObj = {
-   test: 'This is a test!'
-}
-
-// app.get('/test', (req, res) => {
-//    // If user is logged in
-//    if (req.isAuthenticated()) {
-//       // 
-      
-//       console.log('Request was authenticated!', req.user);
-
-//    } else {
-//       return console.log('Request was NOT authenticated. You get nothing!');
-//    }
-   
-//    res.send(testObj);
-// });
-
-app.post('/db/cart', (req, res) => {
-   // If user is logged in
-   if (req.isAuthenticated()) {
-      console.log('Backend cart console.log:');
-      console.log(req.user.id);
-      const cartItems = JSON.stringify(req.body);
-
-      db.query("UPDATE users SET cart = $1 WHERE id = $2 RETURNING *", [cartItems, req.user.id], (error, results) => {
-         if (error) {
-            return console.log(error)
-         } else {
-            return res.send('Cart successfully saved to account.');
-         }
-      });
-
-   } else {
-      return console.log('Request is NOT authenticated. You get nothing.');
-   }
-});
-
-app.post('/db/likes', (req, res) => {
-   // If user is logged in
-   if (req.isAuthenticated()) {
-      console.log('Backend likes console.log:');
-      console.log(req.body);
-      console.log(JSON.stringify(req.body));
-
-      return res.send(req.body)
-   } else {
-      return console.log('Request is NOT authenticated. You get nothing.')
-   }
-});
-
-
 
 // HOME PAGE
 app.get('/', (req, res) => {
@@ -163,8 +78,42 @@ app.get('/*', (req, res) => {
 
 // ======================= SERVER ================================
 // ===============================================================
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
    console.log(`Server has started on port ${port}...`);
 });
+
+
+// ======================= FUNCTION DECLARATIONS =================
+// ===============================================================
+
+function getUserByEmail(email, cb) {
+   db.query('SELECT * FROM users WHERE username = $1', [email.toLowerCase()], (err, result) => {      
+      if (err) {
+         return cb(err, null);
+
+      } else if (!result.rows[0]) {
+         return cb(null, null);
+
+      } else {
+         return cb(null, result.rows[0]);
+      }
+   });
+}
+
+function getUserByID(id, cb) {
+   db.query('SELECT * FROM users WHERE id = $1', [id], (err, result) => {      
+      if (err) {
+         console.log(err);
+         return cb(err, null);
+      }
+
+      if (!result.rows[0]) {
+         console.log('The username does not match any existing account.');
+         return cb(null, null);
+      }
+   return cb(null, result.rows[0]);
+   });
+}
