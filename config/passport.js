@@ -4,20 +4,27 @@ const LocalStrategy = require('passport-local').Strategy,
 
 // // Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request.
 function initialize(passport, getUserByEmail, getUserByID) {
-   const authenticateUser = (email, password, next) => {
+
+   const authenticateUser = (email, password, done) => {
+      console.log('Passport authentication activated');
+      
       getUserByEmail(email, (error, user) => {
          if (error) {
-            return next(error)
+            return done(error)
          }
 
          if (user == null) {
-            return next(null, false, { message: `The provided email ${email} does not match an existing account.` })
+            return done(null, false, { message: `The provided email ${email} does not match an existing account.` }
+            )
          }
 
          if (sc.decrypt(user.password) == password) {
-            return next(null, user);
+            console.log('Authentication successful!');
+            return done(null, user);
          } else {
-            return next(null, false, { message: 'The password provided was incorrect.' })
+            console.log('Password does match account.')
+            return done(null, false, { message: 'The password provided was incorrect.' }
+            )
          }
       });
    }

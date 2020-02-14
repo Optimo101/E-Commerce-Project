@@ -11,18 +11,7 @@
             <h1 class="page-header__title">Account</h1>
          </div>
 
-
-         <% if (messages.error) { %>
-         <h3 class="msg-header msg-header--error"><i class="msg-header__icon fas fa-exclamation-circle message-header__icon"></i><%= messages.error %></h3>
-         <% } %>
-
-         <% if (typeof errorMsg != 'undefined') { %>
-         <h3 class="msg-header msg-header--error"><i class="msg-header__icon fas fa-exclamation-circle message-header__icon"></i><%= errorMsg %></h3>
-         <% } %>
-
-         <% if (typeof successMsg != 'undefined') { %>
-            <h3 class="msg-header msg-header--success"><i class="msg-header__icon fas fa-exclamation-circle message-header__icon"></i><%= successMsg %></h3>
-         <% } %>
+         <h3 class="msg-header msg-header--error"></h3>
 
          <div class="login-section__content">
 
@@ -38,42 +27,6 @@
                      <input type="password" class="sign-in__password-input input" name="password">
                      <input type="submit" class="sign-in__btn btn btn--red btn--hover-float" value="Login">
                   </div>
-   
-               </form>
-            </div>
-
-            <div class="or-container">
-               <h2 class="or-title">- OR -</h2>
-            </div>
-            
-            <div class="form-container">
-               <form class="sign-up__form form" method="POST" action="/user/register">
-                  <h2 class="sign-up__title form__title">Create Account</h2>
-   
-                  <div class="form__content">
-                     <div class="sign-up__sub-container form-sub-container">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="sign-up__first-name-input input" name="firstName" required>
-         
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="sign-up__last-name-input input" name="lastName" required>
-                        
-                        <label for="username">Email Address</label>
-                        <input type="email" class="sign-up__email-input input" name="newUsername" required>
-                     </div>
-                     
-                     <div class="sign-up__sub-container form-sub-container">
-                        <label for="password">Password</label>
-                        <input type="password" class="sign-up__password-input input" name="newPassword" required>
-         
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" class="sign-up__confirm-password-input input" name="confirmPassword" required>
-         
-                        <input type="submit" class="sign-up__btn btn btn--red btn--hover-float" value="Create Account">
-                     </div>
-   
-                  </div>
-                     
    
                </form>
             </div>

@@ -6,32 +6,50 @@ const express = require('express'),
       db = require('../../config/db');
 
 
+
+
+// REGISTER (GET)
+
+router.get('/', checkNotAuthenticated, (req, res) => {
+   console.log('Register (GET) Route:')
+
+   res.render('register');
+
+});
+
+
 // REGISTER (POST)
-router.post('/', (req, res) => {   
+router.post('/', checkNotAuthenticated, (req, res) => {   
+   console.log('Register (POST) Route:')
    const { firstName, lastName, newUsername, newPassword, confirmPassword } = req.body;
 
    if (newPassword !== confirmPassword) {
-      return res.render('login', { errorMsg: 'Password fields did not match. Please try again.' })
+      return res.render('register', { errorMsg: 'Password fields did not match. Please try again.' })
    }
 
    getUserByEmail(newUsername.toLowerCase(), (error, user) => {
       if (error) {
          console.log(error);
-         return res.render('login');
+         return res.render('register');
       }
 
       if (user) {
-         return res.render('login', { errorMsg: 'An account with that email address already exists.' });
+         return res.render('register', { errorMsg: 'An account with that email address already exists.' });
 
       } else {
          db.query('INSERT INTO users (first_name, last_name, username, password, id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstName, lastName, newUsername.toLowerCase(), sc.encrypt(newPassword), uuidv4()], (error, results) => {
 
             if (error) {
                console.log(error);
-               return res.render('login');
+               return res.render('register', {errorMsg: 'An error occurred while attempting to access the server. Please try again later.'});
             }
       
-            return res.render('login', { successMsg: 'Account created. Please login.' })
+            // return res.render('login', { successMsg: 'Account created. Please login.' })
+
+            return res.redirect('/user/login');
+
+            // const queryString = encodeURIComponent('yes');
+            // return res.redirect('/user/login/?registered=' + queryString)
          });
       }
    });
@@ -50,6 +68,13 @@ function getUserByEmail(email, cb) {
          return cb(null, result.rows[0]);
       }
    });
+}
+
+function checkNotAuthenticated(req, res, next) {
+   if (req.isAuthenticated()) {
+      return res.redirect('/');
+   }
+   next();
 }
 
 
