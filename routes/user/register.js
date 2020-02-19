@@ -3,23 +3,18 @@ const express = require('express'),
       uuidv4 = require('uuid/v4'),
       simplecrypt = require('simplecrypt'),
       sc = simplecrypt({ password: process.env.SCPASS }),
-      db = require('../../config/db');
-
-
-
+      db = require('../../config/db'),
+      authLib = require('../../lib/authentication'),
+      queriesLib = require('../../lib/queries');
 
 // REGISTER (GET)
-
-router.get('/', checkNotAuthenticated, (req, res) => {
-   console.log('Register (GET) Route:')
-
+router.get('/', authLib.checkNotAuth, (req, res) => {
+   console.log('Register (GET) Route:');
    res.render('register');
-
 });
 
-
 // REGISTER (POST)
-router.post('/', checkNotAuthenticated, (req, res) => {   
+router.post('/', authLib.checkNotAuth, (req, res) => {   
    console.log('Register (POST) Route:')
    const { firstName, lastName, newUsername, newPassword, confirmPassword } = req.body;
 
@@ -27,7 +22,7 @@ router.post('/', checkNotAuthenticated, (req, res) => {
       return res.render('register', { errorMsg: 'Password fields did not match. Please try again.' })
    }
 
-   getUserByEmail(newUsername.toLowerCase(), (error, user) => {
+   queriesLib.getUserByEmail(newUsername.toLowerCase(), (error, user) => {
       if (error) {
          console.log(error);
          return res.render('register');
@@ -44,38 +39,10 @@ router.post('/', checkNotAuthenticated, (req, res) => {
                return res.render('register', {errorMsg: 'An error occurred while attempting to access the server. Please try again later.'});
             }
       
-            // return res.render('login', { successMsg: 'Account created. Please login.' })
-
             return res.redirect('/user/login');
-
-            // const queryString = encodeURIComponent('yes');
-            // return res.redirect('/user/login/?registered=' + queryString)
          });
       }
    });
 });
-
-
-function getUserByEmail(email, cb) {
-   db.query('SELECT * FROM users WHERE username = $1', [email.toLowerCase()], (err, result) => {      
-      if (err) {
-         return cb(err, null);
-
-      } else if (!result.rows[0]) {
-         return cb(null, null);
-
-      } else {
-         return cb(null, result.rows[0]);
-      }
-   });
-}
-
-function checkNotAuthenticated(req, res, next) {
-   if (req.isAuthenticated()) {
-      return res.redirect('/');
-   }
-   next();
-}
-
 
 module.exports = router;

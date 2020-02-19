@@ -1,5 +1,10 @@
+// ================ NPM PACKAGE REQUIREMENTS =====================
+// ===============================================================
+
+// Require sensitive info pertaining to security of app
 require('dotenv').config();
 
+// Packages/Libraries
 const express = require('express'),
       app = express(),
       methodOverride = require('method-override'),
@@ -7,18 +12,25 @@ const express = require('express'),
       flash = require('express-flash'),
       session = require('express-session'),
       cookieParser = require('cookie-parser'),
-      db = require('./config/db'),
-      initializePassport = require('./config/passport');
+      queriesLib = require('./lib/queries');
 
+// Passport configuration
+const initializePassport = require('./config/passport');
+
+// Route file requirements
 const register = require('./routes/user/register'),
       login = require('./routes/user/login'),
       logout = require('./routes/user/logout'),
-      account = require('./routes/user/account');
+      account = require('./routes/user/account'),
+      results = require('./routes/results'),
+      misc = require('./routes/misc');
+
 
 
 // ======================= MIDDLEWARE ============================
 // ===============================================================
 
+// Express middleware
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
@@ -34,57 +46,24 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Router
 app.use('/user/register', register);
 app.use('/user/login', login);
 app.use('/user/logout', logout);
 app.use('/user/account', account);
+app.use('/results', results);
+app.use('/', misc);
 
+// Express settings
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
 
-
-initializePassport(passport, getUserByEmail, getUserByID);
-
-
-// ======================= ROUTES ================================
-// ===============================================================
-
-// HOME PAGE
-app.get('/', (req, res) => {
-   res.render('home', {user: req.user});
-});
-
-
-// RESULTS PAGE
-app.get('/results', (req, res) => {
-   res.render('results', {user: req.user});
-});
-
-app.get('/user/likes', checkAuthenticated, (req, res) => {
-   res.render('likes', {user: req.user});
-})
-
-
-// PRODUCT PAGE
-app.get('/product', (req, res) => {
-   res.render('product', {user: req.user});
-});
-
-// CART PAGE
-app.get('/cart', (req, res) => {
-   res.render('cart', {user: req.user});
-});
-
-
-// CATCH ALL
-app.get('/*', (req, res) => {
-   res.send('Unable to find the requested page.')
-});
 
 
 // ======================= SERVER ================================
 // ===============================================================
 
+// If PORT is set, use that; otherwsie use port 3000
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
@@ -92,42 +71,10 @@ app.listen(port, () => {
 });
 
 
-// ======================= FUNCTION DECLARATIONS =================
+
+// ======================= FUNCTIONS =============================
 // ===============================================================
 
-function getUserByEmail(email, cb) {
-   db.query('SELECT * FROM users WHERE username = $1', [email.toLowerCase()], (err, result) => {      
-      if (err) {
-         return cb(err, null);
+// Configure Passport
+initializePassport(passport, queriesLib.getUserByEmail, queriesLib.getUserByID);
 
-      } else if (!result.rows[0]) {
-         return cb(null, null);
-
-      } else {
-         return cb(null, result.rows[0]);
-      }
-   });
-}
-
-function getUserByID(id, cb) {
-   db.query('SELECT * FROM users WHERE id = $1', [id], (err, result) => {      
-      if (err) {
-         console.log(err);
-         return cb(err, null);
-      }
-
-      if (!result.rows[0]) {
-         console.log('The username does not match any existing account.');
-         return cb(null, null);
-      }
-   return cb(null, result.rows[0]);
-   });
-}
-
-function checkAuthenticated(req, res, next) {
-   if (req.isAuthenticated()) {
-      return next();
-   }
-   console.log('Access denied! Please login.');
-   res.redirect('/user/login');
-}
