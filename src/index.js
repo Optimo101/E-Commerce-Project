@@ -56,18 +56,24 @@ const controlCart = (event) => {
       currentQuantity = 1;
    }
 
-   // Swap icon on 'Add to Cart' button to let user know item is being added to thier cart
+   // Icon animation on 'Add to Cart' button to let user know item is being added to thier cart
    cartBtnAnimation(buttonElement, state.cart.items[currentSku]);
    
    // Add the item to the cart model
+   let source;
+
+   window.location.pathname === '/results' ? source = state.productSearch.results : source = state.likes.likes
+
+   console.log(source);
+
    state.cart.addItem(
       currentSku,
-      state.productSearch.results[currentIndex].image,
-      state.productSearch.results[currentIndex].name,
-      state.productSearch.results[currentIndex].regularPrice,
+      source[currentIndex].image,
+      source[currentIndex].name,
+      source[currentIndex].regularPrice,
       currentQuantity
    );
-
+   
    // Update number of cart items in cart icon located in top right corner
    elements.headerCartCounter.innerHTML = state.cart.getNumItems();
 };
@@ -118,7 +124,7 @@ const controlCartPage = () => {
 };
 
 // ===========================================================
-// LIKE CONTROLLER
+// LIKES CONTROLLER
 // ===========================================================
 const controlLikes = (event) => {
    const buttonElement = event.target.closest('.btn');
@@ -126,43 +132,92 @@ const controlLikes = (event) => {
    const idArray = buttonElement.id.split('-');
    const currentIndex = idArray[0];
    const currentSku = idArray[1];
+   let likesPage;
+   let source;
 
-   // User has NOT yet liked current product
-   if (!state.likes.isLiked(currentSku)) {
+   window.location.pathname === '/user/likes' ? likesPage = true : likesPage = false;
+
+   likesPage ? source = state.likes.likes[currentIndex] : source = state.productSearch.results[currentIndex];
+
+   // Product is NOT currently liked
+   if (!state.likes.isLiked(currentSku, likesPage)) {
+      console.log('Add the like!')
+      console.log(likesPage, source);
+
+
       // Add like to the state
       state.likes.addLike(
          currentSku,
-         state.productSearch.results[currentIndex].name,
-         state.productSearch.results[currentIndex].image,
-         state.productSearch.results[currentIndex].regularPrice
+         source.name,
+         source.image,
+         source.regularPrice,
+         source.customerReviewAverage,
+         source.customerReviewCount,
+         likesPage
       );
 
       // Toggle the like button
-      if (window.location.pathname === '/results') {
+      if (window.location.pathname === '/results' || window.location.pathname === '/user/likes') {
          resultsView.toggleLikeBtn(true, iconElement);
       } else if (window.location.pathname === '/product') {
          productView.toggleLikeBtn(true, iconElement);
       }
 
-      // Add like to UI list
-      // COMING SOON!!!
-
-   // User HAS liked the current product
+   // Product IS currently liked
    } else {
       // Remove like to the state
-      state.likes.deleteLike(currentSku);
+      state.likes.deleteLike(currentSku, likesPage);
 
       // Toggle the like button
-      if (window.location.pathname === '/results') {
+      if (window.location.pathname === '/results' || window.location.pathname === '/user/likes') {
          resultsView.toggleLikeBtn(false, iconElement);
+
       } else if (window.location.pathname === '/product') {
          productView.toggleLikeBtn(false, iconElement);
       }
-
-      // Remove like to UI list
-      // COMING SOON!!!
-   }
+   } 
 }
+
+// ===========================================================
+// LIKES PAGE CONTROLLER
+// ===========================================================
+const controlLikesPage = async () => {
+   console.log('Beginning controlLikesPage()...');
+
+   state.likes.createTempLikes();
+
+   // Add index property to each object in array
+   state.likes.tempLikes.forEach((element, index) => {
+      element.index = index;
+   });
+
+   // Render results on UI
+   resultsView.renderResults(state.likes.tempLikes);
+
+   // EVENT LISTENERS
+   // ===========================================================
+   elements.resultsSection.addEventListener('click', event => {
+      if (event.target.matches('.results-section__page-buttons, .results-section__page-buttons *')) {
+         const btn = event.target.closest('.btn');
+
+         if (btn) {
+            const goToPage = parseInt(btn.dataset.goto, 10);
+            resultsView.clearResults();
+            resultsView.renderResults(state.likes.tempLikes, goToPage);
+         };
+      }
+
+      if (event.target.matches('.product-thumb__cart-btn, .product-thumb__cart-btn *')) {
+         controlCart(event);
+      }
+
+      if (event.target.matches('.product-thumb__like-btn, .product-thumb__like-btn *')) {
+         controlLikes(event);
+      }
+   });
+}
+
+
 
 
 // ===========================================================
@@ -189,11 +244,12 @@ const controlResultsPage = async () => {
             }
          });
 
-
          // Render results on UI
          state.productSearch.results.forEach((element, index) => {
             element.index = index;
          });
+
+         console.log('AFTER', state.productSearch.results);
 
          resultsView.renderResults(state.productSearch.results);
 
@@ -318,8 +374,6 @@ const controlProductPage = async () => {
 // HEADER CONTROLLER
 // ===========================================================
 const controlHeader = async () => {
-   console.log('Beginning controlHeader()...')
-
    try {
       // Perform categories search
       await controlCategorySearch();
@@ -490,6 +544,8 @@ const init = () => {
       controlCartPage();
    } else if (window.location.pathname === '/user/login') {
       controlLoginPage();
+   } else if (window.location.pathname === '/user/likes') {
+      controlLikesPage();
    } else if (window.location.pathname === '/') {
       controlHomePage();
    }
