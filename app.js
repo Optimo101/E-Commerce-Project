@@ -1,11 +1,13 @@
 require('dotenv').config();
+
 const express = require('express'),
       app = express(),
       methodOverride = require('method-override'),
       passport = require('passport'),
       flash = require('express-flash'),
       session = require('express-session'),
-      db = require('./config/index'),
+      cookieParser = require('cookie-parser'),
+      db = require('./config/db'),
       initializePassport = require('./config/passport');
 
 const register = require('./routes/user/register'),
@@ -14,10 +16,10 @@ const register = require('./routes/user/register'),
       account = require('./routes/user/account');
 
 
-initializePassport(passport, getUserByEmail, getUserByID);
-
+// ======================= MIDDLEWARE ============================
 // ===============================================================
-app.use(require('cookie-parser')());
+
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(flash());
@@ -41,7 +43,58 @@ app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
 
 
+initializePassport(passport, getUserByEmail, getUserByID);
+
+
+// ======================= ROUTES ================================
 // ===============================================================
+
+// HOME PAGE
+app.get('/', (req, res) => {
+   res.render('home', {user: req.user});
+});
+
+
+// RESULTS PAGE
+app.get('/results', (req, res) => {
+   res.render('results', {user: req.user});
+});
+
+app.get('/user/likes', checkAuthenticated, (req, res) => {
+   res.render('likes', {user: req.user});
+})
+
+
+// PRODUCT PAGE
+app.get('/product', (req, res) => {
+   res.render('product', {user: req.user});
+});
+
+// CART PAGE
+app.get('/cart', (req, res) => {
+   res.render('cart', {user: req.user});
+});
+
+
+// CATCH ALL
+app.get('/*', (req, res) => {
+   res.send('Unable to find the requested page.')
+});
+
+
+// ======================= SERVER ================================
+// ===============================================================
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+   console.log(`Server has started on port ${port}...`);
+});
+
+
+// ======================= FUNCTION DECLARATIONS =================
+// ===============================================================
+
 function getUserByEmail(email, cb) {
    db.query('SELECT * FROM users WHERE username = $1', [email.toLowerCase()], (err, result) => {      
       if (err) {
@@ -71,38 +124,10 @@ function getUserByID(id, cb) {
    });
 }
 
-// ===============================================================
-// HOME PAGE
-app.get('/', (req, res, next) => {
-   res.render('home', {user: req.user});
-});
-
-// RESULTS PAGE
-app.get('/results', (req, res) => {
-   res.render('results', {user: req.user});
-});
-
-// PRODUCT PAGE
-app.get('/product', (req, res) => {
-   res.render('product', {user: req.user});
-});
-
-// CART PAGE
-app.get('/cart', (req, res) => {
-   res.render('cart', {user: req.user});
-});
-
-
-// CATCH ALL
-app.get('/*', (req, res) => {
-   res.send('Unable to find the requested page.')
-});
-
-
-// ======================= SERVER ================================
-// ===============================================================
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-   console.log(`Server has started on port ${port}...`);
-});
+function checkAuthenticated(req, res, next) {
+   if (req.isAuthenticated()) {
+      return next();
+   }
+   console.log('Access denied! Please login.');
+   res.redirect('/user/login');
+}

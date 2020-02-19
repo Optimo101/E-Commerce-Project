@@ -1,3 +1,5 @@
+import axios from 'axios'; 
+
 import { elements, hideElement, updateItemQuant, cartBtnAnimation } from './views/base';
 
 import ProductSearch from './models/ProductSearch';
@@ -54,18 +56,24 @@ const controlCart = (event) => {
       currentQuantity = 1;
    }
 
-   // Swap icon on 'Add to Cart' button to let user know item is being added to thier cart
+   // Icon animation on 'Add to Cart' button to let user know item is being added to thier cart
    cartBtnAnimation(buttonElement, state.cart.items[currentSku]);
    
    // Add the item to the cart model
+   let source;
+
+   window.location.pathname === '/results' ? source = state.productSearch.results : source = state.likes.likes
+
+   console.log(source);
+
    state.cart.addItem(
       currentSku,
-      state.productSearch.results[currentIndex].image,
-      state.productSearch.results[currentIndex].name,
-      state.productSearch.results[currentIndex].regularPrice,
+      source[currentIndex].image,
+      source[currentIndex].name,
+      source[currentIndex].regularPrice,
       currentQuantity
    );
-
+   
    // Update number of cart items in cart icon located in top right corner
    elements.headerCartCounter.innerHTML = state.cart.getNumItems();
 };
@@ -74,6 +82,8 @@ const controlCart = (event) => {
 // CART PAGE CONTROLLER
 // ===========================================================
 const controlCartPage = () => {
+   console.log('Beginning controlCartPage()...')
+
    cartView.renderCartGridItems(state.cart.items);
 
    state.cart.calcTotals();
@@ -114,7 +124,7 @@ const controlCartPage = () => {
 };
 
 // ===========================================================
-// LIKE CONTROLLER
+// LIKES CONTROLLER
 // ===========================================================
 const controlLikes = (event) => {
    const buttonElement = event.target.closest('.btn');
@@ -122,49 +132,100 @@ const controlLikes = (event) => {
    const idArray = buttonElement.id.split('-');
    const currentIndex = idArray[0];
    const currentSku = idArray[1];
+   let likesPage;
+   let source;
 
-   // User has NOT yet liked current product
-   if (!state.likes.isLiked(currentSku)) {
+   window.location.pathname === '/user/likes' ? likesPage = true : likesPage = false;
+
+   likesPage ? source = state.likes.likes[currentIndex] : source = state.productSearch.results[currentIndex];
+
+   // Product is NOT currently liked
+   if (!state.likes.isLiked(currentSku, likesPage)) {
+      console.log('Add the like!')
+      console.log(likesPage, source);
+
+
       // Add like to the state
       state.likes.addLike(
          currentSku,
-         state.productSearch.results[currentIndex].name,
-         state.productSearch.results[currentIndex].image,
-         state.productSearch.results[currentIndex].regularPrice
+         source.name,
+         source.image,
+         source.regularPrice,
+         source.customerReviewAverage,
+         source.customerReviewCount,
+         likesPage
       );
 
       // Toggle the like button
-      if (window.location.pathname === '/results') {
+      if (window.location.pathname === '/results' || window.location.pathname === '/user/likes') {
          resultsView.toggleLikeBtn(true, iconElement);
       } else if (window.location.pathname === '/product') {
          productView.toggleLikeBtn(true, iconElement);
       }
 
-      // Add like to UI list
-      // COMING SOON!!!
-
-   // User HAS liked the current product
+   // Product IS currently liked
    } else {
       // Remove like to the state
-      state.likes.deleteLike(currentSku);
+      state.likes.deleteLike(currentSku, likesPage);
 
       // Toggle the like button
-      if (window.location.pathname === '/results') {
+      if (window.location.pathname === '/results' || window.location.pathname === '/user/likes') {
          resultsView.toggleLikeBtn(false, iconElement);
+
       } else if (window.location.pathname === '/product') {
          productView.toggleLikeBtn(false, iconElement);
       }
-
-      // Remove like to UI list
-      // COMING SOON!!!
-   }
+   } 
 }
+
+// ===========================================================
+// LIKES PAGE CONTROLLER
+// ===========================================================
+const controlLikesPage = async () => {
+   console.log('Beginning controlLikesPage()...');
+
+   state.likes.createTempLikes();
+
+   // Add index property to each object in array
+   state.likes.tempLikes.forEach((element, index) => {
+      element.index = index;
+   });
+
+   // Render results on UI
+   resultsView.renderResults(state.likes.tempLikes);
+
+   // EVENT LISTENERS
+   // ===========================================================
+   elements.resultsSection.addEventListener('click', event => {
+      if (event.target.matches('.results-section__page-buttons, .results-section__page-buttons *')) {
+         const btn = event.target.closest('.btn');
+
+         if (btn) {
+            const goToPage = parseInt(btn.dataset.goto, 10);
+            resultsView.clearResults();
+            resultsView.renderResults(state.likes.tempLikes, goToPage);
+         };
+      }
+
+      if (event.target.matches('.product-thumb__cart-btn, .product-thumb__cart-btn *')) {
+         controlCart(event);
+      }
+
+      if (event.target.matches('.product-thumb__like-btn, .product-thumb__like-btn *')) {
+         controlLikes(event);
+      }
+   });
+}
+
+
 
 
 // ===========================================================
 // RESULTS PAGE CONTROLLER
 // ===========================================================
 const controlResultsPage = async () => {
+   console.log('Beginning controlResultsPage()...');
+
    // Get search query from url parameter
    const urlQuery = window.location.search;
    
@@ -183,11 +244,12 @@ const controlResultsPage = async () => {
             }
          });
 
-
          // Render results on UI
          state.productSearch.results.forEach((element, index) => {
             element.index = index;
          });
+
+         console.log('AFTER', state.productSearch.results);
 
          resultsView.renderResults(state.productSearch.results);
 
@@ -226,6 +288,7 @@ const controlResultsPage = async () => {
 // PRODUCT PAGE CONTROLLER
 // ===========================================================
 const controlProductPage = async () => {
+   console.log('Beginning controlProductPage()...')
 
    // Get search query from url parameter
    const urlQuery = window.location.search;
@@ -352,13 +415,35 @@ const controlHeader = async () => {
          mainMenuView.toggleDropdown(elements.mainMenuDropdown);
       });
 
-      // Open/close account menu
+      // Account Menu events
       if (elements.accountMenuDropdown != null) {
+
          elements.accountMenuBtn.addEventListener('click', function() {
             mainMenuView.toggleDropdown(elements.accountMenuDropdown);
          });
-      }
 
+         elements.accountLogoutLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            logout();
+
+            async function logout() {
+               try {
+                  await axios.post('/user/logout', {
+                     cart: state.cart.items,
+                     likes: state.likes.likes
+                  })
+                  .then((response) => {
+                     console.log(response);
+                     state.cart.clearLocalStorage();
+                     state.likes.clearLocalStorage();
+                     window.location = window.location.href;
+                  })
+               } catch (error) {
+                  console.log(error);
+               }
+            }
+         });
+      }
 
       // Open/close main menu
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
@@ -375,11 +460,63 @@ const controlHeader = async () => {
 // HOME PAGE CONTROLLER
 // ===========================================================
 const controlHomePage = () => {
+   console.log('Beginning controlHomePage()...')
 
    homeView.promotionRotation();
+};
 
 
+// ===========================================================
+// LOGIN PAGE CONTROLLER
+// ===========================================================
+const controlLoginPage = () => {
+   console.log('Beginning controlLoginPage()...')
    
+// EVENT LISTENERS
+// ===========================================================
+   elements.accountLoginBtn.addEventListener('click', event => {
+      event.preventDefault();
+      login();
+
+      async function login() {
+         const username = elements.accountLoginUsername.value;
+         const password = elements.accountLoginPassword.value;
+
+         try {
+            await axios.post('/user/login', {
+               username: username,
+               password: password
+            })
+            .then(response => {
+               console.log('cart obj:', response.data.cart)
+               console.log('likes obj:', response.data.likes)
+
+               if (response.data.error) {
+                  return document.querySelector('.msg-header').innerHTML = response.data.error;
+               }
+
+               if (response.data.cart != null) {
+                  if (!(Object.keys(response.data.cart).length === 0)) {
+                     state.cart.combineCarts(response.data.cart);
+                  }
+               }
+              
+               if (response.data.likes != null) {
+                  if (!(response.data.likes.length === 0)) {
+                     state.likes.combineLikes(response.data.likes);
+                  }
+               }  
+                  
+               return window.location = '/';
+            })
+       
+         } catch (error) {
+            if (error) {
+               console.log(error);
+            }
+         }
+      }
+   });
 };
 
 
@@ -388,7 +525,6 @@ const controlHomePage = () => {
 // ===========================================================
 const init = () => {
    // Restore cart and saved/liked items on page load
-   // window.addEventListener('load', () => {
       state.likes = new Likes();
       state.likes.readLocalStorage();
 
@@ -396,8 +532,7 @@ const init = () => {
       state.cart.readLocalStorage();
 
       console.log(localStorage);
-      console.log(state);
-   // });
+      console.log('State', state);
 
    controlHeader();
 
@@ -407,6 +542,10 @@ const init = () => {
       controlResultsPage();
    } else if (window.location.pathname === '/cart') {
       controlCartPage();
+   } else if (window.location.pathname === '/user/login') {
+      controlLoginPage();
+   } else if (window.location.pathname === '/user/likes') {
+      controlLikesPage();
    } else if (window.location.pathname === '/') {
       controlHomePage();
    }
