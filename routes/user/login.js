@@ -1,25 +1,17 @@
 const express = require('express'),
       router = express.Router(),
-      passport = require('passport');
+      passport = require('passport'),
+      authLib = require('../../lib/authentication');
 
 
 // LOGIN (GET)
-router.get('/', checkNotAuthenticated, (req, res) => {
+router.get('/', authLib.checkNotAuth, (req, res) => {
    console.log('Login (GET) Route:')
-
-   // const registered = req.query.registered;
-   // console.log('New account Registration?', registered);
-
-   // if (registered === 'yes') {
-   //    res.render('login', {successMsg: 'Your account has been created. Please login.'});
-   // } else {
-      res.render('login');
-   // }
+   res.render('login');
 });
 
-
 // LOGIN (POST)
-router.post('/', (req, res, next) => {
+router.post('/', authLib.checkNotAuth, (req, res, next) => {
    console.log('Login (POST) Route:')
 
    passport.authenticate('local', function(err, user, info) {
@@ -41,40 +33,5 @@ router.post('/', (req, res, next) => {
       });
     })(req, res, next);
 })
-
-
-
-
-
-// LOGIN (POST)
-// router.post('/', passport.authenticate('local', function (err, user, info) {
-//    if (err) {
-//       console.log('ERROR', err);
-//    }
-//    if (user) {
-//       console.log('USER', user);
-//    }
-//    if (info) {
-//       console.log('MESSAGE', info.message);
-//    }
-
-//    next();
-
-   
-// }), (req, res, next) => {
-//    console.log('Login (POST) Route:')
-//    console.log(req.user);
-//    res.send(req.user);
-// });
-
-
-
-function checkNotAuthenticated(req, res, next) {
-   if (req.isAuthenticated()) {
-      return res.redirect('/');
-   }
-   next();
-}
-
 
 module.exports = router;
