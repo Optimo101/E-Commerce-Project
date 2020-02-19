@@ -85,8 +85,6 @@ export default class Likes {
    }
 
    combineLikes(dbLikes) {
-      console.log('From combineLikes function:', dbLikes)
-
       dbLikes.forEach((like) => {
 
          if (!this.isLiked(like.sku)) {
@@ -95,8 +93,6 @@ export default class Likes {
       });
 
       this.persistData();
-
-      console.log('New likes after dbLikes added:', this.likes);
    }
 
    clearLocalStorage() {

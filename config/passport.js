@@ -2,7 +2,7 @@ const LocalStrategy = require('passport-local').Strategy,
       simplecrypt = require('simplecrypt'),
       sc = simplecrypt({ password: process.env.SCPASS });
 
-// // Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request.
+// Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request
 function initialize(passport, getUserByEmail, getUserByID) {
 
    const authenticateUser = (email, password, done) => {
