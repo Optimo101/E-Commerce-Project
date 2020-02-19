@@ -168,7 +168,7 @@
                <div class="account-cart-wrapper">
                   <% if (typeof user != 'undefined') { %>
                      <button class="account-btn btn btn--black">
-                        <i class="far fa-user account-btn__icon"></i>
+                        <i class="fas fa-user account-btn__icon"></i>
                         Hello,&nbsp <span class="account-btn__firstname"> <%= user.first_name %></span>
                      </button>
 
@@ -183,7 +183,7 @@
                            </li>
 
                            <li class="account-menu__item">
-                              <a href="/user/likes/<%= user.id %>" class="account-menu__link">
+                              <a href="/user/likes" class="account-menu__link">
                                  <i class="fas fa-heart account-menu__item-icon"></i>
                                  <span class="account-menu__title">Liked Items</span>
                               </a>
@@ -197,7 +197,7 @@
                            </li>
                            
                            <li class="account-menu__item">
-                              <a href="/user/logout/" class="account-menu__link">
+                              <a href="/user/logout/" class="account-menu__link--logout account-menu__link">
                                  <i class="fas fa-sign-out-alt account-menu__item-icon"></i>
                                  <span class="account-menu__title">LOGOUT</span>
                               </a>
@@ -206,9 +206,13 @@
                      </div>
 
                   <% } else { %>
-                     <a class="account-btn btn btn--black" href="/user/login">
-                        <i class="far fa-user account-btn__icon"></i>
-                        Account
+                     <a class="login-btn btn btn--black" href="/user/login">
+                        <i class="fas fa-sign-in-alt login-btn__icon"></i>
+                        Login
+                     </a>
+                     <a class="register-btn btn btn--black" href="/user/register">
+                        <i class="fas fa-user-plus register-btn__icon"></i>
+                        Register
                      </a>
                   <% } %>
                   
@@ -216,7 +220,7 @@
                      Cart
                      <i class="fas fa-shopping-cart cart-link__icon"></i>
                      </ion-icon>
-                     <div class="cart-link__counter">0</div>
+                     <div class="cart-link__counter"></div>
                   </a>
                </div>
             </div>
