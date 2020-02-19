@@ -135,15 +135,12 @@ const controlLikes = (event) => {
    let likesPage;
    let source;
 
-   window.location.pathname === '/user/likes' ? likesPage = true : likesPage = false;
+   window.location.pathname === '/results/likes' ? likesPage = true : likesPage = false;
 
    likesPage ? source = state.likes.likes[currentIndex] : source = state.productSearch.results[currentIndex];
 
    // Product is NOT currently liked
    if (!state.likes.isLiked(currentSku, likesPage)) {
-      console.log('Add the like!')
-      console.log(likesPage, source);
-
 
       // Add like to the state
       state.likes.addLike(
@@ -157,7 +154,7 @@ const controlLikes = (event) => {
       );
 
       // Toggle the like button
-      if (window.location.pathname === '/results' || window.location.pathname === '/user/likes') {
+      if (window.location.pathname === '/results' || window.location.pathname === '/results/likes') {
          resultsView.toggleLikeBtn(true, iconElement);
       } else if (window.location.pathname === '/product') {
          productView.toggleLikeBtn(true, iconElement);
@@ -169,7 +166,7 @@ const controlLikes = (event) => {
       state.likes.deleteLike(currentSku, likesPage);
 
       // Toggle the like button
-      if (window.location.pathname === '/results' || window.location.pathname === '/user/likes') {
+      if (window.location.pathname === '/results' || window.location.pathname === '/results/likes') {
          resultsView.toggleLikeBtn(false, iconElement);
 
       } else if (window.location.pathname === '/product') {
@@ -544,7 +541,7 @@ const init = () => {
       controlCartPage();
    } else if (window.location.pathname === '/user/login') {
       controlLoginPage();
-   } else if (window.location.pathname === '/user/likes') {
+   } else if (window.location.pathname === '/results/likes') {
       controlLikesPage();
    } else if (window.location.pathname === '/') {
       controlHomePage();

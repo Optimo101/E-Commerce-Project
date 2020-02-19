@@ -1,12 +1,11 @@
 const express = require('express'),
       router = express.Router(),
-      db = require('../../config/db');
+      db = require('../../config/db'),
+      authLib = require('../../lib/authentication');
 
 // LOGOUT (POST)
-router.post('/', checkAuthenticated, (req, res) => {
+router.post('/', authLib.checkAuth, (req, res) => {
    console.log('Logout (POST) ROUTE:');
-
-   console.log('Original URL:', req.originalUrl);
 
    const cart = JSON.stringify(req.body.cart);
    const likes = JSON.stringify(req.body.likes);
@@ -20,15 +19,5 @@ router.post('/', checkAuthenticated, (req, res) => {
       }
    });
 });
-
-
-function checkAuthenticated(req, res, next) {
-   if (req.isAuthenticated()) {
-      return next();
-   }
-   console.log('Access denied! Please login.');
-   res.redirect('/user/login');
-}
-
 
 module.exports = router;
