@@ -54,10 +54,16 @@ app.get('/', (req, res) => {
    res.render('home', {user: req.user});
 });
 
+
 // RESULTS PAGE
 app.get('/results', (req, res) => {
    res.render('results', {user: req.user});
 });
+
+app.get('/user/likes', checkAuthenticated, (req, res) => {
+   res.render('likes', {user: req.user});
+})
+
 
 // PRODUCT PAGE
 app.get('/product', (req, res) => {
@@ -116,4 +122,12 @@ function getUserByID(id, cb) {
       }
    return cb(null, result.rows[0]);
    });
+}
+
+function checkAuthenticated(req, res, next) {
+   if (req.isAuthenticated()) {
+      return next();
+   }
+   console.log('Access denied! Please login.');
+   res.redirect('/user/login');
 }
