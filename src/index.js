@@ -1,11 +1,12 @@
-import axios from 'axios'; 
-
-import { elements, hideElement, updateItemQuant, cartBtnAnimation } from './views/base';
-
+// ===========================================================
+// FILE DEPENDENCIES
+// ===========================================================
 import ProductSearch from './models/ProductSearch';
 import CategorySearch from './models/CategorySearch';
 import Likes from './models/Likes';
 import Cart from './models/Cart';
+import axios from 'axios';
+import { elements, hideElement, updateItemQuant, cartBtnAnimation } from './views/base';
 
 import * as homeView from './views/homeView';
 import * as resultsView from './views/resultsView';
@@ -15,9 +16,12 @@ import * as submenuView from './views/submenuView';
 import * as cartView from './views/cartView';
 
 
-// GLOBAL STATE
+
+// ===========================================================
+// CURRENT STATE OF APP
 // ===========================================================
 const state = {};
+
 
 
 // ===========================================================
@@ -38,34 +42,33 @@ const controlProductSearch = async (query) => {
 };
 
 
+
 // ===========================================================
 // CART CONTROLLER
 // ===========================================================
 const controlCart = (event) => {
-   const buttonElement = event.target.closest('.btn');
-   const idArray = buttonElement.id.split('-');
-   const currentIndex = idArray[0];
-   const currentSku = idArray[1];
-   let currentQuantity;
+   // Determine closest button HTML element and get the sku and index
+   const buttonElement = event.target.closest('.btn'),
+         idArray = buttonElement.id.split('-'),
+         currentIndex = idArray[0],
+         currentSku = idArray[1];
+   let   currentQuantity;
 
-
-
+   // If quantity of products exists (only on Product page) then get quantity
    if (elements.productQuantity) {
       currentQuantity = Number(elements.productQuantity.value);
    } else {
       currentQuantity = 1;
    }
 
-   // Icon animation on 'Add to Cart' button to let user know item is being added to thier cart
+   // 'Add to Cart' button animation lets user know item is being added
    cartBtnAnimation(buttonElement, state.cart.items[currentSku]);
    
-   // Add the item to the cart model
+   // If current page is Results, then use productSearch array; otherwise, use the 'Likes' array (Likes page)
    let source;
-
    window.location.pathname === '/results' ? source = state.productSearch.results : source = state.likes.likes
 
-   console.log(source);
-
+   // Add item to the Cart model
    state.cart.addItem(
       currentSku,
       source[currentIndex].image,
@@ -74,9 +77,11 @@ const controlCart = (event) => {
       currentQuantity
    );
    
-   // Update number of cart items in cart icon located in top right corner
+   // Update number of items in cart icon located in HTML Header section
    elements.headerCartCounter.innerHTML = state.cart.getNumItems();
 };
+
+
 
 // ===========================================================
 // CART PAGE CONTROLLER
@@ -84,16 +89,22 @@ const controlCart = (event) => {
 const controlCartPage = () => {
    console.log('Beginning controlCartPage()...')
 
+   // Create HTML elements for each item in Cart model
    cartView.renderCartGridItems(state.cart.items);
 
+   // Calculate the cart totals
    state.cart.calcTotals();
+
+   // Display the cart totals
    cartView.updateCartSummary(state.cart.totals);
 
+   // Add event listeners to HTML elements
    elements.cartGrid.addEventListener('click', (event) => {
    
       if (event.target.closest('.cart-grid__quantity')) {
          const itemSku = event.target.closest('.cart-grid__quantity').id.slice(5);
    
+         // Event for increasing and decreasing item quantities
          if (event.target.matches('.quantity-calc__btns, .quantity-calc__btns *')) {
             let direction;
    
@@ -110,11 +121,12 @@ const controlCartPage = () => {
             cartView.highlightRefreshBtns(itemSku);
          };
 
+         // Event for removing item from cart
          if (event.target.matches('.cart-grid__remove-btn, .cart-grid__remove-btn *')) {
             state.cart.removeItem(itemSku); 
             location.reload(true);
          }
-
+         // Event for refreshing cart quantity
          if (event.target.matches('.cart-grid__refresh-btn, .cart-grid__refresh-btn *')) {
             location.reload(true);
          }
@@ -123,26 +135,35 @@ const controlCartPage = () => {
 
 };
 
+
+
 // ===========================================================
 // LIKES CONTROLLER
 // ===========================================================
 const controlLikes = (event) => {
-   const buttonElement = event.target.closest('.btn');
-   const iconElement = buttonElement.children[0];
-   const idArray = buttonElement.id.split('-');
-   const currentIndex = idArray[0];
-   const currentSku = idArray[1];
-   let likesPage;
-   let source;
+   const buttonElement = event.target.closest('.btn'),
+         iconElement = buttonElement.children[0],
+         idArray = buttonElement.id.split('-'),
+         currentIndex = idArray[0],
+         currentSku = idArray[1];
+   let   currentPage,
+         likesPage,
+         source;
 
-   window.location.pathname === '/results/likes' ? likesPage = true : likesPage = false;
+   // Determine which page user is currently on
+   currentPage = window.location.pathname;
 
+   // Is the user on the Likes page?
+   currentPage === '/results/likes' ? likesPage = true : likesPage = false;
+
+   // If user is on Likes page, set array source to Likes model; otherwise, set to productSearch model
    likesPage ? source = state.likes.likes[currentIndex] : source = state.productSearch.results[currentIndex];
 
-   // Product is NOT currently liked
+   // If product is NOT liked
    if (!state.likes.isLiked(currentSku, likesPage)) {
+      console.log('is Liked');
 
-      // Add like to the state
+      // Add like to the state Likes model
       state.likes.addLike(
          currentSku,
          source.name,
@@ -153,27 +174,30 @@ const controlLikes = (event) => {
          likesPage
       );
 
-      // Toggle the like button
-      if (window.location.pathname === '/results' || window.location.pathname === '/results/likes') {
+      // Toggle the 'Like' button appearance
+      if (currentPage === '/results' || currentPage === '/results/likes') {
          resultsView.toggleLikeBtn(true, iconElement);
-      } else if (window.location.pathname === '/product') {
+      } else if (currentPage === '/product') {
          productView.toggleLikeBtn(true, iconElement);
       }
 
-   // Product IS currently liked
+   // If product IS currently liked
    } else {
-      // Remove like to the state
+      console.log('isNotLiked');
+      // Remove like from the state
       state.likes.deleteLike(currentSku, likesPage);
 
-      // Toggle the like button
-      if (window.location.pathname === '/results' || window.location.pathname === '/results/likes') {
+      // Toggle the 'Like' button appearance
+      if (currentPage === '/results' || currentPage === '/results/likes') {
          resultsView.toggleLikeBtn(false, iconElement);
-
-      } else if (window.location.pathname === '/product') {
+      } else if (currentPage === '/product') {
          productView.toggleLikeBtn(false, iconElement);
       }
    } 
+
+   
 }
+
 
 // ===========================================================
 // LIKES PAGE CONTROLLER
