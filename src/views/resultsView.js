@@ -23,8 +23,8 @@ const renderStars = (rating) => {
    return htmlString;
 };
 
-export const toggleLikeBtn = (isLiked, currentElement) => {
-   if (isLiked) {
+export const toggleLikeBtn = (liked, currentElement) => {
+   if (!liked) {
       currentElement.setAttribute('class', 'product-thumb__like-icon product-thumb__like-icon--full fas fa-heart');
    } else {
       currentElement.setAttribute('class', 'product-thumb__like-icon far fa-heart');

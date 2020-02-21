@@ -98,7 +98,7 @@ const controlCartPage = () => {
    // Display the cart totals
    cartView.updateCartSummary(state.cart.totals);
 
-   // Add event listeners to HTML elements
+   // Event Listeners
    elements.cartGrid.addEventListener('click', (event) => {
    
       if (event.target.closest('.cart-grid__quantity')) {
@@ -146,23 +146,23 @@ const controlLikes = (event) => {
          idArray = buttonElement.id.split('-'),
          currentIndex = idArray[0],
          currentSku = idArray[1];
+
    let   currentPage,
          likesPage,
-         source;
+         source,
+         liked;
 
    // Determine which page user is currently on
    currentPage = window.location.pathname;
-
    // Is the user on the Likes page?
    currentPage === '/results/likes' ? likesPage = true : likesPage = false;
-
-   // If user is on Likes page, set array source to Likes model; otherwise, set to productSearch model
+   // If user is on Likes page, set array source to Likes model; otherwise, set source to productSearch model
    likesPage ? source = state.likes.likes[currentIndex] : source = state.productSearch.results[currentIndex];
+   // Is item currently liked?
+   liked = state.likes.isLiked(currentSku, likesPage);
 
    // If product is NOT liked
-   if (!state.likes.isLiked(currentSku, likesPage)) {
-      console.log('is Liked');
-
+   if (!liked) {
       // Add like to the state Likes model
       state.likes.addLike(
          currentSku,
@@ -175,28 +175,26 @@ const controlLikes = (event) => {
       );
 
       // Toggle the 'Like' button appearance
-      if (currentPage === '/results' || currentPage === '/results/likes') {
-         resultsView.toggleLikeBtn(true, iconElement);
-      } else if (currentPage === '/product') {
-         productView.toggleLikeBtn(true, iconElement);
-      }
+      toggleLikeIcon();
 
    // If product IS currently liked
    } else {
-      console.log('isNotLiked');
       // Remove like from the state
       state.likes.deleteLike(currentSku, likesPage);
 
       // Toggle the 'Like' button appearance
-      if (currentPage === '/results' || currentPage === '/results/likes') {
-         resultsView.toggleLikeBtn(false, iconElement);
-      } else if (currentPage === '/product') {
-         productView.toggleLikeBtn(false, iconElement);
-      }
-   } 
+      toggleLikeIcon();
+   }
 
-   
+   function toggleLikeIcon() {
+      if (currentPage === '/results' || currentPage === '/results/likes') {
+         resultsView.toggleLikeBtn(liked, iconElement);
+      } else if (currentPage === '/product') {
+         productView.toggleLikeBtn(liked, iconElement);
+      }
+   }
 }
+
 
 
 // ===========================================================
@@ -204,7 +202,7 @@ const controlLikes = (event) => {
 // ===========================================================
 const controlLikesPage = async () => {
    console.log('Beginning controlLikesPage()...');
-
+   // Copy 'likes' to 'tempLikes' in Likes model (necessary for adding back a 'like' after removing in Likes page)
    state.likes.createTempLikes();
 
    // Add index property to each object in array
@@ -215,7 +213,7 @@ const controlLikesPage = async () => {
    // Render results on UI
    resultsView.renderResults(state.likes.tempLikes);
 
-   // EVENT LISTENERS
+   // Event Listeners
    // ===========================================================
    elements.resultsSection.addEventListener('click', event => {
       if (event.target.matches('.results-section__page-buttons, .results-section__page-buttons *')) {
@@ -240,7 +238,6 @@ const controlLikesPage = async () => {
 
 
 
-
 // ===========================================================
 // RESULTS PAGE CONTROLLER
 // ===========================================================
@@ -254,10 +251,10 @@ const controlResultsPage = async () => {
       try {
          // Prepare UI for results
 
-         // Perform Search and prepare results
+         // Perform search and prepare results
          await controlProductSearch(urlQuery);
 
-         // Determine if any products are 'Liked' by user
+         // Determine if any products are 'liked' by user
          state.productSearch.results.forEach((element) => {
             if (!state.likes.isLiked(element.sku)) {
             } else {
@@ -265,23 +262,21 @@ const controlResultsPage = async () => {
             }
          });
 
-         // Render results on UI
+         // Add index property to each object in array
          state.productSearch.results.forEach((element, index) => {
             element.index = index;
          });
 
-         console.log('AFTER', state.productSearch.results);
-
+         // Render results on UI
          resultsView.renderResults(state.productSearch.results);
 
       }  catch (error) {
          alert('Somthing went wrong when attempting to render product search results');
          console.log(error);
       }
-
    }
 
-   // EVENT LISTENERS
+   // Event Listeners
    // ===========================================================
    elements.resultsSection.addEventListener('click', event => {
       if (event.target.matches('.results-section__page-buttons, .results-section__page-buttons *')) {
@@ -340,13 +335,9 @@ const controlProductPage = async () => {
       if (event.target.matches('.quantity-calc__btns, .quantity-calc__btns *')) {
          let direction;
 
-         if (event.target.className.includes('up')) {
-            direction = 'up';
-         } else {
-            direction = 'down';
-         }
+         event.target.className.includes('up') ? direction = 'up' : direction = 'down';
 
-         updateItemQuant(direction, itemSku, function(newQuantity) {
+         updateItemQuant(direction, itemSku, (newQuantity) => {
             elements.productPrice.innerHTML = (newQuantity * state.productSearch.results[0].regularPrice).toFixed(2);
          });
       }
