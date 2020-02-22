@@ -1,4 +1,5 @@
 export const elements = {
+   siteHeader: document.querySelector('.site-header'),
    headerNotice: document.querySelector('.header-notice'),
    headerNoticeBtn: document.querySelector('.header-notice__close-icon'),
    headerCartCounter: document.querySelector('.cart-link__counter'),

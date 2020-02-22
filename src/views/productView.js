@@ -16,8 +16,8 @@ export const renderLikeBtn = (isLiked, sku) => {
    elements.productActionBox.insertAdjacentHTML('beforeend', htmlString);
 }
 
-export const toggleLikeBtn = (isLiked) => {
-   if (isLiked) {
+export const toggleLikeBtn = (liked) => {
+   if (!liked) {
       document.querySelector('.product-info__like-icon').setAttribute('class', 'product-info__like-icon product-info__like-icon--full fas fa-heart');
       document.querySelector('.product-info__like-text').innerHTML = 'Saved';
    } else {
