@@ -39,7 +39,7 @@ const controlProductSearch = async (query) => {
       alert('Somthing went wrong with the product search');
       console.log(error);
    }
-};
+}
 
 
 
@@ -79,7 +79,7 @@ const controlCart = (event) => {
    
    // Update number of items in cart icon located in HTML Header section
    elements.headerCartCounter.innerHTML = state.cart.getNumItems();
-};
+}
 
 
 
@@ -133,7 +133,7 @@ const controlCartPage = () => {
       }
    });
 
-};
+}
 
 
 
@@ -190,6 +190,7 @@ const controlLikes = (event) => {
       if (currentPage === '/results' || currentPage === '/results/likes') {
          resultsView.toggleLikeBtn(liked, iconElement);
       } else if (currentPage === '/product') {
+         console.log(liked, iconElement)
          productView.toggleLikeBtn(liked, iconElement);
       }
    }
@@ -264,14 +265,14 @@ const controlResultsPage = async () => {
 
          // Add index property to each object in array
          state.productSearch.results.forEach((element, index) => {
-            element.index = index;
+            element.index = index
          });
 
          // Render results on UI
          resultsView.renderResults(state.productSearch.results);
 
       }  catch (error) {
-         alert('Somthing went wrong when attempting to render product search results');
+         alert('Something went wrong when attempting to render product search results');
          console.log(error);
       }
    }
@@ -290,14 +291,14 @@ const controlResultsPage = async () => {
       }
 
       if (event.target.matches('.product-thumb__cart-btn, .product-thumb__cart-btn *')) {
-         controlCart(event);
+         controlCart(event)
       }
 
       if (event.target.matches('.product-thumb__like-btn, .product-thumb__like-btn *')) {
-         controlLikes(event);
+         controlLikes(event)
       }
    });
-};
+}
    
 
 // ===========================================================
@@ -321,12 +322,12 @@ const controlProductPage = async () => {
          productView.renderLikeBtn(state.likes.isLiked(state.productSearch.results[0].sku), state.productSearch.results[0].sku)
 
       }  catch (error) {
-         alert('Somthing went wrong when attempting to render product.');
+         alert('Something went wrong when attempting to render product.');
          console.log(error);
       }
    };
 
-   // EVENT LISTENERS
+   // Event Listeners
    // ===========================================================
    elements.productMain.addEventListener('click', (event) => {
       const itemSku = elements.productSku.innerHTML;
@@ -341,8 +342,17 @@ const controlProductPage = async () => {
             elements.productPrice.innerHTML = (newQuantity * state.productSearch.results[0].regularPrice).toFixed(2);
          });
       }
-   });
 
+      // When 'Add to Cart' button is clicked
+      if (event.target.matches('.product-info__cart-btn, .product-info__cart-btn *')) {
+         controlCart(event);
+      }
+
+      // When 'Like' button is clicked
+      if (event.target.matches('.product-info__like-btn, .product-info__like-btn *')) {
+         controlLikes(event);
+      }
+   });
  
    // When nav titles are clicked
    for (const navItem of elements.productNavItems) {
@@ -354,14 +364,8 @@ const controlProductPage = async () => {
    for (const element of productThumbs) {
       element.addEventListener('click', productView.thumbImgsEvents);
    };
-
-   // When 'Add to Cart' button is clicked
-   elements.productCartBtn.addEventListener('click', controlCart);
-
-   // When 'Like' button is clicked
-   document.querySelector('.product-info__like-btn').addEventListener('click', controlLikes);
-   
 };
+
 
 
 // ===========================================================
@@ -376,7 +380,7 @@ const controlProductPage = async () => {
          await state.categorySearch.getResults();
 
       } catch (error) {
-         alert('Somthing went wrong with the categories search');
+         alert('Something went wrong with the categories search');
          console.log(error);
       }
    };
@@ -391,7 +395,7 @@ const controlHeader = async () => {
       await controlCategorySearch();
 
    } catch (error) {
-      alert('Somthing went wrong when attempting to render subcategories.');
+      alert('Something went wrong when attempting to render subcategories.');
       console.log(error);
    }
 
@@ -408,10 +412,55 @@ const controlHeader = async () => {
     elements.headerCartCounter.innerHTML = state.cart.getNumItems();
 
 
-   // EVENT LISTENERS
+    
+   // Event Listeners
    // ===========================================================
+      elements.siteHeader.addEventListener('click', (event) => {
+
+         // Header notice close button
+         if (event.target.matches('.header-notice__close-icon, .header-notice__close-icon *')) {
+            hideElement(elements.headerNotice);
+         }
+
+         // Open/close main menu
+         if (event.target.matches('.main-menu__btn, .main-menu__btn *')) {
+            mainMenuView.toggleDropdown(elements.mainMenuDropdown);
+         }
+
+         // Account menu events (after user has logged in)
+         if (elements.accountMenuDropdown != null) {
+
+            // Toggle account dropdown menu
+            if (event.target.matches('.account-btn, .account-btn *')) {
+               mainMenuView.toggleDropdown(elements.accountMenuDropdown);
+            }
+
+            // When user clicks logout link
+            if (event.target.matches('.account-menu__link--logout, .account-menu__link--logout *')) {
+               event.preventDefault();
+               logout();
+   
+               async function logout() {
+                  try {
+                     await axios.post('/user/logout', {
+                        cart: state.cart.items,
+                        likes: state.likes.likes
+                     })
+                     .then(() => {
+                        state.cart.clearLocalStorage();
+                        state.likes.clearLocalStorage();
+                        window.location = window.location.href;
+                     })
+                  } catch (error) {
+                     console.log(error);
+                  }
+               }
+            }
+         }
+      });
+
       // Close menus when click anywhere outside of menus
-      document.addEventListener('click', function(event) {
+      document.addEventListener('click', (event) => {
          if (elements.mainMenuDropdown.classList.contains('is-visible')) {
             mainMenuView.hideOnClickOutside(event, elements.mainMenuDropdown);
          
@@ -420,52 +469,12 @@ const controlHeader = async () => {
             mainMenuView.hideOnClickOutside(event, elements.accountMenuDropdown);
          }
       });
-   
-      
-      // Open/close main menu
-      elements.mainMenuBtn.addEventListener('click', function() {
-         mainMenuView.toggleDropdown(elements.mainMenuDropdown);
-      });
 
-      // Account Menu events
-      if (elements.accountMenuDropdown != null) {
-
-         elements.accountMenuBtn.addEventListener('click', function() {
-            mainMenuView.toggleDropdown(elements.accountMenuDropdown);
-         });
-
-         elements.accountLogoutLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            logout();
-
-            async function logout() {
-               try {
-                  await axios.post('/user/logout', {
-                     cart: state.cart.items,
-                     likes: state.likes.likes
-                  })
-                  .then((response) => {
-                     console.log(response);
-                     state.cart.clearLocalStorage();
-                     state.likes.clearLocalStorage();
-                     window.location = window.location.href;
-                  })
-               } catch (error) {
-                  console.log(error);
-               }
-            }
-         });
-      }
-
-      // Open/close main menu
+      // Open/close submenus
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
       submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu); 
-      
-      // Header notice close button
-      elements.headerNoticeBtn.addEventListener('click', function() {
-         hideElement(elements.headerNotice);
-      });
 };
+
 
 
 // ===========================================================
@@ -474,8 +483,10 @@ const controlHeader = async () => {
 const controlHomePage = () => {
    console.log('Beginning controlHomePage()...')
 
+   // Begin image slides in landing section
    homeView.promotionRotation();
 };
+
 
 
 // ===========================================================
@@ -484,8 +495,8 @@ const controlHomePage = () => {
 const controlLoginPage = () => {
    console.log('Beginning controlLoginPage()...')
    
-// EVENT LISTENERS
-// ===========================================================
+   // Event Listeners
+   // ===========================================================
    elements.accountLoginBtn.addEventListener('click', event => {
       event.preventDefault();
       login();
@@ -500,9 +511,6 @@ const controlLoginPage = () => {
                password: password
             })
             .then(response => {
-               console.log('cart obj:', response.data.cart)
-               console.log('likes obj:', response.data.likes)
-
                if (response.data.error) {
                   return document.querySelector('.msg-header').innerHTML = response.data.error;
                }
@@ -512,7 +520,7 @@ const controlLoginPage = () => {
                      state.cart.combineCarts(response.data.cart);
                   }
                }
-              
+            
                if (response.data.likes != null) {
                   if (!(response.data.likes.length === 0)) {
                      state.likes.combineLikes(response.data.likes);
@@ -520,8 +528,8 @@ const controlLoginPage = () => {
                }  
                   
                return window.location = '/';
-            })
-       
+            });
+      
          } catch (error) {
             if (error) {
                console.log(error);
@@ -532,35 +540,30 @@ const controlLoginPage = () => {
 };
 
 
+
 // ===========================================================
 // INITIALIZE APPLICATION
 // ===========================================================
 const init = () => {
    // Restore cart and saved/liked items on page load
-      state.likes = new Likes();
-      state.likes.readLocalStorage();
+   state.likes = new Likes();
+   state.likes.readLocalStorage();
+   state.cart = new Cart();
+   state.cart.readLocalStorage();
 
-      state.cart = new Cart();
-      state.cart.readLocalStorage();
+   console.log(localStorage);
+   console.log('State', state);
 
-      console.log(localStorage);
-      console.log('State', state);
+   const pageLoc = window.location.pathname;
 
    controlHeader();
 
-   if (window.location.pathname === '/product') {
-      controlProductPage();
-   } else if (window.location.pathname === '/results') {
-      controlResultsPage();
-   } else if (window.location.pathname === '/cart') {
-      controlCartPage();
-   } else if (window.location.pathname === '/user/login') {
-      controlLoginPage();
-   } else if (window.location.pathname === '/results/likes') {
-      controlLikesPage();
-   } else if (window.location.pathname === '/') {
-      controlHomePage();
-   }
-};
+   if (pageLoc === '/product') {controlProductPage()}
+   if (pageLoc === '/results') {controlResultsPage()}
+   if (pageLoc === '/cart') {controlCartPage()}
+   if (pageLoc === '/user/login') {controlLoginPage()}
+   if (pageLoc === '/results/likes') {controlLikesPage()}
+   if (pageLoc === '/') {controlHomePage()}
+}
 
 init();
