@@ -1,10 +1,12 @@
 import { elements } from './base';
 
+// Clear items from Results page
 export const clearResults = () => {
    elements.resultsMainGrid.innerHTML = '';
    elements.resultsPages.innerHTML = '';
 }
 
+// Render review stars
 const renderStars = (rating) => {
    const int = Math.floor(rating);
    const dec = (rating * 10 - Math.floor(rating) * 10) / 10;
@@ -14,29 +16,29 @@ const renderStars = (rating) => {
    
    for (let i = 0; i < int; i++) {
       htmlString += '<i class="product-thumb__review-icon fas fa-star"></i>';
-   };
+   }
 
    if (dec) {
       htmlString += `<i class="product-thumb__review-icon fas fa-star product-thumb__review-icon--partial" style="background-image: linear-gradient(to right, #EB2F38 0%, #EB2F38 ${perc}%, #ffffff ${perc}%, #ffffff 100%);"></i>`
-   };
+   }
      
    return htmlString;
-};
+}
 
-export const toggleLikeBtn = (isLiked, currentElement) => {
-   if (isLiked) {
+// Toggle 'like' button icon appearance
+export const toggleLikeBtn = (liked, currentElement) => {
+   if (!liked) {
       currentElement.setAttribute('class', 'product-thumb__like-icon product-thumb__like-icon--full fas fa-heart');
    } else {
       currentElement.setAttribute('class', 'product-thumb__like-icon far fa-heart');
    }
 }
 
-
+// Render product item
 const renderProductItem = (product) => {
    product.name = product.name.replace(/"/g, '&quot;');
 
    const likeIconHtml = product.liked ? '<i class="product-thumb__like-icon product-thumb__like-icon--full fas fa-heart"></i>' : '<i class="product-thumb__like-icon far fa-heart"></i>'
-
 
    const markup = 
    `<div class="product-thumb" id="${product.index}-${product.sku}">
@@ -75,11 +77,12 @@ const renderProductItem = (product) => {
    </div>`;
 
    elements.resultsMainGrid.insertAdjacentHTML('beforeend', markup);
-};
+}
 
+// Render item count at bottom of Results page
 const renderItemCount = (itemStart, itemEnd, itemTotal) => {
    elements.resultsCount.innerHTML = `${itemStart} - ${itemEnd} of ${itemTotal} total items`
-};
+}
 
 const createButton = (page, type) =>  `
    <button class="btn btn--small btn--black results-section__page-btn results-section__page-btn--${type}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
@@ -88,7 +91,7 @@ const createButton = (page, type) =>  `
    </button>
 `;
 
-
+// Render 'page' buttons at bottom of Results page
 const renderButtons = (page, numResults, resPerPage) => {
    const pages = Math.ceil(numResults / resPerPage); // 48 results / 20 = 2.4 rounded up to 3 pages
 
@@ -110,9 +113,9 @@ const renderButtons = (page, numResults, resPerPage) => {
    }
 
    elements.resultsPages.insertAdjacentHTML('afterbegin', button);
-};
+}
 
-
+// Render results of product search on Results page
 export const renderResults = (results, page = 1, resPerPage = 20) => {
    // Render results of current page
    const start = (page - 1) * resPerPage;
@@ -129,4 +132,4 @@ export const renderResults = (results, page = 1, resPerPage = 20) => {
    if (results.length >= resPerPage) {
       renderButtons(page, results.length, resPerPage);
    }
-};
+}

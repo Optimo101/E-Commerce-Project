@@ -5,8 +5,6 @@ const express = require('express'),
 
 // LOGOUT (POST)
 router.post('/', authLib.checkAuth, (req, res) => {
-   console.log('Logout (POST) ROUTE:');
-
    const cart = JSON.stringify(req.body.cart);
    const likes = JSON.stringify(req.body.likes);
 

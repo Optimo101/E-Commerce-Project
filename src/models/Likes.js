@@ -17,7 +17,6 @@ export default class Likes {
 
       // Persist data in localStorage
       this.persistData(likesPage);
-
       return like;
    }
 
@@ -39,7 +38,6 @@ export default class Likes {
       if (likesPage === true) {
          return this.tempLikes.findIndex(element => element.sku == sku) !== -1;
       } 
-
       return this.likes.findIndex(element => element.sku == sku) !== -1;
    }
 
@@ -63,7 +61,6 @@ export default class Likes {
       
       // Restore likes from localStorage
       if (tempLikesStorage) {
-         console.log('Temporary likes exists!', tempLikesStorage);
          this.likes = tempLikesStorage;
          localStorage.setItem('likes', JSON.stringify(this.likes));
          localStorage.removeItem('tempLikes');
@@ -102,5 +99,4 @@ export default class Likes {
    createTempLikes() {
       this.tempLikes = this.likes.slice();
    }
-
 }
