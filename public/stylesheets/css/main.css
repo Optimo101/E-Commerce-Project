@@ -1155,13 +1155,14 @@ section {
     .cart-grid__quantity .quantity-calc__wrap {
       margin-bottom: .8rem; }
   .cart-grid__btn-wrap {
-    display: flex; }
-    .cart-grid__btn-wrap i {
-      font-size: 1.4rem; }
-    .cart-grid__btn-wrap button {
-      width: 2.75rem; }
+    font-weight: 300;
+    display: flex;
+    justify-content: center; }
   .cart-grid__remove-btn {
-    margin-right: .5rem; }
+    padding-top: 2px;
+    padding-bottom: 2px; }
+    .cart-grid__remove-btn:hover {
+      background-color: #EB2F38; }
   .cart-grid__unit-price {
     font-size: 1.2rem;
     white-space: nowrap;

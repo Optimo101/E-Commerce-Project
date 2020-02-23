@@ -34,11 +34,8 @@ export const renderCartGridItems = (cartItems) => {
                </div>
 
                <div class="cart-grid__btn-wrap">
-                  <button class="cart-grid__remove-btn btn btn--small btn--red">
-                     <i class="cart-grid__remove-icon fas fa-times-circle"></i>
-                  </button>
-                  <button class="cart-grid__refresh-btn btn btn--small btn--darkgrey">
-                     <i class="cart-grid__refresh-icon fas fa-redo-alt"></i>
+                  <button class="cart-grid__remove-btn btn btn--small btn--darkgrey">
+                     Remove
                   </button>
                </div>
 
@@ -71,17 +68,11 @@ export const updateCartSummary = (totals) => {
    elements.cartSummaryTotal.innerHTML = `${totals.grandTotal}`;
 } 
 
-export const highlightRefreshBtns = (itemSku) => {
-   const refreshBtn = document.querySelector(`#item-${itemSku} .cart-grid__refresh-btn`);
+export const displayRefreshBtn = () => {
    const checkoutBtn = document.querySelector('.cart-summary__checkout-btn');
 
-   if (refreshBtn.classList.contains('btn--darkgrey')) {
-      refreshBtn.classList.remove('btn--darkgrey');
-      refreshBtn.classList.add('btn--green');
-
-      checkoutBtn.classList.remove('btn--darkgrey');
-      checkoutBtn.classList.add('btn--green');
-      checkoutBtn.innerHTML = 'Refresh Cart';
-      checkoutBtn.setAttribute('href', '/cart');
-   }
+   checkoutBtn.classList.remove('btn--darkgrey');
+   checkoutBtn.classList.add('btn--green');
+   checkoutBtn.innerHTML = 'Refresh Cart';
+   checkoutBtn.setAttribute('href', '/cart');
 }
