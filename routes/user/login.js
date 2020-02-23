@@ -6,14 +6,11 @@ const express = require('express'),
 
 // LOGIN (GET)
 router.get('/', authLib.checkNotAuth, (req, res) => {
-   console.log('Login (GET) Route:')
    res.render('login');
 });
 
 // LOGIN (POST)
 router.post('/', authLib.checkNotAuth, (req, res, next) => {
-   console.log('Login (POST) Route:')
-
    passport.authenticate('local', function(err, user, info) {
       if (err) { 
          console.log(err)
