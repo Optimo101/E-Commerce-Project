@@ -99,5 +99,4 @@ export default class Likes {
    createTempLikes() {
       this.tempLikes = this.likes.slice();
    }
-
 }

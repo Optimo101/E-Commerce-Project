@@ -119,7 +119,7 @@ const controlCartPage = () => {
             });
 
             cartView.highlightRefreshBtns(itemSku);
-         };
+         }
 
          // Event for removing item from cart
          if (event.target.matches('.cart-grid__remove-btn, .cart-grid__remove-btn *')) {
@@ -132,7 +132,6 @@ const controlCartPage = () => {
          }
       }
    });
-
 }
 
 
@@ -190,7 +189,6 @@ const controlLikes = (event) => {
       if (currentPage === '/results' || currentPage === '/results/likes') {
          resultsView.toggleLikeBtn(liked, iconElement);
       } else if (currentPage === '/product') {
-         console.log(liked, iconElement)
          productView.toggleLikeBtn(liked, iconElement);
       }
    }
@@ -224,7 +222,7 @@ const controlLikesPage = async () => {
             const goToPage = parseInt(btn.dataset.goto, 10);
             resultsView.clearResults();
             resultsView.renderResults(state.likes.tempLikes, goToPage);
-         };
+         }
       }
 
       if (event.target.matches('.product-thumb__cart-btn, .product-thumb__cart-btn *')) {
@@ -287,7 +285,7 @@ const controlResultsPage = async () => {
             const goToPage = parseInt(btn.dataset.goto, 10);
             resultsView.clearResults();
             resultsView.renderResults(state.productSearch.results, goToPage);
-         };
+         }
       }
 
       if (event.target.matches('.product-thumb__cart-btn, .product-thumb__cart-btn *')) {
@@ -300,6 +298,7 @@ const controlResultsPage = async () => {
    });
 }
    
+
 
 // ===========================================================
 // PRODUCT PAGE CONTROLLER
@@ -325,7 +324,7 @@ const controlProductPage = async () => {
          alert('Something went wrong when attempting to render product.');
          console.log(error);
       }
-   };
+   }
 
    // Event Listeners
    // ===========================================================
@@ -357,33 +356,33 @@ const controlProductPage = async () => {
    // When nav titles are clicked
    for (const navItem of elements.productNavItems) {
       navItem.addEventListener('click', productView.navItemsEvents);
-   };
+   }
 
    // When thumb images are clicked
    const productThumbs = document.querySelectorAll('.product-gallery__thumb-wrap');
    for (const element of productThumbs) {
       element.addEventListener('click', productView.thumbImgsEvents);
-   };
-};
+   }
+}
 
 
 
 // ===========================================================
 // CATEGORIES SEARCH CONTROLLER
 // ===========================================================
-   const controlCategorySearch = async () => {
-      // New category search object and add to state
-      state.categorySearch = new CategorySearch();
+const controlCategorySearch = async () => {
+   // New category search object and add to state
+   state.categorySearch = new CategorySearch();
 
-      try {
-         // Search categories
-         await state.categorySearch.getResults();
+   try {
+      // Search categories
+      await state.categorySearch.getResults();
 
-      } catch (error) {
-         alert('Something went wrong with the categories search');
-         console.log(error);
-      }
-   };
+   } catch (error) {
+      alert('Something went wrong with the categories search');
+      console.log(error);
+   }
+}
 
 
 // ===========================================================
@@ -411,8 +410,6 @@ const controlHeader = async () => {
     // Update number of items showing in header cart icon
     elements.headerCartCounter.innerHTML = state.cart.getNumItems();
 
-
-    
    // Event Listeners
    // ===========================================================
       elements.siteHeader.addEventListener('click', (event) => {
@@ -473,7 +470,7 @@ const controlHeader = async () => {
       // Open/close submenus
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
       submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu); 
-};
+}
 
 
 
@@ -485,7 +482,7 @@ const controlHomePage = () => {
 
    // Begin image slides in landing section
    homeView.promotionRotation();
-};
+}
 
 
 
@@ -537,7 +534,7 @@ const controlLoginPage = () => {
          }
       }
    });
-};
+}
 
 
 

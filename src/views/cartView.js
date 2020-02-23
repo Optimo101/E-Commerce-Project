@@ -61,8 +61,8 @@ export const renderCartGridItems = (cartItems) => {
       `;
 
       elements.cartGrid.insertAdjacentHTML('beforeend', html);
-   };
-};
+   }
+}
 
 export const updateCartSummary = (totals) => {
    elements.cartSummarySubtotal.innerHTML = `${totals.subtotal}`;
@@ -83,5 +83,5 @@ export const highlightRefreshBtns = (itemSku) => {
       checkoutBtn.classList.add('btn--green');
       checkoutBtn.innerHTML = 'Refresh Cart';
       checkoutBtn.setAttribute('href', '/cart');
-   };
-};
+   }
+}

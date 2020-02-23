@@ -9,9 +9,12 @@ export default class Search {
    }
 
    formatQuery() {
+      let formattedQuery;
+      
       // i.e. query is "?keyword-search=red+dead+redemption"
       if (this.query.includes(this.keywordSearchKey)) {
          console.log(`You attempted a keyword search with query: ${this.query}`)
+
          const queryArray = this.query.trim().slice(8).split('+');
          const addToString = "search=\'";
    
@@ -21,43 +24,18 @@ export default class Search {
             newQueryArray.push(addToString.concat(element) + "\'");
          });
          
-         const formattedQuery = newQueryArray.join('&'); // i.e. 'search="red"&search="dead"&search="redemption"
-         return formattedQuery;
-
-         // i.e. query is "?category=abcat0100000"
-      } else if (this.query.includes(this.catSearchKey)) 
-         console.log(`You attempted a category search with query: ${this.query}`);
-         const formattedQuery = this.query.slice(1);
-
-         return formattedQuery;
-   };
-
-   async getResults() {
-
-      const searchQuery = this.formatQuery();
-      let keywords;
-      let catID;
-
-      // FUTURE FEATURE - THIS WOULD ALLOW A SEARCH WITHIN A CATEGORY
-      if (searchQuery.includes(this.keywordSearchKey) && searchQuery.includes(this.catSearchKey)) {
-         console.log('FEATURE HAS NOT BEEN IMPLEMENTED!');
-         keywords = `(${searchQuery})`;
-         catID = `&(${searchQuery})`; // FUTURE FEATURE -- THIS IS WHERE THE CATEGORY ID WOULD GO
-
-      // SEARCH BY KEYWORD
-      } else if (searchQuery.includes(this.keywordSearchKey)) {
-         keywords = `(${searchQuery})`;
-         catID = '';
-
-      // SEARCH BY CATEGORY
-      } else if (searchQuery.includes(this.catSearchKey)){
-         keywords = '';
-         catID = `(${searchQuery})`;
-
-      } else {
-         console.log('SOMETHING HAS GONE TERRIBLY WRONG WITH THE SEARCH! AHHHH!');
+         formattedQuery = newQueryArray.join('&'); // i.e. 'search="red"&search="dead"&search="redemption"
+      } 
+      
+      if (this.query.includes(this.catSearchKey)) {
+         console.log(`Search query: ${this.query}`);
+         formattedQuery = this.query.slice(1);
       }
+      
+      return formattedQuery;
+   }
 
+   async search(totalPages, keywords, catID) {
       const baseURL = 'https://api.bestbuy.com/v1/',
             apiType = 'products',
             attribute = 'customerReviewAverage>1',
@@ -68,9 +46,7 @@ export default class Search {
             active = 'active=true',
             responseFormat = 'format=json';
 
-      let totalPages = 1;
-
-      console.log(`${baseURL}${apiType}(${keywords}${catID}&${attribute})?apiKey=${apiKey}&${sortOptions}&${showOptions}&${pageSize}&page=1&${active}&${responseFormat}`);
+      console.log('API Request:', `${baseURL}${apiType}(${keywords}${catID}&${attribute})?apiKey=${apiKey}&${sortOptions}&${showOptions}&${pageSize}&page=1&${active}&${responseFormat}`);
 
       for (let i = 0; i < totalPages; i++) {
          try {
@@ -79,9 +55,43 @@ export default class Search {
             this.results = this.results.concat(response.data.products);
             // totalPages = response.data.totalPages; // ACTIVATE THIS LINE OF CODE TO CREATE UNLIMITED NUMBER OF SEARCH RESULTS (PAGES)
             totalPages = 1;
+
          } catch (error) {
-            console.error(error);
+            console.log(error);
          }
+      }
+   }
+
+   async getResults() {
+      const searchQuery = this.formatQuery();
+      let   keywords,
+            catID,
+            totalPages = 1;
+
+      // Future feature - This would allow a search within a category
+      if (searchQuery.includes(this.keywordSearchKey) && searchQuery.includes(this.catSearchKey)) {
+         console.log('Feature has not been implemeneted...');
+         keywords = `(${searchQuery})`;
+         catID = `&(${searchQuery})`; // This is where the category ID would go
+         
+      // Search by keyword
+      } else if (searchQuery.includes(this.keywordSearchKey)) {
+         keywords = `(${searchQuery})`;
+         catID = '';
+
+      // Search by category
+      } else if (searchQuery.includes(this.catSearchKey)) {
+         keywords = '';
+         catID = `(${searchQuery})`;
+
+      } else {
+         console.log('Something went wrong with the search...');
+      }
+
+      try {
+         await this.search(totalPages, keywords, catID);
+      } catch (error) {
+         console.log(error);
       }
    }
 }

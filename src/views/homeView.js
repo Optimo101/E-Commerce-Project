@@ -1,16 +1,5 @@
 import { elements } from './base';
 
-
-// const toggleBackgroundImg = (i) => {
-   
-//    setTimeout(function() {
-//       elements.landingBackground.classList.replace(`landing__background--${i}`, `landing__background--${i+1}`);
-//    }, 2000);
-// };
-
-
-
-
 export const promotionRotation = () => {
    let current = 0;
 
@@ -70,5 +59,5 @@ export const promotionRotation = () => {
          elements.landingPromoBox.classList.remove('slide-and-fade');
       }, 7000)
    }, 8000);
-};
+}
 
