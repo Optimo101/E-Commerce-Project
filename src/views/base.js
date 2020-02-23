@@ -1,27 +1,33 @@
 export const elements = {
+   // HEADER ELEMENTS
+   siteHeader: document.querySelector('.site-header'),
    headerNotice: document.querySelector('.header-notice'),
    headerNoticeBtn: document.querySelector('.header-notice__close-icon'),
    headerCartCounter: document.querySelector('.cart-link__counter'),
 
+   // SEARCH FORM ELEMENTS
    searchForm: document.querySelector('.search-form'),
    searchInput: document.querySelector('.search-form__input'),
 
+   // MAIN MENU ELEMENTS
    mainMenuBtn: document.querySelector('.main-menu__btn'),
    mainMenuDropdown: document.querySelector('.main-menu__dropdown'),
    shadowOverlay: document.querySelector('.shadow-overlay'),
-
    mainMenuItems: document.querySelectorAll('.main-menu__item'),
    submenuItems: document.querySelectorAll('.submenu'),
 
+   // ACCOUNT MENU ELEMENTS
    accountMenuBtn: document.querySelector('.account-btn'),
    accountMenuDropdown: document.querySelector('.account-menu__dropdown'),
    accountLogoutLink: document.querySelector('.account-menu__link--logout'),
 
+   // LOGIN PAGE ELEMENTS
    accountLoginForm: document.querySelector('.sign-in__form'),
    accountLoginUsername: document.querySelector('.sign-in__email-input'),
    accountLoginPassword: document.querySelector('.sign-in__password-input'),
    accountLoginBtn: document.querySelector('.sign-in__btn'),
 
+   // HOME PAGE ELEMENTS
    landingSection: document.querySelector('.landing'),
    landingBackground: document.querySelector('.landing__background'),
    landingPromoBox: document.querySelector('.promotion'),
@@ -29,11 +35,13 @@ export const elements = {
    landingPromoSubHeader: document.querySelector('.promotion__sub-header'),
    landingPromoBtn: document.querySelector('.promotion__btn'),
 
+   // RESULTS PAGE ELEMENTS
    resultsSection: document.querySelector('.results-section'),
    resultsMainGrid: document.querySelector('.results-section__main-grid'),
    resultsPages: document.querySelector('.results-section__page-buttons'),
    resultsCount: document.querySelector('.results-section__item-count'),
 
+   // PRODUCT PAGE ELEMENTS
    productMain: document.querySelector('.product-section__main'),
    productTitle: document.querySelector('.product__title'),
    productManufacturer: document.querySelector('.product-header__manufacturer-data'),
@@ -50,20 +58,19 @@ export const elements = {
    productCartBtn: document.querySelector('.product-info__cart-btn'),
    productReview: document.querySelector('.product-info__review-stars'),
    productReviewCount: document.querySelector('.product-info__review-count'),
-
+   
+   // CART PAGE ELEMENTS
    cartGrid: document.querySelector('.cart-grid'),
    cartSummarySubtotal: document.querySelector('.cart-summary__subtotal-number'),
    cartSummaryTaxes: document.querySelector('.cart-summary__tax-number'),
    cartSummaryShipping: document.querySelector('.cart-summary__shipping-number'),
    cartSummaryTotal: document.querySelector('.cart-summary__total-number')
-};
-
-
+}
 
 // ============== SIMPLE HIDE ELEMENT FUNCTION ==============
 export const hideElement = (element) => {
      element.style.height = '0';
-};
+}
 
 export const updateItemQuant = (direction, sku, callback) => {
    const selectorString = `#item-${sku} .quantity-calc__input`;
@@ -79,7 +86,7 @@ export const updateItemQuant = (direction, sku, callback) => {
 
       callback(newQuantity);
    }
-};
+}
 
 export const cartBtnAnimation = (buttonElement, existingItem) => {
    const iconElement = buttonElement.children[0];
@@ -101,14 +108,13 @@ export const cartBtnAnimation = (buttonElement, existingItem) => {
       iconElement.classList.add('is-spinning');
    }
 
-   
    const stopCartBtnAnimation = () => {
       textElement.innerHTML = '';
       textElement.innerHTML = 'Add to Cart';
       iconElement.classList.remove('is-spinning');
       iconElement.classList.remove('fa-redo-alt');
       iconElement.classList.add('fa-shopping-cart');
-   };
+   }
 
    setTimeout(stopCartBtnAnimation, 500);
-};
+}

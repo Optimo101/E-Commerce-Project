@@ -16,8 +16,8 @@ export const renderLikeBtn = (isLiked, sku) => {
    elements.productActionBox.insertAdjacentHTML('beforeend', htmlString);
 }
 
-export const toggleLikeBtn = (isLiked) => {
-   if (isLiked) {
+export const toggleLikeBtn = (liked) => {
+   if (!liked) {
       document.querySelector('.product-info__like-icon').setAttribute('class', 'product-info__like-icon product-info__like-icon--full fas fa-heart');
       document.querySelector('.product-info__like-text').innerHTML = 'Saved';
    } else {
@@ -49,7 +49,7 @@ const renderImgs = (product) => {
       if (element) {
          imgsArr.push(element);
       }
-   };
+   }
 
    const newProductName = product.name.replace(/"/g, '&quot;');
    
@@ -68,10 +68,10 @@ const renderImgs = (product) => {
             </div>
          </div>
       `;
-   };
+   }
 
    elements.productThumbsBox.insertAdjacentHTML('afterbegin', html);
-};
+}
 
 const renderDescContent = (longDescription) => {
    const html = `
@@ -83,7 +83,7 @@ const renderDescContent = (longDescription) => {
    `;
 
    elements.productNavContents[0].insertAdjacentHTML('afterbegin', html);
-};
+}
 
 const renderFeatItems = (featItemsArr) => {
    let html = '';
@@ -106,10 +106,10 @@ const renderFeatItems = (featItemsArr) => {
          </li>
          `;
       }
-   };
+   }
 
    return html;
-};
+}
 
 const renderFeatContent = (featItemsArr) => {
    const html = `
@@ -119,7 +119,7 @@ const renderFeatContent = (featItemsArr) => {
    `;
 
    elements.productNavContents[1].insertAdjacentHTML('afterbegin', html);
-};
+}
 
 
 const renderIncludedItems = (includedItemsArr) => {
@@ -134,7 +134,7 @@ const renderIncludedItems = (includedItemsArr) => {
    }
 
    return html;
-};
+}
 
 
 const renderIncludedContent = (includedItemsArr) => {
@@ -145,7 +145,7 @@ const renderIncludedContent = (includedItemsArr) => {
    `;
 
    elements.productNavContents[2].insertAdjacentHTML('afterbegin', html);
-};
+}
 
 
 const renderSpecsItems = (specsArr) => {
@@ -158,7 +158,7 @@ const renderSpecsItems = (specsArr) => {
             <h4 class="product-info__specifications-title">${element.name}:</h4>
          </li>
       `;
-   };
+   }
 
    ulList1 += `</ul>`;
 
@@ -169,14 +169,14 @@ const renderSpecsItems = (specsArr) => {
             <p class="product-info__specifications-text">${element.value}</p>
          </li>
       `;
-   };
+   }
 
    ulList2 += `</ul>`;
 
    const htmlArr = [ulList1, ulList2];
 
    return htmlArr;
-};
+}
 
 
 const renderSpecsContent = (specsArr) => {
@@ -191,18 +191,18 @@ const renderSpecsContent = (specsArr) => {
    `;
 
    elements.productNavContents[3].insertAdjacentHTML('afterbegin', html);
-};
+}
 
 const renderTopInfo = (title, manufacturer, model, sku) => {
    elements.productTitle.innerHTML = title;
    elements.productManufacturer.innerHTML = manufacturer;
    elements.productModel.innerHTML = model;
    elements.productSku.innerHTML = sku;
-};
+}
 
 const renderPrice = (price) => {
    elements.productPrice.innerHTML = price;
-};
+}
 
 const renderReview = (rating, revCount) => {
    
@@ -214,15 +214,15 @@ const renderReview = (rating, revCount) => {
    
    for (let i = 0; i < int; i++) {
       htmlString += '<i class="product-info__review-icon fas fa-star"></i>';
-   };
+   }
 
    if (dec) {
       htmlString += `<i class="product-info__review-icon fas fa-star product-info__review-icon--partial" style="background-image: linear-gradient(to right, #EB2F38 0%, #EB2F38 ${perc}%, #ececec ${perc}%, #ececec 100%);"></i>`
-   };
+   }
       
    elements.productReview.insertAdjacentHTML('afterbegin', htmlString);
    elements.productReviewCount.innerHTML = revCount;
-};
+}
 
 export const renderProduct = (product) => {
    renderTopInfo(product.name, product.manufacturer, product.modelNumber, product.sku);
@@ -234,7 +234,7 @@ export const renderProduct = (product) => {
    renderIncludedContent(product.includedItemList);
    renderSpecsContent(product.details);
    renderImgs(product);
-};
+}
 
 export const navItemsEvents = (event) => {
    const navItemElement = event.currentTarget;
@@ -251,10 +251,10 @@ export const navItemsEvents = (event) => {
 
    const index = Array.prototype.indexOf.call(elements.productNavItems, navItemElement);
    elements.productNavContents[index].style.display = 'block';
-};
+}
 
 export const thumbImgsEvents = (event) => {   
    const imgSrc = event.currentTarget.querySelector('.product-gallery__thumb-img').getAttribute('src');
 
    elements.productImg.setAttribute('src', imgSrc);
-};
+}
