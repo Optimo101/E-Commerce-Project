@@ -9,13 +9,11 @@ const express = require('express'),
 
 // REGISTER (GET)
 router.get('/', authLib.checkNotAuth, (req, res) => {
-   console.log('Register (GET) Route:');
    res.render('register');
 });
 
 // REGISTER (POST)
 router.post('/', authLib.checkNotAuth, (req, res) => {   
-   console.log('Register (POST) Route:')
    const { firstName, lastName, newUsername, newPassword, confirmPassword } = req.body;
 
    if (newPassword !== confirmPassword) {
