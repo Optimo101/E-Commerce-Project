@@ -1,6 +1,6 @@
 import { elements } from './base';
 
-// ============= ADD MODIFIER CLASS TO DOM ELEMENTS =============
+// ADD MODIFIER CLASS TO DOM ELEMENTS
 export const addModClass = (nodeList, prefix) => {
    const elementList = nodeList;
 
@@ -13,8 +13,8 @@ export const addModClass = (nodeList, prefix) => {
          item.id = `mm-${num}`;
       }
       num++;
-   };
-};
+   }
+}
 
 
 // ADD EVENT LISTENERS FOR OPEN/CLOSING SUBMENUS
@@ -23,25 +23,25 @@ export const setUpSubmenuEvent = (eventType, method) => {
       document.querySelector(`.main-menu__item--${i}`).addEventListener(eventType, function() {
          if (document.querySelector(`.submenu--${i}`)) {
             method(document.querySelector(`.submenu--${i}`));
-         };
+         }
       });
-   };
-};
+   }
+}
 
 
-// ============== SUBMENU FUNCTIONS ==============
+// SUBMENU FUNCTIONS
 export const showSubMenu = (element) => {
    // Gets the natural height of an element
    const getHeight = () => {
       element.style.display = 'block'; // Make it visible
       const height = element.scrollHeight + 'px'; // Get height
       return height;
-   };
+   }
    
    element.style.display = 'block';
    element.style.height = getHeight();
    element.style.opacity = 1;
-};
+}
 
 export const hideSubMenu = (element) => {
    element.style.height = '0';
@@ -50,10 +50,10 @@ export const hideSubMenu = (element) => {
    window.setTimeout(function() {
       element.style.display = 'none';
    }, 250);
-};
+}
 
 
-// ============== RENDER SUBMENU CONTENT ==============
+// RENDER SUBMENU CONTENT
 const createSubmenu = (mainCatNum) => {
    const markup = `
       <div class="submenu submenu--${mainCatNum}">
@@ -62,7 +62,7 @@ const createSubmenu = (mainCatNum) => {
    const mainMenuElement = document.getElementById(`mm-${mainCatNum}`);
 
    mainMenuElement.insertAdjacentHTML('beforeend', markup);
-};
+}
 
 const createSubmenuContent = (subCatsObj, mainCatNum, totalSubCats) => {
    let markup = `
@@ -78,16 +78,17 @@ const createSubmenuContent = (subCatsObj, mainCatNum, totalSubCats) => {
                </span>
             </a>
          </li>
-         `};
+      `
+   }
 
    markup += `</ul>`;
 
    const subMenuElement = document.querySelector(`.submenu--${mainCatNum}`);
    subMenuElement.insertAdjacentHTML('beforeend', markup);
-};
+}
 
 
-// ============== RENDER SUBMENUS ==============
+// RENDER SUBMENUS
 export const renderSubMenus = (arrays) => {
    
    // For each subcategory list (array)...
@@ -106,7 +107,7 @@ export const renderSubMenus = (arrays) => {
       // Then fill in each submenu with the subcategory items
       createSubmenuContent(subCategoriesObj, index + 1, array.length);
    });
-};
+}
 
 
 

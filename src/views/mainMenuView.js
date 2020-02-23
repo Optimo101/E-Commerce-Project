@@ -9,7 +9,7 @@ export const showDropdown = (element) => {
       const height = element.scrollHeight + 'px'; // Get height
       element.style.display = '';
       return height;
-   };
+   }
 
    var height = getHeight(); // Gets natural height
    element.classList.add('is-visible'); // Make element visible
@@ -18,28 +18,28 @@ export const showDropdown = (element) => {
 
 
    // Once transition is complete, remove the inline max-height so content can scale responsively.
-	window.setTimeout(function () {
+	window.setTimeout(() => {
       element.style.height = '';
       element.style.overflow = 'visible'; // Show overflow for submenus
    }, 250);
-};
+}
 
 export const hideDropdown = (element) => {
    // Give element a height to change from as 'auto' (from 'is-visible' class) does not work
    element.style.height = element.scrollHeight + 'px';
 
    // Set height back to 0 and overflow to hidden
-   window.setTimeout(function() {
+   window.setTimeout(() => {
       element.style.height = '0';
       element.style.overflow = 'hidden';
    }, 1);
 
    // When transition is complete, hide it
-   window.setTimeout(function() {
+   window.setTimeout(() => {
       element.classList.remove('is-visible');
       elements.shadowOverlay.style.display = 'none';
    }, 250);
-};
+}
 
 export const toggleDropdown = (element) => {
    // If menu is visible, hide it
@@ -50,7 +50,7 @@ export const toggleDropdown = (element) => {
 
    //Otherwise, show it
    showDropdown(element);
-};
+}
 
 export const hideOnClickOutside = (event, element) => {
    if (event.target.closest('.main-menu__btn') === null && 
@@ -59,5 +59,4 @@ export const hideOnClickOutside = (event, element) => {
       event.target.closest('.account-menu__dropdown') === null) {
          hideDropdown(element);
    } 
-};
-
+}

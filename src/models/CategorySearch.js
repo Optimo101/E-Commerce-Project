@@ -28,7 +28,6 @@ export default class SubCats {
       }
 
       this.filterResults();
-
    };
 
    filterResults() {
@@ -49,16 +48,22 @@ export default class SubCats {
             }
          });
 
-         resultsArray.splice(0, 1); // first category from results (Gift Ideas) was only item that did not follow number pattern used to filter above -- manually removing
-         resultsArray.splice(33, 1); // unable to remove id: '0700000' (Video Games) using above method -- manually removing
-         resultsArray.splice(3, 1); // Removing subcategory TV & Internet Service Providers due to no search results found under this category
-         resultsArray.splice(54, 1); // Removing subcategory Weather Stations due to no search results found under this category.
+         // first category from results (Gift Ideas) was only item that did not follow number pattern used to filter above -- manually removing
+         resultsArray.splice(0, 1); 
+
+         // unable to remove id: '0700000' (Video Games) using above method -- manually removing
+         resultsArray.splice(33, 1);
+
+         // Removing subcategory TV & Internet Service Providers due to no search results found under this category
+         resultsArray.splice(3, 1);
+
+         // Removing subcategory Weather Stations due to no search results found under this category.
+         resultsArray.splice(54, 1);
 
          this.results = resultsArray;
    };
 
    organizeResults() {
-      
       for (let i = 0; i < 9; i++) {
          let subCatArray = [];
 
