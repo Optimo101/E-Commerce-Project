@@ -78,14 +78,10 @@
 
    &__list-link {
       transition: color .25s;
-      transition: border-color .35s ease;
-      border-bottom: 1px solid transparent;
 
       &:hover {
          color: $color-black;
-         border-color: $color-black;
       }
-      
    }
 }
 
