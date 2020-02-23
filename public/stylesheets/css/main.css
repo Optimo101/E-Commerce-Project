@@ -757,12 +757,9 @@ section {
   .footer-nav__list-item {
     margin-bottom: .6rem; }
   .footer-nav__list-link {
-    transition: color .25s;
-    transition: border-color .35s ease;
-    border-bottom: 1px solid transparent; }
+    transition: color .25s; }
     .footer-nav__list-link:hover {
-      color: #3d3d3d;
-      border-color: #3d3d3d; }
+      color: #3d3d3d; }
 
 .footer-subscribe {
   display: flex;
