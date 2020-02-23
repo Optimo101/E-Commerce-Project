@@ -118,16 +118,12 @@ const controlCartPage = () => {
                state.cart.updateItem(itemSku, newQuantity)
             });
 
-            cartView.highlightRefreshBtns(itemSku);
+            cartView.displayRefreshBtn();
          }
 
          // Event for removing item from cart
          if (event.target.matches('.cart-grid__remove-btn, .cart-grid__remove-btn *')) {
             state.cart.removeItem(itemSku); 
-            location.reload(true);
-         }
-         // Event for refreshing cart quantity
-         if (event.target.matches('.cart-grid__refresh-btn, .cart-grid__refresh-btn *')) {
             location.reload(true);
          }
       }

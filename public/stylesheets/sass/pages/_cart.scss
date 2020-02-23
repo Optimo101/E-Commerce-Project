@@ -65,19 +65,18 @@
    }
 
    &__btn-wrap {
+      font-weight: 300;
       display: flex;
-
-      & i {
-         font-size: $font-size-sm;
-      }
-
-      & button {
-         width: 2.75rem;
-      }
+      justify-content: center;
    }
 
    &__remove-btn {
-      margin-right: .5rem;
+      padding-top: 2px;
+      padding-bottom: 2px;
+
+      &:hover {
+         background-color: $color-primary;
+      }
    }
 
    &__unit-price {
