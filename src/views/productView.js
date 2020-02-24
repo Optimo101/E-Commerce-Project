@@ -225,6 +225,8 @@ const renderReview = (rating, revCount) => {
 }
 
 export const renderProduct = (product) => {
+   product.name = product.name.replace(/"/g, '&quot;');
+   
    renderTopInfo(product.name, product.manufacturer, product.modelNumber, product.sku);
    renderReview(product.customerReviewAverage, product.customerReviewCount);
    renderPrice(product.regularPrice);
