@@ -1118,12 +1118,12 @@ section {
     justify-content: center;
     background-color: white;
     padding: 1rem; }
-  .cart-grid__image-outer-wrap {
+  .cart-grid__image-wrap {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100%; }
-  .cart-grid__image-inner-wrap {
+  .cart-grid__image-link {
     display: flex;
     justify-content: center;
     align-items: center;

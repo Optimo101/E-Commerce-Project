@@ -6,17 +6,17 @@ export const renderCartGridItems = (cartItems) => {
    for (const item of items) {
       const html = `
          <div class="cart-grid__item">
-            <div class="cart-grid__image-outer-wrap">
-               <div class="cart-grid__image-inner-wrap">
-                  <img src="${cartItems[item].image}" alt="${cartItems[item].name}" class="cart-grid__image">
-               </div>
+            <div class="cart-grid__image-wrap">
+                  <a href="/product?search=${cartItems[item].sku}" class="cart-grid__image-link">
+                     <img src="${cartItems[item].image}" alt="${cartItems[item].name}" class="cart-grid__image">
+                  </a>
             </div>
          </div>
 
          <div class="cart-grid__item">
-            <p class="cart-grid__name">  
-            ${cartItems[item].name}
-            </p>
+            <a href="/product?search=${cartItems[item].sku}" class="cart-grid__title-link">
+               <p class="cart-grid__name">${cartItems[item].name}</p>
+            </a>
          </div>
 
          <div class="cart-grid__item">

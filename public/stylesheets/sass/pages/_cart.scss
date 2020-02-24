@@ -34,14 +34,14 @@
       padding: 1rem;
    }
 
-   &__image-outer-wrap {
+   &__image-wrap {
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100%;
    }
 
-   &__image-inner-wrap {
+   &__image-link {
       display: flex;
       justify-content: center;
       align-items: center;
