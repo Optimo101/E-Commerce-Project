@@ -30,7 +30,8 @@
 }
 
 .main-header {
-   margin-top: 2rem;
+   padding-top: 2rem;
+   background-image: url('../../img/brickwall.png');
 }
 
 .top-header {
@@ -65,6 +66,7 @@
 
    border: 2px solid $color-lightgrey;
    border-radius: 4rem;
+   background-color: $color-white;
 
 
    &__input {

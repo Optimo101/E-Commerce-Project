@@ -105,6 +105,7 @@ const controlCartPage = () => {
    cartView.updateCartSummary(state.cart.totals);
 
    // Event Listeners
+   // ===========================================================
    elements.cartGrid.addEventListener('click', (event) => {
    
       if (event.target.closest('.cart-grid__quantity')) {
