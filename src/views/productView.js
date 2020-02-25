@@ -56,6 +56,7 @@ const renderImgs = (product) => {
    // Set img src of main img
    elements.productImg.setAttribute('src', imgsArr[0]);
    elements.productImg.setAttribute('alt', newProductName);
+   elements.productImgLink.setAttribute('href', imgsArr[0]);
    
    // Create thumbs
    let html = '';
@@ -217,7 +218,7 @@ const renderReview = (rating, revCount) => {
    }
 
    if (dec) {
-      htmlString += `<i class="product-info__review-icon fas fa-star product-info__review-icon--partial" style="background-image: linear-gradient(to right, #EB2F38 0%, #EB2F38 ${perc}%, #ececec ${perc}%, #ececec 100%);"></i>`
+      htmlString += `<i class="product-info__review-icon fas fa-star product-info__review-icon--partial" style="background-image: linear-gradient(to right, #f3d31f 0%, #f3d31f ${perc}%, #ececec ${perc}%, #ececec 100%);"></i>`
    }
       
    elements.productReview.insertAdjacentHTML('afterbegin', htmlString);
@@ -259,4 +260,5 @@ export const thumbImgsEvents = (event) => {
    const imgSrc = event.currentTarget.querySelector('.product-gallery__thumb-img').getAttribute('src');
 
    elements.productImg.setAttribute('src', imgSrc);
+   elements.productImgLink.setAttribute('href', imgSrc);
 }

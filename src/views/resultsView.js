@@ -19,7 +19,7 @@ const renderStars = (rating) => {
    }
 
    if (dec) {
-      htmlString += `<i class="product-thumb__review-icon fas fa-star product-thumb__review-icon--partial" style="background-image: linear-gradient(to right, #EB2F38 0%, #EB2F38 ${perc}%, #ffffff ${perc}%, #ffffff 100%);"></i>`
+      htmlString += `<i class="product-thumb__review-icon fas fa-star product-thumb__review-icon--partial" style="background-image: linear-gradient(to right, #f3d31f 0%, #f3d31f ${perc}%, #ffffff ${perc}%, #ffffff 100%);"></i>`
    }
      
    return htmlString;
