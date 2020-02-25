@@ -35,7 +35,7 @@
 
    }
 
-   &__img-inner-wrap {
+   &__img-link {
       display: flex;
       justify-content: center;
    }
@@ -99,16 +99,12 @@
       justify-content: space-between;
       list-style: none;
       margin-bottom: 2rem;
-
+      color: $color-black;
    }
 
    &__nav-item {
       cursor: pointer;
-      transition: color .25s;
 
-      &:hover {
-         color: $color-black;
-      }
 
       &:after {
          display:block;
@@ -135,13 +131,25 @@
       text-transform: uppercase;
       font-size: $font-size-primary;
       font-weight: $font-weight-bold;
-      color: inherit;
+      font-size: $font-size-lg;
+
    }
 
    &__nav-content-main {
       color: $color-black;
-      max-height: 45rem;
+      background-color: white;
+      max-height: 42.6rem;
+      border: 1px solid $color-lightgrey;
+      border-radius: 10px;
+
+      padding: 1rem;
+
       overflow-y: scroll;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+         display: none;
+      } 
    }
 
 // =====================================
@@ -253,7 +261,8 @@
    &__user-review-box {
       margin: 2rem 0;
       color: $color-black;
-      // background-color: lightpink;
+      font-size: $font-size-xl;
+
    }
 
    &__review-wrap {
@@ -266,7 +275,7 @@
    }
 
    &__review-icon {
-      color: $color-primary;
+      color: $color-yellow;
       
       &--partial {
          color: transparent;
@@ -300,14 +309,14 @@
       line-height: 3rem;
       color: black;
       font-size: $font-size-xxl;
-      margin-right: 2rem;
-      margin-left: 1rem;
+      margin-right: 3rem;;
+      margin-left: 1.5rem;
       transition: background-color .25s;
    }
 
    &__cart-btn {
       width: 17rem;
-      margin-right: 1rem;
+      margin-right: 2rem;
       &:hover {
          background-color: $color-primary;
       }

@@ -47,6 +47,7 @@ export const elements = {
    productManufacturer: document.querySelector('.product-header__manufacturer-data'),
    productModel: document.querySelector('.product-header__model-data'),
    productSku: document.querySelector('.product-header__sku-data'),
+   productImgLink: document.querySelector('.product-gallery__img-link'),
    productImg: document.querySelector('.product-gallery__main-img'),
    productThumbsBox: document.querySelector('.product-gallery__thumbs-box'),
    productNavItems: document.querySelectorAll('.product-info__nav-item'),
