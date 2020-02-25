@@ -7,8 +7,8 @@
 
    height: 4rem;
    width: 100%;
-   background-color: $color-lightergrey;
-   border-bottom: 1px solid $color-lightgrey;
+   background-color: rgb(235, 235, 235);
+   border-bottom: 1px solid $color-grey;
    transition: height .5s;
    overflow: hidden;
 
@@ -31,7 +31,7 @@
 
 .main-header {
    padding-top: 2rem;
-   background-image: url('../../img/brickwall.png');
+   // background-image: url('../../img/white_brick_wall_dark.png');
 }
 
 .top-header {

@@ -322,7 +322,7 @@
 
       &:hover {
          & .product-info__like-icon {
-            transform: scale(1.3);
+            transform: scale(1.25);
             color: $color-primary;
          }
       } 
@@ -336,7 +336,7 @@
 
       &--full {
          color: $color-primary;
-         transform: scale(1.3);
+         transform: scale(1.25);
       }
    }
 
