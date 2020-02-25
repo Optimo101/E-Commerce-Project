@@ -391,6 +391,7 @@ const controlCategorySearch = async () => {
 // HEADER CONTROLLER
 // ===========================================================
 const controlHeader = async () => {
+
    try {
       // Perform categories search
       await controlCategorySearch();
@@ -414,48 +415,42 @@ const controlHeader = async () => {
 
    // Event Listeners
    // ===========================================================
-      elements.siteHeader.addEventListener('click', (event) => {
+   elements.siteHeader.addEventListener('click', (event) => {
+      // Open/close main menu
+      if (event.target.matches('.main-menu__btn, .main-menu__btn *')) {
+         mainMenuView.toggleDropdown(elements.mainMenuDropdown);
+      }
 
-         // Header notice close button
-         if (event.target.matches('.header-notice__close-icon, .header-notice__close-icon *')) {
-            hideElement(elements.headerNotice);
+      // Account menu events (after user has logged in)
+      if (elements.accountMenuDropdown != null) {
+
+         // Toggle account dropdown menu
+         if (event.target.matches('.account-btn, .account-btn *')) {
+            mainMenuView.toggleDropdown(elements.accountMenuDropdown);
          }
 
-         // Open/close main menu
-         if (event.target.matches('.main-menu__btn, .main-menu__btn *')) {
-            mainMenuView.toggleDropdown(elements.mainMenuDropdown);
-         }
+         // When user clicks logout link
+         if (event.target.matches('.account-menu__link--logout, .account-menu__link--logout *')) {
+            event.preventDefault();
+            logout();
 
-         // Account menu events (after user has logged in)
-         if (elements.accountMenuDropdown != null) {
-
-            // Toggle account dropdown menu
-            if (event.target.matches('.account-btn, .account-btn *')) {
-               mainMenuView.toggleDropdown(elements.accountMenuDropdown);
-            }
-
-            // When user clicks logout link
-            if (event.target.matches('.account-menu__link--logout, .account-menu__link--logout *')) {
-               event.preventDefault();
-               logout();
-   
-               async function logout() {
-                  try {
-                     await axios.post('/user/logout', {
-                        cart: state.cart.items,
-                        likes: state.likes.likes
-                     })
-                     .then(() => {
-                        state.cart.clearLocalStorage();
-                        state.likes.clearLocalStorage();
-                        window.location = window.location.href;
-                     })
-                  } catch (error) {
-                     console.log(error);
-                  }
+            async function logout() {
+               try {
+                  await axios.post('/user/logout', {
+                     cart: state.cart.items,
+                     likes: state.likes.likes
+                  })
+                  .then(() => {
+                     state.cart.clearLocalStorage();
+                     state.likes.clearLocalStorage();
+                     window.location = window.location.href;
+                  })
+               } catch (error) {
+                  console.log(error);
                }
             }
          }
+      }
       });
 
       // Close menus when click anywhere outside of menus
@@ -484,9 +479,15 @@ const controlHomePage = () => {
 
    // Begin image slides in landing section
    homeView.promotionRotation();
+
+   // Event Listeners
+   // ===========================================================
+   elements.headerNoticeBtn.addEventListener('click', () => {
+      hideElement(elements.headerNotice);
+      });
 }
 
-
+  
 
 // ===========================================================
 // LOGIN PAGE CONTROLLER
