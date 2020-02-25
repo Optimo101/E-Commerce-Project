@@ -113,7 +113,7 @@ body {
 
 .page-header {
   margin-bottom: 2rem;
-  border-bottom: 3px solid #cecece; }
+  border-bottom: 3px solid #b6b6b6; }
   .page-header__title {
     font-size: 3rem;
     color: #3d3d3d; }
@@ -303,9 +303,11 @@ body {
     text-decoration: none; }
   .main-menu__item-icon {
     margin-right: 1.5rem;
-    width: 1.75rem; }
+    width: 1.75rem;
+    transition: color .15s ease; }
   .main-menu__title {
-    margin-right: auto; }
+    margin-right: auto;
+    transition: color .15s ease; }
   .main-menu__item-arrow {
     transition: transform .3s; }
 
@@ -440,7 +442,8 @@ body {
 
 .quantity-calc__btns {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  background-color: #FFF; }
 
 .quantity-calc__up-btn {
   display: flex;
@@ -526,10 +529,12 @@ body {
 
 .account-menu__item-icon {
   margin-right: 1.5rem;
-  width: 1.75rem; }
+  width: 1.75rem;
+  transition: color .15s ease; }
 
 .account-menu__title {
-  margin-right: auto; }
+  margin-right: auto;
+  transition: color .15s ease; }
 
 .header-notice {
   display: flex;
@@ -537,8 +542,8 @@ body {
   align-items: center;
   height: 4rem;
   width: 100%;
-  background-color: #ececec;
-  border-bottom: 1px solid #cecece;
+  background-color: #ebebeb;
+  border-bottom: 1px solid #b6b6b6;
   transition: height .5s;
   overflow: hidden; }
   .header-notice__content {
@@ -553,8 +558,7 @@ body {
       color: #3d3d3d; }
 
 .main-header {
-  padding-top: 2rem;
-  background-image: url("../../img/brickwall.png"); }
+  padding-top: 2rem; }
 
 .top-header {
   display: flex;
@@ -621,8 +625,8 @@ body {
   position: relative;
   background-color: #ececec;
   padding-top: 3rem;
-  border-bottom: 1px solid #cecece;
-  background-image: url("../../img/brickwall.png"); }
+  border-bottom: 1px solid #b6b6b6;
+  background-image: url("../../img/white_brick_wall_dark.png"); }
 
 section {
   padding-bottom: 10rem; }
@@ -641,7 +645,7 @@ section {
   display: flex;
   background-color: #EB2F38;
   height: 6rem;
-  border-bottom: 1px solid #7a7a7a; }
+  border-bottom: 1px solid #b6b6b6; }
   .nav-bar__content {
     display: flex;
     align-items: center;
@@ -729,6 +733,8 @@ section {
     justify-content: center; }
     .footer-contact__container div:nth-of-type(2) {
       margin-bottom: .6rem; }
+    .footer-contact__container div:nth-of-type(3):hover {
+      color: #3d3d3d; }
   .footer-contact__logo-box {
     display: flex;
     align-items: center;
@@ -739,7 +745,8 @@ section {
     height: auto; }
   .footer-contact__item {
     display: flex;
-    align-items: center; }
+    align-items: center;
+    transition: color .15s ease; }
   .footer-contact i {
     margin-right: 1.5rem; }
 
@@ -760,7 +767,7 @@ section {
   .footer-nav__list-item {
     margin-bottom: .6rem; }
   .footer-nav__list-link {
-    transition: color .25s; }
+    transition: color .15s; }
     .footer-nav__list-link:hover {
       color: #3d3d3d; }
 
@@ -802,7 +809,7 @@ section {
   margin-top: -3rem;
   height: 75vh;
   padding-bottom: 0;
-  background-image: url("../../img/brickwall.png"); }
+  background-image: url("../../img/white_brick_wall_dark.png"); }
   .landing__background {
     background-image: url(../../img/landing-img-0.jpg);
     background-size: cover;
@@ -1080,7 +1087,7 @@ section {
   margin-right: 1rem; }
 
 .product-info__like-btn:hover .product-info__like-icon {
-  transform: scale(1.3);
+  transform: scale(1.25);
   color: #EB2F38; }
 
 .product-info__like-icon {
@@ -1090,7 +1097,7 @@ section {
   backface-visibility: hidden; }
   .product-info__like-icon--full {
     color: #EB2F38;
-    transform: scale(1.3); }
+    transform: scale(1.25); }
 
 .product-info__like-text {
   width: 5rem; }

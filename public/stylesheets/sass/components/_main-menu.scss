@@ -95,11 +95,13 @@
    &__item-icon {
       margin-right: 1.5rem;
       width: 1.75rem;
+      transition: color .15s ease;
+
    }
 
    &__title {
       margin-right: auto;
-
+      transition: color .15s ease;
    }
 
    &__item-arrow {
