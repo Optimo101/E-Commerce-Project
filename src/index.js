@@ -452,7 +452,18 @@ const controlHeader = async () => {
             }
          }
       }
-      });
+
+      // When user clicks Cart link
+      if (event.target.matches('.cart-link, .cart-link *')) {
+         event.preventDefault();
+
+         if (Object.keys(state.cart.items).length === 0) {
+            return window.alert("There are no items in your cart. Go shopping!");
+         }
+
+         window.location = '/cart';
+      }
+   });
 
       // Close menus when click anywhere outside of menus
       document.addEventListener('click', (event) => {
@@ -495,7 +506,7 @@ const controlHomePage = () => {
 // ===========================================================
 const controlLoginPage = () => {
    console.log('Beginning controlLoginPage()...')
-   
+
    // Event Listeners
    // ===========================================================
    elements.accountLoginBtn.addEventListener('click', event => {
