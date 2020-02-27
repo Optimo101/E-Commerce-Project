@@ -29,6 +29,6 @@ router.post('/', authLib.checkNotAuth, (req, res, next) => {
          return res.send(req.user);
       });
     })(req, res, next);
-})
+});
 
 module.exports = router;

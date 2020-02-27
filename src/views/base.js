@@ -22,10 +22,10 @@ export const elements = {
    accountLogoutLink: document.querySelector('.account-menu__link--logout'),
 
    // LOGIN PAGE ELEMENTS
-   accountLoginForm: document.querySelector('.sign-in__form'),
-   accountLoginUsername: document.querySelector('.sign-in__email-input'),
-   accountLoginPassword: document.querySelector('.sign-in__password-input'),
-   accountLoginBtn: document.querySelector('.sign-in__btn'),
+   // accountLoginForm: document.querySelector('.sign-in__form'),
+   accountLoginUsername: document.querySelector('.login-username'),
+   accountLoginPassword: document.querySelector('.login-password'),
+   accountLoginBtn: document.querySelector('.account-login-btn'),
 
    // HOME PAGE ELEMENTS
    landingSection: document.querySelector('.landing'),
@@ -95,7 +95,6 @@ export const cartBtnAnimation = (buttonElement, existingItem) => {
 
    if (existingItem && existingItem.quantity === 9) {
       console.log(existingItem);
-      console.log('YOu have reached the item limit!');
       textElement.innerHTML = '';
       textElement.innerHTML = 'Max Limit';
       iconElement.classList.remove('fa-shopping-cart');

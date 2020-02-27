@@ -6,14 +6,10 @@
 }
 
 .cart {
-   display: flex;
-   justify-content: space-between;
-   flex-wrap: wrap;
 }
 
 .cart-grid {
    flex-grow: 1;
-
    display: grid;
    grid-template-columns: 10rem auto auto auto;
    grid-template-rows: 3rem;
@@ -65,7 +61,6 @@
    }
 
    &__btn-wrap {
-      font-weight: 300;
       display: flex;
       justify-content: center;
    }
@@ -73,6 +68,7 @@
    &__remove-btn {
       padding-top: 2px;
       padding-bottom: 2px;
+      background-color: $color-grey;
 
       &:hover {
          background-color: $color-primary;
