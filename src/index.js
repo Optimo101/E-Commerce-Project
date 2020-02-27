@@ -430,6 +430,28 @@ const controlHeader = async () => {
             mainMenuView.toggleDropdown(elements.accountMenuDropdown);
          }
 
+         // When user clicks the 'Liked Items' link in the account menu
+         if (event.target.matches('.account-menu__link--liked-items, .account-menu__link--liked-items *')) {
+            event.preventDefault();
+
+            if (state.likes.likes.length === 0) {
+               return window.alert("You currently do not have any 'liked' items.");
+            }
+   
+            window.location = '/results/likes';
+         }
+
+         // If user clicks the 'Shopping Cart' link in the account menu
+         if (event.target.matches('.account-menu__link--shopping-cart, .account-menu__link--shopping-cart *')) {
+            event.preventDefault();
+            
+            if (Object.keys(state.cart.items).length === 0) {
+               return window.alert("There are no items in your cart. Go shopping!");
+            }
+   
+            window.location = '/cart';
+         }
+
          // When user clicks logout link
          if (event.target.matches('.account-menu__link--logout, .account-menu__link--logout *')) {
             event.preventDefault();
