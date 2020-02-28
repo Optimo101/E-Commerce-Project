@@ -8,6 +8,7 @@ import Cart from './models/Cart';
 import axios from 'axios';
 import { elements, hideElement, updateItemQuant, cartBtnAnimation } from './views/base';
 
+import * as headerView from './views/headerView';
 import * as homeView from './views/homeView';
 import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
@@ -435,10 +436,10 @@ const controlHeader = async () => {
             event.preventDefault();
 
             if (state.likes.likes.length === 0) {
-               return window.alert("You currently do not have any 'liked' items.");
+               headerView.showNoLikesMsg();
+            } else {
+               window.location = '/results/likes'
             }
-   
-            window.location = '/results/likes';
          }
 
          // If user clicks the 'Shopping Cart' link in the account menu
@@ -446,10 +447,10 @@ const controlHeader = async () => {
             event.preventDefault();
             
             if (Object.keys(state.cart.items).length === 0) {
-               return window.alert("There are no items in your cart. Go shopping!");
+               headerView.showNoItemsMsg();
+            } else {
+               window.location = '/cart';
             }
-   
-            window.location = '/cart';
          }
 
          // When user clicks logout link
@@ -480,10 +481,10 @@ const controlHeader = async () => {
          event.preventDefault();
 
          if (Object.keys(state.cart.items).length === 0) {
-            return window.alert("There are no items in your cart. Go shopping!");
+            headerView.showNoItemsMsg();
+         } else {
+            window.location = '/cart';
          }
-
-         window.location = '/cart';
       }
    });
 
@@ -501,6 +502,11 @@ const controlHeader = async () => {
       // Open/close submenus
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
       submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu); 
+
+      // If user clicks the close icon on the header notice section (at very top of header)
+      elements.headerNoticeBtn.addEventListener('click', () => {
+         hideElement(elements.headerNotice);
+      });
 }
 
 
@@ -514,11 +520,6 @@ const controlHomePage = () => {
    // Begin image slides in landing section
    homeView.promotionRotation();
 
-   // Event Listeners
-   // ===========================================================
-   elements.headerNoticeBtn.addEventListener('click', () => {
-      hideElement(elements.headerNotice);
-      });
 }
 
   

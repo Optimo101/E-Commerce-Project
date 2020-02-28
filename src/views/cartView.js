@@ -1,7 +1,10 @@
-import { elements } from './base';
+import { elements, dollarFormat } from './base';
 
 export const renderCartGridItems = (cartItems) => {
    const items = Object.keys(cartItems);
+
+
+
 
    for (const item of items) {
       const html = `
@@ -46,11 +49,11 @@ export const renderCartGridItems = (cartItems) => {
             <div class="cart-grid__total">
 
                <div class="cart-grid__total-price">
-                  <span class="cart-grid__total-price-number">$${cartItems[item].itemTotal}</span>
+                  <span class="cart-grid__total-price-number">$${ dollarFormat(cartItems[item].itemTotal) }</span>
                </div>
 
                <div class="cart-grid__unit-price">
-                  <p class="cart-grid__unit-price-text">($${cartItems[item].price} each)</p>
+                  <p class="cart-grid__unit-price-text">($${ dollarFormat(cartItems[item].price) } each)</p>
                </div>
 
             </div>
@@ -62,10 +65,10 @@ export const renderCartGridItems = (cartItems) => {
 }
 
 export const updateCartSummary = (totals) => {
-   elements.cartSummarySubtotal.innerHTML = `${totals.subtotal}`;
-   elements.cartSummaryTaxes.innerHTML = `${totals.taxes}`;
-   elements.cartSummaryShipping.innerHTML = `${totals.shipping}`;
-   elements.cartSummaryTotal.innerHTML = `${totals.grandTotal}`;
+   elements.cartSummarySubtotal.innerHTML = `${ dollarFormat(totals.subtotal) }`;
+   elements.cartSummaryTaxes.innerHTML = `${ dollarFormat(totals.taxes) }`;
+   elements.cartSummaryShipping.innerHTML = `${ dollarFormat(totals.shipping) }`;
+   elements.cartSummaryTotal.innerHTML = `${ dollarFormat(totals.grandTotal) }`;
 } 
 
 export const displayRefreshBtn = () => {

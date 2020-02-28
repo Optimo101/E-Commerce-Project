@@ -2,6 +2,7 @@ export const elements = {
    // HEADER ELEMENTS
    siteHeader: document.querySelector('.site-header'),
    headerNotice: document.querySelector('.header-notice'),
+   headerNoticeText : document.querySelector('.header-notice__text'),
    headerNoticeBtn: document.querySelector('.header-notice__close-icon'),
    headerCartCounter: document.querySelector('.cart-link__counter'),
 
@@ -69,6 +70,16 @@ export const elements = {
 }
 
 // ============== SIMPLE HIDE ELEMENT FUNCTION ==============
+
+export const dollarFormat = (num) => {
+   return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+};
+
+export const numberFormat = (num) => {
+   return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+};
+
+
 export const hideElement = (element) => {
      element.style.height = '0';
 }

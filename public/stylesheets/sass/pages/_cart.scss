@@ -11,9 +11,9 @@
 .cart-grid {
    flex-grow: 1;
    display: grid;
-   grid-template-columns: 10rem auto auto auto;
+   grid-template-columns: 12rem auto auto auto;
    grid-template-rows: 3rem;
-   grid-auto-rows: minmax(0, 10rem);
+   grid-auto-rows: minmax(0, 12rem);
    gap: 3px;
 
    border: 2px solid $color-lightgrey;

@@ -1,4 +1,4 @@
-import { elements } from './base';
+import { elements, numberFormat, dollarFormat } from './base';
 
 // Clear items from Results page
 export const clearResults = () => {
@@ -57,13 +57,13 @@ const renderProductItem = (product) => {
             </div>
 
             <div class="product-thumb__review-count">
-               (${product.customerReviewCount})
+               (${numberFormat(product.customerReviewCount)})
             </div>
          </div>
       </div>
 
       <div class="product-thumb__bottom-content">
-         <div class="product-thumb__price">$${product.regularPrice}</div>
+         <div class="product-thumb__price">$${dollarFormat(product.regularPrice)}</div>
          <div class="product-thumb__btn-wrap">
             <button class="product-thumb__cart-btn btn btn--small btn--black" id="${product.index}-${product.sku}">
                <i class="product-thumb__cart-icon fas fa-shopping-cart"></i>
@@ -80,9 +80,9 @@ const renderProductItem = (product) => {
 }
 
 // Render item count at bottom of Results page
-const renderItemCount = (itemStart, itemEnd, itemTotal) => {
-   elements.resultsCount.innerHTML = `${itemStart} - ${itemEnd} of ${itemTotal} total items`
-}
+// const renderItemCount = (itemStart, itemEnd, itemTotal) => {
+//    elements.resultsCount.innerHTML = `${itemStart} - ${itemEnd} of ${itemTotal} total items`
+// }
 
 const createButton = (page, type) =>  `
    <button class="btn btn--small btn--black results-section__page-btn results-section__page-btn--${type}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
@@ -124,9 +124,9 @@ export const renderResults = (results, page = 1, resPerPage = 20) => {
    results.slice(start, end).forEach(renderProductItem);
 
    // Render item count of current page
-   const itemStart = start + 1;
-   const itemEnd = end;
-   renderItemCount(itemStart, itemEnd, results.length);
+   // const itemStart = start + 1;
+   // const itemEnd = end;
+   // renderItemCount(itemStart, itemEnd, results.length);
 
    // Render page buttons of current page
    if (results.length >= resPerPage) {

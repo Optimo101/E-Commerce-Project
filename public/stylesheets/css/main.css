@@ -399,7 +399,7 @@ body {
     justify-content: center;
     line-height: 1rem; }
   .product-thumb__review-stars {
-    font-size: 1.8rem; }
+    font-size: 1.4rem; }
   .product-thumb__review-icon {
     color: #f3d31f; }
     .product-thumb__review-icon--partial {
@@ -584,12 +584,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 4rem;
+  height: 0;
   width: 100%;
   background-color: #90e0f8;
   border-bottom: 1px solid #b6b6b6;
   transition: height .5s;
-  overflow: hidden; }
+  overflow: hidden;
+  color: #5c5c5c; }
   .header-notice__content {
     display: flex;
     align-items: center; }
@@ -599,11 +600,11 @@ body {
     cursor: pointer;
     transition: color .25s ease; }
     .header-notice__close-icon:hover {
-      color: #5c5c5c; }
+      color: #EB2F38; }
 
 .main-header {
   padding-top: 2rem;
-  background-color: #eeeeee; }
+  background-image: url("../../img/white_brick_wall_dark.png"); }
 
 .top-header {
   display: flex;
@@ -917,7 +918,7 @@ section {
 
 .results-section__footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: top;
   width: 100%; }
 
@@ -1162,9 +1163,9 @@ section {
 .cart-grid {
   flex-grow: 1;
   display: grid;
-  grid-template-columns: 10rem auto auto auto;
+  grid-template-columns: 12rem auto auto auto;
   grid-template-rows: 3rem;
-  grid-auto-rows: minmax(0, 10rem);
+  grid-auto-rows: minmax(0, 12rem);
   gap: 3px;
   border: 2px solid #cecece;
   border-radius: 1rem;
