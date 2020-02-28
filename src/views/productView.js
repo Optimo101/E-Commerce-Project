@@ -1,4 +1,4 @@
-import { elements } from './base';
+import { elements, numberFormat, dollarFormat } from './base';
 
 export const renderLikeBtn = (isLiked, sku) => {
    const htmlString = !isLiked ? `
@@ -202,7 +202,7 @@ const renderTopInfo = (title, manufacturer, model, sku) => {
 }
 
 const renderPrice = (price) => {
-   elements.productPrice.innerHTML = price;
+   elements.productPrice.innerHTML = dollarFormat(price);
 }
 
 const renderReview = (rating, revCount) => {
@@ -222,7 +222,7 @@ const renderReview = (rating, revCount) => {
    }
       
    elements.productReview.insertAdjacentHTML('afterbegin', htmlString);
-   elements.productReviewCount.innerHTML = revCount;
+   elements.productReviewCount.innerHTML = numberFormat(revCount);
 }
 
 export const renderProduct = (product) => {
