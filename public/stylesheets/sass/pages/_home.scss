@@ -8,8 +8,7 @@
    margin-top: -3rem;
    height: 75vh;
    padding-bottom: 0;
-   background-image: url('../../img/white_brick_wall_dark.png');
-
+   background-color: black;
    
    &__background {
       background-image: url(../../img/landing-img-0.jpg);
@@ -17,11 +16,8 @@
       background-position: center;
       width: 100%;
       height: 100%;
-      
-
-      
+      transition: opacity .5s ease-in-out;
    }
-
 }
 
 .promotion {
@@ -35,6 +31,7 @@
    flex-direction: column;
    align-items: center;
    position: absolute;
+   transition: opacity .5s ease-in-out;
 
    &__header-box {
       display: flex;
@@ -50,14 +47,10 @@
       line-height: 5rem;
       backface-visibility: none;
       margin-bottom: 1rem;
-
-      animation: moveInLeft 1s ease-out;
    }
 
    &__sub-header {
       font-size: $font-size-xl;
-
-      animation: moveInRight 1s ease-out;
    }
 
    

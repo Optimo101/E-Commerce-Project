@@ -17,6 +17,7 @@
    padding: .8rem 2.2rem;
 
    transition: background-color .25s ease;
+   backface-visibility: hidden;
    cursor: pointer;
 
    &--small {
@@ -31,18 +32,18 @@
    }
 
    &--hover-float {
-      transition: all .20s;
+      transition: all .20s ease-in-out;
 
       &:hover {
          transform: translateY(-3px);
-         box-shadow: 0 .8rem .6rem rgba($color-black, .3);
+         box-shadow: 0 .8rem .6rem rgba(black, .3);
       }
 
       &:active,
       &:focus {
          outline: none;
          transform: translateY(-1px);
-         box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+         box-shadow: 0 .5rem 1rem rgba(black, .2);
       }
    }
   
