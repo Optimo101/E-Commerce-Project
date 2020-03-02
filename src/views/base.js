@@ -31,10 +31,6 @@ export const elements = {
    // HOME PAGE ELEMENTS
    landingSection: document.querySelector('.landing'),
    landingBackground: document.querySelector('.landing__background'),
-   landingPromoBox: document.querySelector('.promotion'),
-   landingPromoHeader: document.querySelector('.promotion__main-header'),
-   landingPromoSubHeader: document.querySelector('.promotion__sub-header'),
-   landingPromoBtn: document.querySelector('.promotion__btn'),
 
    // RESULTS PAGE ELEMENTS
    resultsSection: document.querySelector('.results-section'),

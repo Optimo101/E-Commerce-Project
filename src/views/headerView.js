@@ -6,6 +6,6 @@ export const showNoItemsMsg = () => {
 }
 
 export const showNoLikesMsg = () => {
-   elements.headerNoticeText.innerHTML = 'You currently do not have any "liked" items.';
+   elements.headerNoticeText.innerHTML = 'You have not added any "liked" items.';
    elements.headerNotice.style.height = '4rem';
 }

@@ -20,6 +20,15 @@ a {
   text-decoration: none;
   color: inherit; }
 
+.animate--move-in-left {
+  animation: moveInLeft 1s ease-out; }
+
+.animate--move-in-right {
+  animation: moveInRight 1s ease-out; }
+
+.animate--move-in-bottom {
+  animation: moveInBottom 1s ease-out; }
+
 @keyframes spin {
   from {
     transform: rotate(0deg); }
@@ -52,7 +61,7 @@ a {
     width: 100%;
     transform: translateX(0); } }
 
-@keyframes slide-and-fade {
+@keyframes fade-in {
   0% {
     opacity: 1; }
   20% {
@@ -162,6 +171,7 @@ body {
   display: inline-block;
   padding: .8rem 2.2rem;
   transition: background-color .25s ease;
+  backface-visibility: hidden;
   cursor: pointer; }
   .btn--small {
     font-size: 1.2rem;
@@ -171,14 +181,14 @@ body {
     animation: moveInBottom .5s ease-out .75s;
     animation-fill-mode: backwards; }
   .btn--hover-float {
-    transition: all .20s; }
+    transition: all .20s ease-in-out; }
     .btn--hover-float:hover {
       transform: translateY(-3px);
-      box-shadow: 0 0.8rem 0.6rem rgba(92, 92, 92, 0.3); }
+      box-shadow: 0 0.8rem 0.6rem rgba(0, 0, 0, 0.3); }
     .btn--hover-float:active, .btn--hover-float:focus {
       outline: none;
       transform: translateY(-1px);
-      box-shadow: 0 0.5rem 1rem rgba(92, 92, 92, 0.2); }
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
   .btn--black {
     background-color: #5c5c5c; }
   .btn--red {
@@ -856,13 +866,14 @@ section {
   margin-top: -3rem;
   height: 75vh;
   padding-bottom: 0;
-  background-image: url("../../img/white_brick_wall_dark.png"); }
+  background-color: black; }
   .landing__background {
     background-image: url(../../img/landing-img-0.jpg);
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 100%; }
+    height: 100%;
+    transition: opacity .5s ease-in-out; }
 
 .promotion {
   position: absolute;
@@ -873,7 +884,8 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute; }
+  position: absolute;
+  transition: opacity .5s ease-in-out; }
   .promotion__header-box {
     display: flex;
     flex-direction: column;
@@ -885,11 +897,9 @@ section {
     font-size: 4rem;
     line-height: 5rem;
     backface-visibility: none;
-    margin-bottom: 1rem;
-    animation: moveInLeft 1s ease-out; }
+    margin-bottom: 1rem; }
   .promotion__sub-header {
-    font-size: 2rem;
-    animation: moveInRight 1s ease-out; }
+    font-size: 2rem; }
 
 .service-bar {
   background-color: #5c5c5c;

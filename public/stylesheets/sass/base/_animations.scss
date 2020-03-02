@@ -1,7 +1,22 @@
+.animate--move-in-left {
+   animation: moveInLeft 1s ease-out;
+}
+
+.animate--move-in-right {
+   animation: moveInRight 1s ease-out;
+}
+
+.animate--move-in-bottom {
+   animation: moveInBottom 1s ease-out;
+}
+
+
 @keyframes spin {
    from {transform:rotate(0deg);}
    to {transform:rotate(360deg);}
 }
+
+
 
 @keyframes shrink-and-slide {
    0% {
@@ -40,7 +55,7 @@
    }
  }
 
- @keyframes slide-and-fade {
+ @keyframes fade-in {
    0% {
       opacity: 1;
    }

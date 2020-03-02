@@ -37,7 +37,7 @@ const controlProductSearch = async (query) => {
       await state.productSearch.getResults();
 
    } catch (error) {
-      alert('Somthing went wrong with the product search');
+      alert('Something went wrong with the product search');
       console.log(error);
    }
 }

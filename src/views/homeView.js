@@ -30,34 +30,42 @@ export const promotionRotation = () => {
       ]
    }
 
+
    setInterval(() => {
       let next = current + 1;
-      
       current === 3 ? next = 0 : next = next;
 
-      elements.landingBackground.classList.add('shrink-and-slide');
-      elements.landingPromoBox.classList.add('slide-and-fade');
-     
+      let promoBox = document.querySelector('.promotion');
+      let clone = promoBox.cloneNode(true);
+
+      // Fade OUT background and promo box
+      elements.landingBackground.style.opacity = '0';
+      promoBox.style.opacity = '0';
+      
+      // Swap backgrounds and promotion box content
       setTimeout(() => {
-         elements.landingBackground.style.backgroundImage = `url(../../img/landing-img-${next}.jpg)`
+         // Replace background image
+         elements.landingBackground.style.backgroundImage = `url(../../img/landing-img-${next}.jpg)`;
 
-         elements.landingPromoHeader.innerHTML = '';
-         elements.landingPromoSubHeader.innerHTML = '';
-         elements.landingPromoBtn.innerHTML = '';
+         // Replace promo box to restart animation
+         promoBox.parentNode.replaceChild(clone, promoBox);
 
-         elements.landingPromoHeader.innerHTML = `${promoContent.header[next]}`;
-         elements.landingPromoSubHeader.innerHTML = `${promoContent.subHeader[next]}`;
-         elements.landingPromoBtn.innerHTML = `${promoContent.button[next]}`;
-         elements.landingPromoBtn.setAttribute('href',`${promoContent.href[next]}`)
+         // Replace the content of the promo box
+         document.querySelector('.promotion__main-header').innerHTML = '';
+         document.querySelector('.promotion__main-header').innerHTML = promoContent.header[next];
 
+         document.querySelector('.promotion__sub-header').innerHTML = '';
+         document.querySelector('.promotion__sub-header').innerHTML = promoContent.subHeader[next];
+
+         document.querySelector('.promotion__btn').innerHTML = '';
+         document.querySelector('.promotion__btn').innerHTML = promoContent.button[next];
+         document.querySelector('.promotion__btn').setAttribute('href', promoContent.href[next]);
+
+         // Fade IN background
+         elements.landingBackground.style.opacity = '1';
+         
          current < 3 ? current ++ : current = 0;
-
-      }, 1500);
-
-      setTimeout(() => {
-         elements.landingBackground.classList.remove('shrink-and-slide');
-         elements.landingPromoBox.classList.remove('slide-and-fade');
-      }, 7000)
+      }, 550);
    }, 8000);
 }
 
