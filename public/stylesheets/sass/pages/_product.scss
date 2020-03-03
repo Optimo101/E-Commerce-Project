@@ -1,5 +1,4 @@
 .product-section {
-   
    &__header {
       padding: 2rem 0;
    }
@@ -17,7 +16,6 @@
       }
    }
 }
-
 
 .product-gallery {
    &__box {
@@ -47,7 +45,6 @@
       max-height: 50rem;
    }
 
-
    &__thumbs-box {
       display: flex;
    }
@@ -62,7 +59,6 @@
       width: 8rem;
       height: 8rem;
       transition: border-color .25s;
-
 
       &:not(:last-child) {
          margin-right: 1rem;
@@ -87,7 +83,6 @@
       padding: .8rem;
    }
 }
-
 
 .product-info {
    &__box {
@@ -123,8 +118,7 @@
          &:after {
             transform: scaleX(1);  
          }
-      }
-      
+      }  
    }
 
    &__nav-title {
@@ -132,7 +126,6 @@
       font-size: $font-size-primary;
       font-weight: $font-weight-bold;
       font-size: $font-size-lg;
-
    }
 
    &__nav-content-main {
@@ -154,8 +147,6 @@
 
 // =====================================
 // =====================================
-
-
    &__nav-content {
 
       &--1 {
@@ -173,18 +164,9 @@
       &--4 {
          display: none;
       }
-
-   }
-
-   &__description {
-   }
-
-   &__description-p {
-
    }
 
    // =====================================
-
    &__features {
       list-style: none;
       font-size: $font-size-xs;
@@ -195,12 +177,10 @@
    }
 
    &__features-title {
-
    }
 
    &__features-text {
       line-height: 1.4rem;
-
    }
 
    // =====================================
@@ -208,21 +188,17 @@
    &__included {
       list-style: inside;
       font-size: $font-size-xs;
-
    }
 
    &__included-item {
       margin-bottom: .5rem;
-
    }
 
    &__included-title {
       display: inline-block;
-
    }
 
    // =====================================
-
    &__specifications {
       display: flex;
       font-size: $font-size-xs;
@@ -251,18 +227,14 @@
    }
 
    &__specifications-text {
-
    }
 
 // =====================================
 // =====================================
-
-
    &__user-review-box {
       margin: 2rem 0;
       color: $color-black;
       font-size: $font-size-xl;
-
    }
 
    &__review-wrap {
@@ -284,23 +256,17 @@
    }
 
    &__review-text {
-
    }
 
    &__review-count {
       font-weight: 500;
    }
 
-
 //===============================
 //===============================
-
-
    &__user-action-box {
       display: flex;
    }
-
-   
 
    &__total-wrap {
       display: flex;

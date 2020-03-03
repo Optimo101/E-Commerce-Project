@@ -47,18 +47,18 @@
       line-height: 5rem;
       backface-visibility: none;
       margin-bottom: 1rem;
+      backface-visibility: hidden;
    }
 
    &__sub-header {
       font-size: $font-size-xl;
-   }
-
-   
+      backface-visibility: hidden;
+   } 
 }
 
 .service-bar {
    background-color: $color-black;
-   margin-bottom: 10rem;
+   margin-bottom: 5rem;
    border-top: 1px solid $color-darkgrey;
    border-bottom: 1px solid $color-darkgrey;
 
@@ -79,4 +79,23 @@
          transform: translateY(.4rem);
       }
    }
+}
+
+.categories-feature {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   margin-bottom: 10rem;
+   color: $color-black;
+   font-weight: 500;
+
+   &__header {
+      margin-bottom: 3rem;
+   }
+
+   &__container {
+      display: flex;
+   }
+
 }

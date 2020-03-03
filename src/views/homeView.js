@@ -1,8 +1,7 @@
 import { elements } from './base';
 
 export const promotionRotation = () => {
-   let current = 0;
-
+   // Used to cycle promo box content
    const promoContent = {
       header: [
          'Music Where You Want It',
@@ -30,6 +29,7 @@ export const promotionRotation = () => {
       ]
    }
 
+   let current = 0;
 
    setInterval(() => {
       let next = current + 1;
@@ -42,7 +42,8 @@ export const promotionRotation = () => {
       elements.landingBackground.style.opacity = '0';
       promoBox.style.opacity = '0';
       
-      // Swap backgrounds and promotion box content
+
+      // Swap backgrounds and promotion box
       setTimeout(() => {
          // Replace background image
          elements.landingBackground.style.backgroundImage = `url(../../img/landing-img-${next}.jpg)`;
