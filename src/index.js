@@ -55,8 +55,6 @@ const controlCart = (event) => {
          currentSku = idArray[1];
    let   currentQuantity;
 
-   console.log(buttonElement, currentIndex, currentSku);
-
    // If quantity of products exists (only on Product page) then get quantity
    if (elements.productQuantity) {
       currentQuantity = Number(elements.productQuantity.value);
@@ -64,16 +62,12 @@ const controlCart = (event) => {
       currentQuantity = 1;
    }
 
-   console.log(currentQuantity);
-
    // 'Add to Cart' button animation lets user know item is being added
    cartBtnAnimation(buttonElement, state.cart.items[currentSku]);
    
    // If current page is Results, then use productSearch array; otherwise, use the 'Likes' array (Likes page)
    let source;
    window.location.pathname === '/results/likes' ? source = state.likes.likes : source = state.productSearch.results;
-
-   console.log(source);
 
    // Add item to the Cart model
    state.cart.addItem(

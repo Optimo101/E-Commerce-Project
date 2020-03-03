@@ -3,7 +3,6 @@
    align-items: center;
    justify-content: center;
 
-
    font-family: inherit;
    font-size: inherit;
    font-weight: inherit;
@@ -36,7 +35,7 @@
 
       &:hover {
          transform: translateY(-3px);
-         box-shadow: 0 .8rem .6rem rgba(black, .3);
+         box-shadow: 0 .8rem 1rem rgba(black, .3);
       }
 
       &:active,
