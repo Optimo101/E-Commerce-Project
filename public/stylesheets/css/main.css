@@ -563,40 +563,22 @@ body {
   border-radius: 100px; }
   .category-thumb:not(:last-child) {
     margin-right: 5rem; }
-  .category-thumb--1 div:first-child {
-    border-color: #9b6cad; }
   .category-thumb--1 div:last-child {
     background-color: #9b6cad; }
-  .category-thumb--2 div:first-child {
-    border-color: #f1bd5b; }
   .category-thumb--2 div:last-child {
     background-color: #f1bd5b; }
-  .category-thumb--3 div:first-child {
-    border-color: #00ad96; }
   .category-thumb--3 div:last-child {
     background-color: #00ad96; }
-  .category-thumb--4 div:first-child {
-    border-color: #5db8bb; }
   .category-thumb--4 div:last-child {
     background-color: #5db8bb; }
-  .category-thumb--5 div:first-child {
-    border-color: #d84873; }
   .category-thumb--5 div:last-child {
     background-color: #d84873; }
-  .category-thumb--6 div:first-child {
-    border-color: #d84848; }
   .category-thumb--6 div:last-child {
     background-color: #d84848; }
-  .category-thumb--7 div:first-child {
-    border-color: black; }
   .category-thumb--7 div:last-child {
     background-color: black; }
-  .category-thumb--8 div:first-child {
-    border-color: #ff5c1b; }
   .category-thumb--8 div:last-child {
     background-color: #ff5c1b; }
-  .category-thumb--9 div:first-child {
-    border-color: #72c26a; }
   .category-thumb--9 div:last-child {
     background-color: #72c26a; }
   .category-thumb__side {
@@ -610,7 +592,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-width: 4px;
+    border-width: 3px;
     border-style: solid;
     border-radius: 100px;
     box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.3);
