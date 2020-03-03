@@ -8,7 +8,7 @@
    margin-top: -3rem;
    height: 75vh;
    padding-bottom: 0;
-
+   background-color: black;
    
    &__background {
       background-image: url(../../img/landing-img-0.jpg);
@@ -16,11 +16,8 @@
       background-position: center;
       width: 100%;
       height: 100%;
-      
-
-      
+      transition: opacity .5s ease-in-out;
    }
-
 }
 
 .promotion {
@@ -34,6 +31,7 @@
    flex-direction: column;
    align-items: center;
    position: absolute;
+   transition: opacity .5s ease-in-out;
 
    &__header-box {
       display: flex;
@@ -49,22 +47,18 @@
       line-height: 5rem;
       backface-visibility: none;
       margin-bottom: 1rem;
-
-      animation: moveInLeft 1s ease-out;
+      backface-visibility: hidden;
    }
 
    &__sub-header {
       font-size: $font-size-xl;
-
-      animation: moveInRight 1s ease-out;
-   }
-
-   
+      backface-visibility: hidden;
+   } 
 }
 
 .service-bar {
    background-color: $color-black;
-   margin-bottom: 10rem;
+   margin-bottom: 5rem;
    border-top: 1px solid $color-darkgrey;
    border-bottom: 1px solid $color-darkgrey;
 
@@ -85,4 +79,23 @@
          transform: translateY(.4rem);
       }
    }
+}
+
+.categories-feature {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   margin-bottom: 10rem;
+   color: $color-black;
+   font-weight: 500;
+
+   &__header {
+      margin-bottom: 3rem;
+   }
+
+   &__container {
+      display: flex;
+   }
+
 }

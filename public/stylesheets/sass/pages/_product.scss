@@ -1,5 +1,4 @@
 .product-section {
-   
    &__header {
       padding: 2rem 0;
    }
@@ -18,7 +17,6 @@
    }
 }
 
-
 .product-gallery {
    &__box {
       display: flex;
@@ -35,7 +33,7 @@
 
    }
 
-   &__img-inner-wrap {
+   &__img-link {
       display: flex;
       justify-content: center;
    }
@@ -46,7 +44,6 @@
       height: auto;
       max-height: 50rem;
    }
-
 
    &__thumbs-box {
       display: flex;
@@ -62,7 +59,6 @@
       width: 8rem;
       height: 8rem;
       transition: border-color .25s;
-
 
       &:not(:last-child) {
          margin-right: 1rem;
@@ -88,7 +84,6 @@
    }
 }
 
-
 .product-info {
    &__box {
       width: 50%;
@@ -99,16 +94,12 @@
       justify-content: space-between;
       list-style: none;
       margin-bottom: 2rem;
-
+      color: $color-black;
    }
 
    &__nav-item {
       cursor: pointer;
-      transition: color .25s;
 
-      &:hover {
-         color: $color-black;
-      }
 
       &:after {
          display:block;
@@ -127,27 +118,35 @@
          &:after {
             transform: scaleX(1);  
          }
-      }
-      
+      }  
    }
 
    &__nav-title {
       text-transform: uppercase;
       font-size: $font-size-primary;
       font-weight: $font-weight-bold;
-      color: inherit;
+      font-size: $font-size-lg;
    }
 
    &__nav-content-main {
       color: $color-black;
-      max-height: 45rem;
+      background-color: white;
+      max-height: 42.6rem;
+      border: 1px solid $color-lightgrey;
+      border-radius: 10px;
+
+      padding: 1rem;
+
       overflow-y: scroll;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+         display: none;
+      } 
    }
 
 // =====================================
 // =====================================
-
-
    &__nav-content {
 
       &--1 {
@@ -165,18 +164,9 @@
       &--4 {
          display: none;
       }
-
-   }
-
-   &__description {
-   }
-
-   &__description-p {
-
    }
 
    // =====================================
-
    &__features {
       list-style: none;
       font-size: $font-size-xs;
@@ -187,12 +177,10 @@
    }
 
    &__features-title {
-
    }
 
    &__features-text {
       line-height: 1.4rem;
-
    }
 
    // =====================================
@@ -200,21 +188,17 @@
    &__included {
       list-style: inside;
       font-size: $font-size-xs;
-
    }
 
    &__included-item {
       margin-bottom: .5rem;
-
    }
 
    &__included-title {
       display: inline-block;
-
    }
 
    // =====================================
-
    &__specifications {
       display: flex;
       font-size: $font-size-xs;
@@ -243,17 +227,14 @@
    }
 
    &__specifications-text {
-
    }
 
 // =====================================
 // =====================================
-
-
    &__user-review-box {
       margin: 2rem 0;
       color: $color-black;
-      // background-color: lightpink;
+      font-size: $font-size-xl;
    }
 
    &__review-wrap {
@@ -266,7 +247,7 @@
    }
 
    &__review-icon {
-      color: $color-primary;
+      color: $color-yellow;
       
       &--partial {
          color: transparent;
@@ -275,23 +256,17 @@
    }
 
    &__review-text {
-
    }
 
    &__review-count {
       font-weight: 500;
    }
 
-
 //===============================
 //===============================
-
-
    &__user-action-box {
       display: flex;
    }
-
-   
 
    &__total-wrap {
       display: flex;
@@ -300,14 +275,14 @@
       line-height: 3rem;
       color: black;
       font-size: $font-size-xxl;
-      margin-right: 2rem;
-      margin-left: 1rem;
+      margin-right: 3rem;;
+      margin-left: 1.5rem;
       transition: background-color .25s;
    }
 
    &__cart-btn {
       width: 17rem;
-      margin-right: 1rem;
+      margin-right: 2rem;
       &:hover {
          background-color: $color-primary;
       }
@@ -322,7 +297,7 @@
 
       &:hover {
          & .product-info__like-icon {
-            transform: scale(1.3);
+            transform: scale(1.25);
             color: $color-primary;
          }
       } 
@@ -336,7 +311,7 @@
 
       &--full {
          color: $color-primary;
-         transform: scale(1.3);
+         transform: scale(1.25);
       }
    }
 

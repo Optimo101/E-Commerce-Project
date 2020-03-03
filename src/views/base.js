@@ -2,6 +2,7 @@ export const elements = {
    // HEADER ELEMENTS
    siteHeader: document.querySelector('.site-header'),
    headerNotice: document.querySelector('.header-notice'),
+   headerNoticeText : document.querySelector('.header-notice__text'),
    headerNoticeBtn: document.querySelector('.header-notice__close-icon'),
    headerCartCounter: document.querySelector('.cart-link__counter'),
 
@@ -22,18 +23,14 @@ export const elements = {
    accountLogoutLink: document.querySelector('.account-menu__link--logout'),
 
    // LOGIN PAGE ELEMENTS
-   accountLoginForm: document.querySelector('.sign-in__form'),
-   accountLoginUsername: document.querySelector('.sign-in__email-input'),
-   accountLoginPassword: document.querySelector('.sign-in__password-input'),
-   accountLoginBtn: document.querySelector('.sign-in__btn'),
+   // accountLoginForm: document.querySelector('.sign-in__form'),
+   accountLoginUsername: document.querySelector('.login-username'),
+   accountLoginPassword: document.querySelector('.login-password'),
+   accountLoginBtn: document.querySelector('.account-login-btn'),
 
    // HOME PAGE ELEMENTS
    landingSection: document.querySelector('.landing'),
    landingBackground: document.querySelector('.landing__background'),
-   landingPromoBox: document.querySelector('.promotion'),
-   landingPromoHeader: document.querySelector('.promotion__main-header'),
-   landingPromoSubHeader: document.querySelector('.promotion__sub-header'),
-   landingPromoBtn: document.querySelector('.promotion__btn'),
 
    // RESULTS PAGE ELEMENTS
    resultsSection: document.querySelector('.results-section'),
@@ -47,6 +44,7 @@ export const elements = {
    productManufacturer: document.querySelector('.product-header__manufacturer-data'),
    productModel: document.querySelector('.product-header__model-data'),
    productSku: document.querySelector('.product-header__sku-data'),
+   productImgLink: document.querySelector('.product-gallery__img-link'),
    productImg: document.querySelector('.product-gallery__main-img'),
    productThumbsBox: document.querySelector('.product-gallery__thumbs-box'),
    productNavItems: document.querySelectorAll('.product-info__nav-item'),
@@ -68,6 +66,16 @@ export const elements = {
 }
 
 // ============== SIMPLE HIDE ELEMENT FUNCTION ==============
+
+export const dollarFormat = (num) => {
+   return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+};
+
+export const numberFormat = (num) => {
+   return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+};
+
+
 export const hideElement = (element) => {
      element.style.height = '0';
 }
@@ -94,7 +102,6 @@ export const cartBtnAnimation = (buttonElement, existingItem) => {
 
    if (existingItem && existingItem.quantity === 9) {
       console.log(existingItem);
-      console.log('YOu have reached the item limit!');
       textElement.innerHTML = '';
       textElement.innerHTML = 'Max Limit';
       iconElement.classList.remove('fa-shopping-cart');

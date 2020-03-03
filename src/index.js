@@ -8,6 +8,7 @@ import Cart from './models/Cart';
 import axios from 'axios';
 import { elements, hideElement, updateItemQuant, cartBtnAnimation } from './views/base';
 
+import * as headerView from './views/headerView';
 import * as homeView from './views/homeView';
 import * as resultsView from './views/resultsView';
 import * as productView from './views/productView';
@@ -36,7 +37,7 @@ const controlProductSearch = async (query) => {
       await state.productSearch.getResults();
 
    } catch (error) {
-      alert('Somthing went wrong with the product search');
+      alert('Something went wrong with the product search');
       console.log(error);
    }
 }
@@ -66,7 +67,7 @@ const controlCart = (event) => {
    
    // If current page is Results, then use productSearch array; otherwise, use the 'Likes' array (Likes page)
    let source;
-   window.location.pathname === '/results' ? source = state.productSearch.results : source = state.likes.likes
+   window.location.pathname === '/results/likes' ? source = state.likes.likes : source = state.productSearch.results;
 
    // Add item to the Cart model
    state.cart.addItem(
@@ -99,6 +100,7 @@ const controlCartPage = () => {
    cartView.updateCartSummary(state.cart.totals);
 
    // Event Listeners
+   // ===========================================================
    elements.cartGrid.addEventListener('click', (event) => {
    
       if (event.target.closest('.cart-grid__quantity')) {
@@ -118,16 +120,12 @@ const controlCartPage = () => {
                state.cart.updateItem(itemSku, newQuantity)
             });
 
-            cartView.highlightRefreshBtns(itemSku);
+            cartView.displayRefreshBtn();
          }
 
          // Event for removing item from cart
          if (event.target.matches('.cart-grid__remove-btn, .cart-grid__remove-btn *')) {
             state.cart.removeItem(itemSku); 
-            location.reload(true);
-         }
-         // Event for refreshing cart quantity
-         if (event.target.matches('.cart-grid__refresh-btn, .cart-grid__refresh-btn *')) {
             location.reload(true);
          }
       }
@@ -389,6 +387,7 @@ const controlCategorySearch = async () => {
 // HEADER CONTROLLER
 // ===========================================================
 const controlHeader = async () => {
+
    try {
       // Perform categories search
       await controlCategorySearch();
@@ -412,49 +411,76 @@ const controlHeader = async () => {
 
    // Event Listeners
    // ===========================================================
-      elements.siteHeader.addEventListener('click', (event) => {
+   elements.siteHeader.addEventListener('click', (event) => {
+      // Open/close main menu
+      if (event.target.matches('.main-menu__btn, .main-menu__btn *')) {
+         mainMenuView.toggleDropdown(elements.mainMenuDropdown);
+      }
 
-         // Header notice close button
-         if (event.target.matches('.header-notice__close-icon, .header-notice__close-icon *')) {
-            hideElement(elements.headerNotice);
+      // Account menu events (after user has logged in)
+      if (elements.accountMenuDropdown != null) {
+
+         // Toggle account dropdown menu
+         if (event.target.matches('.account-btn, .account-btn *')) {
+            mainMenuView.toggleDropdown(elements.accountMenuDropdown);
          }
 
-         // Open/close main menu
-         if (event.target.matches('.main-menu__btn, .main-menu__btn *')) {
-            mainMenuView.toggleDropdown(elements.mainMenuDropdown);
-         }
+         // When user clicks the 'Liked Items' link in the account menu
+         if (event.target.matches('.account-menu__link--liked-items, .account-menu__link--liked-items *')) {
+            event.preventDefault();
 
-         // Account menu events (after user has logged in)
-         if (elements.accountMenuDropdown != null) {
-
-            // Toggle account dropdown menu
-            if (event.target.matches('.account-btn, .account-btn *')) {
-               mainMenuView.toggleDropdown(elements.accountMenuDropdown);
+            if (state.likes.likes.length === 0) {
+               headerView.showNoLikesMsg();
+            } else {
+               window.location = '/results/likes'
             }
+         }
 
-            // When user clicks logout link
-            if (event.target.matches('.account-menu__link--logout, .account-menu__link--logout *')) {
-               event.preventDefault();
-               logout();
-   
-               async function logout() {
-                  try {
-                     await axios.post('/user/logout', {
-                        cart: state.cart.items,
-                        likes: state.likes.likes
-                     })
-                     .then(() => {
-                        state.cart.clearLocalStorage();
-                        state.likes.clearLocalStorage();
-                        window.location = window.location.href;
-                     })
-                  } catch (error) {
-                     console.log(error);
-                  }
+         // If user clicks the 'Shopping Cart' link in the account menu
+         if (event.target.matches('.account-menu__link--shopping-cart, .account-menu__link--shopping-cart *')) {
+            event.preventDefault();
+            
+            if (Object.keys(state.cart.items).length === 0) {
+               headerView.showNoItemsMsg();
+            } else {
+               window.location = '/cart';
+            }
+         }
+
+         // When user clicks logout link
+         if (event.target.matches('.account-menu__link--logout, .account-menu__link--logout *')) {
+            event.preventDefault();
+            logout();
+
+            async function logout() {
+               try {
+                  await axios.post('/user/logout', {
+                     cart: state.cart.items,
+                     likes: state.likes.likes
+                  })
+                  .then(() => {
+                     state.cart.clearLocalStorage();
+                     state.likes.clearLocalStorage();
+                     window.location = window.location.href;
+                  })
+               } catch (error) {
+                  console.log(error);
                }
             }
          }
-      });
+      }
+
+      // When user clicks Cart link
+      if (event.target.matches('.cart-link, .cart-link *')) {
+         event.preventDefault();
+
+         if (Object.keys(state.cart.items).length === 0) {
+            headerView.showNoItemsMsg();
+         } else {
+            window.location = '/cart';
+         }
+      }
+   });
 
       // Close menus when click anywhere outside of menus
       document.addEventListener('click', (event) => {
@@ -470,6 +496,11 @@ const controlHeader = async () => {
       // Open/close submenus
       submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
       submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu); 
+
+      // If user clicks the close icon on the header notice section (at very top of header)
+      elements.headerNoticeBtn.addEventListener('click', () => {
+         hideElement(elements.headerNotice);
+      });
 }
 
 
@@ -482,16 +513,17 @@ const controlHomePage = () => {
 
    // Begin image slides in landing section
    homeView.promotionRotation();
+
 }
 
-
+  
 
 // ===========================================================
 // LOGIN PAGE CONTROLLER
 // ===========================================================
 const controlLoginPage = () => {
    console.log('Beginning controlLoginPage()...')
-   
+
    // Event Listeners
    // ===========================================================
    elements.accountLoginBtn.addEventListener('click', event => {

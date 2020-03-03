@@ -42,7 +42,7 @@ export default class Search {
             apiKey = 'MORTkmhIyQS3N3Pahuta4gSd',
             sortOptions = 'sort=bestSellingRank.asc',
             showOptions = 'show=name,sku,description,details.name,details.value,features.feature,includedItemList.includedItem,longDescription,manufacturer,modelNumber,regularPrice,shortDescription,customerReviewAverage,customerReviewCount,image,accessoriesImage,alternateViewsImage,angleImage,backViewImage,largeFrontImage,leftViewImage,rightViewImage,topViewImage',
-            pageSize = 'pageSize=100',
+            pageSize = 'pageSize=60',
             active = 'active=true',
             responseFormat = 'format=json';
 

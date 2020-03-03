@@ -33,7 +33,7 @@ export default class Cart {
    }
 
    updateItemTotal(sku) {
-      this.items[sku].itemTotal = (this.items[sku].quantity * this.items[sku].price).toFixed(2);
+      this.items[sku].itemTotal = parseFloat((this.items[sku].quantity * this.items[sku].price).toFixed(2));
    }
 
 
@@ -80,7 +80,7 @@ export default class Cart {
    }
 
    calcGrandTotal() {
-      this.totals.grandTotal = (this.totals.subtotal + this.totals.taxes + this.totals.shipping).toFixed(2);
+      this.totals.grandTotal = parseFloat((this.totals.subtotal + this.totals.taxes + this.totals.shipping).toFixed(2));
    }
 
    persistData() {

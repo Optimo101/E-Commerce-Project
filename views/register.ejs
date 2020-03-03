@@ -1,11 +1,13 @@
 <% include partials/head %>
+<% include partials/header-notice %>
+
 <% include partials/header %>
 
 <main class="main">
    <div class="shadow-overlay"></div>
 
    <div class="container">
-      <section class="login-section">
+      <section class="register-section">
          <div class="page-header">
             <h1 class="page-header__title">Register</h1>
          </div>
@@ -20,38 +22,47 @@
 
          <div class="register-section__content">
 
-            <div class="form-container">
-               <form class="sign-up__form form" method="POST" action="/user/register">
-                  <h2 class="sign-up__title form__title">New Account Information</h2>
-   
-                  <div class="form__content">
-                     <div class="sign-up__sub-container form-sub-container">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="sign-up__first-name-input input" name="firstName" required>
+            <form class="form" method="POST" action="/user/register">
+               <div class="form__section">
+                  <h2 class="form__title">New Account Information</h2>
+                  <div class="form__sub-section">
+                     <div class="form__inputs-wrap">
+
+                        <div class="form__input-wrap">
+                           <label class="form__input-label" for="firstName">First Name</label>
+                           <input type="text" class="form__input" name="firstName" required>
+                        </div>
+
+                        <div class="form__input-wrap">
+                           <label class="form__input-label" for="lastName">Last Name</label>
+                           <input type="text" class="form__input" name="lastName" required>
+
+                        </div>
+                        <div class="form__input-wrap">
+                           <label class="form__input-label" for="username">Email Address</label>
+                           <input type="email" class="form__input" name="newUsername" required>
+                        </div>
          
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="sign-up__last-name-input input" name="lastName" required>
+                     </div>
+
+                     <div class="form__inputs-wrap">
+
+                        <div class="form__input-wrap">
+                           <label class="form__input-label" for="password">Password</label>
+                           <input type="password" class="form__input" name="newPassword" required>
+                        </div>
+                        <div class="form__input-wrap">
+                           <label class="form__input-label" for="confirmPassword">Confirm Password</label>
+                           <input type="password" class="form__input" name="confirmPassword" required>
+                        </div>
                         
-                        <label for="username">Email Address</label>
-                        <input type="email" class="sign-up__email-input input" name="newUsername" required>
+                        <input type="submit" class="form__btn btn btn--red btn--hover-float" value="Create Account">
+
                      </div>
-                     
-                     <div class="sign-up__sub-container form-sub-container">
-                        <label for="password">Password</label>
-                        <input type="password" class="sign-up__password-input input" name="newPassword" required>
-         
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" class="sign-up__confirm-password-input input" name="confirmPassword" required>
-         
-                        <input type="submit" class="sign-up__btn btn btn--red btn--hover-float" value="Create Account">
-                     </div>
-   
                   </div>
                      
-   
-               </form>
-            </div>
-
+               </div>
+            </form>
 
          </div>
 
