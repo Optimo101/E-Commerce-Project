@@ -22,6 +22,12 @@
       & div:nth-of-type(2) {
          margin-bottom: .6rem;
       }
+
+      & div:nth-of-type(3) {
+         &:hover {
+            color: $color-black;
+         }
+      }
    }
 
    &__logo-box {
@@ -39,7 +45,10 @@
    &__item {
       display: flex;
       align-items: center;
+      transition: color .15s ease;
+
    }
+
 
    & i {
       margin-right: 1.5rem;
@@ -77,15 +86,11 @@
    }
 
    &__list-link {
-      transition: color .25s;
-      transition: border-color .35s ease;
-      border-bottom: 1px solid transparent;
+      transition: color .15s;
 
       &:hover {
          color: $color-black;
-         border-color: $color-black;
       }
-      
    }
 }
 
@@ -126,11 +131,7 @@
       border-radius: 4rem;
 
       font-family: inherit;
-      font-size: inherit;
-
-
-
-      
+      font-size: inherit;      
    }
 
    &__form-btn {

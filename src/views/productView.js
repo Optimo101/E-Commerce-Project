@@ -1,4 +1,4 @@
-import { elements } from './base';
+import { elements, numberFormat, dollarFormat } from './base';
 
 export const renderLikeBtn = (isLiked, sku) => {
    const htmlString = !isLiked ? `
@@ -56,6 +56,7 @@ const renderImgs = (product) => {
    // Set img src of main img
    elements.productImg.setAttribute('src', imgsArr[0]);
    elements.productImg.setAttribute('alt', newProductName);
+   elements.productImgLink.setAttribute('href', imgsArr[0]);
    
    // Create thumbs
    let html = '';
@@ -201,7 +202,7 @@ const renderTopInfo = (title, manufacturer, model, sku) => {
 }
 
 const renderPrice = (price) => {
-   elements.productPrice.innerHTML = price;
+   elements.productPrice.innerHTML = dollarFormat(price);
 }
 
 const renderReview = (rating, revCount) => {
@@ -217,14 +218,16 @@ const renderReview = (rating, revCount) => {
    }
 
    if (dec) {
-      htmlString += `<i class="product-info__review-icon fas fa-star product-info__review-icon--partial" style="background-image: linear-gradient(to right, #EB2F38 0%, #EB2F38 ${perc}%, #ececec ${perc}%, #ececec 100%);"></i>`
+      htmlString += `<i class="product-info__review-icon fas fa-star product-info__review-icon--partial" style="background-image: linear-gradient(to right, #f3d31f 0%, #f3d31f ${perc}%, #ececec ${perc}%, #ececec 100%);"></i>`
    }
       
    elements.productReview.insertAdjacentHTML('afterbegin', htmlString);
-   elements.productReviewCount.innerHTML = revCount;
+   elements.productReviewCount.innerHTML = numberFormat(revCount);
 }
 
 export const renderProduct = (product) => {
+   product.name = product.name.replace(/"/g, '&quot;');
+   
    renderTopInfo(product.name, product.manufacturer, product.modelNumber, product.sku);
    renderReview(product.customerReviewAverage, product.customerReviewCount);
    renderPrice(product.regularPrice);
@@ -257,4 +260,5 @@ export const thumbImgsEvents = (event) => {
    const imgSrc = event.currentTarget.querySelector('.product-gallery__thumb-img').getAttribute('src');
 
    elements.productImg.setAttribute('src', imgSrc);
+   elements.productImgLink.setAttribute('href', imgSrc);
 }

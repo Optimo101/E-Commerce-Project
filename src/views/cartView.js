@@ -1,22 +1,25 @@
-import { elements } from './base';
+import { elements, dollarFormat } from './base';
 
 export const renderCartGridItems = (cartItems) => {
    const items = Object.keys(cartItems);
 
+
+
+
    for (const item of items) {
       const html = `
          <div class="cart-grid__item">
-            <div class="cart-grid__image-outer-wrap">
-               <div class="cart-grid__image-inner-wrap">
-                  <img src="${cartItems[item].image}" alt="${cartItems[item].name}" class="cart-grid__image">
-               </div>
+            <div class="cart-grid__image-wrap">
+                  <a href="/product?search=${cartItems[item].sku}" class="cart-grid__image-link">
+                     <img src="${cartItems[item].image}" alt="${cartItems[item].name}" class="cart-grid__image">
+                  </a>
             </div>
          </div>
 
          <div class="cart-grid__item">
-            <p class="cart-grid__name">  
-            ${cartItems[item].name}
-            </p>
+            <a href="/product?search=${cartItems[item].sku}" class="cart-grid__title-link">
+               <p class="cart-grid__name">${cartItems[item].name}</p>
+            </a>
          </div>
 
          <div class="cart-grid__item">
@@ -34,11 +37,8 @@ export const renderCartGridItems = (cartItems) => {
                </div>
 
                <div class="cart-grid__btn-wrap">
-                  <button class="cart-grid__remove-btn btn btn--small btn--red">
-                     <i class="cart-grid__remove-icon fas fa-times-circle"></i>
-                  </button>
-                  <button class="cart-grid__refresh-btn btn btn--small btn--darkgrey">
-                     <i class="cart-grid__refresh-icon fas fa-redo-alt"></i>
+                  <button class="cart-grid__remove-btn btn btn--small btn--darkgrey">
+                     Remove
                   </button>
                </div>
 
@@ -49,11 +49,11 @@ export const renderCartGridItems = (cartItems) => {
             <div class="cart-grid__total">
 
                <div class="cart-grid__total-price">
-                  <span class="cart-grid__total-price-number">$${cartItems[item].itemTotal}</span>
+                  <span class="cart-grid__total-price-number">$${ dollarFormat(cartItems[item].itemTotal) }</span>
                </div>
 
                <div class="cart-grid__unit-price">
-                  <p class="cart-grid__unit-price-text">($${cartItems[item].price} each)</p>
+                  <p class="cart-grid__unit-price-text">($${ dollarFormat(cartItems[item].price) } each)</p>
                </div>
 
             </div>
@@ -65,23 +65,17 @@ export const renderCartGridItems = (cartItems) => {
 }
 
 export const updateCartSummary = (totals) => {
-   elements.cartSummarySubtotal.innerHTML = `${totals.subtotal}`;
-   elements.cartSummaryTaxes.innerHTML = `${totals.taxes}`;
-   elements.cartSummaryShipping.innerHTML = `${totals.shipping}`;
-   elements.cartSummaryTotal.innerHTML = `${totals.grandTotal}`;
+   elements.cartSummarySubtotal.innerHTML = `${ dollarFormat(totals.subtotal) }`;
+   elements.cartSummaryTaxes.innerHTML = `${ dollarFormat(totals.taxes) }`;
+   elements.cartSummaryShipping.innerHTML = `${ dollarFormat(totals.shipping) }`;
+   elements.cartSummaryTotal.innerHTML = `${ dollarFormat(totals.grandTotal) }`;
 } 
 
-export const highlightRefreshBtns = (itemSku) => {
-   const refreshBtn = document.querySelector(`#item-${itemSku} .cart-grid__refresh-btn`);
+export const displayRefreshBtn = () => {
    const checkoutBtn = document.querySelector('.cart-summary__checkout-btn');
 
-   if (refreshBtn.classList.contains('btn--darkgrey')) {
-      refreshBtn.classList.remove('btn--darkgrey');
-      refreshBtn.classList.add('btn--green');
-
-      checkoutBtn.classList.remove('btn--darkgrey');
-      checkoutBtn.classList.add('btn--green');
-      checkoutBtn.innerHTML = 'Refresh Cart';
-      checkoutBtn.setAttribute('href', '/cart');
-   }
+   checkoutBtn.classList.remove('btn--darkgrey');
+   checkoutBtn.classList.add('btn--green');
+   checkoutBtn.innerHTML = 'Refresh Cart';
+   checkoutBtn.setAttribute('href', '/cart');
 }

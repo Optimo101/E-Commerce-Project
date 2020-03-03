@@ -3,7 +3,7 @@
    
    background-color: $color-primary;
    height: 6rem;
-   border-bottom: 1px solid $color-darkgrey;
+   border-bottom: 1px solid $color-grey;
 
 
    &__content {
@@ -88,6 +88,7 @@
    font-size: 2rem;
    font-weight: 500;
    color: white;
+   cursor: pointer;
 
    &__icon {
       font-size: 3.5rem;

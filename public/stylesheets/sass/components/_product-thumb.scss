@@ -87,11 +87,11 @@
    }
 
    &__review-stars {
-      font-size: $font-size-lg;
+      font-size: $font-size-sm;
    }
 
    &__review-icon {
-      color: $color-primary;
+      color: $color-yellow;
 
       &--partial {
          color: transparent;

@@ -8,8 +8,8 @@ body {
 
 .prom-head-primary {
    font-size: $font-size-xxl;
-   font-weight:  $font-weight-thin; 
-   color: $color-primary;
+   font-weight:  $font-weight-bold; 
+   color: $color-black;
 }
 
 .prom-head-secondary {
@@ -25,7 +25,7 @@ body {
 
 .page-header {
    margin-bottom: 2rem;
-   border-bottom: 3px solid $color-lightgrey;
+   border-bottom: 3px solid $color-grey;
    
    &__title {
       font-size: $font-size-xxl;
