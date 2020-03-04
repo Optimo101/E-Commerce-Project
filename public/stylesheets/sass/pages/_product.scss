@@ -123,9 +123,12 @@
 
    &__nav-title {
       text-transform: uppercase;
-      font-size: $font-size-primary;
       font-weight: $font-weight-bold;
       font-size: $font-size-lg;
+
+      @include respond(tab-sm) {
+         font-size: $font-size-primary;
+      }
    }
 
    &__nav-content-main {

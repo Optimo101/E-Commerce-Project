@@ -1,0 +1,28 @@
+
+// MEDIA QUERY MANAGER
+
+/*
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+*/
+
+@mixin respond($breakpoint) {
+
+   @if $breakpoint == tab-lg {
+      @media (max-width: 75em) { @content }; // @ 1200px
+   }
+
+   @if $breakpoint == tab-md {
+      @media (max-width: 68.75em) { @content }; // @ 1100px
+   }
+
+   @if $breakpoint == tab-sm {
+      @media (max-width: 62.5em) { @content }; // @ 1000px
+   }
+
+   @if $breakpoint == tab-xs {
+      @media (max-width: 62.5em) { @content }; // @ 1000px
+   }
+}
