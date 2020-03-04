@@ -11,7 +11,19 @@
 }
 
 html {
-    font-size: 62.5%; // 10px
+    font-size: 62.5%; // 1rem = 10px
+
+   @include respond(tab-lg) {
+      font-size: 56.25%; // 1rem = 9px
+   }
+
+   @include respond(tab-md) {
+      font-size: 50%; // 1rem = 8px
+   }
+
+   @include respond(tab-sm) {
+      font-size: 46.875%; // 1rem = 7.5px
+   }
 }
 
 body {

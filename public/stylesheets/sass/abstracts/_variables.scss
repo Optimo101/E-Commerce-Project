@@ -2,7 +2,7 @@
    $color-primary: #EB2F38;
    $color-secondary: rgb(235, 80, 80);
 
-   $color-black: rgb(92, 92, 92); // rgb(61, 61, 61)
+   $color-black: rgb(102, 102, 102); // rgb(92, 92, 92)
    $color-white: #FFF;
 
    $color-red: rgb(255, 22, 22);
@@ -14,11 +14,11 @@
    $color-lightergrey: #eeeeee;
 
 
-//FONT
-   $font-size-primary: 1.6rem;
+// FONT
    $font-size-xxs: 1.2rem;
    $font-size-xs: 1.3rem;
    $font-size-sm: 1.4rem;
+   $font-size-primary: 1.6rem;
    $font-size-lg: 1.8rem;
    $font-size-xl: 2rem;
    $font-size-xxl: 3rem;
@@ -27,3 +27,11 @@
    $font-weight-primary: 400;
    $font-weight-bold: 500;
    $font-weight-thin: 300;
+
+// MEDIA BREAKPOINTS
+   $bp-xl: 53.125em; // 850px
+   $bp-lg: 50em;     // 800px
+   $bp-md: 46.875em; // 750px
+   $bp-sm: 31.25em;  // 500px
+   $bp-xs: 25em;     // 400px
+   
