@@ -4,7 +4,7 @@
    padding-bottom: 5rem;
    font-size: $font-size-sm;
 
-   @media only screen and (max-width: $bp-md) {
+   @media only screen and (max-width: $bp-xl) {
       flex-wrap: wrap;
    }
 
@@ -52,8 +52,12 @@
    &__logo-box {
       display: flex;
       align-items: center;
-      max-width: 16rem;
+      max-width: 18rem;
       margin-bottom: .5rem;
+
+      @media only screen and (max-width: $bp-sm) {
+         max-width: 24rem;
+      }
    }
 
    &__logo-img {
@@ -84,7 +88,7 @@
    border-right: 1px solid $color-grey;
 
   
-   @media only screen and (max-width: $bp-md) {
+   @media only screen and (max-width: $bp-xl) {
       order: 1; //moves to ultimate position.
       flex-basis: 85%;
       justify-content: space-around;
@@ -150,6 +154,7 @@
    @media only screen and (max-width: $bp-sm) {
       margin-right: 0;
       order: -1;
+      max-width: 38rem;
    }
 
    &__container {
@@ -162,7 +167,7 @@
       padding-left: 2.5rem;
 
 
-      @media only screen and (max-width: $bp-md) {
+      @media only screen and (max-width: $bp-xl) {
          max-width: 41.25rem;;
        }
 

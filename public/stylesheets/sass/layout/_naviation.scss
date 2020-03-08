@@ -24,12 +24,33 @@
    list-style: none;
    margin-left: -7rem;
 
-   // @media only screen and (max-width: $bp-xl) {
-   //    margin-left: -23rem;
-   // }
+   @media only screen and (max-width: $bp-xxl) {
+      margin-left: -6rem;
+   }
+
+   @media only screen and (max-width: $bp-lg) {
+      margin-left: -16rem;
+   }
+
+   @media only screen and (max-width: $bp-sm) {
+      margin-left: -22.5rem;
+   }
+   
 
    &__item {
       position: relative;
+
+      @media only screen and (max-width: $bp-xxl) {
+         &:not(:last-child) {
+            margin-right: 2rem;
+         }
+      }
+
+      @media only screen and (max-width: $bp-lg) {
+         &:first-child {
+            display: none;
+         }
+      }
    }
 
    &__link {
@@ -37,6 +58,11 @@
 
       &:hover {
          background-color: $color-black;
+      }
+
+      @media only screen and (max-width: $bp-xxl) {
+         padding: 0;
+         background-color: $color-primary !important;
       }
    }
 }
@@ -55,23 +81,36 @@
       font-size: 2.2rem;
       margin-right: 1rem;
 
-     
+      @media only screen and (max-width: $bp-md) {
+         font-size: 2.1rem;
+         margin: 0;
+      }
    }
 
    &__text {
+      @media only screen and (max-width: $bp-md) {
+         display: none;
+      }
    }
 }
 
 .register-btn {
    font-weight: 300;
-   margin-right: 3rem;
+   margin-right: 2rem;
 
    &__icon {
       font-size: 2rem;
       margin-right: 1rem;
+
+      @media only screen and (max-width: $bp-md) {
+         margin: 0;
+      }
    }
 
    &__text {
+      @media only screen and (max-width: $bp-md) {
+         display: none;
+      }
    }
 }
 

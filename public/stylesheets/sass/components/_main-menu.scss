@@ -14,15 +14,32 @@
       margin-right: 1.5rem;
       font-size: 2rem;
 
-      // @media only screen and (max-width: $bp-xl) {
-      //    margin: 0;
-      // }
+      @media only screen and (max-width: $bp-sm) {
+         margin-right: 0;
+      }
+
    }
 
    &__btn-text {
-      // @media only screen and (max-width: $bp-xl) {
-      //    display: none;
-      // }
+      &--2 {
+         display:none;
+      }
+
+      @media only screen and (max-width: $bp-lg) {
+         &--1 {
+            display: none;
+         }
+
+         &--2 {
+            display: block;
+         }
+      }
+
+      @media only screen and (max-width: $bp-sm) {
+         &--2 {
+            display: none;
+         }
+      }
    }
 
    &__dropdown {

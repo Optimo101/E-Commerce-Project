@@ -21,8 +21,4 @@ $breakpoint argument choices:
    @if $breakpoint == tab-sm {
       @media (max-width: 62.5em) { @content }; // @ 1000px
    }
-
-   @if $breakpoint == tab-xs {
-      @media (max-width: 62.5em) { @content }; // @ 1000px
-   }
 }

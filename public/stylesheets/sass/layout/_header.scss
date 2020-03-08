@@ -41,15 +41,24 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
-   height: 12rem;
+
+   @media only screen and (max-width: $bp-smd) {
+      flex-wrap: wrap;
+      justify-content: center;
+   }
 }
 
 .logo {
    display: flex;
    align-items: center;
    
-   height: 100%;
+   height: 12rem;
    flex-basis: 25%;
+
+   @media only screen and (max-width: $bp-smd) {
+      flex-basis: 100%;
+      max-width: 22.3rem;
+   }
 
    &__link {
       height: 100%;
@@ -58,6 +67,7 @@
    &__img {
       height: 95%;
       object-fit: contain;
+
 
    }
 }
@@ -70,6 +80,16 @@
    border: 2px solid $color-lightgrey;
    border-radius: 4rem;
    background-color: $color-white;
+
+   @media only screen and (max-width: $bp-lmd) {
+      flex-basis: 100%;
+      margin-left: 3rem;
+   }
+
+   @media only screen and (max-width: $bp-smd) {
+      margin-left: 0;
+      margin-bottom: 3rem;
+   }
 
 
    &__input {
@@ -99,8 +119,11 @@
    justify-content: flex-end;
    align-items: center;
    flex-basis: 25%;
-
    color: $color-black;
+
+   @media only screen and (max-width: $bp-lmd) {
+      display: none;
+   }
 
    &__icon {
       font-size: 3.5rem;
