@@ -7,100 +7,97 @@
    perspective: 150rem;
    position: relative;
    border-radius: 100px;
+   margin-right: 6rem;
+   margin-bottom: 3rem;
 
    @media only screen and (max-width: $bp-xl) {
-      width: 14rem;
-      height: 14rem;
+      margin-bottom: 3rem;
    }
 
-   &:not(:last-child) {
-      margin-right: 5rem;
+   @media only screen and (max-width: $bp-sm) {
+      &:nth-child(even) {
+         margin-right: 0;
+      }
+   }
+
+   @media only screen and (max-width: $bp-xs) {
+      &:nth-child(odd) {
+         margin-right: 3rem;
+      }
+
+      &:last-child {
+         margin-right: 0;
+      }
    }
 
    &--1 {
-      // & div:first-child {
-      //    border-color: rgb(155, 108, 173);
-      // }
-
       & div:last-child {
          background-color: rgb(155, 108, 173);
       }
    }
 
    &--2 {
-      // & div:first-child {
-      //    border-color: rgb(241, 189, 91); //rgb(241, 182, 71);
-      // }
-
       & div:last-child {
          background-color: rgb(241, 189, 91);
       }
    }
 
    &--3 {
-      // & div:first-child {
-      //    border-color: rgb(216, 72, 72);
-      // }
-
       & div:last-child {
          background-color: rgb(216, 72, 72);
+      }
+
+      @media only screen and (max-width: $bp-xl) {
+         margin-right: 0;
+      }
+
+      @media only screen and (max-width: $bp-sm) {
+         margin-right: 6rem;
       }
    }
 
    &--4 {
-      // & div:first-child {
-      //    border-color: rgb(93, 184, 187);
-      // }
-
       & div:last-child {
          background-color: rgb(93, 184, 187);
       } 
    }
 
    &--5 {
-      // & div:first-child {
-      //    border-color: rgb(216, 72, 115);
-      // }
+      margin-right: 0;
 
       & div:last-child {
          background-color: rgb(216, 72, 115);
       }
+
+      @media only screen and (max-width: $bp-xl) {
+         margin-right: 6rem;
+      }
    }
 
    &--6 {
-      // & div:first-child {
-      //    border-color: rgb(0, 173, 150);
-      // }
-
       & div:last-child {
          background-color: rgb(0, 173, 150);
+      }
+
+      @media only screen and (max-width: $bp-xl) {
+         margin-right: 0;
       }
    }
 
    &--7 {
-      // & div:first-child {
-      //    border-color: black;
-      // }
-
       & div:last-child {
          background-color: black;
       }
    }
 
    &--8 {
-      // & div:first-child {
-      //    border-color: rgb(255, 92, 27);
-      // }
-
       & div:last-child {
          background-color: rgb(255, 92, 27);
       }
    }
 
    &--9 {
-      // & div:first-child {
-      //    border-color: rgb(114, 194, 106);
-      // }
+      margin-right: 0;
 
       & div:last-child {
          background-color: rgb(114, 194, 106);
@@ -134,14 +131,12 @@
 
       &--front {
          background-color: $color-white;
-
       }
 
       &--back {
          transform: rotateY(180deg);
          color: $color-white;
          text-align: center;
-
       }
    }
 
