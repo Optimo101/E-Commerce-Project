@@ -58,7 +58,7 @@ export const elements = {
    productReviewCount: document.querySelector('.product-info__review-count'),
    
    // CART PAGE ELEMENTS
-   cartGrid: document.querySelector('.cart-grid'),
+   cartGrid: document.querySelector('.cart'),
    cartSummarySubtotal: document.querySelector('.cart-summary__subtotal-number'),
    cartSummaryTaxes: document.querySelector('.cart-summary__tax-number'),
    cartSummaryShipping: document.querySelector('.cart-summary__shipping-number'),

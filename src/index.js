@@ -103,8 +103,8 @@ const controlCartPage = () => {
    // ===========================================================
    elements.cartGrid.addEventListener('click', (event) => {
    
-      if (event.target.closest('.cart-grid__quantity')) {
-         const itemSku = event.target.closest('.cart-grid__quantity').id.slice(5);
+      if (event.target.closest('.cart__quantity')) {
+         const itemSku = event.target.closest('.cart__quantity').id.slice(5);
    
          // Event for increasing and decreasing item quantities
          if (event.target.matches('.quantity-calc__btns, .quantity-calc__btns *')) {
@@ -124,7 +124,7 @@ const controlCartPage = () => {
          }
 
          // Event for removing item from cart
-         if (event.target.matches('.cart-grid__remove-btn, .cart-grid__remove-btn *')) {
+         if (event.target.matches('.cart__remove-btn, .cart__remove-btn *')) {
             state.cart.removeItem(itemSku); 
             location.reload(true);
          }
