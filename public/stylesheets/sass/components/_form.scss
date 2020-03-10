@@ -1,7 +1,7 @@
 .form {
    display: flex;
    flex-wrap: wrap;  
-   margin: -1.5rem; 
+   margin: -1.5rem;
 
    &__section {
       display: flex;
@@ -17,7 +17,10 @@
 
    &__sub-section {
       display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
       margin: -1.5rem;
+
 
       & .form__inputs-wrap:first-of-type {
          & .form__input-wrap:last-of-type {
@@ -55,6 +58,7 @@
       font-size: inherit;
       font-style: inherit;
       font-weight: inherit;
+      width: 25rem;
    }
 
    &__btn {
