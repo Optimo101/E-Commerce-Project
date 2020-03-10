@@ -1,10 +1,15 @@
 .cart-section {
    &__main {
       display: flex;
+      position: relative;
 
       @media only screen and (max-width: $bp-xxl) {
          flex-wrap: wrap;
          max-width: 80rem;
+      }
+
+      @media only screen and (max-width: $bp-smd) {
+         max-width: 50rem;
       }
    }
 }
@@ -14,7 +19,7 @@
    border-radius: 1rem;
    overflow: hidden;
    margin-right: 3rem;
-   color: $color-black;
+   color: black;
    max-width: 80rem;
    background-color: white;
    height: 100%;
@@ -78,7 +83,7 @@
       }
 
       &--price {
-         width: 12rem;
+         width: 13rem;
       }
    }
 
@@ -130,23 +135,20 @@
    &__total {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
       width: 100%
    }
 
    &__unit-price {
-      font-size: $font-size-xxs;
+      font-size: $font-size-xs;
       white-space: nowrap;
-      font-weight: $font-weight-primary;
-      color: $color-darkgrey;
       width: 100%
    }
 
    &__total-price {
       font-size: $font-size-lg;
-      width: 100%
+      font-weight: $font-weight-bold;
+      width: 100%;
    }
 }
 
@@ -154,7 +156,7 @@
    flex-grow: 1;
    flex-shrink: 0;
    max-width: 41rem;
-   color: $color-black;
+   color: black;
 
    @media only screen and (max-width: $bp-xxl) {
       margin-left: auto;
@@ -172,6 +174,7 @@
       display: flex;
       justify-content: center;
       margin-bottom: 1rem;
+      color: $color-black;
    }
 
    &__title {
@@ -198,7 +201,7 @@
    &__total-wrap {
       color: $color-black;
       font-weight: $font-weight-bold;
-      font-size: $font-size-xl;
+      font-size: $font-size-xxl;
    }
 
    &__btns-wrap {

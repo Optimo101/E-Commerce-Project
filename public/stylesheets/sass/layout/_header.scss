@@ -32,9 +32,13 @@
 
 .main-header {
    padding-top: 2rem;
+   background-color: $color-lightergrey;
    // background-image: url('../../img/white_brick_wall_dark.png');
-   // background-color: $color-lightergrey;
-   background-image: url('../../img/white_brick_wall_dark.png');
+
+   background: linear-gradient(to left, #e0e0e0, #ffffff);
+   
+   //#ECE9E6
+
 }
 
 .top-header {

@@ -121,6 +121,7 @@ const controlCartPage = () => {
             });
 
             cartView.displayRefreshBtn();
+            window.location = '/cart';
          }
 
          // Event for removing item from cart
