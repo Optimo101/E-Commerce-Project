@@ -596,6 +596,8 @@ body {
     border-radius: 1rem; }
   .form__sub-section {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     margin: -1.5rem; }
     .form__sub-section .form__inputs-wrap:first-of-type .form__input-wrap:last-of-type {
       margin-bottom: 0; }
@@ -618,7 +620,8 @@ body {
     border-radius: .5rem;
     font-size: inherit;
     font-style: inherit;
-    font-weight: inherit; }
+    font-weight: inherit;
+    width: 25rem; }
   .form__btn {
     margin-top: 1.5rem; }
 
@@ -892,17 +895,26 @@ section {
     margin-right: 1rem; }
     @media only screen and (max-width: 40.625em) {
       .login-btn__icon {
-        font-size: 2.1rem;
+        font-size: 2.4rem;
         margin: 0; } }
   @media only screen and (max-width: 40.625em) {
     .login-btn__text {
       display: none; } }
 
+.account-btn {
+  font-weight: 300;
+  margin-right: 3rem; }
+  .account-btn__icon {
+    font-size: 2.4rem;
+    margin-right: 1rem; }
+  .account-btn__firstname {
+    font-weight: 500; }
+
 .register-btn {
   font-weight: 300;
   margin-right: 2rem; }
   .register-btn__icon {
-    font-size: 2rem;
+    font-size: 2.4rem;
     margin-right: 1rem; }
     @media only screen and (max-width: 40.625em) {
       .register-btn__icon {
@@ -910,15 +922,6 @@ section {
   @media only screen and (max-width: 40.625em) {
     .register-btn__text {
       display: none; } }
-
-.account-btn {
-  font-weight: 300;
-  margin-right: 3rem; }
-  .account-btn__icon {
-    font-size: 2rem;
-    margin-right: 1rem; }
-  .account-btn__firstname {
-    font-weight: 500; }
 
 .cart-link {
   position: relative;
