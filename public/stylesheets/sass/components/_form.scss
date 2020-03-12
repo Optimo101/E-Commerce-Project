@@ -55,11 +55,15 @@
 
    &__input {
       padding: .5rem;
-      border-radius: .5rem;
+      // border-radius: .5rem;
       font-size: inherit;
       font-style: inherit;
       font-weight: inherit;
       width: 25rem;
+
+      border: none;
+      border-bottom: 1px solid $color-darkgrey;
+
    }
 
    &__btn {

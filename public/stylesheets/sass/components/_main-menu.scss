@@ -5,6 +5,9 @@
    height: 4rem;
    width: 30rem;
 
+   @media only screen and (max-width: $bp-sm) {
+      width: auto;
+   }
 
    &__btn {
       text-transform: uppercase;
@@ -14,10 +17,13 @@
       margin-right: 1.5rem;
       font-size: 2rem;
 
+      &:nth-child(2) {
+         display: none;
+      }
+
       @media only screen and (max-width: $bp-sm) {
          margin-right: 0;
       }
-
    }
 
    &__btn-text {
@@ -51,7 +57,7 @@
       z-index: 100;
       background-color: $color-white;
 
-      transition: height .25s ease-in-out;
+      transition: height .35s ease-in-out;
       overflow: hidden;
       height: 0;
       display: none; 
@@ -66,6 +72,27 @@
          font-size: 3rem;
          color: $color-white;
       }
+
+      @media (hover:none) and (max-width: $bp-smd) {
+         position: fixed;
+         top: 0;
+         left: 0;
+         max-width: 50%;
+      }
+
+      @media (hover:none) and (max-width: $bp-sm) {
+         max-width: 60%;
+      }
+
+      @media (hover:none) and (max-width: $bp-xs) {
+         max-width: 70%;
+      }
+
+      @media (hover:none) and (max-width: $bp-xxs) {
+         max-width: 80%;
+      }
+
+      
    }
 
    &__dropdown.is-visible {
@@ -76,7 +103,7 @@
    &__list {
       list-style: none;
       padding: 1rem 0;
-
+      height: 100%;
 
       & > li:not(:last-child):after  {
          border-bottom: 1px solid #e5e5e5;

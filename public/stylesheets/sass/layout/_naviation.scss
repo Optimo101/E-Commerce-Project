@@ -33,7 +33,7 @@
    }
 
    @media only screen and (max-width: $bp-sm) {
-      margin-left: -22.5rem;
+      display: none;
    }
    
 
@@ -78,18 +78,25 @@
    margin-right: 1rem;
 
    &__icon {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       margin-right: 1rem;
 
       @media only screen and (max-width: $bp-md) {
-         font-size: 2.4rem;
          margin: 0;
+      }
+
+      @media only screen and (max-width: $bp-sm) {
+         margin-right: 1rem;
       }
    }
 
    &__text {
       @media only screen and (max-width: $bp-md) {
          display: none;
+      }
+
+      @media only screen and (max-width: $bp-sm) {
+         display: block;
       }
    }
 }
@@ -119,11 +126,19 @@
       @media only screen and (max-width: $bp-md) {
          margin: 0;
       }
+
+      @media only screen and (max-width: $bp-sm) {
+         margin-right: 1rem;
+      }
    }
 
    &__text {
       @media only screen and (max-width: $bp-md) {
          display: none;
+      }
+
+      @media only screen and (max-width: $bp-sm) {
+         display: block;
       }
    }
 }
@@ -149,8 +164,8 @@
       justify-content: center;
       
       position: absolute;
-      top: 0;
-      right: -1rem;
+      top: -5px;
+      right: -5px;
 
       width: 1.8rem;
       height: 1.8rem;

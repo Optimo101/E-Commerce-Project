@@ -1,27 +1,34 @@
 import { elements } from './base';
 
 // ============== MAINMENU FUNCTIONS ==============
-export const showDropdown = (element) => {
+const showDropdown = (element, isTouchScreen) => {
+   console.log('isTouchScreen?:', isTouchScreen);
 
-   // Gets the natural height of an element
-   const getHeight = () => {
+   // Gets the natural height of dropdown menu element or gets screen height if mobile
+   const getMenuHeight = () => {
       element.style.display = 'block'; // Make it visible
-      const height = element.scrollHeight + 'px'; // Get height
+      const scrollHeight = element.scrollHeight + 'px'; // Get height for DESKTOP
+
       element.style.display = '';
-      return height;
+      return scrollHeight;
    }
 
-   var height = getHeight(); // Gets natural height
-   element.classList.add('is-visible'); // Make element visible
-   element.style.height = height; // Update the max-height
-   elements.shadowOverlay.style.display = 'block'; // show background overlay
+   let height = getMenuHeight(); // Gets natural height
 
+   if (isTouchScreen && screen.width < 576) {
+      height = screen.height + 'px'; // Gets the screen height for mobile menu
+      document.querySelector('.main-menu__list').style.height = height;
+   }
+   
+   element.style.height = height; // Update the height
+   element.classList.add('is-visible'); // Make menu visible
+   elements.shadowOverlay.style.display = 'block'; // Show background overlay
 
    // Once transition is complete, remove the inline max-height so content can scale responsively.
 	window.setTimeout(() => {
       element.style.height = '';
       element.style.overflow = 'visible'; // Show overflow for submenus
-   }, 250);
+   }, 350);
 }
 
 export const hideDropdown = (element) => {
@@ -38,10 +45,10 @@ export const hideDropdown = (element) => {
    window.setTimeout(() => {
       element.classList.remove('is-visible');
       elements.shadowOverlay.style.display = 'none';
-   }, 250);
+   }, 350);
 }
 
-export const toggleDropdown = (element) => {
+export const toggleDropdown = (element, isTouchScreen) => {
    // If menu is visible, hide it
    if (element.classList.contains('is-visible')) {
       hideDropdown(element);
@@ -49,7 +56,7 @@ export const toggleDropdown = (element) => {
    }
 
    //Otherwise, show it
-   showDropdown(element);
+   showDropdown(element, isTouchScreen);
 }
 
 export const hideOnClickOutside = (event, element) => {

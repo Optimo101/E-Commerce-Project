@@ -27,6 +27,7 @@ html {
       font-size: 46.875%; } }
 
 body {
+  position: relative;
   box-sizing: border-box;
   margin: auto;
   height: 100%; }
@@ -272,11 +273,16 @@ body {
   position: relative;
   height: 4rem;
   width: 30rem; }
+  @media only screen and (max-width: 31.25em) {
+    .main-menu {
+      width: auto; } }
   .main-menu__btn {
     text-transform: uppercase; }
   .main-menu__icon {
     margin-right: 1.5rem;
     font-size: 2rem; }
+    .main-menu__icon:nth-child(2) {
+      display: none; }
     @media only screen and (max-width: 31.25em) {
       .main-menu__icon {
         margin-right: 0; } }
@@ -298,7 +304,7 @@ body {
     width: 100%;
     z-index: 100;
     background-color: #FFF;
-    transition: height .25s ease-in-out;
+    transition: height .35s ease-in-out;
     overflow: hidden;
     height: 0;
     display: none; }
@@ -311,12 +317,28 @@ body {
       content: "\f0de";
       font-size: 3rem;
       color: #FFF; }
+    @media (hover: none) and (max-width: 35.9375em) {
+      .main-menu__dropdown {
+        position: fixed;
+        top: 0;
+        left: 0;
+        max-width: 50%; } }
+    @media (hover: none) and (max-width: 31.25em) {
+      .main-menu__dropdown {
+        max-width: 60%; } }
+    @media (hover: none) and (max-width: 25em) {
+      .main-menu__dropdown {
+        max-width: 70%; } }
+    @media (hover: none) and (max-width: 21.875em) {
+      .main-menu__dropdown {
+        max-width: 80%; } }
   .main-menu__dropdown.is-visible {
     display: block;
     height: auto; }
   .main-menu__list {
     list-style: none;
-    padding: 1rem 0; }
+    padding: 1rem 0;
+    height: 100%; }
     .main-menu__list > li:not(:last-child):after {
       border-bottom: 1px solid #e5e5e5;
       position: absolute;
@@ -372,7 +394,7 @@ body {
   .submenu__list {
     display: flex;
     flex-direction: column;
-    width: 35rem;
+    width: 30rem;
     list-style: none;
     padding: 1rem 0;
     color: #7a7a7a; }
@@ -629,11 +651,12 @@ body {
     white-space: wrap; }
   .form__input {
     padding: .5rem;
-    border-radius: .5rem;
     font-size: inherit;
     font-style: inherit;
     font-weight: inherit;
-    width: 25rem; }
+    width: 25rem;
+    border: none;
+    border-bottom: 1px solid #7a7a7a; }
   .form__btn {
     margin-top: 1.5rem; }
 
@@ -780,7 +803,7 @@ body {
   display: flex;
   justify-content: center;
   flex-basis: 45%;
-  border: 2px solid #cecece;
+  border: 2px solid #b6b6b6;
   border-radius: 4rem;
   background-color: #FFF; }
   @media only screen and (max-width: 43.75em) {
@@ -850,6 +873,14 @@ section {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6); }
+  @media (hover: none) {
+    .shadow-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      min-height: 100%; } }
 
 .nav-bar {
   display: flex;
@@ -877,7 +908,7 @@ section {
       margin-left: -16rem; } }
   @media only screen and (max-width: 31.25em) {
     .nav {
-      margin-left: -22.5rem; } }
+      display: none; } }
   .nav__item {
     position: relative; }
     @media only screen and (max-width: 53.125em) {
@@ -904,15 +935,20 @@ section {
   font-weight: 300;
   margin-right: 1rem; }
   .login-btn__icon {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     margin-right: 1rem; }
     @media only screen and (max-width: 40.625em) {
       .login-btn__icon {
-        font-size: 2.4rem;
         margin: 0; } }
+    @media only screen and (max-width: 31.25em) {
+      .login-btn__icon {
+        margin-right: 1rem; } }
   @media only screen and (max-width: 40.625em) {
     .login-btn__text {
       display: none; } }
+  @media only screen and (max-width: 31.25em) {
+    .login-btn__text {
+      display: block; } }
 
 .account-btn {
   font-weight: 300;
@@ -932,9 +968,15 @@ section {
     @media only screen and (max-width: 40.625em) {
       .register-btn__icon {
         margin: 0; } }
+    @media only screen and (max-width: 31.25em) {
+      .register-btn__icon {
+        margin-right: 1rem; } }
   @media only screen and (max-width: 40.625em) {
     .register-btn__text {
       display: none; } }
+  @media only screen and (max-width: 31.25em) {
+    .register-btn__text {
+      display: block; } }
 
 .cart-link {
   position: relative;
@@ -951,8 +993,8 @@ section {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 0;
-    right: -1rem;
+    top: -5px;
+    right: -5px;
     width: 1.8rem;
     height: 1.8rem;
     background-color: #666666;
@@ -1640,7 +1682,6 @@ section {
     border-bottom: 1px double #cecece;
     margin-bottom: .8rem; }
   .cart-summary__total-wrap {
-    color: #666666;
     font-weight: 500;
     font-size: 3rem; }
   .cart-summary__btns-wrap {

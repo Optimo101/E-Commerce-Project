@@ -19,11 +19,26 @@ import * as cartView from './views/cartView';
 
 
 // ===========================================================
-// CURRENT STATE OF APP
+// STATE OF APP
 // ===========================================================
 const state = {};
 
 
+
+// ===========================================================
+// TOUCH SCREEN?
+// ===========================================================
+window.addEventListener('touchstart', function onFirstTouch() {
+   // add class to body element
+   document.body.classList.add('user-is-touching');
+ 
+   // or set your app's state however you normally would
+   state.isTouchScreen = true;
+   console.log(state.isMobile);
+ 
+   // we only need to know once that a user touched the screen
+   window.removeEventListener('touchstart', onFirstTouch, false);
+ }, false);
 
 // ===========================================================
 // PRODUCTS SEARCH CONTROLLER
@@ -415,7 +430,7 @@ const controlHeader = async () => {
    elements.siteHeader.addEventListener('click', (event) => {
       // Open/close main menu
       if (event.target.matches('.main-menu__btn, .main-menu__btn *')) {
-         mainMenuView.toggleDropdown(elements.mainMenuDropdown);
+         mainMenuView.toggleDropdown(elements.mainMenuDropdown, state.isTouchScreen);
       }
 
       // Account menu events (after user has logged in)
