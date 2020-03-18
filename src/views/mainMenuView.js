@@ -2,8 +2,6 @@ import { elements } from './base';
 
 // ============== MAINMENU FUNCTIONS ==============
 const showDropdown = (element, isTouchScreen) => {
-   console.log('isTouchScreen?:', isTouchScreen);
-
    // Gets the natural height of dropdown menu element or gets screen height if mobile
    const getMenuHeight = () => {
       element.style.display = 'block'; // Make it visible

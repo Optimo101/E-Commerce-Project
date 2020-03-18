@@ -19,8 +19,18 @@ export const addModClass = (nodeList, prefix) => {
 
 // ADD EVENT LISTENERS FOR OPEN/CLOSING SUBMENUS
 export const setUpSubmenuEvent = (eventType, method) => {
+   if (eventType === 'click') {
+      for (const element of elements.headerMainMenuLinks) {
+         element.addEventListener('click', function(event) {
+            event.preventDefault();
+         });
+      }
+   }
+   
    for (let i = 1; i <= elements.mainMenuItems.length; i++) {
-      document.querySelector(`.main-menu__item--${i}`).addEventListener(eventType, function() {
+      let mainMenuItem = document.querySelector(`.main-menu__item--${i}`);
+
+      mainMenuItem.addEventListener(eventType, () => {
          if (document.querySelector(`.submenu--${i}`)) {
             method(document.querySelector(`.submenu--${i}`));
          }
@@ -51,6 +61,59 @@ export const hideSubMenu = (element) => {
       element.style.display = 'none';
    }, 250);
 }
+
+const clearSubMenus = (submenuList) => {
+   for (let submenu of submenuList) {
+      
+      hideSubMenu(submenu);
+      submenu.classList.remove('active');
+   }
+}
+
+const clearMainMenuStyles = (mainMenuList) => {
+   for (let mainMenuItem of mainMenuList) {
+      mainMenuItem.getElementsByClassName('main-menu__item-icon')[0].style.color = 'rgb(122,122,122)';
+      mainMenuItem.getElementsByClassName('main-menu__title')[0].style.color = 'rgb(122,122,122)';
+      mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.color = 'rgb(122,122,122)';
+      mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.transform = 'rotate(-90deg)';
+
+   }
+}
+
+export const toggleSubMenu = async (element) => {
+   const mainMenuItem = element.parentNode;
+
+   // If submenu is not currently active, then show it
+   if (!element.classList.contains('active')) {
+      const submenuList = document.querySelectorAll('.submenu');
+      const mainMenuList = document.querySelectorAll('.main-menu__item');
+
+      await clearSubMenus(submenuList);
+      clearMainMenuStyles(mainMenuList);
+
+      mainMenuItem.getElementsByClassName('main-menu__item-icon')[0].style.color = '#EB2F38';
+      mainMenuItem.getElementsByClassName('main-menu__title')[0].style.color = '#000';
+      mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.color = '#000';
+      mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.transform = 'rotate(0deg)';
+
+      setTimeout(() => {
+         element.classList.add('active');
+         showSubMenu(element);
+   }, 250);
+      
+   // If submenu is active, then hide it
+   } else {
+      mainMenuItem.getElementsByClassName('main-menu__item-icon')[0].style.color = 'rgb(122,122,122)';
+      mainMenuItem.getElementsByClassName('main-menu__title')[0].style.color = 'rgb(122,122,122)';
+      mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.color = 'rgb(122,122,122)';
+      mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.transform = 'rotate(-90deg)';
+
+      element.classList.remove('active');
+      hideSubMenu(element);
+   }
+}
+
+
 
 
 // RENDER SUBMENU CONTENT
