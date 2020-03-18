@@ -11,7 +11,18 @@
    height: 0;
    overflow: hidden;
    display: none;
-   transition: height .25s ease-in-out, opacity .25s ease-out;
+   transition: height .30s, opacity .20s;
+
+   @media (hover:none) and (max-width: $bp-smd) {
+      left: 0;
+      top: 99%;
+      width: 100%;
+      background-color: $color-lightergrey;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      transition: height .5s, opacity .5s;
+
+   }
 
    &__list {
       display: flex;

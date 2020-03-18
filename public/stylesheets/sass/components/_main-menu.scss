@@ -71,6 +71,10 @@
          content: "\f0de";
          font-size: 3rem;
          color: $color-white;
+
+         @media (hover:none) and (max-width: $bp-smd) {
+            display: none;
+         }
       }
 
       @media (hover:none) and (max-width: $bp-smd) {
@@ -78,6 +82,8 @@
          top: 0;
          left: 0;
          max-width: 50%;
+         border-top-left-radius: 0;
+         border-bottom-left-radius: 0;
       }
 
       @media (hover:none) and (max-width: $bp-sm) {
@@ -91,8 +97,6 @@
       @media (hover:none) and (max-width: $bp-xxs) {
          max-width: 80%;
       }
-
-      
    }
 
    &__dropdown.is-visible {
@@ -162,6 +166,14 @@
 
    &__item-arrow {
       transition: transform .3s;
+
+      @media (hover:none) and (max-width: $bp-smd) {
+         transform: rotate(-90deg);
+      }
+
+      &--down {
+         transform: rotate(0deg);
+      }
    }
 }
 

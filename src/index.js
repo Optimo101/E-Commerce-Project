@@ -28,17 +28,24 @@ const state = {};
 // ===========================================================
 // TOUCH SCREEN?
 // ===========================================================
-window.addEventListener('touchstart', function onFirstTouch() {
-   // add class to body element
-   document.body.classList.add('user-is-touching');
+
+// window.addEventListener('touchstart', function onFirstTouch() {
+//    // add class to body element
+//    document.body.classList.add('user-is-touching');
  
-   // or set your app's state however you normally would
-   state.isTouchScreen = true;
-   console.log(state.isMobile);
+//    // set state
+//    state.isTouchScreen = true;
+//    console.log(state.isTouchScreen);
  
-   // we only need to know once that a user touched the screen
-   window.removeEventListener('touchstart', onFirstTouch, false);
- }, false);
+//    // we only need to know once that a user touched the screen
+//    window.removeEventListener('touchstart', onFirstTouch, false);
+//  }, false);
+
+ if (('ontouchstart' in window) || 
+      (navigator.maxTouchPoints > 0) || 
+      (navigator.msMaxTouchPoints > 0)) {
+         state.isTouchScreen = true;
+}
 
 // ===========================================================
 // PRODUCTS SEARCH CONTROLLER
@@ -403,7 +410,6 @@ const controlCategorySearch = async () => {
 // HEADER CONTROLLER
 // ===========================================================
 const controlHeader = async () => {
-
    try {
       // Perform categories search
       await controlCategorySearch();
@@ -510,8 +516,17 @@ const controlHeader = async () => {
       });
 
       // Open/close submenus
-      submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
-      submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu); 
+      console.log('isTouchScreen?', state.isTouchScreen);
+
+      if (!state.isTouchScreen) {
+         submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
+         submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
+      } else {
+         submenuView.setUpSubmenuEvent('click', submenuView.toggleSubMenu);
+      }
+      
+
+      
 
       // If user clicks the close icon on the header notice section (at very top of header)
       elements.headerNoticeBtn.addEventListener('click', () => {

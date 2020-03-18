@@ -5,6 +5,7 @@ export const elements = {
    headerNoticeText : document.querySelector('.header-notice__text'),
    headerNoticeBtn: document.querySelector('.header-notice__close-icon'),
    headerCartCounter: document.querySelector('.cart-link__counter'),
+   headerMainMenuLinks: document.querySelectorAll('.main-menu__link'),
 
    // SEARCH FORM ELEMENTS
    searchForm: document.querySelector('.search-form'),
