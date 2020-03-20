@@ -435,7 +435,7 @@ const controlHeader = async () => {
    // ===========================================================
    elements.siteHeader.addEventListener('click', (event) => {
       // Open/close main menu
-      if (event.target.matches('.main-menu__btn, .main-menu__btn *')) {
+      if (event.target.matches('.main-menu__btn, .main-menu__btn *') || event.target.matches('.main-menu__header-icon')) {
          mainMenuView.toggleDropdown(elements.mainMenuDropdown, state.isTouchScreen);
       }
 
@@ -516,8 +516,6 @@ const controlHeader = async () => {
       });
 
       // Open/close submenus
-      console.log('isTouchScreen?', state.isTouchScreen);
-
       if (!state.isTouchScreen) {
          submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
          submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);

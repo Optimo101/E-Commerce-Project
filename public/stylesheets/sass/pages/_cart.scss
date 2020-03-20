@@ -84,6 +84,7 @@
 
       &--price {
          width: 13rem;
+         align-self: flex-start;
       }
    }
 
@@ -123,13 +124,19 @@
    }
 
    &__remove-btn {
-      padding-top: 2px;
-      padding-bottom: 2px;
+      padding-top: 4px;
+      padding-bottom: 4px;
       background-color: $color-grey;
+      font-weight: $font-weight-thin;
 
       &:hover {
          background-color: $color-primary;
       }
+
+      @media (hover:none) {
+         background-color: $color-primary;
+      }
+
    }
 
    &__total {
@@ -146,7 +153,7 @@
    }
 
    &__total-price {
-      font-size: $font-size-lg;
+      font-size: $font-size-xl;
       font-weight: $font-weight-bold;
       width: 100%;
    }
@@ -186,6 +193,7 @@
       border-radius: 1rem;;
       padding: 1rem;
       margin-bottom: 1.5rem;
+      font-size: $font-size-xl;
 
       & div {
          display: flex;
