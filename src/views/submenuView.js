@@ -76,7 +76,10 @@ const clearMainMenuStyles = (mainMenuList) => {
       mainMenuItem.getElementsByClassName('main-menu__title')[0].style.color = 'rgb(122,122,122)';
       mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.color = 'rgb(122,122,122)';
       mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.transform = 'rotate(-90deg)';
-
+      
+      if (screen.width > 575) {
+         mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.transform = 'rotate(0deg)';
+      }
    }
 }
 
@@ -96,6 +99,10 @@ export const toggleSubMenu = async (element) => {
       mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.color = '#000';
       mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.transform = 'rotate(0deg)';
 
+      if (screen.width > 575) {
+         mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.transform = 'rotate(-90deg)';
+      }
+
       setTimeout(() => {
          element.classList.add('active');
          showSubMenu(element);
@@ -107,6 +114,10 @@ export const toggleSubMenu = async (element) => {
       mainMenuItem.getElementsByClassName('main-menu__title')[0].style.color = 'rgb(122,122,122)';
       mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.color = 'rgb(122,122,122)';
       mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.transform = 'rotate(-90deg)';
+
+      if (screen.width > 575) {
+         mainMenuItem.getElementsByClassName('main-menu__item-arrow')[0].style.transform = 'rotate(0deg)';
+      }
 
       element.classList.remove('active');
       hideSubMenu(element);

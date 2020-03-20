@@ -1,6 +1,5 @@
 .main-menu {
    display: flex;
-
    position: relative;
    height: 4rem;
    width: 30rem;
@@ -56,11 +55,12 @@
       width: 100%;
       z-index: 100;
       background-color: $color-white;
-
       transition: height .35s ease-in-out;
       overflow: hidden;
       height: 0;
-      display: none; 
+      display: none;
+
+      
 
       &::before {
          position: absolute;
@@ -109,6 +109,17 @@
       padding: 1rem 0;
       height: 100%;
 
+      @media (hover:none) and (max-width: $bp-smd) {
+         overflow-y: scroll;
+         -ms-overflow-style: none;
+
+         &::-webkit-scrollbar {
+            display: none;
+         }
+      }
+      
+
+
       & > li:not(:last-child):after  {
          border-bottom: 1px solid #e5e5e5;
          position: absolute;
@@ -125,11 +136,39 @@
       }
    }
 
+
+   
+   &__header {
+      display: none;
+
+      @media (hover:none) and (max-width: $bp-smd) {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         border-bottom: 1rem solid $color-lightergrey;
+         padding: 1.2rem 1.8rem 1.2rem .5rem;
+         margin-bottom: 1rem;
+         color: black;
+         font-size: 2.2rem;
+         color: $color-primary;
+      }
+   }
+
+   &__header-text {
+      font-weight: $font-weight-bold;
+      line-height: 1.5rem;
+   }
+
+   &__header-icon {
+      font-size: 2.5rem;
+      color: $color-darkgrey;
+   }
+
    &__item {
       position: relative;
       text-transform: none;
       width: 100%;
-      font-size: 1.6rem;
+      font-size: $font-size-primary;
       font-weight: 500;
 
       &:hover {
@@ -141,7 +180,12 @@
          & .main-menu__item-icon {
             color: $color-primary;
          }
-      }   
+      }
+      
+      @media (hover:none) and (max-width: $bp-smd) {
+         font-size: $font-size-lg;
+         line-height: 2.2rem;
+      }
    }
 
    &__link {
@@ -150,6 +194,11 @@
       width: 100%;
       padding: 1.2rem 1.8rem;
       text-decoration: none;
+
+      @media (hover:none) and (max-width: $bp-smd) {
+         padding: 1.6rem 1.8rem;
+
+      }
    }
 
    &__item-icon {
@@ -167,7 +216,7 @@
    &__item-arrow {
       transition: transform .3s;
 
-      @media (hover:none) and (max-width: $bp-smd) {
+      @media (max-width: $bp-smd) {
          transform: rotate(-90deg);
       }
 

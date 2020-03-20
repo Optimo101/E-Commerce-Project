@@ -192,13 +192,11 @@
       max-height: 42.6rem;
       border: 1px solid $color-lightgrey;
       border-radius: 10px;
-
       padding: 1rem;
+      font-size: $font-size-primary;
 
       overflow-y: scroll;
       -ms-overflow-style: none;
-
-      font-size: $font-size-primary;
 
       &::-webkit-scrollbar {
          display: none;
@@ -360,6 +358,10 @@
       &:hover {
          background-color: $color-primary;
       }
+
+      @media only screen and (max-width: 475px) {
+         margin-top: 2rem;
+      }
    }
 
    &__cart-icon {
@@ -370,14 +372,16 @@
    &__like-btn {
       align-self: center;
 
-     
-
       &:hover {
          & .product-info__like-icon {
             transform: scale(1.25);
             color: $color-primary;
          }
       } 
+
+      @media only screen and (max-width: 475px) {
+         margin-top: 2rem;
+      }
    }
 
    &__like-icon {
