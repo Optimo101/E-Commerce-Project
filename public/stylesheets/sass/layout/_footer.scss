@@ -1,11 +1,19 @@
-.site-footer {
-}
-
 .main-footer {
    display: flex;
-   padding-top: 3rem;
+   padding-top: 5rem;
    padding-bottom: 5rem;
-   font-size: $font-size-sm;
+   font-size: $font-size-lg;
+
+
+
+   @media only screen and (max-width: $bp-xl) {
+      flex-wrap: wrap;
+   }
+
+   @media only screen and (max-width: $bp-sm) {
+      flex-direction: column;
+      align-items: center;
+   }
 
 }
 
@@ -13,11 +21,24 @@
    display: flex;
    flex-basis: 22%;
    padding-right: 2.5rem;
+   margin-left: auto;
+
+   @media only screen and (max-width: $bp-sm) {
+      margin-left: 0;
+      margin-bottom: 3rem;
+      padding-right: 0;
+      order: 1;
+   }
 
    &__container {
       display: flex;
       flex-direction: column;
       justify-content: center;
+
+      @media only screen and (max-width: $bp-sm) {
+         align-items: center;
+      }
+
 
       & div:nth-of-type(2) {
          margin-bottom: .6rem;
@@ -33,8 +54,12 @@
    &__logo-box {
       display: flex;
       align-items: center;
-      max-width: 16rem;
-      margin-bottom: 1rem;
+      max-width: 18rem;
+      margin-bottom: .5rem;
+
+      @media only screen and (max-width: $bp-sm) {
+         max-width: 24rem;
+      }
    }
 
    &__logo-img {
@@ -61,8 +86,36 @@
    align-items: center;
    flex-basis: 43%;
    
-   border-left: 2px solid $color-darkgrey;
-   border-right: 2px solid $color-darkgrey;
+   border-left: 1px solid $color-grey;
+   border-right: 1px solid $color-grey;
+
+  
+   @media only screen and (max-width: $bp-xl) {
+      order: 1; //moves to ultimate position.
+      flex-basis: 85%;
+      justify-content: space-around;
+      border: none;
+      border-top: 1px solid $color-grey;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      margin-left: auto;
+      margin-right: auto;
+
+   }
+
+   @media only screen and (max-width: $bp-sm) {
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid $color-grey;
+      padding-top: 3rem;
+      border-top: 1px solid $color-grey;
+      width: 85%;
+      order: 0;
+   }
+
+   @media only screen and (max-width: $bp-xs) {
+      width: 100%;
+   }
 
 
    &__list-box {
@@ -98,7 +151,13 @@
    display: flex;
    justify-content: flex-end;
    flex-basis: 35%;
+   margin-right: auto;
 
+   @media only screen and (max-width: $bp-sm) {
+      margin-right: 0;
+      order: -1;
+      max-width: 38rem;
+   }
 
    &__container {
       display: flex;
@@ -108,10 +167,24 @@
 
       max-width: 38rem;
       padding-left: 2.5rem;
+
+
+      @media only screen and (max-width: $bp-xl) {
+         max-width: 41.25rem;;
+       }
+
+       @media only screen and (max-width: $bp-sm) {
+         margin-right: 0;
+         padding-left: 0;
+      }
    }
 
    &__paragraph {
       margin-bottom: 1.8rem;
+
+      @media only screen and (max-width: $bp-sm) {
+         text-align: center;
+      }
    }
 
    &__form {
@@ -119,7 +192,7 @@
       align-items: center;
 
       width: 100%;
-      border: 2px solid $color-lightgrey;
+      border: 2px solid $color-grey;
       border-radius: 4rem;
    }
 

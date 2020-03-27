@@ -48,19 +48,13 @@
   
    &--black {
       background-color: $color-black;
-      
    }
 
    &--red {
       background-color: $color-primary;
    }
 
-   &--green {
-      background-color: rgb(54, 204, 54);
-   }
-
    &--darkgrey {
       background-color: $color-darkgrey;
    }
-
 }

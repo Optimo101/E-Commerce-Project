@@ -1,33 +1,91 @@
 .cart-section {
    &__main {
       display: flex;
-      justify-content: space-between;
+      position: relative;
+
+      @media only screen and (max-width: $bp-xxl) {
+         flex-wrap: wrap;
+         max-width: 80rem;
+      }
+
+      @media only screen and (max-width: $bp-smd) {
+         max-width: 50rem;
+      }
    }
 }
 
 .cart {
-}
-
-.cart-grid {
-   flex-grow: 1;
-   display: grid;
-   grid-template-columns: 12rem auto auto auto;
-   grid-template-rows: 3rem;
-   grid-auto-rows: minmax(0, 12rem);
-   gap: 3px;
-
    border: 2px solid $color-lightgrey;
    border-radius: 1rem;
    overflow: hidden;
-   margin-right: 2.5rem;
-   color: $color-black;
+   margin-right: 3rem;
+   color: black;
+   max-width: 80rem;
+   background-color: white;
+   height: 100%;
+
+   @media only screen and (max-width: $bp-xxl) {
+      margin-right: 0;
+      margin-bottom: 3rem;
+   }
+
+   &__row {
+      display: flex;
+      height: 12rem;
+
+      &:not(:first-of-type) {
+         border-top: 1px solid $color-lightgrey;
+      }
+
+      @media only screen and (max-width: $bp-smd) {
+         height: auto;
+      }
+   }
+
+   &__right {
+      display: flex;
+      flex-basis: 100%;
+
+      @media only screen and (max-width: $bp-smd) {
+         flex-wrap: wrap;
+      }
+   }
+
+   &__left {
+      display: flex;
+      align-items: center;
+   }
 
    &__item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      background-color: white;
-      padding: 1rem;
+      height: auto;
+      background-color: $color-white;
+      padding: 1.5rem;
+
+      &--img {
+         width: 12rem;
+         height: 100%;
+         justify-content: center;
+
+         @media only screen and (max-width: $bp-smd) {
+            height: 12rem;
+         }
+      }
+
+      &--name {
+         margin-right: auto;
+         flex-basis: 70%;
+
+         @media only screen and (max-width: $bp-smd) {
+            flex-basis: 100%;
+         }
+      }
+
+      &--price {
+         width: 13rem;
+         align-self: flex-start;
+      }
    }
 
    &__image-wrap {
@@ -66,20 +124,38 @@
    }
 
    &__remove-btn {
-      padding-top: 2px;
-      padding-bottom: 2px;
+      padding-top: 4px;
+      padding-bottom: 4px;
       background-color: $color-grey;
+      font-weight: $font-weight-thin;
 
       &:hover {
          background-color: $color-primary;
       }
+
+      @media (hover:none) {
+         background-color: $color-primary;
+      }
+
+   }
+
+   &__total {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%
    }
 
    &__unit-price {
-      font-size: $font-size-xxs;
+      font-size: $font-size-xs;
       white-space: nowrap;
-      font-weight: $font-weight-primary;
-      color: $color-darkgrey;
+      width: 100%
+   }
+
+   &__total-price {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      width: 100%;
    }
 }
 
@@ -87,7 +163,11 @@
    flex-grow: 1;
    flex-shrink: 0;
    max-width: 41rem;
-   color: $color-black;
+   color: black;
+
+   @media only screen and (max-width: $bp-xxl) {
+      margin-left: auto;
+   }
 
    &__box {
       width: 100%;
@@ -101,7 +181,7 @@
       display: flex;
       justify-content: center;
       margin-bottom: 1rem;
-
+      color: $color-black;
    }
 
    &__title {
@@ -113,6 +193,7 @@
       border-radius: 1rem;;
       padding: 1rem;
       margin-bottom: 1.5rem;
+      font-size: $font-size-xl;
 
       & div {
          display: flex;
@@ -126,9 +207,8 @@
    }
 
    &__total-wrap {
-      color: $color-black;
       font-weight: $font-weight-bold;
-      font-size: $font-size-xl;
+      font-size: $font-size-xxl;
    }
 
    &__btns-wrap {

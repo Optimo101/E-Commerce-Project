@@ -5,15 +5,15 @@
       display: flex;
 
       color: $color-black;
-      width: 6rem;
-      height: 4rem;
+      width: 7rem;
+      height: 5rem;
    }
 
    &__input {
       height: 100%;
       width: 100%;
       text-align: center;
-      font-size: $font-size-lg;
+      font-size: $font-size-xl;
       border: 1px solid $color-black;
       border-right: none;
    }
@@ -22,15 +22,14 @@
       display: flex;
       flex-direction: column;
       background-color: $color-white;
+      width: 4rem;
    }
 
    &__up-btn {
       display: flex;
       justify-content: center;
       align-items: center;
-
       height: 50%;
-      width: 2rem;
       border: 1px solid $color-black;
       cursor: pointer;
 
@@ -47,9 +46,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-
       height: 50%;
-      width: 2rem;
       border: 1px solid $color-black;
       cursor: pointer;
 

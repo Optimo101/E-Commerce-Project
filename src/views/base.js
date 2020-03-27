@@ -5,6 +5,7 @@ export const elements = {
    headerNoticeText : document.querySelector('.header-notice__text'),
    headerNoticeBtn: document.querySelector('.header-notice__close-icon'),
    headerCartCounter: document.querySelector('.cart-link__counter'),
+   headerMainMenuLinks: document.querySelectorAll('.main-menu__link'),
 
    // SEARCH FORM ELEMENTS
    searchForm: document.querySelector('.search-form'),
@@ -58,7 +59,7 @@ export const elements = {
    productReviewCount: document.querySelector('.product-info__review-count'),
    
    // CART PAGE ELEMENTS
-   cartGrid: document.querySelector('.cart-grid'),
+   cartGrid: document.querySelector('.cart'),
    cartSummarySubtotal: document.querySelector('.cart-summary__subtotal-number'),
    cartSummaryTaxes: document.querySelector('.cart-summary__tax-number'),
    cartSummaryShipping: document.querySelector('.cart-summary__shipping-number'),
