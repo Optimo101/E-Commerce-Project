@@ -473,14 +473,14 @@ body {
   align-items: center;
   border: 1px solid #cecece;
   border-radius: 1rem;
-  padding: 3.5rem 0;
+  padding: 3rem 0;
   font-size: 1.6rem;
   color: #666666;
   background-color: #FFF; }
   .product-thumb:hover .product-thumb__img {
     transform: scale(1.1); }
   .product-thumb__top-content {
-    height: 50%;
+    height: 45%;
     margin: 0 3rem; }
   .product-thumb__img {
     width: 100%;
@@ -492,7 +492,7 @@ body {
     flex-direction: column;
     align-content: center;
     margin-top: 2.5rem;
-    padding: 0 1.5rem; }
+    padding: 0 1.2rem; }
   .product-thumb__btn-wrap {
     display: flex;
     justify-content: center; }
@@ -529,7 +529,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 1rem; }
+    line-height: 1rem;
+    margin-bottom: 2rem; }
   .product-thumb__review-stars {
     font-size: 1.4rem; }
   .product-thumb__review-icon {
