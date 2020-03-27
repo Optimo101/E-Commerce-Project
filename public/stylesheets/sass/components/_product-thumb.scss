@@ -5,7 +5,7 @@
 
    border: 1px solid $color-lightgrey;
    border-radius: 1rem;
-   padding: 3.5rem 0;
+   padding: 3rem 0;
 
    font-size: $font-size-primary;
    color: $color-black;
@@ -17,7 +17,7 @@
 
 
    &__top-content {
-      height: 50%;
+      height: 45%;
       margin: 0 3rem;
    }
 
@@ -33,7 +33,7 @@
       flex-direction: column;
       align-content: center;
       margin-top: 2.5rem;
-      padding: 0 1.5rem;
+      padding: 0 1.2rem;
    }
 
    &__btn-wrap {
@@ -94,6 +94,7 @@
       align-items: center;
       justify-content: center;
       line-height: 1rem;
+      margin-bottom: 2rem;
    }
 
    &__review-stars {
