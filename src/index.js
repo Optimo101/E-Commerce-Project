@@ -19,11 +19,33 @@ import * as cartView from './views/cartView';
 
 
 // ===========================================================
-// CURRENT STATE OF APP
+// STATE OF APP
 // ===========================================================
 const state = {};
 
 
+
+// ===========================================================
+// TOUCH SCREEN?
+// ===========================================================
+
+// window.addEventListener('touchstart', function onFirstTouch() {
+//    // add class to body element
+//    document.body.classList.add('user-is-touching');
+ 
+//    // set state
+//    state.isTouchScreen = true;
+//    console.log(state.isTouchScreen);
+ 
+//    // we only need to know once that a user touched the screen
+//    window.removeEventListener('touchstart', onFirstTouch, false);
+//  }, false);
+
+ if (('ontouchstart' in window) || 
+      (navigator.maxTouchPoints > 0) || 
+      (navigator.msMaxTouchPoints > 0)) {
+         state.isTouchScreen = true;
+}
 
 // ===========================================================
 // PRODUCTS SEARCH CONTROLLER
@@ -103,8 +125,8 @@ const controlCartPage = () => {
    // ===========================================================
    elements.cartGrid.addEventListener('click', (event) => {
    
-      if (event.target.closest('.cart-grid__quantity')) {
-         const itemSku = event.target.closest('.cart-grid__quantity').id.slice(5);
+      if (event.target.closest('.cart__quantity')) {
+         const itemSku = event.target.closest('.cart__quantity').id.slice(5);
    
          // Event for increasing and decreasing item quantities
          if (event.target.matches('.quantity-calc__btns, .quantity-calc__btns *')) {
@@ -121,10 +143,11 @@ const controlCartPage = () => {
             });
 
             cartView.displayRefreshBtn();
+            window.location = '/cart';
          }
 
          // Event for removing item from cart
-         if (event.target.matches('.cart-grid__remove-btn, .cart-grid__remove-btn *')) {
+         if (event.target.matches('.cart__remove-btn, .cart__remove-btn *')) {
             state.cart.removeItem(itemSku); 
             location.reload(true);
          }
@@ -387,7 +410,6 @@ const controlCategorySearch = async () => {
 // HEADER CONTROLLER
 // ===========================================================
 const controlHeader = async () => {
-
    try {
       // Perform categories search
       await controlCategorySearch();
@@ -413,8 +435,8 @@ const controlHeader = async () => {
    // ===========================================================
    elements.siteHeader.addEventListener('click', (event) => {
       // Open/close main menu
-      if (event.target.matches('.main-menu__btn, .main-menu__btn *')) {
-         mainMenuView.toggleDropdown(elements.mainMenuDropdown);
+      if (event.target.matches('.main-menu__btn, .main-menu__btn *') || event.target.matches('.main-menu__header-icon')) {
+         mainMenuView.toggleDropdown(elements.mainMenuDropdown, state.isTouchScreen);
       }
 
       // Account menu events (after user has logged in)
@@ -494,8 +516,15 @@ const controlHeader = async () => {
       });
 
       // Open/close submenus
-      submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
-      submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu); 
+      if (!state.isTouchScreen) {
+         submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
+         submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
+      } else {
+         submenuView.setUpSubmenuEvent('click', submenuView.toggleSubMenu);
+      }
+      
+
+      
 
       // If user clicks the close icon on the header notice section (at very top of header)
       elements.headerNoticeBtn.addEventListener('click', () => {

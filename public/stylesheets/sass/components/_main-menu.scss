@@ -1,8 +1,12 @@
 .main-menu {
+   display: flex;
    position: relative;
    height: 4rem;
    width: 30rem;
 
+   @media only screen and (max-width: $bp-sm) {
+      width: auto;
+   }
 
    &__btn {
       text-transform: uppercase;
@@ -11,6 +15,36 @@
    &__icon {
       margin-right: 1.5rem;
       font-size: 2rem;
+
+      &:nth-child(2) {
+         display: none;
+      }
+
+      @media only screen and (max-width: $bp-sm) {
+         margin-right: 0;
+      }
+   }
+
+   &__btn-text {
+      &--2 {
+         display:none;
+      }
+
+      @media only screen and (max-width: $bp-lg) {
+         &--1 {
+            display: none;
+         }
+
+         &--2 {
+            display: block;
+         }
+      }
+
+      @media only screen and (max-width: $bp-sm) {
+         &--2 {
+            display: none;
+         }
+      }
    }
 
    &__dropdown {
@@ -21,11 +55,12 @@
       width: 100%;
       z-index: 100;
       background-color: $color-white;
-
-      transition: height .25s ease-in-out;
+      transition: height .35s ease-in-out;
       overflow: hidden;
       height: 0;
-      display: none; 
+      display: none;
+
+      
 
       &::before {
          position: absolute;
@@ -36,6 +71,31 @@
          content: "\f0de";
          font-size: 3rem;
          color: $color-white;
+
+         @media (hover:none) and (max-width: $bp-smd) {
+            display: none;
+         }
+      }
+
+      @media (hover:none) and (max-width: $bp-smd) {
+         position: fixed;
+         top: 0;
+         left: 0;
+         max-width: 50%;
+         border-top-left-radius: 0;
+         border-bottom-left-radius: 0;
+      }
+
+      @media (hover:none) and (max-width: $bp-sm) {
+         max-width: 60%;
+      }
+
+      @media (hover:none) and (max-width: $bp-xs) {
+         max-width: 70%;
+      }
+
+      @media (hover:none) and (max-width: $bp-xxs) {
+         max-width: 80%;
       }
    }
 
@@ -47,6 +107,17 @@
    &__list {
       list-style: none;
       padding: 1rem 0;
+      height: 100%;
+
+      @media (hover:none) and (max-width: $bp-smd) {
+         overflow-y: scroll;
+         -ms-overflow-style: none;
+
+         &::-webkit-scrollbar {
+            display: none;
+         }
+      }
+      
 
 
       & > li:not(:last-child):after  {
@@ -65,11 +136,39 @@
       }
    }
 
+
+   
+   &__header {
+      display: none;
+
+      @media (hover:none) and (max-width: $bp-smd) {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         border-bottom: 1rem solid $color-lightergrey;
+         padding: 1.2rem 1.8rem 1.2rem .5rem;
+         margin-bottom: 1rem;
+         color: black;
+         font-size: 2.2rem;
+         color: $color-primary;
+      }
+   }
+
+   &__header-text {
+      font-weight: $font-weight-bold;
+      line-height: 1.5rem;
+   }
+
+   &__header-icon {
+      font-size: 2.5rem;
+      color: $color-darkgrey;
+   }
+
    &__item {
       position: relative;
       text-transform: none;
       width: 100%;
-      font-size: 1.6rem;
+      font-size: $font-size-primary;
       font-weight: 500;
 
       &:hover {
@@ -81,7 +180,12 @@
          & .main-menu__item-icon {
             color: $color-primary;
          }
-      }   
+      }
+      
+      @media (hover:none) and (max-width: $bp-smd) {
+         font-size: $font-size-lg;
+         line-height: 2.2rem;
+      }
    }
 
    &__link {
@@ -90,6 +194,11 @@
       width: 100%;
       padding: 1.2rem 1.8rem;
       text-decoration: none;
+
+      @media (hover:none) and (max-width: $bp-smd) {
+         padding: 1.6rem 1.8rem;
+
+      }
    }
 
    &__item-icon {
@@ -106,6 +215,14 @@
 
    &__item-arrow {
       transition: transform .3s;
+
+      @media (max-width: $bp-smd) {
+         transform: rotate(-90deg);
+      }
+
+      &--down {
+         transform: rotate(0deg);
+      }
    }
 }
 

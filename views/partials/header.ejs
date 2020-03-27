@@ -35,31 +35,27 @@
                   <div class="main-menu">
                      <button href="#" class="main-menu__btn btn btn--black ">
                         <i class="fas fa-bars main-menu__icon"></i>
-                        Shop Categories
+                        <i class="fas fa-shopping-basket main-menu__icon"></i>
+                        <span class="main-menu__btn-text--1">Shop Categories</span>
+                        <span class="main-menu__btn-text--2">Shop</span> 
                      </button>
 
                      <div class="main-menu__dropdown">
-                        <ul class="main-menu__list">
+                       
 
+                        
+                        <ul class="main-menu__list">
+                           <div class="main-menu__header">
+                              <div class="main-menu__header-text">Shopping Categories</div>
+                              <i class="fas fa-times main-menu__header-icon"></i>
+
+                           </div>
                            <li class="main-menu__item">
                               <a href="/results?categoryPath.id=abcat0100000" class="main-menu__link">
                                  <i class="fas fa-tv main-menu__item-icon"></i>
                                  <span class="main-menu__title">TV & Home Theater</span>
                                  <i class="fas fa-chevron-down main-menu__item-arrow"></i>
                               </a>
-                  
-                              <!-- <div class="submenu submenu--${mainCatNum}">
-                                 <ul class="submenu__list">
-                                    <li class="submenu__item submenu__item--${i}">
-                                       <a class="submenu__link" href="/results?cat-search=${subCatsObj[i].id}">
-                                          <span class="submenu__title">
-                                          
-                                          </span>
-                                       </a>
-                                    </li>
-                                 </ul>
-                              </div> -->
-
                            </li>
 
                            <li class="main-menu__item">
@@ -200,16 +196,15 @@
                   <% } else { %>
                      <a class="login-btn btn btn--black" href="/user/login">
                         <i class="fas fa-sign-in-alt login-btn__icon"></i>
-                        Login
+                        <span class="login-btn__text">Login</span>
                      </a>
                      <a class="register-btn btn btn--black" href="/user/register">
                         <i class="fas fa-user-plus register-btn__icon"></i>
-                        Register
+                        <span class="register-btn__text">Register</span>
                      </a>
                   <% } %>
                   
                   <a class="cart-link">
-                     Cart
                      <i class="fas fa-shopping-cart cart-link__icon"></i>
                      </ion-icon>
                      <div class="cart-link__counter"></div>

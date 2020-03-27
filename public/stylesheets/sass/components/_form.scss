@@ -1,13 +1,13 @@
 .form {
    display: flex;
    flex-wrap: wrap;  
-   margin: -1.5rem; 
+   margin: -1.5rem;
+   font-size: $font-size-lg;
 
    &__section {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
-
       background-color: $color-white;
       padding: 3rem;
       margin: 1.5rem;
@@ -17,6 +17,8 @@
 
    &__sub-section {
       display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
       margin: -1.5rem;
 
       & .form__inputs-wrap:first-of-type {
@@ -42,7 +44,6 @@
       display: flex;
       flex-direction: column;
       margin-bottom: 2rem;
-
    }
 
    &__input-label {
@@ -51,21 +52,22 @@
 
    &__input {
       padding: .5rem;
-      border-radius: .5rem;
+      // border-radius: .5rem;
       font-size: inherit;
       font-style: inherit;
       font-weight: inherit;
+      width: 25rem;
+      border: none;
+      border-bottom: 1px solid $color-darkgrey;
+
+      &:focus {
+         ~ .form__input-label {
+            font-size: 3rem;
+         }
+      }
    }
 
    &__btn {
       margin-top: 1.5rem;
-   }
-}
-
-.account-section__content {
-   & .form__section:first-of-type {
-      & .form__input {
-         background-color: $color-lightergrey;
-      }
    }
 }
