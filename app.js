@@ -38,9 +38,11 @@ app.use(flash());
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(session({
+   store: new (require('connect-pg-simple')(session))(),
    secret: process.env.SESSION_SECRET,
    resave: false,
-   saveUninitialized: false
+   saveUninitialized: false,
+   cookie: {maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
 
 app.use(passport.initialize());
