@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
+    "connect-pg-simple": "^6.1.0",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
     "ejs": "^2.7.1",
@@ -41,7 +42,7 @@
     "simplecrypt": "^0.1.0"
   },
   "engines": {
-   "node": "10.15.x",
-   "npm": "6.4.x"
-   }
+    "node": "10.15.x",
+    "npm": "6.4.x"
+  }
 }
