@@ -38,5 +38,9 @@
     "request": "^2.88.0",
     "serialize-javascript": "^2.1.2",
     "simplecrypt": "^0.1.0"
-  }
+  },
+  "engines": {
+   "node": "10.15.x",
+   "npm": "6.4.x"
+   }
 }
