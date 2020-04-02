@@ -14,7 +14,7 @@ const pool = new Pool({
    // port: process.env.PGPORT
 });
 
-console.log('Connection String:', pool.connectionString);
+console.log('Connection String:', pool);
 
 module.exports = {
   query: (text, params, callback) => {
