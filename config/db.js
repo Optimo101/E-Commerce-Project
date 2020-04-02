@@ -2,10 +2,10 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
    connectionString: process.env.DATABASE_URL,
-   ssl: true,
-   user: process.env.PGUSER, // PGUSER=eshopadmin
-   password: process.env.PGPASS, // PGPASS=admin
-   database: process.env.PGDATABASE // PGDATABASE=eshopdb
+   ssl: true
+   // user: process.env.PGUSER,
+   // password: process.env.PGPASS,
+   // database: process.env.PGDATABASE
 
    // user: process.env.PGUSER,
    // host: process.env.PGHOST,
@@ -13,6 +13,8 @@ const pool = new Pool({
    // password: process.env.PGPASS,
    // port: process.env.PGPORT
 });
+
+console.log('Connection String:', pool.connectionString);
 
 module.exports = {
   query: (text, params, callback) => {
