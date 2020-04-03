@@ -1,7 +1,7 @@
 // ================ NPM PACKAGE REQUIREMENTS =====================
 // ===============================================================
 
-// Require sensitive info pertaining to security of app
+// Parser for .env variables
 require('dotenv').config();
 
 // Packages/Libraries
@@ -11,8 +11,11 @@ const express = require('express'),
       passport = require('passport'),
       flash = require('express-flash'),
       session = require('express-session'),
+      PostgreSqlStore = require('connect-pg-simple')(session),
       cookieParser = require('cookie-parser'),
-      queriesLib = require('./lib/queries');
+      queriesLib = require('./lib/queries'),
+      db = require('./config/db');
+
 
 // Passport configuration
 const initializePassport = require('./config/passport');
@@ -38,11 +41,13 @@ app.use(flash());
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(session({
-   store: new (require('connect-pg-simple')(session))(),
    secret: process.env.SESSION_SECRET,
    resave: false,
    saveUninitialized: false,
-   cookie: {maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+   store: new PostgreSqlStore({
+      pool: db.getPool()
+   })
 }));
 
 app.use(passport.initialize());
