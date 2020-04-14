@@ -70,7 +70,7 @@ app.set('view options', { layout: false });
 // ===============================================================
 
 // If PORT is set, use that; otherwsie use port 3000
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.listen(port, () => {
    console.log(`Server has started on port ${port}...`);
