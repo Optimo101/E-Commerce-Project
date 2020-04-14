@@ -4,6 +4,9 @@
 // Parser for .env variables
 require('dotenv').config();
 
+// If PORT is set, use that; otherwsie use port 3000
+const port = process.env.PORT || 3000;
+
 // Packages/Libraries
 const express = require('express'),
       app = express(),
@@ -69,10 +72,6 @@ app.set('view options', { layout: false });
 
 // ======================= SERVER ================================
 // ===============================================================
-
-// If PORT is set, use that; otherwsie use port 3000
-const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
    console.log(`Server has started on port ${port}...`);
 });
