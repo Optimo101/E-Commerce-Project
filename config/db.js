@@ -11,6 +11,8 @@ const pool = new Pool({
    // port: process.env.PGPORT
 });
 
+console.log('process.env.DATABASE_URL output:', process.env.DATABASE_URL);
+
 module.exports = {
    query: (text, params, callback) => {
       return pool.query(text, params, callback)
