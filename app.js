@@ -4,6 +4,8 @@
 // Parser for .env variables
 // require('dotenv').config();
 
+console.log('process.env.PORT output', process.env.PORT);
+
 // Packages/Libraries
 const express = require('express'),
       app = express(),
