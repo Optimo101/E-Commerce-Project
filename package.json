@@ -33,7 +33,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.0",
     "method-override": "^3.0.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "pg": "^7.17.1",
