@@ -2,7 +2,7 @@
 // ===============================================================
 
 // Parser for .env variables
-// require('dotenv').config();
+require('dotenv').config();
 
 console.log('process.env.PORT output', process.env.PORT);
 
@@ -66,7 +66,7 @@ app.use('/', misc);
 // Express settings
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
-app.set('port', (process.env.PORT || process.env.port || 5000));
+app.set('port', (process.env.PORT || 5000));
 
 
 // ======================= SERVER ================================
