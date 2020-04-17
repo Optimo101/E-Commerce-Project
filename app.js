@@ -10,15 +10,15 @@ console.log('process.env.NODE_ENV output:', process.env.NODE_ENV);
 
 // Packages/Libraries
 const express = require('express'),
-      app = express(),
-      methodOverride = require('method-override'),
-      passport = require('passport'),
-      flash = require('express-flash'),
-      session = require('express-session'),
-      PostgreSqlStore = require('connect-pg-simple')(session),
-      cookieParser = require('cookie-parser'),
-      queriesLib = require('./lib/queries'),
-      db = require('./config/db');
+   app = express(),
+   methodOverride = require('method-override'),
+   passport = require('passport'),
+   flash = require('express-flash'),
+   session = require('express-session'),
+   PostgreSqlStore = require('connect-pg-simple')(session),
+   cookieParser = require('cookie-parser'),
+   queriesLib = require('./lib/queries'),
+   db = require('./config/db');
 
 
 // Passport configuration
@@ -26,12 +26,11 @@ const initializePassport = require('./config/passport');
 
 // Route file requirements
 const register = require('./routes/user/register'),
-      login = require('./routes/user/login'),
-      logout = require('./routes/user/logout'),
-      account = require('./routes/user/account'),
-      results = require('./routes/results'),
-      misc = require('./routes/misc');
-
+   login = require('./routes/user/login'),
+   logout = require('./routes/user/logout'),
+   account = require('./routes/user/account'),
+   results = require('./routes/results'),
+   misc = require('./routes/misc');
 
 
 // ======================= MIDDLEWARE ============================
