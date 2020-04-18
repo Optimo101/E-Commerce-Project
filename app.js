@@ -4,7 +4,6 @@
 // Parser for .env variables
 require('dotenv').config();
 
-console.log('process.env output:', process.env);
 console.log('process.env.PORT output:', process.env.PORT);
 console.log('process.env.NODE_ENV output:', process.env.NODE_ENV);
 
