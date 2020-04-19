@@ -66,7 +66,7 @@ app.use('/', misc);
 // Express settings
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
-// app.set('port', (process.env.PORT || 80));
+// app.set('port', (process.env.PORT || 3000));
 
 
 // ======================= FUNCTIONS =============================
@@ -90,9 +90,9 @@ let port;
 if (process.env.PORT) {
    port = process.env.PORT;
 } else {
-   port = 443;
+   port = 3000;
 }
-console.log('PORT is:', port);
+console.log('Console.log--> PORT is:', port);
 
 app.listen(port, () => {
    console.log('Node app is running on port', app.get('port'));
