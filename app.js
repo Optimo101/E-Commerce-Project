@@ -66,7 +66,7 @@ app.use('/', misc);
 // Express settings
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
-app.set('port', (process.env.PORT || 5000));
+// app.set('port', (process.env.PORT || 80));
 
 
 // ======================= SERVER ================================
@@ -75,9 +75,13 @@ app.set('port', (process.env.PORT || 5000));
 // If PORT is set, use that; otherwsie use port 3000
 // const port = process.env.PORT || process.env.port || 3000;
 
-app.listen(app.get('port'), () => {
+// app.listen(app.get('port'), () => {
+//    console.log('Node app is running on port', app.get('port'));
+// });
+
+app.listen(process.env.PORT || 80, () => {
    console.log('Node app is running on port', app.get('port'));
- });
+});
 
 
 
