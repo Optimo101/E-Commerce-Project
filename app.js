@@ -69,25 +69,31 @@ app.set('view options', { layout: false });
 // app.set('port', (process.env.PORT || 80));
 
 
-// ======================= SERVER ================================
-// ===============================================================
-
-// If PORT is set, use that; otherwsie use port 3000
-// const port = process.env.PORT || process.env.port || 3000;
-
-// app.listen(app.get('port'), () => {
-//    console.log('Node app is running on port', app.get('port'));
-// });
-
-app.listen(process.env.PORT || 5000, () => {
-   console.log('Node app is running on port', app.get('port'));
-});
-
-
-
 // ======================= FUNCTIONS =============================
 // ===============================================================
 
 // Configure Passport
 initializePassport(passport, queriesLib.getUserByEmail, queriesLib.getUserByID);
 
+
+// ======================= SERVER ================================
+// ===============================================================
+
+// app.listen(app.get('port'), () => {
+//    console.log('Node app is running on port', app.get('port'));
+// });
+
+// If PORT is set, use that; otherwsie use port 80
+// const port = process.env.PORT || 80;
+
+let port;
+if (process.env.PORT) {
+   port = process.env.PORT;
+} else {
+   port = 443;
+}
+console.log('PORT is:', port);
+
+app.listen(port, () => {
+   console.log('Node app is running on port', app.get('port'));
+});
