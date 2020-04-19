@@ -7,8 +7,7 @@
     "build": "webpack-dev-server",
     "build:dev": "webpack --mode development",
     "build:prod": "webpack --mode production",
-    "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css",
-    "start": "npm run build:dev && nodemon app.js"
+    "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css"
   },
   "author": "Justin Schiller",
   "license": "ISC",
