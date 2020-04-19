@@ -95,5 +95,5 @@ if (process.env.PORT) {
 console.log('Console.log--> PORT is:', port);
 
 app.listen(port, () => {
-   console.log('Node app is running on port', app.get('port'));
+   console.log(`Node app is running on port ${port}`);
 });
