@@ -1,0 +1,1 @@
+web: npm run build:prod && node app.js
