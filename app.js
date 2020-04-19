@@ -79,7 +79,7 @@ app.set('view options', { layout: false });
 //    console.log('Node app is running on port', app.get('port'));
 // });
 
-app.listen(process.env.PORT || 80, () => {
+app.listen(process.env.PORT || 5000, () => {
    console.log('Node app is running on port', app.get('port'));
 });
 
