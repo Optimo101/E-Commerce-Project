@@ -4,10 +4,11 @@
   "description": "E-commerce mock-up project",
   "main": "app.js",
   "scripts": {
-    "build": "webpack-dev-server",
-    "build:dev": "webpack --mode development",
-    "build:prod": "webpack --mode production",
-    "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css"
+      "start": "node app.js",
+      "build": "webpack-dev-server",
+      "build:dev": "webpack --mode development",
+      "build:prod": "webpack --mode production",
+      "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css"
   },
   "author": "Justin Schiller",
   "license": "ISC",
