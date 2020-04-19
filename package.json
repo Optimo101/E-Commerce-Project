@@ -9,7 +9,7 @@
     "build:prod": "webpack --mode production",
     "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css",
     "start": "npm run build:dev && nodemon app.js",
-    "heroku-postbuild": "npm run build:prod && node app.js"
+    "heroku-postbuild": "npm run build:prod && node app.js -p $PORT"
   },
   "author": "Justin Schiller",
   "license": "ISC",
