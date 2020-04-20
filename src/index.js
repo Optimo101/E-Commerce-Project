@@ -505,7 +505,7 @@ const controlHeader = async () => {
       });
 
       // Open/close submenus
-      if (!state.isTouchScreen) {
+      if (!screen.width < 576) {
          submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
          submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
       } else {

@@ -373,7 +373,7 @@ body {
         margin-bottom: 1rem;
         color: black;
         font-size: 2.2rem;
-        color: #EB2F38; } }
+        color: #666666; } }
   .main-menu__header-text {
     font-weight: 500;
     line-height: 1.5rem; }
@@ -1248,6 +1248,9 @@ section {
   @media only screen and (max-width: 40.625em) {
     .promotion {
       max-width: 35rem; } }
+  @media only screen and (max-width: 35.9375em) {
+    .promotion {
+      top: 45%; } }
   .promotion__header-box {
     display: flex;
     flex-direction: column;
