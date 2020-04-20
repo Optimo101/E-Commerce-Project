@@ -1,8 +1,8 @@
 import { elements } from './base';
 
 // ============== MAINMENU FUNCTIONS ==============
-const showDropdown = (element, isTouchScreen) => {
-   // Gets the natural height of dropdown menu element or gets screen height if mobile
+const showDropdown = (element) => {
+   // Gets the natural height of dropdown menu element
    const getMenuHeight = () => {
       element.style.display = 'block'; // Make it visible
       const scrollHeight = element.scrollHeight + 'px'; // Get height for DESKTOP
@@ -13,7 +13,7 @@ const showDropdown = (element, isTouchScreen) => {
 
    let height = getMenuHeight(); // Gets natural height
 
-   if (isTouchScreen && screen.width < 576) {
+   if (screen.width < 576) {
       height = screen.height + 'px'; // Gets the screen height for mobile menu
       document.querySelector('.main-menu__list').style.height = height;
    }
@@ -46,7 +46,7 @@ export const hideDropdown = (element) => {
    }, 350);
 }
 
-export const toggleDropdown = (element, isTouchScreen) => {
+export const toggleDropdown = (element) => {
    // If menu is visible, hide it
    if (element.classList.contains('is-visible')) {
       hideDropdown(element);
@@ -54,7 +54,7 @@ export const toggleDropdown = (element, isTouchScreen) => {
    }
 
    //Otherwise, show it
-   showDropdown(element, isTouchScreen);
+   showDropdown(element);
 }
 
 export const hideOnClickOutside = (event, element) => {
