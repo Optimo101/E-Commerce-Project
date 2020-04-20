@@ -4,7 +4,8 @@
   "description": "E-commerce mock-up project",
   "main": "app.js",
   "scripts": {
-      "start": "npm run build:prod && node app.js",
+      "start": "node app.js",
+      "build": "npm run build:prod",
       
       "pre-deploy-start": "npm run build:dev && nodemon app.js",
       "pre-deploy-build": "webpack-dev-server",
