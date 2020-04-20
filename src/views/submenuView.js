@@ -21,7 +21,7 @@ export const addModClass = (nodeList, prefix) => {
 export const setUpSubmenuEvent = (eventType, method) => {
    if (eventType === 'click') {
       for (const element of elements.headerMainMenuLinks) {
-         element.addEventListener('click', function(event) {
+         element.addEventListener('click', (event) => {
             event.preventDefault();
          });
       }
@@ -57,7 +57,7 @@ export const hideSubMenu = (element) => {
    element.style.height = '0';
    element.style.opacity = '0';
    
-   window.setTimeout(function() {
+   window.setTimeout(() => {
       element.style.display = 'none';
    }, 250);
 }
@@ -106,7 +106,7 @@ export const toggleSubMenu = async (element) => {
       setTimeout(() => {
          element.classList.add('active');
          showSubMenu(element);
-   }, 250);
+      }, 250);
       
    // If submenu is active, then hide it
    } else {
