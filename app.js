@@ -1,11 +1,7 @@
-// ================ NPM PACKAGE REQUIREMENTS =====================
+// =================== NPM PACKAGE REQUIREMENTS ==================
 // ===============================================================
-
 // Parser for .env variables
 require('dotenv').config();
-
-console.log('process.env.PORT output:', process.env.PORT);
-console.log('process.env.NODE_ENV output:', process.env.NODE_ENV);
 
 // Packages/Libraries
 const express = require('express'),
@@ -19,11 +15,11 @@ const express = require('express'),
    queriesLib = require('./lib/queries'),
    db = require('./config/db');
 
-
 // Passport configuration
 const initializePassport = require('./config/passport');
 
-// Route file requirements
+// ===================== ROUTE REQUIREMENTS ======================
+// ===============================================================
 const register = require('./routes/user/register'),
    login = require('./routes/user/login'),
    logout = require('./routes/user/logout'),
@@ -32,9 +28,8 @@ const register = require('./routes/user/register'),
    misc = require('./routes/misc');
 
 
-// ======================= MIDDLEWARE ============================
+// ======================== MIDDLEWARE ===========================
 // ===============================================================
-
 // Express middleware
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
@@ -66,33 +61,17 @@ app.use('/', misc);
 // Express settings
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
-// app.set('port', (process.env.PORT || 3000));
 
 
-// ======================= FUNCTIONS =============================
+// ==================== INITIALIZE PASSPORT ======================
 // ===============================================================
-
-// Configure Passport
 initializePassport(passport, queriesLib.getUserByEmail, queriesLib.getUserByID);
 
 
-// ======================= SERVER ================================
+// ========================== SERVER =============================
 // ===============================================================
-
-// app.listen(app.get('port'), () => {
-//    console.log('Node app is running on port', app.get('port'));
-// });
-
 // If PORT is set, use that; otherwsie use port 80
-// const port = process.env.PORT || 80;
-
-let port;
-if (process.env.PORT) {
-   port = process.env.PORT;
-} else {
-   port = 3000;
-}
-console.log('Console.log--> PORT is:', port);
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
    console.log(`Node app is running on port ${port}`);

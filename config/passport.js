@@ -4,10 +4,8 @@ const LocalStrategy = require('passport-local').Strategy,
 
 // Configure the local strategy for use by Passport (username and password are auto detected from res.body after post request
 function initialize(passport, getUserByEmail, getUserByID) {
-   console.log('This is a test!!');
    
    const authenticateUser = (email, password, done) => {
-      console.log('Passport authentication activated');
       
       getUserByEmail(email, (error, user) => {
          if (error) {
