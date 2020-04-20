@@ -320,7 +320,7 @@ body {
       @media (hover: none) and (max-width: 35.9375em) {
         .main-menu__dropdown::before {
           display: none; } }
-    @media (hover: none) and (max-width: 35.9375em) {
+    @media (max-width: 35.9375em) {
       .main-menu__dropdown {
         position: fixed;
         top: 0;
@@ -328,13 +328,13 @@ body {
         max-width: 50%;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0; } }
-    @media (hover: none) and (max-width: 31.25em) {
+    @media (max-width: 31.25em) {
       .main-menu__dropdown {
         max-width: 60%; } }
-    @media (hover: none) and (max-width: 25em) {
+    @media (max-width: 25em) {
       .main-menu__dropdown {
         max-width: 70%; } }
-    @media (hover: none) and (max-width: 21.875em) {
+    @media (max-width: 21.875em) {
       .main-menu__dropdown {
         max-width: 80%; } }
   .main-menu__dropdown.is-visible {
@@ -344,7 +344,7 @@ body {
     list-style: none;
     padding: 1rem 0;
     height: 100%; }
-    @media (hover: none) and (max-width: 35.9375em) {
+    @media (max-width: 35.9375em) {
       .main-menu__list {
         overflow-y: scroll;
         -ms-overflow-style: none; }
@@ -363,7 +363,7 @@ body {
       display: block; }
   .main-menu__header {
     display: none; }
-    @media (hover: none) and (max-width: 35.9375em) {
+    @media (max-width: 35.9375em) {
       .main-menu__header {
         display: flex;
         align-items: center;
@@ -392,7 +392,7 @@ body {
         transform: rotate(-90deg); }
       .main-menu__item:hover .main-menu__item-icon {
         color: #EB2F38; }
-    @media (hover: none) and (max-width: 35.9375em) {
+    @media (max-width: 35.9375em) {
       .main-menu__item {
         font-size: 1.8rem;
         line-height: 2.2rem; } }
@@ -402,7 +402,7 @@ body {
     width: 100%;
     padding: 1.2rem 1.8rem;
     text-decoration: none; }
-    @media (hover: none) and (max-width: 35.9375em) {
+    @media (max-width: 35.9375em) {
       .main-menu__link {
         padding: 1.6rem 1.8rem; } }
   .main-menu__item-icon {

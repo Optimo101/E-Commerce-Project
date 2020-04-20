@@ -77,7 +77,7 @@
          }
       }
 
-      @media (hover:none) and (max-width: $bp-smd) {
+      @media (max-width: $bp-smd) {
          position: fixed;
          top: 0;
          left: 0;
@@ -86,15 +86,15 @@
          border-bottom-left-radius: 0;
       }
 
-      @media (hover:none) and (max-width: $bp-sm) {
+      @media (max-width: $bp-sm) {
          max-width: 60%;
       }
 
-      @media (hover:none) and (max-width: $bp-xs) {
+      @media (max-width: $bp-xs) {
          max-width: 70%;
       }
 
-      @media (hover:none) and (max-width: $bp-xxs) {
+      @media (max-width: $bp-xxs) {
          max-width: 80%;
       }
    }
@@ -109,7 +109,7 @@
       padding: 1rem 0;
       height: 100%;
 
-      @media (hover:none) and (max-width: $bp-smd) {
+      @media (max-width: $bp-smd) {
          overflow-y: scroll;
          -ms-overflow-style: none;
 
@@ -141,7 +141,7 @@
    &__header {
       display: none;
 
-      @media (hover:none) and (max-width: $bp-smd) {
+      @media (max-width: $bp-smd) {
          display: flex;
          align-items: center;
          justify-content: space-between;
@@ -182,7 +182,7 @@
          }
       }
       
-      @media (hover:none) and (max-width: $bp-smd) {
+      @media (max-width: $bp-smd) {
          font-size: $font-size-lg;
          line-height: 2.2rem;
       }
@@ -195,7 +195,7 @@
       padding: 1.2rem 1.8rem;
       text-decoration: none;
 
-      @media (hover:none) and (max-width: $bp-smd) {
+      @media (max-width: $bp-smd) {
          padding: 1.6rem 1.8rem;
 
       }
