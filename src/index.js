@@ -28,24 +28,13 @@ const state = {};
 // ===========================================================
 // TOUCH SCREEN?
 // ===========================================================
-
-// window.addEventListener('touchstart', function onFirstTouch() {
-//    // add class to body element
-//    document.body.classList.add('user-is-touching');
- 
-//    // set state
-//    state.isTouchScreen = true;
-//    console.log(state.isTouchScreen);
- 
-//    // we only need to know once that a user touched the screen
-//    window.removeEventListener('touchstart', onFirstTouch, false);
-//  }, false);
-
  if (('ontouchstart' in window) || 
       (navigator.maxTouchPoints > 0) || 
       (navigator.msMaxTouchPoints > 0)) {
          state.isTouchScreen = true;
 }
+
+
 
 // ===========================================================
 // PRODUCTS SEARCH CONTROLLER
@@ -419,7 +408,7 @@ const controlHeader = async () => {
       console.log(error);
    }
 
-    // Organize the results to be used for rendering
+    // Organize the results to be rendered
     state.categorySearch.organizeResults();
 
     // Add modifier classes to each main menu item: main-menu__item--1
@@ -523,9 +512,6 @@ const controlHeader = async () => {
          submenuView.setUpSubmenuEvent('click', submenuView.toggleSubMenu);
       }
       
-
-      
-
       // If user clicks the close icon on the header notice section (at very top of header)
       elements.headerNoticeBtn.addEventListener('click', () => {
          hideElement(elements.headerNotice);
@@ -545,7 +531,7 @@ const controlHomePage = () => {
 
 }
 
-  
+
 
 // ===========================================================
 // LOGIN PAGE CONTROLLER
@@ -609,8 +595,8 @@ const init = () => {
    state.cart = new Cart();
    state.cart.readLocalStorage();
 
-   console.log(localStorage);
-   console.log('State', state);
+   console.log('localStorage log:', localStorage);
+   console.log('state log:', state);
 
    const pageLoc = window.location.pathname;
 
