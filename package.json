@@ -4,11 +4,25 @@
   "description": "E-commerce mock-up project",
   "main": "app.js",
   "scripts": {
-      "start": "node app.js"
+      "start": "node app.js",
+      
+      "pre-deploy-start": "npm run build:dev && nodemon app.js",
+      "pre-deploy-build": "webpack-dev-server",
+      "build:dev": "webpack --mode development",
+      "build:prod": "webpack --mode production",
+      "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css"
   },
   "author": "Justin Schiller",
   "license": "ISC",
-
+  "devDependencies": {
+   "@babel/core": "^7.6.4",
+   "@babel/preset-env": "^7.6.3",
+   "babel-loader": "^8.0.6",
+   "clean-webpack-plugin": "^3.0.0",
+   "webpack": "^4.41.1",
+   "webpack-cli": "^3.3.9",
+   "webpack-dev-server": "^3.8.2"
+ },
   "dependencies": {
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
@@ -26,15 +40,7 @@
     "pg": "^7.17.1",
     "request": "^2.88.2",
     "serialize-javascript": "^2.1.2",
-    "simplecrypt": "^0.1.0",
-    
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
-    "babel-loader": "^8.1.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "simplecrypt": "^0.1.0"
   },
   "engines": {
     "node": "10.15.1",
