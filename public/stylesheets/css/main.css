@@ -433,7 +433,7 @@ body {
   overflow: hidden;
   display: none;
   transition: height .30s, opacity .20s; }
-  @media (hover: none) and (max-width: 35.9375em) {
+  @media (max-width: 35.9375em) {
     .submenu {
       left: 0;
       top: 98%;
@@ -449,7 +449,7 @@ body {
     list-style: none;
     padding: 1rem 0;
     color: #7a7a7a; }
-    @media (hover: none) and (max-width: 35.9375em) {
+    @media (max-width: 35.9375em) {
       .submenu__list {
         color: black; } }
   .submenu__item {
@@ -463,7 +463,7 @@ body {
     padding: .5rem 1.8rem;
     width: 100%;
     height: 100%; }
-    @media (hover: none) and (max-width: 35.9375em) {
+    @media (max-width: 35.9375em) {
       .submenu__link {
         padding: 1rem 1.8rem; } }
 
@@ -932,7 +932,7 @@ section {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6); }
-  @media (hover: none) {
+  @media (max-width: 35.9375em) {
     .shadow-overlay {
       position: fixed;
       top: 0;

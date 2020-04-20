@@ -12,7 +12,7 @@
    display: none;
    transition: height .30s, opacity .20s;
 
-   @media (hover:none) and (max-width: $bp-smd) {
+   @media (max-width: $bp-smd) {
       left: 0;
       top: 98%;
       width: 100%;
@@ -30,7 +30,7 @@
       padding: 1rem 0;
       color: $color-darkgrey;
       
-      @media (hover:none) and (max-width: $bp-smd) {
+      @media (max-width: $bp-smd) {
          color: black;
       }
    }
@@ -51,7 +51,7 @@
       width: 100%;
       height: 100%;
 
-      @media (hover:none) and (max-width: $bp-smd) {
+      @media (max-width: $bp-smd) {
          padding: 1rem 1.8rem;
       }
    }

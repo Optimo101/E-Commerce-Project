@@ -28,7 +28,7 @@ section {
    width: 100%;
    background-color: rgba(0, 0, 0, 0.6);
 
-   @media (hover:none) {
+   @media (max-width: $bp-smd) {
       position: fixed;
       top: 0;
       left: 0;   
