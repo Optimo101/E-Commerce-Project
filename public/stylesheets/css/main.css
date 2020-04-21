@@ -1314,7 +1314,7 @@ section {
   justify-content: center; }
   @media only screen and (max-width: 470px) {
     .results-section__main-grid {
-      grid-template-columns: repeat(auto-fit, 38rem); } }
+      grid-template-columns: repeat(auto-fit, 45rem); } }
 
 .results-section__footer {
   display: flex;
