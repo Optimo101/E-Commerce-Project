@@ -1,25 +1,5 @@
 .results-section {
-   // display: grid;
-   // grid-template-rows: 10rem auto min-content;
-   // grid-template-columns: [sidebar-start] 20rem [sidebar-end main-start] 1fr [main-end];
-   // gap: 1.5rem;
-   // padding-top: 2rem;
-
-   // &__sidebar {
-   //    grid-column: sidebar-start / sidebar-end;
-   //    grid-row: 1 / -1;
-   //    width: 100%;
-   //    border: 1px solid lightgrey;
-   // }
-
-   // &__header {
-   //    grid-column: main-start / main-end;
-   //    width: 100%;
-   //    border: 1px solid lightgrey;
-   // }
-
    &__main {
-      // grid-column: main-start / main-end;
     
    }
 
@@ -33,9 +13,7 @@
       justify-content: center;
 
       @media only screen and (max-width: 470px) {
-         grid-template-columns: repeat(auto-fit, 35rem);
-
-
+         grid-template-columns: repeat(auto-fit, 38rem);
       }
    }
 
