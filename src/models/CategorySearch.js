@@ -8,7 +8,7 @@ export default class SubCats {
 
    async getResults() {
       const baseURL = 'https://api.bestbuy.com/v1/categories',
-            apiKey = 'MORTkmhIyQS3N3Pahuta4gSd',
+            apiKey = process.env.API_KEY,
             showOptions = '&show=name,id',
             pageSize = '&pageSize=100',
             responseFormat = '&format=json';

@@ -39,7 +39,7 @@ export default class Search {
       const baseURL = 'https://api.bestbuy.com/v1/',
             apiType = 'products',
             attribute = 'customerReviewAverage>1',
-            apiKey = 'MORTkmhIyQS3N3Pahuta4gSd',
+            apiKey = process.env.API_KEY,
             sortOptions = 'sort=bestSellingRank.asc',
             showOptions = 'show=name,sku,description,details.name,details.value,features.feature,includedItemList.includedItem,longDescription,manufacturer,modelNumber,regularPrice,shortDescription,customerReviewAverage,customerReviewCount,image,accessoriesImage,alternateViewsImage,angleImage,backViewImage,largeFrontImage,leftViewImage,rightViewImage,topViewImage',
             pageSize = 'pageSize=60',

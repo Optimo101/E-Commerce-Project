@@ -163,10 +163,13 @@ const controlLikes = (event) => {
 
    // Determine which page user is currently on
    currentPage = window.location.pathname;
+
    // Is the user on the Likes page?
    currentPage === '/results/likes' ? likesPage = true : likesPage = false;
+
    // If user is on Likes page, set array source to Likes model; otherwise, set source to productSearch model
    likesPage ? source = state.likes.likes[currentIndex] : source = state.productSearch.results[currentIndex];
+   
    // Is item currently liked?
    liked = state.likes.isLiked(currentSku, likesPage);
 
