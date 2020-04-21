@@ -553,8 +553,7 @@ body {
   .product-thumb__bottom-content {
     display: flex;
     align-items: center;
-    margin-top: auto;
-    padding: 0 1.5rem; }
+    margin-top: auto; }
   .product-thumb__price {
     font-weight: 500;
     font-size: 1.8rem;
@@ -1201,7 +1200,6 @@ section {
         text-align: center; } }
   .footer-subscribe__form {
     display: flex;
-    justify-content: center;
     width: 100%;
     border: 2px solid #b6b6b6;
     border-radius: 4rem; }
