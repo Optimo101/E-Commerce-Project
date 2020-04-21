@@ -1201,6 +1201,7 @@ section {
         text-align: center; } }
   .footer-subscribe__form {
     display: flex;
+    justify-content: center;
     width: 100%;
     border: 2px solid #b6b6b6;
     border-radius: 4rem; }
@@ -1315,7 +1316,7 @@ section {
   justify-content: center; }
   @media only screen and (max-width: 470px) {
     .results-section__main-grid {
-      grid-template-columns: repeat(auto-fit, 35rem); } }
+      grid-template-columns: repeat(auto-fit, 38rem); } }
 
 .results-section__footer {
   display: flex;
