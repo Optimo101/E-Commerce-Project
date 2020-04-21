@@ -12,8 +12,10 @@ const showDropdown = (element) => {
    }
 
    let height = getMenuHeight(); // Gets natural height
+   console.log(element);
+   console.log(elements.accountMenuBtn)
 
-   if (screen.width < 576) {
+   if (screen.width < 576 && element != elements.accountMenuDropdown) {
       height = screen.height + 'px'; // Gets the screen height for mobile menu
       document.querySelector('.main-menu__list').style.height = height;
    }
