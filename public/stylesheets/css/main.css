@@ -392,7 +392,8 @@ body {
     text-transform: none;
     width: 100%;
     font-size: 1.6rem;
-    font-weight: 500; }
+    font-weight: 500;
+    cursor: pointer; }
     .main-menu__item:hover {
       color: black; }
       .main-menu__item:hover .main-menu__item-arrow {
