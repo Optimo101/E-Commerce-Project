@@ -39,13 +39,13 @@ const state = {};
 // ===========================================================
 // PRODUCTS SEARCH CONTROLLER
 // ===========================================================
-const controlProductSearch = async (query) => {
+const controlProductSearch = async (query, apiKey) => {
    // Create new search object and add to state
    state.productSearch = new ProductSearch(query);
 
    try {
       // Search for products
-      await state.productSearch.getResults();
+      await state.productSearch.getResults(apiKey);
 
    } catch (error) {
       alert('Something went wrong with the product search');
@@ -253,7 +253,7 @@ const controlLikesPage = async () => {
 // ===========================================================
 // RESULTS PAGE CONTROLLER
 // ===========================================================
-const controlResultsPage = async () => {
+const controlResultsPage = async (apiKey) => {
    console.log('Beginning controlResultsPage()...');
 
    // Get search query from url parameter
@@ -264,7 +264,7 @@ const controlResultsPage = async () => {
          // Prepare UI for results
 
          // Perform search and prepare results
-         await controlProductSearch(urlQuery);
+         await controlProductSearch(urlQuery, apiKey);
 
          // Determine if any products are 'liked' by user
          state.productSearch.results.forEach((element) => {
@@ -316,7 +316,7 @@ const controlResultsPage = async () => {
 // ===========================================================
 // PRODUCT PAGE CONTROLLER
 // ===========================================================
-const controlProductPage = async () => {
+const controlProductPage = async (apiKey) => {
    console.log('Beginning controlProductPage()...')
 
    // Get search query from url parameter
@@ -327,7 +327,7 @@ const controlProductPage = async () => {
          // Prepare UI for results
 
          // Perform Search and prepare results
-         await controlProductSearch(urlQuery);
+         await controlProductSearch(urlQuery, apiKey);
 
          // Render results on UI
          productView.renderProduct(state.productSearch.results[0]);
@@ -383,13 +383,14 @@ const controlProductPage = async () => {
 // ===========================================================
 // CATEGORIES SEARCH CONTROLLER
 // ===========================================================
-const controlCategorySearch = async () => {
+const controlCategorySearch = async (apiKey) => {
+
    // New category search object and add to state
    state.categorySearch = new CategorySearch();
 
    try {
       // Search categories
-      await state.categorySearch.getResults();
+      await state.categorySearch.getResults(apiKey);
 
    } catch (error) {
       alert('Something went wrong with the categories search');
@@ -401,10 +402,10 @@ const controlCategorySearch = async () => {
 // ===========================================================
 // HEADER CONTROLLER
 // ===========================================================
-const controlHeader = async () => {
+const controlHeader = async (apiKey) => {
    try {
       // Perform categories search
-      await controlCategorySearch();
+      await controlCategorySearch(apiKey);
 
    } catch (error) {
       alert('Something went wrong when attempting to render subcategories.');
@@ -603,10 +604,24 @@ const init = () => {
 
    const pageLoc = window.location.pathname;
 
-   controlHeader();
 
-   if (pageLoc === '/product') {controlProductPage()}
-   if (pageLoc === '/results') {controlResultsPage()}
+   async function getApiKey() {
+      try {
+         let res = await axios.get('/apikey');
+         return res
+      } catch (error) {
+         console.log(error);
+      }
+   }
+
+   getApiKey().then((response) => {
+      const apiKey = response.data;
+
+      controlHeader(apiKey);
+      if (pageLoc === '/product') {controlProductPage(apiKey)}
+      if (pageLoc === '/results') {controlResultsPage(apiKey)}
+   });
+
    if (pageLoc === '/cart') {controlCartPage()}
    if (pageLoc === '/user/login') {controlLoginPage()}
    if (pageLoc === '/results/likes') {controlLikesPage()}

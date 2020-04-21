@@ -17,6 +17,11 @@ router.get('/cart', (req, res) => {
    res.render('cart', {user: req.user});
 });
 
+// API KEY
+router.get('/apikey', (req, res) => {
+   res.send(process.env.API_KEY);
+})
+
 // CATCH ALL
 router.get('/*', (req, res) => {
    res.send('Unable to find the requested page.')
