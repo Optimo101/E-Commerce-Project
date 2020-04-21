@@ -45,6 +45,8 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
+   padding-left: 2.5rem;
+   padding-right: 2.5rem;
 
    @media only screen and (max-width: $bp-smd) {
       flex-wrap: wrap;
@@ -93,7 +95,6 @@
    @media only screen and (max-width: $bp-smd) {
       margin-left: 0;
       margin-bottom: 3rem;
-      margin: 0 2rem 3rem 2rem;
    }
 
 
