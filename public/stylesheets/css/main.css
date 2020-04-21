@@ -838,7 +838,9 @@ body {
 .top-header {
   display: flex;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem; }
   @media only screen and (max-width: 35.9375em) {
     .top-header {
       flex-wrap: wrap;
@@ -873,8 +875,7 @@ body {
   @media only screen and (max-width: 35.9375em) {
     .search-form {
       margin-left: 0;
-      margin-bottom: 3rem;
-      margin: 0 2rem 3rem 2rem; } }
+      margin-bottom: 3rem; } }
   .search-form__input {
     flex-grow: 1;
     font-size: inherit;
@@ -1200,7 +1201,6 @@ section {
         text-align: center; } }
   .footer-subscribe__form {
     display: flex;
-    align-items: center;
     width: 100%;
     border: 2px solid #b6b6b6;
     border-radius: 4rem; }
