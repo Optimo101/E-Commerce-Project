@@ -35,11 +35,11 @@ export default class Search {
       return formattedQuery;
    }
 
-   async search(totalPages, keywords, catID) {
+   async search(totalPages, keywords, catID, key) {
       const baseURL = 'https://api.bestbuy.com/v1/',
             apiType = 'products',
             attribute = 'customerReviewAverage>1',
-            apiKey = process.env.API_KEY,
+            apiKey = key,
             sortOptions = 'sort=bestSellingRank.asc',
             showOptions = 'show=name,sku,description,details.name,details.value,features.feature,includedItemList.includedItem,longDescription,manufacturer,modelNumber,regularPrice,shortDescription,customerReviewAverage,customerReviewCount,image,accessoriesImage,alternateViewsImage,angleImage,backViewImage,largeFrontImage,leftViewImage,rightViewImage,topViewImage',
             pageSize = 'pageSize=60',
@@ -62,7 +62,7 @@ export default class Search {
       }
    }
 
-   async getResults() {
+   async getResults(key) {
       const searchQuery = this.formatQuery();
       let   keywords,
             catID,
@@ -89,7 +89,7 @@ export default class Search {
       }
 
       try {
-         await this.search(totalPages, keywords, catID);
+         await this.search(totalPages, keywords, catID, key);
       } catch (error) {
          console.log(error);
       }
