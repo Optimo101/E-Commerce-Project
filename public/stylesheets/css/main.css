@@ -36,6 +36,12 @@ a {
   text-decoration: none;
   color: inherit; }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s; }
+
 .animate--move-in-left {
   animation: moveInLeft 1s ease-out; }
 
@@ -879,7 +885,7 @@ body {
     border-radius: 4rem;
     border: none;
     padding: 1rem 1.5rem;
-    background-color: #FFF; }
+    background-color: #FFF !important; }
   .search-form__btn:hover {
     background-color: #EB2F38; }
   .search-form__icon {
