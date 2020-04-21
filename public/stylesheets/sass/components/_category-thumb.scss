@@ -134,6 +134,7 @@
       }
 
       &--back {
+         -webkit-transform: rotate(180deg);
          transform: rotateY(180deg);
          color: $color-white;
          text-align: center;
@@ -141,10 +142,12 @@
    }
 
    &:hover &__side--front {
+      -webkit-transform: rotate(-180deg);
       transform: rotateY(-180deg);
    }
 
    &:hover &__side--back {
+      -webkit-transform: rotate(0);
       transform: rotateY(0);
    }
 
