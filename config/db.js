@@ -2,8 +2,9 @@ const { Pool } = require('pg');
 
 let pool;
 
+// Swap environment variables depending upon Node env. (For quick deployment/editing)
 if (process.env.NODE_ENV === 'production') {
-   pool = new Pool({
+   return pool = new Pool({
       connectionString: process.env.DATABASE_URL,
       ssl: true
    });
@@ -19,9 +20,9 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
    query: (text, params, callback) => {
-      return pool.query(text, params, callback)
+      return pool.query(text, params, callback);
    },
    getPool: () => {
-      return pool
+      return pool;
    }
 }

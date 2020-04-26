@@ -24,7 +24,6 @@ export const elements = {
    accountLogoutLink: document.querySelector('.account-menu__link--logout'),
 
    // LOGIN PAGE ELEMENTS
-   // accountLoginForm: document.querySelector('.sign-in__form'),
    accountLoginUsername: document.querySelector('.login-username'),
    accountLoginPassword: document.querySelector('.login-password'),
    accountLoginBtn: document.querySelector('.account-login-btn'),
@@ -66,21 +65,22 @@ export const elements = {
    cartSummaryTotal: document.querySelector('.cart-summary__total-number')
 }
 
-// ============== SIMPLE HIDE ELEMENT FUNCTION ==============
-
+// Dollar format function
 export const dollarFormat = (num) => {
    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 };
 
+// Number format function (with commas)
 export const numberFormat = (num) => {
    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 };
 
-
+// Hide an element using height transition (used for header-notice)
 export const hideElement = (element) => {
      element.style.height = '0';
 }
 
+// Update item quantity on Product page and Cart Page
 export const updateItemQuant = (direction, sku, callback) => {
    const selectorString = `#item-${sku} .quantity-calc__input`;
    const inputElement = document.querySelector(selectorString) ? document.querySelector(selectorString) : elements.productQuantity;
@@ -97,6 +97,7 @@ export const updateItemQuant = (direction, sku, callback) => {
    }
 }
 
+// 'Add to cart' animation used on Results, Product, Likes pages.
 export const cartBtnAnimation = (buttonElement, existingItem) => {
    const iconElement = buttonElement.children[0];
    const textElement = buttonElement.children[1];
@@ -107,7 +108,6 @@ export const cartBtnAnimation = (buttonElement, existingItem) => {
       textElement.innerHTML = 'Max Limit';
       iconElement.classList.remove('fa-shopping-cart');
       iconElement.classList.add('fa-exclamation');
-
    } else {
       textElement.innerHTML = '';
       textElement.innerHTML = 'Adding. . .';
@@ -123,6 +123,5 @@ export const cartBtnAnimation = (buttonElement, existingItem) => {
       iconElement.classList.remove('fa-redo-alt');
       iconElement.classList.add('fa-shopping-cart');
    }
-
    setTimeout(stopCartBtnAnimation, 500);
 }

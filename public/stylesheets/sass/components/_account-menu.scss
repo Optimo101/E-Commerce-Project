@@ -1,5 +1,4 @@
 .account-menu {
-
    &__dropdown {
       position: absolute;
       top: 5rem;
@@ -8,7 +7,6 @@
       width: 100%;
       z-index: 100;
       background-color: $color-white;
-
       transition: height .25s ease-in-out;
       overflow: hidden;
       height: 0;

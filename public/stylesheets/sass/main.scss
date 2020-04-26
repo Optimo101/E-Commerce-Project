@@ -1,31 +1,26 @@
-@import 'abstracts/variables';
 @import 'abstracts/mixins';
-
-@import 'base/base';
+@import 'abstracts/variables';
 @import 'base/animations';
+@import 'base/base';
 @import 'base/typography';
 @import 'base/utilities';
-
+@import 'components/account-menu';
 @import 'components/button';
-@import 'components/prom-primary';
-@import 'components/prom-secondary';
-@import 'components/service-feature';
+@import 'components/category-thumb';
+@import 'components/form';
 @import 'components/main-menu';
-@import 'components/submenu';
 @import 'components/product-thumb';
 @import 'components/quantity-calc';
-@import 'components/account-menu';
-@import 'components/form';
-@import 'components/category-thumb';
-
+@import 'components/service-feature';
+@import 'components/submenu';
+@import 'layout/footer';
 @import 'layout/header';
 @import 'layout/layout';
 @import 'layout/naviation';
-@import 'layout/footer';
-
-@import 'pages/home';
-@import 'pages/results';
-@import 'pages/product';
 @import 'pages/cart';
+@import 'pages/home';
 @import 'pages/login';
+@import 'pages/product';
+@import 'pages/results';
+
 

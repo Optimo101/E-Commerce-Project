@@ -7,7 +7,6 @@ export default class Cart {
    }
 
    addItem(sku, image, name, price, quantity) {      
-      
       if (!this.inCart(sku)) {
          const itemTotal = Number((price * quantity).toFixed(2));
          this.items[sku] = { sku, image, name, price, quantity, itemTotal};
@@ -36,15 +35,13 @@ export default class Cart {
       this.items[sku].itemTotal = parseFloat((this.items[sku].quantity * this.items[sku].price).toFixed(2));
    }
 
-
    inCart(sku) {
       return this.items.hasOwnProperty(sku) ? true : false;
    }
 
    getNumItems() {
-      let numItems = 0;
-      
       const objProperties = (Object.getOwnPropertyNames(this.items));
+      let   numItems = 0;
 
       for (const property of objProperties) {
          numItems += this.items[property].quantity;

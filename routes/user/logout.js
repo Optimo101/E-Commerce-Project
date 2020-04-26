@@ -3,7 +3,7 @@ const express = require('express'),
       db = require('../../config/db'),
       authLib = require('../../lib/authentication');
 
-// LOGOUT (POST)
+// LOGOUT ROUTE (POST)
 router.post('/', authLib.checkAuth, (req, res) => {
    const cart = JSON.stringify(req.body.cart);
    const likes = JSON.stringify(req.body.likes);

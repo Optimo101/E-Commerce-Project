@@ -1,6 +1,6 @@
 // =================== NPM PACKAGE REQUIREMENTS ==================
 // ===============================================================
-// Parser for .env variables
+// Parser for environment variables
 require('dotenv').config();
 
 // Packages/Libraries
@@ -18,7 +18,8 @@ const express = require('express'),
 // Passport configuration
 const initializePassport = require('./config/passport');
 
-// ===================== ROUTE REQUIREMENTS ======================
+
+// ======================= ROUTE IMPORTS =========================
 // ===============================================================
 const register = require('./routes/user/register'),
    login = require('./routes/user/login'),
@@ -28,9 +29,8 @@ const register = require('./routes/user/register'),
    misc = require('./routes/misc');
 
 
-// ======================== MIDDLEWARE ===========================
+// ========================== MIDDLEWARE =========================
 // ===============================================================
-// Express middleware
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
@@ -63,14 +63,14 @@ app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
 
 
-// ==================== INITIALIZE PASSPORT ======================
+// ===================== INITIALIZE PASSPORT =====================
 // ===============================================================
 initializePassport(passport, queriesLib.getUserByEmail, queriesLib.getUserByID);
 
 
 // ========================== SERVER =============================
 // ===============================================================
-// If PORT is set, use that; otherwsie use port 80
+// If PORT is set (deployment); otherwise, use port 3000 (localhost)
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

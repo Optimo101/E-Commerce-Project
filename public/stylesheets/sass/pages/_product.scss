@@ -41,7 +41,6 @@
       border-radius: 1rem;
       background-color: white;
       margin-bottom: 1rem;
-
    }
 
    &__img-link {
@@ -103,7 +102,6 @@
          width: 100%;
          max-width: 90rem;
       }
-
    }
 
    &__nav-tabs {
@@ -158,7 +156,6 @@
             height: 0;
             margin-bottom: 5px;
          }
-         
       }
    }
 
@@ -182,8 +179,6 @@
       @media only screen and (max-width: 475px) {
          font-size: $font-size-xl;
       }
-
-     
    }
 
    &__nav-content-main {
@@ -278,19 +273,10 @@
       max-width: 20rem;
    }
 
-   &__specifications-values {
-   }
-
    &__specifications-item {   
       height: 4rem;
       line-height: 1.1;   
       margin-bottom: 1.8rem;
-   }
-
-   &__specifications-title {
-   }
-
-   &__specifications-text {
    }
 
 // =====================================
@@ -348,7 +334,6 @@
       @media only screen and (max-width: 475px) {
          flex-basis: 60%;
       }
-     
    }
 
    &__cart-btn {

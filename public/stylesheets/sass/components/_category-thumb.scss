@@ -1,8 +1,6 @@
-
 .category-thumb {
    width: 16rem;
    height: 16rem;
-
    -moz-perspective: 150rem;
    perspective: 150rem;
    position: relative;
@@ -119,12 +117,9 @@
       justify-content: center;
       align-items: center;
 
-      // border-width: 2px;
-      // border-style: solid;
       border-radius: 100px;
       box-shadow: 0rem 1rem 2rem rgba(black, .3);
       padding: 2.2rem;
-
       font-size: $font-size-xl;
 
       transition: .8s ease;
@@ -156,5 +151,4 @@
       max-height: 100%;
       max-width: 100%;
    }
-
 }

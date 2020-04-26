@@ -1,5 +1,3 @@
-.site-header {}
-
 .header-notice {
    display: flex;
    justify-content: center;
@@ -33,12 +31,7 @@
 .main-header {
    padding-top: 2rem;
    background-color: $color-lightergrey;
-   // background-image: url('../../img/white_brick_wall_dark.png');
-
    background: linear-gradient(to left, #e0e0e0, #ffffff);
-   
-   //#ECE9E6
-
 }
 
 .top-header {
@@ -74,8 +67,6 @@
    &__img {
       height: 95%;
       object-fit: contain;
-
-
    }
 }
 
@@ -97,7 +88,6 @@
       margin-left: 0;
       margin-bottom: 3rem;
    }
-
 
    &__input {
       flex-grow: 1;
@@ -148,7 +138,5 @@
       font-weight: 500;
       color: $color-primary;
    }
-
-   &__number {}
 }
 

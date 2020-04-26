@@ -1,6 +1,6 @@
 import { elements } from './base';
 
-// ADD MODIFIER CLASS TO DOM ELEMENTS
+// Add 'modifier' class to DOM elements
 export const addModClass = (nodeList, prefix) => {
    const elementList = nodeList;
 
@@ -16,8 +16,7 @@ export const addModClass = (nodeList, prefix) => {
    }
 }
 
-
-// ADD EVENT LISTENERS FOR OPEN/CLOSING SUBMENUS
+// Add event handlers for open/close submenus
 export const setUpSubmenuEvent = (eventType, method) => {
    if (eventType === 'click') {
       for (const element of elements.headerMainMenuLinks) {
@@ -38,8 +37,8 @@ export const setUpSubmenuEvent = (eventType, method) => {
    }
 }
 
-
-// SUBMENU FUNCTIONS
+// Submenu functions
+// =============================================================
 export const showSubMenu = (element) => {
    // Gets the natural height of an element
    const getHeight = () => {
@@ -124,10 +123,7 @@ export const toggleSubMenu = async (element) => {
    }
 }
 
-
-
-
-// RENDER SUBMENU CONTENT
+// Create a submenu
 const createSubmenu = (mainCatNum) => {
    const markup = `
       <div class="submenu submenu--${mainCatNum}">
@@ -138,6 +134,7 @@ const createSubmenu = (mainCatNum) => {
    mainMenuElement.insertAdjacentHTML('beforeend', markup);
 }
 
+// Create submenu's content
 const createSubmenuContent = (subCatsObj, mainCatNum, totalSubCats) => {
    let markup = `
       <ul class="submenu__list">
@@ -161,28 +158,24 @@ const createSubmenuContent = (subCatsObj, mainCatNum, totalSubCats) => {
    subMenuElement.insertAdjacentHTML('beforeend', markup);
 }
 
-
-// RENDER SUBMENUS
+// Render all submenus
 export const renderSubMenus = (arrays) => {
    
    // For each subcategory list (array)...
    arrays.forEach(function(array, index) {
 
-      // Create an object and...
+      // Create an object
       let subCategoriesObj = {};
-      // ...create object properties for each subcategory object in the array...
+
+      // Create object properties for each subcategory object in the array...
       array.forEach(function(element, index) {
          subCategoriesObj[`${index + 1}`] = element;
       });
 
-      // ...then create submenu markup for main menu items using index + 1 to match id of main menu item
+      // Then create submenu markup for main menu items using index + 1 to match id of main menu item...
       createSubmenu(index + 1);
 
       // Then fill in each submenu with the subcategory items
       createSubmenuContent(subCategoriesObj, index + 1, array.length);
    });
 }
-
-
-
-
