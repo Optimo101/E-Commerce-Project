@@ -4,12 +4,12 @@ const express = require('express'),
       authLib = require('../../lib/authentication');
 
 
-// LOGIN (GET)
+// LOGIN ROUTE (GET)
 router.get('/', authLib.checkNotAuth, (req, res) => {
    res.render('login');
 });
 
-// LOGIN (POST)
+// LOGIN ROUTE (POST)
 router.post('/', authLib.checkNotAuth, (req, res, next) => {
    passport.authenticate('local', function(err, user, info) {
       if (err) { 

@@ -12,10 +12,13 @@ export default class SubCats {
             showOptions = '&show=name,id',
             pageSize = '&pageSize=100',
             responseFormat = '&format=json';
+      let   totalPages = 1;
 
-      let totalPages = 1;
+
 
       for (let i = 0; i < totalPages; i++) {
+         console.log('API Category Request:', `${baseURL}(id=abcat*)?apiKey=${apiKey}${showOptions}${pageSize}&page=${i + 1}${responseFormat}`);
+
          try {
             const response = await axios.get(`${baseURL}(id=abcat*)?apiKey=${apiKey}${showOptions}${pageSize}&page=${i + 1}${responseFormat}`);
 
@@ -48,10 +51,14 @@ export default class SubCats {
             }
          });
 
-         // first category from results (Gift Ideas) was only item that did not follow number pattern used to filter above -- manually removing
+
+         // Manual and one-off removal of result items
+         // ===========================================================
+
+         // First category from results (Gift Ideas) was only item that did not follow number pattern used to filter above -- manually removing
          resultsArray.splice(0, 1); 
 
-         // unable to remove id: '0700000' (Video Games) using above method -- manually removing
+         // Unable to remove id: '0700000' (Video Games) using above method -- manually removing
          resultsArray.splice(33, 1);
 
          // Removing subcategory TV & Internet Service Providers due to no search results found under this category

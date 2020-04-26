@@ -79,11 +79,6 @@ const renderProductItem = (product) => {
    elements.resultsMainGrid.insertAdjacentHTML('beforeend', markup);
 }
 
-// Render item count at bottom of Results page
-// const renderItemCount = (itemStart, itemEnd, itemTotal) => {
-//    elements.resultsCount.innerHTML = `${itemStart} - ${itemEnd} of ${itemTotal} total items`
-// }
-
 const createButton = (page, type) =>  `
    <button class="btn btn--small btn--black results-section__page-btn results-section__page-btn--${type}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
          <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
@@ -94,8 +89,8 @@ const createButton = (page, type) =>  `
 // Render 'page' buttons at bottom of Results page
 const renderButtons = (page, numResults, resPerPage) => {
    const pages = Math.ceil(numResults / resPerPage); // 48 results / 20 = 2.4 rounded up to 3 pages
+   let   button;
 
-   let button;
    if (page === 1 && pages > 1) {
       // Only display next page button
       button = createButton(page, 'next');
@@ -117,16 +112,10 @@ const renderButtons = (page, numResults, resPerPage) => {
 
 // Render results of product search on Results page
 export const renderResults = (results, page = 1, resPerPage = 20) => {
-   // Render results of current page
    const start = (page - 1) * resPerPage;
    const end = page * resPerPage;
 
    results.slice(start, end).forEach(renderProductItem);
-
-   // Render item count of current page
-   // const itemStart = start + 1;
-   // const itemEnd = end;
-   // renderItemCount(itemStart, itemEnd, results.length);
 
    // Render page buttons of current page
    if (results.length >= resPerPage) {

@@ -6,12 +6,12 @@ const express = require('express'),
       authLib = require('../../lib/authentication'),
       queriesLib = require('../../lib/queries');
 
-// ACCOUNT (GET)
+// ACCOUNT ROUTE (GET)
 router.get('/:id', authLib.checkAuth, (req, res) => {
    res.render('account', {user: req.user});
 });
 
-// ACCOUNT (PUT)
+// ACCOUNT ROUTE (PUT)
 router.put('/:id', authLib.checkAuth, (req, res) => {
    const { password, newPassword, confirmPassword } = req.body;
 

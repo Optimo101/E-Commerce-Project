@@ -30,7 +30,6 @@ const renderCartBtnId = (sku) => {
    elements.productCartBtn.id = `0-${sku}`;
 }
 
-
 const renderImgs = (product) => {
    const imgProperties = [
       product.largeFrontImage,
@@ -175,13 +174,11 @@ const renderSpecsItems = (specsArr) => {
    ulList2 += `</ul>`;
 
    const htmlArr = [ulList1, ulList2];
-
    return htmlArr;
 }
 
 
 const renderSpecsContent = (specsArr) => {
-   
    const htmlListsArr = renderSpecsItems(specsArr);
    
    const html = `
@@ -206,7 +203,6 @@ const renderPrice = (price) => {
 }
 
 const renderReview = (rating, revCount) => {
-   
    const int = Math.floor(rating);
    const dec = (rating * 10 - Math.floor(rating) * 10) / 10;
    const perc = dec * 100;
@@ -226,6 +222,7 @@ const renderReview = (rating, revCount) => {
 }
 
 export const renderProduct = (product) => {
+   // Neccessary due to HTML rendering issues with some product titles containing double quotes (i.e. 55" Flat screen TV)
    product.name = product.name.replace(/"/g, '&quot;');
    
    renderTopInfo(product.name, product.manufacturer, product.modelNumber, product.sku);

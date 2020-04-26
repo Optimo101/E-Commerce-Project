@@ -1,34 +1,33 @@
 import { elements } from './base';
 
-// ============== MAINMENU FUNCTIONS ==============
 const showDropdown = (element) => {
-   // Gets the natural height of dropdown menu element
-   const getMenuHeight = () => {
-      element.style.display = 'block'; // Make it visible
-      const scrollHeight = element.scrollHeight + 'px'; // Get height for DESKTOP
-
-      element.style.display = '';
-      return scrollHeight;
-   }
-
-   let height = getMenuHeight(); // Gets natural height
-   console.log(element);
-   console.log(elements.accountMenuBtn)
+   let height;
 
    if (screen.width < 576 && element != elements.accountMenuDropdown) {
       height = screen.height + 'px'; // Gets the screen height for mobile menu
       document.querySelector('.main-menu__list').style.height = height;
+   } else {
+      height = getMenuHeight(element); // Gets natural height of dropdown menu
    }
    
    element.style.height = height; // Update the height
-   element.classList.add('is-visible'); // Make menu visible
-   elements.shadowOverlay.style.display = 'block'; // Show background overlay
+   element.classList.add('is-visible'); // Make dropdown menu visible
+   elements.shadowOverlay.style.display = 'block'; // Show background shadow overlay
 
    // Once transition is complete, remove the inline max-height so content can scale responsively.
 	window.setTimeout(() => {
       element.style.height = '';
       element.style.overflow = 'visible'; // Show overflow for submenus
    }, 350);
+}
+
+// Gets the natural height of dropdown menu element
+const getMenuHeight = (element) => {
+   element.style.display = 'block'; // Make it visible
+   const scrollHeight = element.scrollHeight + 'px'; // Get height for DESKTOP
+
+   element.style.display = '';
+   return scrollHeight;
 }
 
 export const hideDropdown = (element) => {
@@ -55,10 +54,11 @@ export const toggleDropdown = (element) => {
       return;
    }
 
-   //Otherwise, show it
+   // Otherwise, show it
    showDropdown(element);
 }
 
+// Shadow overlay background when user clicks outside of menu dropdown area
 export const hideOnClickOutside = (event, element) => {
    if (event.target.closest('.main-menu__btn') === null && 
       event.target.closest('.main-menu__dropdown') === null &&

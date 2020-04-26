@@ -13,8 +13,6 @@ export default class Search {
       
       // i.e. query is "?keyword-search=red+dead+redemption"
       if (this.query.includes(this.keywordSearchKey)) {
-         console.log(`You attempted a keyword search with query: ${this.query}`)
-
          const queryArray = this.query.trim().slice(8).split('+');
          const addToString = "search=\'";
    
@@ -36,6 +34,7 @@ export default class Search {
    }
 
    async search(totalPages, keywords, catID, key) {
+      console.log(key);
       const baseURL = 'https://api.bestbuy.com/v1/',
             apiType = 'products',
             attribute = 'customerReviewAverage>1',
@@ -46,7 +45,7 @@ export default class Search {
             active = 'active=true',
             responseFormat = 'format=json';
 
-      console.log('API Request:', `${baseURL}${apiType}(${keywords}${catID}&${attribute})?apiKey=${apiKey}&${sortOptions}&${showOptions}&${pageSize}&page=1&${active}&${responseFormat}`);
+      console.log('API Product Request:', `${baseURL}${apiType}(${keywords}${catID}&${attribute})?apiKey=${apiKey}&${sortOptions}&${showOptions}&${pageSize}&page=1&${active}&${responseFormat}`);
 
       for (let i = 0; i < totalPages; i++) {
          try {
@@ -68,11 +67,11 @@ export default class Search {
             catID,
             totalPages = 1;
 
-      // Future feature - This would allow a search within a category
+      // UNIMPLEMENTED FEATURE - This would allow a search within a category
       if (searchQuery.includes(this.keywordSearchKey) && searchQuery.includes(this.catSearchKey)) {
          console.log('Feature has not been implemeneted...');
          keywords = `(${searchQuery})`;
-         catID = `&(${searchQuery})`; // This is where the category ID would go
+         catID = `&(${searchQuery})`; // Category ID would go here
          
       // Search by keyword
       } else if (searchQuery.includes(this.keywordSearchKey)) {

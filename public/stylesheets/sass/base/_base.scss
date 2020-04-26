@@ -1,13 +1,13 @@
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+   margin: 0;
+   padding: 0;
+   box-sizing: inherit;
 }
 
 *:focus {
-    outline: none;
+   outline: none;
 }
 
 html {
@@ -28,16 +28,18 @@ html {
 
 body {
    position: relative;
-    box-sizing: border-box;
-    margin: auto;
-    height: 100%;
+   box-sizing: border-box;
+   margin: auto;
+   height: 100%;
 }
 
+// Remove browser styles for a elements
 a {
-    text-decoration: none;
-    color: inherit;
+   text-decoration: none;
+   color: inherit;
 }
 
+// Removes browser background color when user has focused input element with auto-fill option
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,

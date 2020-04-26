@@ -2,7 +2,7 @@
    $color-primary: #EB2F38;
    $color-secondary: rgb(235, 80, 80);
 
-   $color-black: rgb(102, 102, 102); // rgb(92, 92, 92)
+   $color-black: rgb(102, 102, 102);
    $color-white: #FFF;
 
    $color-red: rgb(255, 22, 22);
@@ -15,6 +15,7 @@
 
 
 // FONT
+   // Size
    $font-size-xxs: 1.2rem;
    $font-size-xs: 1.3rem;
    $font-size-sm: 1.4rem;
@@ -24,6 +25,7 @@
    $font-size-xxl: 3rem;
    $font-size-xxxl: 4rem;
 
+   // Weight
    $font-weight-primary: 400;
    $font-weight-bold: 500;
    $font-weight-thin: 300;

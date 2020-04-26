@@ -17,12 +17,10 @@ import * as submenuView from './views/submenuView';
 import * as cartView from './views/cartView';
 
 
-
 // ===========================================================
 // STATE OF APP
 // ===========================================================
 const state = {};
-
 
 
 // ===========================================================
@@ -33,7 +31,6 @@ const state = {};
       (navigator.msMaxTouchPoints > 0)) {
          state.isTouchScreen = true;
 }
-
 
 
 // ===========================================================
@@ -52,7 +49,6 @@ const controlProductSearch = async (query, apiKey) => {
       console.log(error);
    }
 }
-
 
 
 // ===========================================================
@@ -94,13 +90,10 @@ const controlCart = (event) => {
 }
 
 
-
 // ===========================================================
 // CART PAGE CONTROLLER
 // ===========================================================
 const controlCartPage = () => {
-   console.log('Beginning controlCartPage()...')
-
    // Create HTML elements for each item in Cart model
    cartView.renderCartGridItems(state.cart.items);
 
@@ -113,11 +106,10 @@ const controlCartPage = () => {
    // Event Listeners
    // ===========================================================
    elements.cartGrid.addEventListener('click', (event) => {
-   
+      // Event handlers for item quantity changes
       if (event.target.closest('.cart__quantity')) {
          const itemSku = event.target.closest('.cart__quantity').id.slice(5);
    
-         // Event for increasing and decreasing item quantities
          if (event.target.matches('.quantity-calc__btns, .quantity-calc__btns *')) {
             let direction;
    
@@ -145,7 +137,6 @@ const controlCartPage = () => {
 }
 
 
-
 // ===========================================================
 // LIKES CONTROLLER
 // ===========================================================
@@ -161,21 +152,23 @@ const controlLikes = (event) => {
          source,
          liked;
 
-   // Determine which page user is currently on
+   // Determine page user is currently on
    currentPage = window.location.pathname;
 
    // Is the user on the Likes page?
    currentPage === '/results/likes' ? likesPage = true : likesPage = false;
 
+   // See below regarding the user liking an item after unliking on the Like's page.
+   // The code below eliminates the need to access the third party API again to re-like the item, which is optimal
    // If user is on Likes page, set array source to Likes model; otherwise, set source to productSearch model
    likesPage ? source = state.likes.likes[currentIndex] : source = state.productSearch.results[currentIndex];
    
    // Is item currently liked?
    liked = state.likes.isLiked(currentSku, likesPage);
 
-   // If product is NOT liked
+   // If NOT liked...
    if (!liked) {
-      // Add like to the state Likes model
+      // Add like to the likes array in app's state object
       state.likes.addLike(
          currentSku,
          source.name,
@@ -186,12 +179,12 @@ const controlLikes = (event) => {
          likesPage
       );
 
-      // Toggle the 'Like' button appearance
+      // Toggle the 'like' button appearance
       toggleLikeIcon();
 
-   // If product IS currently liked
+   // If currently liked...
    } else {
-      // Remove like from the state
+      // Remove like from the likes array from app's state object
       state.likes.deleteLike(currentSku, likesPage);
 
       // Toggle the 'Like' button appearance
@@ -208,13 +201,12 @@ const controlLikes = (event) => {
 }
 
 
-
 // ===========================================================
 // LIKES PAGE CONTROLLER
 // ===========================================================
 const controlLikesPage = async () => {
-   console.log('Beginning controlLikesPage()...');
-   // Copy 'likes' to 'tempLikes' in Likes model (necessary for adding back a 'like' after removing in Likes page)
+   // Create temporary likes array mirrored from the original likes array (state object)
+   // This is necessary to be able to like an item after unliking on the Like's page
    state.likes.createTempLikes();
 
    // Add index property to each object in array
@@ -228,6 +220,7 @@ const controlLikesPage = async () => {
    // Event Listeners
    // ===========================================================
    elements.resultsSection.addEventListener('click', event => {
+      // Event handlers for pagination
       if (event.target.matches('.results-section__page-buttons, .results-section__page-buttons *')) {
          const btn = event.target.closest('.btn');
 
@@ -238,10 +231,11 @@ const controlLikesPage = async () => {
          }
       }
 
+      // Event handler for 'add to cart' buttons
       if (event.target.matches('.product-thumb__cart-btn, .product-thumb__cart-btn *')) {
          controlCart(event);
       }
-
+      // Event handler for 'like' buttons
       if (event.target.matches('.product-thumb__like-btn, .product-thumb__like-btn *')) {
          controlLikes(event);
       }
@@ -249,20 +243,15 @@ const controlLikesPage = async () => {
 }
 
 
-
 // ===========================================================
 // RESULTS PAGE CONTROLLER
 // ===========================================================
 const controlResultsPage = async (apiKey) => {
-   console.log('Beginning controlResultsPage()...');
-
    // Get search query from url parameter
    const urlQuery = window.location.search;
    
    if (urlQuery) {
       try {
-         // Prepare UI for results
-
          // Perform search and prepare results
          await controlProductSearch(urlQuery, apiKey);
 
@@ -274,7 +263,7 @@ const controlResultsPage = async (apiKey) => {
             }
          });
 
-         // Add index property to each object in array
+         // Add an index property to each object in array
          state.productSearch.results.forEach((element, index) => {
             element.index = index
          });
@@ -291,6 +280,7 @@ const controlResultsPage = async (apiKey) => {
    // Event Listeners
    // ===========================================================
    elements.resultsSection.addEventListener('click', event => {
+      // Event handler for pagination
       if (event.target.matches('.results-section__page-buttons, .results-section__page-buttons *')) {
          const btn = event.target.closest('.btn');
 
@@ -301,10 +291,12 @@ const controlResultsPage = async (apiKey) => {
          }
       }
 
+      // Event handler for 'add to cart' buttons
       if (event.target.matches('.product-thumb__cart-btn, .product-thumb__cart-btn *')) {
          controlCart(event)
       }
 
+      // Event handler for 'like' buttons
       if (event.target.matches('.product-thumb__like-btn, .product-thumb__like-btn *')) {
          controlLikes(event)
       }
@@ -312,13 +304,10 @@ const controlResultsPage = async (apiKey) => {
 }
    
 
-
 // ===========================================================
 // PRODUCT PAGE CONTROLLER
 // ===========================================================
 const controlProductPage = async (apiKey) => {
-   console.log('Beginning controlProductPage()...')
-
    // Get search query from url parameter
    const urlQuery = window.location.search;
 
@@ -344,7 +333,7 @@ const controlProductPage = async (apiKey) => {
    elements.productMain.addEventListener('click', (event) => {
       const itemSku = elements.productSku.innerHTML;
 
-      // When product quantity buttons are clicked
+      // Event handler for product quantity
       if (event.target.matches('.quantity-calc__btns, .quantity-calc__btns *')) {
          let direction;
 
@@ -355,23 +344,23 @@ const controlProductPage = async (apiKey) => {
          });
       }
 
-      // When 'Add to Cart' button is clicked
+      // Event handler for 'add to cart' buttons
       if (event.target.matches('.product-info__cart-btn, .product-info__cart-btn *')) {
          controlCart(event);
       }
 
-      // When 'Like' button is clicked
+      // Event handler for 'like' buttons
       if (event.target.matches('.product-info__like-btn, .product-info__like-btn *')) {
          controlLikes(event);
       }
    });
  
-   // When nav titles are clicked
+   // Event handler for clicking navigation titles
    for (const navItem of elements.productNavItems) {
       navItem.addEventListener('click', productView.navItemsEvents);
    }
 
-   // When thumb images are clicked
+   // Event handler for click thumb images
    const productThumbs = document.querySelectorAll('.product-gallery__thumb-wrap');
    for (const element of productThumbs) {
       element.addEventListener('click', productView.thumbImgsEvents);
@@ -379,12 +368,11 @@ const controlProductPage = async (apiKey) => {
 }
 
 
-
 // ===========================================================
 // CATEGORIES SEARCH CONTROLLER
 // ===========================================================
+// Searches the BB API for current product categories to be dynamically loaded in main menu
 const controlCategorySearch = async (apiKey) => {
-
    // New category search object and add to state
    state.categorySearch = new CategorySearch();
 
@@ -412,27 +400,27 @@ const controlHeader = async (apiKey) => {
       console.log(error);
    }
 
-    // Organize the results to be rendered
-    state.categorySearch.organizeResults();
+   // Organize the results
+   state.categorySearch.organizeResults();
 
-    // Add modifier classes to each main menu item: main-menu__item--1
-    submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
- 
-    // Render the submenus with subcategories for each main menu category
-    submenuView.renderSubMenus(state.categorySearch.allSubCatArrays);
+   // Add 'modifier' class to each main menu item: main-menu__item--1
+   submenuView.addModClass(elements.mainMenuItems,'main-menu__item');
 
-    // Update number of items showing in header cart icon
-    elements.headerCartCounter.innerHTML = state.cart.getNumItems();
+   // Render the submenus with subcategories for each main menu category
+   submenuView.renderSubMenus(state.categorySearch.allSubCatArrays);
+
+   // Update number of items in users cart icon (top right)
+   elements.headerCartCounter.innerHTML = state.cart.getNumItems();
 
    // Event Listeners
    // ===========================================================
    elements.siteHeader.addEventListener('click', (event) => {
-      // Open/close main menu
+      // Event handler for open/close main menu
       if (event.target.matches('.main-menu__btn, .main-menu__btn *') || event.target.matches('.main-menu__header-icon')) {
          mainMenuView.toggleDropdown(elements.mainMenuDropdown);
       }
 
-      // Account menu events (after user has logged in)
+      // Event handler for user's account menu (after logged in)
       if (elements.accountMenuDropdown != null) {
 
          // Toggle account dropdown menu
@@ -440,7 +428,7 @@ const controlHeader = async (apiKey) => {
             mainMenuView.toggleDropdown(elements.accountMenuDropdown);
          }
 
-         // When user clicks the 'Liked Items' link in the account menu
+         // When 'Liked Items' link is clicked in the account menu
          if (event.target.matches('.account-menu__link--liked-items, .account-menu__link--liked-items *')) {
             event.preventDefault();
 
@@ -451,7 +439,7 @@ const controlHeader = async (apiKey) => {
             }
          }
 
-         // If user clicks the 'Shopping Cart' link in the account menu
+         // When 'Shopping Cart' link is clicked in the account menu
          if (event.target.matches('.account-menu__link--shopping-cart, .account-menu__link--shopping-cart *')) {
             event.preventDefault();
             
@@ -462,7 +450,7 @@ const controlHeader = async (apiKey) => {
             }
          }
 
-         // When user clicks logout link
+         // When logout link is clicked
          if (event.target.matches('.account-menu__link--logout, .account-menu__link--logout *')) {
             event.preventDefault();
             logout();
@@ -485,7 +473,7 @@ const controlHeader = async (apiKey) => {
          }
       }
 
-      // When user clicks Cart link
+      // When Cart link is clicked
       if (event.target.matches('.cart-link, .cart-link *')) {
          event.preventDefault();
 
@@ -497,7 +485,7 @@ const controlHeader = async (apiKey) => {
       }
    });
 
-      // Close menus when click anywhere outside of menus
+      // Event handler when user clicks anywhere outside of main menu or account menu
       document.addEventListener('click', (event) => {
          if (elements.mainMenuDropdown.classList.contains('is-visible')) {
             mainMenuView.hideOnClickOutside(event, elements.mainMenuDropdown);
@@ -508,7 +496,7 @@ const controlHeader = async (apiKey) => {
          }
       });
 
-      // Open/close submenus
+      // Event handler for open/close submenus of main menu
       if (!(screen.width < 576)) {
          submenuView.setUpSubmenuEvent('mouseover', submenuView.showSubMenu);
          submenuView.setUpSubmenuEvent('mouseleave', submenuView.hideSubMenu);
@@ -516,37 +504,35 @@ const controlHeader = async (apiKey) => {
          submenuView.setUpSubmenuEvent('click', submenuView.toggleSubMenu);
       }
       
-      // If user clicks the close icon on the header notice section (at very top of header)
+      // Event handler for clicking 'X' (close) icon at very top of header
       elements.headerNoticeBtn.addEventListener('click', () => {
          hideElement(elements.headerNotice);
       });
 }
 
 
-
 // ===========================================================
 // HOME PAGE CONTROLLER
 // ===========================================================
 const controlHomePage = () => {
-   console.log('Beginning controlHomePage()...')
-
-   // Begin image slides in landing section
+   // Begin landing images transition rotation timing
    homeView.promotionRotation();
-
 }
-
 
 
 // ===========================================================
 // LOGIN PAGE CONTROLLER
 // ===========================================================
 const controlLoginPage = () => {
-   console.log('Beginning controlLoginPage()...')
-
    // Event Listeners
    // ===========================================================
+
+   // Event handler for login button
    elements.accountLoginBtn.addEventListener('click', event => {
+      // Prevent default href link event...
       event.preventDefault();
+
+      // Instead run login function
       login();
 
       async function login() {
@@ -554,27 +540,32 @@ const controlLoginPage = () => {
          const password = elements.accountLoginPassword.value;
 
          try {
+            // post the username and password entered by the user
             await axios.post('/user/login', {
                username: username,
                password: password
             })
+            // Once a response is received from server
             .then(response => {
+               // If error (such as incorrect username or password)
                if (response.data.error) {
                   return document.querySelector('.msg-header').innerHTML = response.data.error;
                }
 
+               // If user's cart object from db has items, combine them with current cart items (prior to user login)
                if (response.data.cart != null) {
                   if (!(Object.keys(response.data.cart).length === 0)) {
                      state.cart.combineCarts(response.data.cart);
                   }
                }
-            
+               // If user's likes object from db has items, combine them with current liked items (prior to user login)
                if (response.data.likes != null) {
                   if (!(response.data.likes.length === 0)) {
                      state.likes.combineLikes(response.data.likes);
                   }
                }  
-                  
+               
+               // Route user to Home page
                return window.location = '/';
             });
       
@@ -588,35 +579,26 @@ const controlLoginPage = () => {
 }
 
 
-
 // ===========================================================
 // INITIALIZE APPLICATION
 // ===========================================================
 const init = () => {
-   // Restore cart and saved/liked items on page load
+   // Restore cart and liked items on each page load
    state.likes = new Likes();
    state.likes.readLocalStorage();
    state.cart = new Cart();
    state.cart.readLocalStorage();
-
    console.log('localStorage log:', localStorage);
-   console.log('state log:', state);
+   console.log('state object log:', state);
 
+   // Current page user is viewing
    const pageLoc = window.location.pathname;
 
-
-   async function getApiKey() {
-      try {
-         let res = await axios.get('/apikey');
-         return res
-      } catch (error) {
-         console.log(error);
-      }
-   }
-
+   // Obtain BB API key from server...
    getApiKey().then((response) => {
       const apiKey = response.data;
 
+      // and pass key to appropriate controllers
       controlHeader(apiKey);
       if (pageLoc === '/product') {controlProductPage(apiKey)}
       if (pageLoc === '/results') {controlResultsPage(apiKey)}
@@ -626,6 +608,16 @@ const init = () => {
    if (pageLoc === '/user/login') {controlLoginPage()}
    if (pageLoc === '/results/likes') {controlLikesPage()}
    if (pageLoc === '/') {controlHomePage()}
+
+
+   async function getApiKey() {
+      try {
+         let response = await axios.get('/apikey');
+         return response;
+      } catch (error) {
+         console.log(error);
+      }
+   }
 }
 
 init();
