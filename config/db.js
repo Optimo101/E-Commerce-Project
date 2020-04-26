@@ -4,7 +4,7 @@ let pool;
 
 // Swap environment variables depending upon Node env. (For quick deployment/editing)
 if (process.env.NODE_ENV === 'production') {
-   return pool = new Pool({
+      pool = new Pool({
       connectionString: process.env.DATABASE_URL,
       ssl: true
    });
