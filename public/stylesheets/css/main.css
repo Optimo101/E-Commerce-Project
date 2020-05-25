@@ -156,10 +156,11 @@ body {
   display: none; }
   .account-menu__dropdown::before {
     position: absolute;
-    top: -1.4rem;
+    top: -1.3rem;
     left: 2rem;
     height: 1.5rem;
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     content: "\f0de";
     font-size: 3rem;
     color: #FFF; }
@@ -429,10 +430,11 @@ body {
     display: none; }
     .main-menu__dropdown::before {
       position: absolute;
-      top: -1.4rem;
+      top: -1.3rem;
       left: 2rem;
       height: 1.5rem;
-      font-family: FontAwesome;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
       content: "\f0de";
       font-size: 3rem;
       color: #FFF; }
@@ -958,7 +960,7 @@ body {
 .main-header {
   padding-top: 2rem;
   background-color: #eeeeee;
-  background: linear-gradient(to left, #e0e0e0, #ffffff); }
+  background-image: url("../../img/white_brick_wall_dark.png"); }
 
 .top-header {
   display: flex;
@@ -1047,7 +1049,7 @@ body {
   background-color: #eeeeee;
   padding-top: 3rem;
   border-bottom: 1px solid #b6b6b6;
-  background-image: url("../../img/white_brick_wall_dark.png"); }
+  background-color: #eeeeee; }
 
 section {
   padding-bottom: 10rem; }
