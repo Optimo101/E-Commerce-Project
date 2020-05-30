@@ -1,7 +1,7 @@
-<% include partials/head %>
-<% include partials/header-notice %>
+<% include ../partials/head %>
+<% include ../partials/header-notice %>
 
-<% include partials/header %>
+<% include ../partials/header %>
 
 <main class="main">
    <div class="shadow-overlay">
@@ -19,7 +19,7 @@
 
          <div class="login-section__content">
 
-            <form class="form" method="POST" action="/user/login">
+            <form class="form">
                <div class="form__section">
                   <h2 class="form__title">Login</h2>
 
@@ -39,10 +39,11 @@
                   </div>
                </div>
             </form>
+
          </div>
       </section>
    </div>
 </main>
 
 
-<% include partials/footer %>
+<% include ../partials/footer %>

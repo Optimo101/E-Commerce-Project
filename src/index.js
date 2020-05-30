@@ -457,7 +457,7 @@ const controlHeader = async (apiKey) => {
 
             async function logout() {
                try {
-                  await axios.post('/user/logout', {
+                  await axios.post('/accounts/logout', {
                      cart: state.cart.items,
                      likes: state.likes.likes
                   })
@@ -541,12 +541,14 @@ const controlLoginPage = () => {
 
          try {
             // post the username and password entered by the user
-            await axios.post('/user/login', {
+            await axios.post('/accounts/login', {
                username: username,
                password: password
             })
             // Once a response is received from server
             .then(response => {
+               // console.log('response:', response)
+               
                // If error (such as incorrect username or password)
                if (response.data.error) {
                   return document.querySelector('.msg-header').innerHTML = response.data.error;
@@ -605,7 +607,7 @@ const init = () => {
    });
 
    if (pageLoc === '/cart') {controlCartPage()}
-   if (pageLoc === '/user/login') {controlLoginPage()}
+   if (pageLoc === '/accounts/login') {controlLoginPage()}
    if (pageLoc === '/results/likes') {controlLikesPage()}
    if (pageLoc === '/') {controlHomePage()}
 

@@ -23,7 +23,7 @@ function initialize(passport, getUserByEmail, getUserByID) {
             return done(null, user);
          // If password does not match
          } else {
-            console.log('Password does match account.')
+            console.log('Password does not match account.')
             return done(null, false, { message: 'The password provided was incorrect.' })
          }
       });
