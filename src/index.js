@@ -464,7 +464,9 @@ const controlHeader = async (apiKey) => {
                   .then(() => {
                      state.cart.clearLocalStorage();
                      state.likes.clearLocalStorage();
+                     
                      window.location = window.location.href;
+
                   })
                } catch (error) {
                   console.log(error);
