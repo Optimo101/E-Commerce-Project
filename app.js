@@ -5,15 +5,15 @@ require('dotenv').config();
 
 // Packages/Libraries
 const express = require('express'),
-   app = express(),
-   methodOverride = require('method-override'),
-   passport = require('passport'),
-   flash = require('express-flash'),
-   session = require('express-session'),
-   PostgreSqlStore = require('connect-pg-simple')(session),
-   cookieParser = require('cookie-parser'),
-   queriesLib = require('./lib/queries'),
-   db = require('./config/db');
+      app = express(),
+      methodOverride = require('method-override'),
+      passport = require('passport'),
+      flash = require('express-flash'),
+      session = require('express-session'),
+      PostgreSqlStore = require('connect-pg-simple')(session),
+      cookieParser = require('cookie-parser'),
+      queriesLib = require('./lib/queries'),
+      db = require('./config/db');
 
 // Passport configuration
 const initializePassport = require('./config/passport');
@@ -21,12 +21,9 @@ const initializePassport = require('./config/passport');
 
 // ======================= ROUTE IMPORTS =========================
 // ===============================================================
-const register = require('./routes/user/register'),
-   login = require('./routes/user/login'),
-   logout = require('./routes/user/logout'),
-   account = require('./routes/user/account'),
-   results = require('./routes/results'),
-   misc = require('./routes/misc');
+const accounts = require('./routes/accounts'),
+      results = require('./routes/results'),
+      misc = require('./routes/misc');
 
 
 // ========================== MIDDLEWARE =========================
@@ -51,10 +48,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Router
-app.use('/user/register', register);
-app.use('/user/login', login);
-app.use('/user/logout', logout);
-app.use('/user/account', account);
+app.use('/accounts', accounts);
 app.use('/results', results);
 app.use('/', misc);
 

@@ -1,0 +1,62 @@
+<% include ../partials/head %>
+<% include ../partials/header-notice %>
+
+<% if (typeof user != 'undefined') { %>
+   <%- include('../partials/header', {user}) %>
+<% } else { %>
+   <%- include ../partials/header %>
+<% } %>
+
+<main class="main">
+   <div class="shadow-overlay"></div>
+
+   <div class="container">
+      <section class="login-section">
+         <div class="page-header">
+            <h1 class="page-header__title"><a href="/accounts/<%= user.id %>" style="text-decoration: underline;"><%= user.first_name %>'s Account</a> > Edit</h1>
+         </div>
+
+         <% if (typeof errorMsg != 'undefined') { %>
+         <h3 class="msg-header msg-header--error"><i class="msg-header__icon fas fa-exclamation-circle message-header__icon"></i><%= errorMsg %></h3>
+         <% } %>
+
+         <% if (typeof successMsg != 'undefined') { %>
+            <h3 class="msg-header msg-header--success"><i class="msg-header__icon fas fa-check message-header__icon"></i><%= successMsg %></h3>
+            <% } %>
+
+         <div class="account-section__content">
+
+               <form class="form" method="POST" action="/accounts/<%= user.id %>?_method=PUT">
+                  
+                  <div class="form__section">
+                     <h2 class="form__title">Update Password</h2>
+   
+                     <div class="form__inputs-wrap">
+                        <div class="form__input-wrap">
+                           <label for="currentPassword" class="form__input-label">Current Password</label>
+                           <input type="password" class="form__input" name="password" required>
+                        </div>
+                        
+                        <div class="form__input-wrap">
+                           <label for="newPassword" class="form__input-label">New Password</label>
+                           <input type="password" class="form__input" name="newPassword" required>
+                        </div>
+                        
+                        <div class="form__input-wrap">
+                           <label for="confirmPassword" class="form__input-label">Confirm New Password</label>
+                           <input type="password" class="form__input" name="confirmPassword" required>
+                        </div>
+                        
+                        <input type="submit" class="form__btn btn btn--red btn--hover-float" value="Update Password">
+                     </div>
+                  </div>
+               </form>
+
+
+         </div>
+      </section>
+   </div>
+
+</main>
+
+<% include ../partials/footer %>
