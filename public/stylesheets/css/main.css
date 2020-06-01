@@ -341,10 +341,14 @@ body {
     max-width: 100%; }
 
 .form {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   margin: -1.5rem;
   font-size: 1.8rem; }
+  .form__account-edit {
+    margin-right: 2.5rem;
+    margin-bottom: 2.5rem;
+    flex-grow: 0; }
   .form__section {
     display: flex;
     flex-direction: column;
