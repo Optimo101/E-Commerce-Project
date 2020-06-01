@@ -13,6 +13,14 @@
             <h1 class="page-header__title">Account</h1>
          </div>
 
+         <% if (typeof errorMsg != 'undefined') { %>
+            <h3 class="msg-header msg-header--error"><i class="msg-header__icon fas fa-exclamation-circle message-header__icon"></i><%= errorMsg %></h3>
+         <% } %>
+      
+         <% if (typeof successMsg != 'undefined') { %>
+            <h3 class="msg-header msg-header--success"><i class="msg-header__icon fas fa-exclamation-circle message-header__icon"></i><%= successMsg %></h3>
+         <% } %>
+
          <h3 class="msg-header msg-header--error"></h3>
          <h3 class="msg-header msg-header">Please login to your account.</h3>
 
