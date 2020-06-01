@@ -148,6 +148,34 @@ router.put('/:id', authLib.checkAuth, (req, res) => {
 });
 
 // (DELETE)
+router.delete('/:id', authLib.checkAuth, (req, res) => {
+   const { password } = req.body;
+
+   queriesLib.getUserByID(req.params.id, (error, user) => {
+      if (error) {
+         return res.render('accounts/accounts-edit', { user: req.user, errorMsg: 'We are currently experiencing issues with the server. Please try again later.' });
+      }
+      
+      if (password != sc.decrypt(user.password)) {
+         return res.render('accounts/accounts-edit', { user: req.user, errorMsg: 'The current password provided did not match your account.' });
+      }
+
+      db.query('DELETE FROM users WHERE id = $1', [user.id], (error, results) => {
+         if (error) {
+            return res.render('accounts/accounts-edit', { errorMsg: 'We are currently experiencing problems with the server. Please try again later.' });
+         }
+         return res.render('accounts/accounts-login', { successMsg: 'Your account has been deleted' })
+      });
+   });
+
+   
+
+});
+
+
+
+
+
 
 
 module.exports = router;

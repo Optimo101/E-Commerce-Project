@@ -21,12 +21,12 @@
          <% } %>
 
          <% if (typeof successMsg != 'undefined') { %>
-            <h3 class="msg-header msg-header--success"><i class="msg-header__icon fas fa-check message-header__icon"></i><%= successMsg %></h3>
-            <% } %>
+         <h3 class="msg-header msg-header--success"><i class="msg-header__icon fas fa-check message-header__icon"></i><%= successMsg %></h3>
+         <% } %>
 
-         <div class="account-section__content">
+         <div class="account-edit-section__content">
 
-               <form class="form" method="POST" action="/accounts/<%= user.id %>?_method=PUT">
+               <form class="form form__account-edit " method="POST" action="/accounts/<%= user.id %>?_method=PUT">
                   
                   <div class="form__section">
                      <h2 class="form__title">Update Password</h2>
@@ -48,6 +48,22 @@
                         </div>
                         
                         <input type="submit" class="form__btn btn btn--red btn--hover-float" value="Update Password">
+                     </div>
+                  </div>
+               </form>
+
+               <form class="form form__account-delete" method="POST" action="/accounts/<%= user.id %>?_method=DELETE">
+                  
+                  <div class="form__section">
+                     <h2 class="form__title">Delete Account</h2>
+   
+                     <div class="form__inputs-wrap">
+                        <div class="form__input-wrap">
+                           <label for="currentPassword" class="form__input-label">Current Password</label>
+                           <input type="password" class="form__input" name="password" required>
+                        </div>
+                        
+                        <input type="submit" class="form__btn btn btn--red btn--hover-float" value="Delete Account">
                      </div>
                   </div>
                </form>
