@@ -4,29 +4,28 @@
   "description": "E-commerce mock-up project",
   "main": "app.js",
   "scripts": {
-      "start": "npm run build:dev && nodemon app.js",
-      "pre-build:": "webpack-dev-server",
-
-      "post-start": "node app.js",
-      
-      "build:dev": "webpack --mode development",
-      "build:prod": "webpack --mode production",
-      "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css"
+    "start": "npm run build:dev && nodemon app.js",
+    "pre-build:": "webpack-dev-server",
+    "post-start": "node app.js",
+    "build:dev": "webpack --mode development",
+    "build:prod": "webpack --mode production",
+    "compile:sass": "node-sass --watch public/stylesheets/sass/main.scss public/stylesheets/css/main.css"
   },
   "author": "Justin Schiller",
   "license": "ISC",
   "devDependencies": {
-   "@babel/core": "^7.6.4",
-   "@babel/preset-env": "^7.6.3",
-   "babel-loader": "^8.0.6",
-   "clean-webpack-plugin": "^3.0.0",
-   "webpack": "^4.41.1",
-   "webpack-cli": "^3.3.9",
-   "webpack-dev-server": "^3.8.2"
- },
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  },
   "dependencies": {
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
+    "compression": "^1.7.4",
     "connect-pg-simple": "^6.1.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",

@@ -6,6 +6,7 @@ require('dotenv').config();
 // Packages/Libraries
 const express = require('express'),
       app = express(),
+      compression = require('compression'),
       methodOverride = require('method-override'),
       passport = require('passport'),
       flash = require('express-flash'),
@@ -28,6 +29,7 @@ const accounts = require('./routes/accounts'),
 
 // ========================== MIDDLEWARE =========================
 // ===============================================================
+app.use(compression());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
