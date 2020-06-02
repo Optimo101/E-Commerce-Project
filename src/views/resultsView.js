@@ -65,11 +65,11 @@ const renderProductItem = (product) => {
       <div class="product-thumb__bottom-content">
          <div class="product-thumb__price">$${dollarFormat(product.regularPrice)}</div>
          <div class="product-thumb__btn-wrap">
-            <button class="product-thumb__cart-btn btn btn--small btn--black" id="${product.index}-${product.sku}">
+            <button aria-label="Add to cart" class="product-thumb__cart-btn btn btn--small btn--black" id="${product.index}-${product.sku}">
                <i class="product-thumb__cart-icon fas fa-shopping-cart"></i>
                <span class="product-thumb__cart-btn-text">Add to Cart</span>
             </button>
-            <button class="product-thumb__like-btn btn btn--small btn--black" id="${product.index}-${product.sku}">
+            <button aria-label="Add to likes" class="product-thumb__like-btn btn btn--small btn--black" id="${product.index}-${product.sku}">
                ${likeIconHtml}
             </button>
          </div>
@@ -80,7 +80,7 @@ const renderProductItem = (product) => {
 }
 
 const createButton = (page, type) =>  `
-   <button class="btn btn--small btn--black results-section__page-btn results-section__page-btn--${type}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
+   <button aria-label="${type === 'prev' ? 'Previous page' : 'Next page'}" class="btn btn--small btn--black results-section__page-btn results-section__page-btn--${type}" data-goto="${type === 'prev' ? page - 1 : page + 1}">
          <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
          <i class="fas fa-angle-${type === 'prev' ? 'left' : 'right'}"></i>
    </button>

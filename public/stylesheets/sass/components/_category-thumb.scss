@@ -112,16 +112,13 @@
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
       overflow: hidden;
-
       display: flex;
       justify-content: center;
       align-items: center;
-
       border-radius: 100px;
       box-shadow: 0rem 1rem 2rem rgba(black, .3);
       padding: 2.2rem;
       font-size: $font-size-xl;
-
       transition: .8s ease;
       transition-property: transform;
 
