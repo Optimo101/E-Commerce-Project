@@ -1,13 +1,3 @@
-
-// MEDIA QUERY MANAGER
-
-/*
-Breakpoint argument choices:
-- phone
-- tab-port
-- tab-land
-*/
-
 @mixin respond($breakpoint) {
 
    @if $breakpoint == tab-lg {
