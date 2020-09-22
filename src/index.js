@@ -1,4 +1,3 @@
-// ===========================================================
 // FILE DEPENDENCIES
 // ===========================================================
 import ProductSearch from './models/ProductSearch';
@@ -17,13 +16,13 @@ import * as submenuView from './views/submenuView';
 import * as cartView from './views/cartView';
 
 
-// ===========================================================
+
 // STATE OF APP
 // ===========================================================
 const state = {};
 
 
-// ===========================================================
+
 // TOUCH SCREEN?
 // ===========================================================
  if (('ontouchstart' in window) || 
@@ -33,7 +32,7 @@ const state = {};
 }
 
 
-// ===========================================================
+
 // PRODUCTS SEARCH CONTROLLER
 // ===========================================================
 const controlProductSearch = async (query, apiKey) => {
@@ -51,7 +50,7 @@ const controlProductSearch = async (query, apiKey) => {
 }
 
 
-// ===========================================================
+
 // CART CONTROLLER
 // ===========================================================
 const controlCart = (event) => {
@@ -90,7 +89,7 @@ const controlCart = (event) => {
 }
 
 
-// ===========================================================
+
 // CART PAGE CONTROLLER
 // ===========================================================
 const controlCartPage = () => {
@@ -137,7 +136,7 @@ const controlCartPage = () => {
 }
 
 
-// ===========================================================
+
 // LIKES CONTROLLER
 // ===========================================================
 const controlLikes = (event) => {
@@ -201,7 +200,7 @@ const controlLikes = (event) => {
 }
 
 
-// ===========================================================
+
 // LIKES PAGE CONTROLLER
 // ===========================================================
 const controlLikesPage = async () => {
@@ -243,7 +242,7 @@ const controlLikesPage = async () => {
 }
 
 
-// ===========================================================
+
 // RESULTS PAGE CONTROLLER
 // ===========================================================
 const controlResultsPage = async (apiKey) => {
@@ -304,7 +303,7 @@ const controlResultsPage = async (apiKey) => {
 }
    
 
-// ===========================================================
+
 // PRODUCT PAGE CONTROLLER
 // ===========================================================
 const controlProductPage = async (apiKey) => {
@@ -368,7 +367,7 @@ const controlProductPage = async (apiKey) => {
 }
 
 
-// ===========================================================
+
 // CATEGORIES SEARCH CONTROLLER
 // ===========================================================
 // Searches the BB API for current product categories to be dynamically loaded in main menu
@@ -387,7 +386,7 @@ const controlCategorySearch = async (apiKey) => {
 }
 
 
-// ===========================================================
+
 // HEADER CONTROLLER
 // ===========================================================
 const controlHeader = async (apiKey) => {
@@ -513,7 +512,7 @@ const controlHeader = async (apiKey) => {
 }
 
 
-// ===========================================================
+
 // HOME PAGE CONTROLLER
 // ===========================================================
 const controlHomePage = () => {
@@ -522,7 +521,7 @@ const controlHomePage = () => {
 }
 
 
-// ===========================================================
+
 // LOGIN PAGE CONTROLLER
 // ===========================================================
 const controlLoginPage = () => {
@@ -583,7 +582,7 @@ const controlLoginPage = () => {
 }
 
 
-// ===========================================================
+
 // INITIALIZE APPLICATION
 // ===========================================================
 const init = () => {
