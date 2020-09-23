@@ -174,25 +174,26 @@ export const controlCategorySearch = async (apiKey) => {
 }
 
 
-// INITIALIZE APPLICATION
+// INITIALIZE APP
 // ===========================================================
 const init = () => {
    // Restore cart and liked items on each page load
    state.likes = new Likes();
-   state.likes.readLocalStorage();
    state.cart = new Cart();
+   state.likes.readLocalStorage();
    state.cart.readLocalStorage();
+
+
    console.log('localStorage log:', localStorage);
    console.log('state object log:', state);
 
-   // Current page user is viewing
+   // Current page view
    const pageLoc = window.location.pathname;
 
-   // Obtain BB API key from server...
+   // Obtain BB API key from server and pass it to appropriate controllers
    getApiKey().then((response) => {
       const apiKey = response.data;
 
-      // and pass key to appropriate controllers
       headerController(apiKey);
       if (pageLoc === '/product') {productPageController(apiKey)}
       if (pageLoc === '/results') {resultsPageController(apiKey)}
@@ -202,16 +203,16 @@ const init = () => {
    if (pageLoc === '/accounts/login') {loginPageController()}
    if (pageLoc === '/results/likes') {likesPageController()}
    if (pageLoc === '/') {homePageController()}
-
-
-   async function getApiKey() {
-      try {
-         let response = await axios.get('/apikey');
-         return response;
-      } catch (error) {
-         console.log(error);
-      }
-   }
 }
 
 init();
+
+
+async function getApiKey() {
+   try {
+      let response = await axios.get('/apikey');
+      return response;
+   } catch (error) {
+      console.log(error);
+   }
+}
