@@ -26,7 +26,7 @@ export default class Search {
       } 
       
       if (this.query.includes(this.catSearchKey)) {
-         console.log(`Search query: ${this.query}`);
+         // console.log(`Search query: ${this.query}`);
          formattedQuery = this.query.slice(1);
       }
       
@@ -34,7 +34,7 @@ export default class Search {
    }
 
    async search(totalPages, keywords, catID, key) {
-      console.log(key);
+      // console.log(key);
       const baseURL = 'https://api.bestbuy.com/v1/',
             apiType = 'products',
             attribute = 'customerReviewAverage>1',
@@ -45,7 +45,7 @@ export default class Search {
             active = 'active=true',
             responseFormat = 'format=json';
 
-      console.log('API Product Request:', `${baseURL}${apiType}(${keywords}${catID}&${attribute})?apiKey=${apiKey}&${sortOptions}&${showOptions}&${pageSize}&page=1&${active}&${responseFormat}`);
+      // console.log('API Product Request:', `${baseURL}${apiType}(${keywords}${catID}&${attribute})?apiKey=${apiKey}&${sortOptions}&${showOptions}&${pageSize}&page=1&${active}&${responseFormat}`);
 
       for (let i = 0; i < totalPages; i++) {
          try {
