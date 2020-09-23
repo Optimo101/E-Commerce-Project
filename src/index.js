@@ -39,8 +39,8 @@ const init = () => {
    state.likes.readLocalStorage();
    state.cart.readLocalStorage();
 
-   console.log('localStorage log:', localStorage);
-   console.log('state object log:', state);
+   // console.log('localStorage log:', localStorage);
+   // console.log('state object log:', state);
 
    // Current page view
    const pageLoc = window.location.pathname;

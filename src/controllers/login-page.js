@@ -14,8 +14,6 @@ export default function controlLoginPage() {
       // Prevent default href link event...
       event.preventDefault();
       
-      console.log('from login-page.js', state);
-
       // Instead run login function
       login();
 
