@@ -27,8 +27,8 @@ export const renderCartGridItems = (cartItems) => {
                <div class="cart__item cart__item--qty">
                   <div class="cart__quantity" id="item-${cartItems[item].sku}">
                      <div class="quantity-calc__wrap">
-                        <label class="visually-hidden" for="quantity-calc__input">Item quantity</label>
-                        <input id="quantity-calc__input" type="text" class="quantity-calc__input" name="quantity" value="${cartItems[item].quantity}" maxlength="1" minlength="1">
+                        <label class="visually-hidden" for="${cartItems[item].sku}-quantity">Item quantity</label>
+                        <input id="${cartItems[item].sku}-quantity" type="text" class="quantity-calc__input" name="quantity" value="${cartItems[item].quantity}" maxlength="1" minlength="1">
                         <span class="quantity-calc__btns">
                            <div class="quantity-calc__up-btn">
                               <i class="fas fa-angle-up"></i>

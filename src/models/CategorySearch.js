@@ -17,7 +17,7 @@ export default class SubCats {
 
 
       for (let i = 0; i < totalPages; i++) {
-         console.log('API Category Request:', `${baseURL}(id=abcat*)?apiKey=${apiKey}${showOptions}${pageSize}&page=${i + 1}${responseFormat}`);
+         // console.log('API Category Request:', `${baseURL}(id=abcat*)?apiKey=${apiKey}${showOptions}${pageSize}&page=${i + 1}${responseFormat}`);
 
          try {
             const response = await axios.get(`${baseURL}(id=abcat*)?apiKey=${apiKey}${showOptions}${pageSize}&page=${i + 1}${responseFormat}`);
