@@ -135,7 +135,7 @@ router.put('/:id', authLib.checkAuth, (req, res) => {
       }
       
       if (password != sc.decrypt(user.password)) {
-         return res.render('accounts/accounts-edit', { user: req.user, errorMsg: 'The current password provided did not match your account.' });
+         return res.render('accounts/accounts-edit', { user: req.user, errorMsg: 'The password provided did not match your account.' });
       }
 
       db.query('UPDATE users SET password = $1 WHERE id = $2 RETURNING *', [sc.encrypt(newPassword), user.id], (error, results) => {
@@ -157,7 +157,7 @@ router.delete('/:id', authLib.checkAuth, (req, res) => {
       }
       
       if (password != sc.decrypt(user.password)) {
-         return res.render('accounts/accounts-edit', { user: req.user, errorMsg: 'The current password provided did not match your account.' });
+         return res.render('accounts/accounts-edit', { user: req.user, errorMsg: 'The password provided did not match your account.' });
       }
 
       db.query('DELETE FROM users WHERE id = $1', [user.id], (error, results) => {
