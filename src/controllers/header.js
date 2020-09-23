@@ -1,10 +1,10 @@
+import axios from 'axios';
 import * as submenuView from '../views/submenuView';
 import * as mainMenuView from '../views/mainMenuView';
 import * as headerView from '../views/headerView';
-import { state, controlCategorySearch } from '../index';
+import controlCategorySearch from './categoriesSearch';
+import { state } from '../index';
 import { elements } from '../views/base';
-
-
 
 
 // HEADER CONTROLLER
