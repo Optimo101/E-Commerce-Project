@@ -1,7 +1,9 @@
 
-import { state, controlCart, controlLikes } from '../index';
-import { elements } from '../views/base';
+import controlCart from './cart';
+import controlLikes from './likes';
 import * as resultsView from '../views/resultsView';
+import { state } from '../index';
+import { elements } from '../views/base';
 
 
 // LIKES PAGE CONTROLLER

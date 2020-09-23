@@ -1,6 +1,9 @@
-import { state, controlProductSearch, controlCart, controlLikes } from '../index';
-import { elements } from '../views/base';
+import controlProductSearch from './productSearch';
+import controlCart from './cart';
+import controlLikes from './likes';
 import * as resultsView from '../views/resultsView';
+import { state } from '../index';
+import { elements } from '../views/base';
 
 
 // RESULTS PAGE CONTROLLER

@@ -1,5 +1,8 @@
 import * as productView from '../views/productView';
-import { state, controlProductSearch, controlCart, controlLikes } from '../index';
+import controlProductSearch from './productSearch';
+import controlLikes from './likes';
+import controlCart from './cart';
+import { state } from '../index';
 import { elements, updateItemQuant } from '../views/base';
 
 
