@@ -4,7 +4,7 @@ import * as mainMenuView from '../views/mainMenuView';
 import * as headerView from '../views/headerView';
 import controlCategorySearch from './categoriesSearch';
 import { state } from '../index';
-import { elements } from '../views/base';
+import { elements, hideElement } from '../views/base';
 
 
 // HEADER CONTROLLER
