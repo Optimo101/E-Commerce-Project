@@ -103,7 +103,7 @@ export const cartBtnAnimation = (buttonElement, existingItem) => {
    const textElement = buttonElement.children[1];
 
    if (existingItem && existingItem.quantity === 9) {
-      console.log(existingItem);
+      // console.log(existingItem);
       textElement.innerHTML = '';
       textElement.innerHTML = 'Max Limit';
       iconElement.classList.remove('fa-shopping-cart');
