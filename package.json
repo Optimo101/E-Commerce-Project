@@ -23,7 +23,7 @@
     "webpack-dev-server": "^3.8.2"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "babel-polyfill": "^6.26.0",
     "compression": "^1.7.4",
     "connect-pg-simple": "^6.1.0",
