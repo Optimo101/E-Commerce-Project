@@ -10,11 +10,11 @@ if (process.env.NODE_ENV === 'production') {
    });
 } else {
    pool = new Pool({
-      user: process.env.PGUSER,
-      host: process.env.PGHOST,
-      database: process.env.PGDATABASE,
-      password: process.env.PGPASS,
-      port: process.env.PGPORT
+      user: process.env.MYSQLUSER,
+      host: process.env.MYSQLHOST,
+      database: process.env.MYSQLDB,
+      password: process.env.MYSQLPASSWORD,
+      port: process.env.MYSQLPORT
    });
 }
 
