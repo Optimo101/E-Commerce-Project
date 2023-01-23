@@ -1,26 +1,19 @@
-const { Pool } = require('pg');
+const mysql = require ('mysql2');
 
-let pool;
+const pool = mysql.createPool({
+   host                 : process.env.DBHOST,
+   database             : process.env.DBNAME,
+   port                 : process.env.DB_PORT,
+   user                 : process.env.DBUSER,
+   password             : process.env.DBPASSWORD
+ });
 
-// Swap environment variables depending upon Node env. (For quick deployment/editing)
-if (process.env.NODE_ENV === 'production') {
-      pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: true
-   });
-} else {
-   pool = new Pool({
-      user: process.env.MYSQLUSER,
-      host: process.env.MYSQLHOST,
-      database: process.env.MYSQLDB,
-      password: process.env.MYSQLPASSWORD,
-      port: process.env.MYSQLPORT
-   });
-}
 
 module.exports = {
    query: (text, params, callback) => {
+     
       return pool.query(text, params, callback);
+      
    },
    getPool: () => {
       return pool;

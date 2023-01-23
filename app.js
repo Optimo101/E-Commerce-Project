@@ -11,10 +11,11 @@ const express = require('express'),
       passport = require('passport'),
       flash = require('express-flash'),
       session = require('express-session'),
-      PostgreSqlStore = require('connect-pg-simple')(session),
+      MySQLStore = require('express-mysql-session')(session),
       cookieParser = require('cookie-parser'),
       queriesLib = require('./lib/queries'),
-      db = require('./config/db');
+      db = require('./config/db'),
+      sessionStore = new MySQLStore({}, db.getPool().promise());
 
 // Passport configuration
 const initializePassport = require('./config/passport');
@@ -41,9 +42,7 @@ app.use(session({
    resave: false,
    saveUninitialized: false,
    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-   store: new PostgreSqlStore({
-      pool: db.getPool()
-   })
+   store: sessionStore
 }));
 
 app.use(passport.initialize());

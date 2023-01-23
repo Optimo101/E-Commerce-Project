@@ -48,7 +48,7 @@ router.post('/logout', authLib.checkAuth, (req, res) => {
    const cart = JSON.stringify(req.body.cart);
    const likes = JSON.stringify(req.body.likes);
 
-   db.query('UPDATE users SET cart = $1, likes = $2 WHERE id = $3', [cart, likes, req.user.id], (error, results) => {
+   db.query('UPDATE users SET cart = ?, likes = ? WHERE id = ?', [cart, likes, req.user.id], (error, results) => {
       if (error) {
          return console.log(error)
       } else {
@@ -90,13 +90,12 @@ router.post('/', authLib.checkNotAuth, (req, res) => {
          return res.render('accounts/accounts-new', { errorMsg: 'An account with that email address already exists.' });
       // else, create new user
       } else {
-         db.query('INSERT INTO users (first_name, last_name, username, password, id) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstName, lastName, newUsername.toLowerCase(), sc.encrypt(newPassword), uuidv4()], (error, results) => {
+         db.query('INSERT INTO users (first_name, last_name, username, password) VALUES (?, ?, ?, ?)', [firstName, lastName, newUsername.toLowerCase(), sc.encrypt(newPassword)], (error, results) => {
 
             if (error) {
                console.log(error);
                return res.render('register', {errorMsg: 'An error occurred while attempting to access the server. Please try again later.'});
             }
-
             return res.redirect('/accounts/login');
          });
       }
@@ -138,7 +137,7 @@ router.put('/:id', authLib.checkAuth, (req, res) => {
          return res.render('accounts/accounts-edit', { user: req.user, errorMsg: 'The password provided did not match your account.' });
       }
 
-      db.query('UPDATE users SET password = $1 WHERE id = $2 RETURNING *', [sc.encrypt(newPassword), user.id], (error, results) => {
+      db.query('UPDATE users SET password = ? WHERE id = ?', [sc.encrypt(newPassword), user.id], (error, results) => {
          if (error) {
             return res.render('accounts/accounts-edit', { user: req.user, errorMsg: 'We are currently experiencing problems with the server. Please try again later.' });
          }
@@ -160,7 +159,7 @@ router.delete('/:id', authLib.checkAuth, (req, res) => {
          return res.render('accounts/accounts-edit', { user: req.user, errorMsg: 'The password provided did not match your account.' });
       }
 
-      db.query('DELETE FROM users WHERE id = $1', [user.id], (error, results) => {
+      db.query('DELETE FROM users WHERE id = ?', [user.id], (error, results) => {
          if (error) {
             return res.render('accounts/accounts-edit', { errorMsg: 'We are currently experiencing problems with the server. Please try again later.' });
          }
